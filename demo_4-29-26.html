@@ -1,0 +1,2149 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
+  <title>Abot-Kamay · Health Companion</title>
+  <link rel="manifest" href="manifest.json">
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+      background: #f5f7fa;
+      color: #1e2b3c;
+      padding-bottom: 70px;
+      line-height: 1.5;
+    }
+    #appContainer { display: block; }
+    .app-header {
+      background: #3a08914f;
+      color: #fff;
+      padding: 16px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .app-header h1 { font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .offline-badge {
+      background: #f0b429;
+      color: #1e2b3c;
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 30px;
+    }
+    .logout-btn {
+      background: #1a7a5a;
+      border: none;
+      color: white;
+      padding: 6px 12px;
+      border-radius: 30px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .tab-bar {
+      display: flex;
+      background: white;
+      border-bottom: 1px solid #d4dce4;
+      padding: 0 8px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+    .tab-bar button {
+      background: none;
+      border: none;
+      padding: 14px 16px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #5e6f7e;
+      border-bottom: 3px solid transparent;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .tab-bar button.active { color: #0b5e42; border-bottom: 3px solid #0b5e42; }
+    .container { padding: 18px 16px; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .card {
+      background: white;
+      border-radius: 20px;
+      padding: 18px 16px;
+      margin-bottom: 18px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+      border: 1px solid #e9edf2;
+    }
+    h2 { font-size: 1.35rem; margin-bottom: 12px; color: #0b3b2c; }
+    h3 { font-size: 1.2rem; margin: 16px 0 8px; color: #1e4a3a; border-bottom: 1px solid #d4dce4; padding-bottom: 4px; }
+    h4 { font-size: 1rem; margin: 12px 0 4px; color: #2a5e4a; font-weight: 600; }
+    .service-list, .contact-list { list-style: none; }
+    .service-list li, .contact-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+    }
+    .badge {
+      background: #e0f2e9;
+      color: #0b5e42;
+      padding: 4px 10px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .emergency-number {
+      background: #fff5e6;
+      border-left: 4px solid #d97706;
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+    .btn {
+      background: #0b5e42;
+      color: white;
+      border: none;
+      padding: 12px 18px;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      width: 100%;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    .btn-outline {
+      background: white;
+      color: #0b5e42;
+      border: 1.5px solid #0b5e42;
+      box-shadow: none;
+      cursor: pointer;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 14px 16px;
+      margin: 8px 0;
+      border: 1.5px solid #d0d9e2;
+      border-radius: 20px;
+      font-size: 1rem;
+    }
+    label { font-weight: 600; margin-top: 6px; display: block; }
+    .record-item {
+      background: #f4f9f6;
+      padding: 14px;
+      border-radius: 18px;
+      margin-bottom: 10px;
+      position: relative;
+      padding-right: 80px;
+    }
+    .reminder-alert {
+      background: #fef3c7;
+      border-radius: 16px;
+      padding: 12px;
+      margin: 15px 0;
+      border-left: 4px solid #eab308;
+    }
+    .footer-note {
+      text-align: center;
+      font-size: 0.75rem;
+      color: #6b7b8a;
+      margin-top: 25px;
+    }
+    .edu-cat-btn.active { background: #0b5e42; color: white; }
+    .auth-form input {
+      width: 100%;
+      padding: 14px 16px;
+      margin: 10px 0;
+      border: 1.5px solid #d0d9e2;
+      border-radius: 30px;
+      font-size: 1rem;
+    }
+    .auth-form button {
+      background: #0b5e42;
+      color: white;
+      border: none;
+      padding: 14px;
+      border-radius: 40px;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 16px;
+      cursor: pointer;
+    }
+    .error-msg { color: #c00; margin-top: 8px; font-size: 0.9rem; }
+    .hidden-tab { display: none !important; }
+
+    .service-category { margin-bottom: 16px; }
+    .service-description { padding-left: 8px; margin-bottom: 6px; color: #2d4a3e; }
+
+    .notification-bar {
+      background: #e0f2e9;
+      border: 1px solid #0b5e42;
+      border-radius: 20px;
+      padding: 14px 16px;
+      margin: 0 0 18px 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .notification-bar p { margin: 0; }
+    .notification-bar .close-btn {
+      background: none;
+      border: none;
+      font-size: 1.2rem;
+      cursor: pointer;
+      color: #0b5e42;
+    }
+    .low-stock-summary {
+      background: #fff5e6;
+      border-left: 4px solid #f57f17;
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+    }
+    .vaccine-badge {
+      background: #d32f2f;
+      color: white;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-left: 8px;
+      display: inline-block;
+    }
+    .user-stats {
+      background: #e6f2ed;
+      padding: 12px;
+      border-radius: 12px;
+      margin-bottom: 15px;
+      font-size: 0.9rem;
+    }
+    .sync-status { font-size: 0.9rem; margin: 8px 0; }
+    .sync-success { color: #2e7d32; }
+    .sync-error { color: #c00; }
+  </style>
+</head>
+<body>
+
+<div id="appContainer">
+  <header class="app-header">
+    <h1>
+      <img src="logo.png" alt="Logo" style="height: 36px; width: auto; vertical-align: middle; margin-right: 8px;">
+      Abot-Kamay
+    </h1>
+    <div style="display: flex; gap: 8px;">
+      <span class="offline-badge" id="offlineIndicator">Fully Offline</span>
+      <button class="logout-btn" id="logoutBtn" style="display: none;">Logout</button>
+    </div>
+  </header>
+
+  <div class="tab-bar">
+    <button class="tab-btn active" data-tab="home">Home</button>
+    <button class="tab-btn" data-tab="education">Health Ed</button>
+    <button class="tab-btn" data-tab="rhu">RHU Services</button>
+    <button class="tab-btn" data-tab="emergency">Emergency</button>
+    <button class="tab-btn" data-tab="records" id="recordsTabBtn">Patient Records</button>
+    <button class="tab-btn" data-tab="appointments" id="appointmentsTabBtn">Appointments</button>
+    <button class="tab-btn" data-tab="account">Account</button>
+    <button class="tab-btn hidden-tab" data-tab="adminLogs" id="adminLogsTabBtn">Logs</button>
+  </div>
+
+  <div class="container">
+    <!-- HOME TAB -->
+    <div id="home" class="tab-content active">
+      <div id="todayNotificationBar" class="notification-bar" style="display: none;">
+        <p id="todayNotificationText"></p>
+        <button class="close-btn" id="dismissNotificationBtn">&times;</button>
+      </div>
+
+      <div class="card">
+        <h2>Mabuhay, <span id="loggedInUserDisplay">Bisita</span>!</h2>
+        <p id="userRoleDisplay">Bisita · Barangay TestingLang</p>
+      </div>
+      <div class="card">
+        <h3>Batay kay Reyes et al. (2026)</h3>
+        <p>Mas pinipili ng mga komunidad sa kanayunan ang <strong>community health fairs</strong> at mga <strong>materyal sa sariling wika</strong>.</p>
+      </div>
+      <div id="nextAppointmentCard" class="card" style="display: none; background: #e6f2ed;">
+        <h3>Susunod na Appointment</h3>
+        <p id="nextAppointmentText"></p>
+      </div>
+      <div class="card">
+        <h3>Paparating na Services</h3>
+        <ul style="list-style: none;">
+          <li>Bakuna sa Tigdas · Marso 15, 2026 · 9AM–2PM</li>
+          <li>Prenatal Checkup · Araw-araw (Lunes–Biyernes)</li>
+          <li>Nutrition Fair · Abril 2, 2026</li>
+        </ul>
+      </div>
+      <div id="homeStatsCard" class="card" style="display: none;">
+        <h3>Mabilisang Impormasyon</h3>
+        <div style="display: flex; justify-content: space-around; text-align: center;">
+          <div>
+            <div style="font-size: 2rem; font-weight: 700; color: #0b5e42;" id="totalPatientsStat">0</div>
+            <div style="font-size: 0.9rem;">Mga Pasyente</div>
+          </div>
+          <div>
+            <div style="font-size: 2rem; font-weight: 700; color: #0b5e42;" id="upcomingVaccinesStat">0</div>
+            <div style="font-size: 0.9rem;">Paparatíng na Bakuna</div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="background: #e6f2ed;">
+        <h3>Alam Mo Ba?</h3>
+        <p id="healthTipText">Ang regular na paghuhugas ng kamay ay nakakabawas ng 30% ng mga sakit tulad ng diarrhea at pneumonia.</p>
+      </div>
+      <div class="card">
+        <h3>Mga Anunsyo mula sa RHU</h3>
+        <ul style="list-style: none;">
+          <li style="padding: 8px 0; border-bottom: 1px solid #e2e8f0;">Libreng Bakuna sa Tigdas – Marso 20, 8AM–2PM sa Barangay Hall.</li>
+          <li style="padding: 8px 0;">Medical Mission – Abril 5, 9AM–4PM. Magdala ng ID.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- HEALTH EDUCATION TAB -->
+    <div id="education" class="tab-content">
+      <div class="card">
+        <h2>Health Education Modules</h2>
+        <p id="edIntro">Maikling panimula — pumili ng kategorya sa ibaba.</p>
+      </div>
+      <div class="card">
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn-outline edu-cat-btn active" data-edu="maternal" style="flex:1;">Maternal & Child</button>
+          <button class="btn-outline edu-cat-btn" data-edu="nutrition" style="flex:1;">Nutrition</button>
+          <button class="btn-outline edu-cat-btn" data-edu="chronic" style="flex:1;">Chronic Disease</button>
+        </div>
+      </div>
+      <div id="eduCategoryContent" class="card">
+        <p>Pumili ng kategorya sa itaas.</p>
+      </div>
+      <div class="card" style="background: #e6f2ed;">
+        <p style="font-style:italic;" id="eduLastUpdated"></p>
+      </div>
+    </div>
+
+    <!-- RHU SERVICES TAB -->
+    <div id="rhu" class="tab-content">
+      <div class="card">
+        <h2>Barangay RHU Services</h2>
+        <p>Ang mga serbisyong pangkalusugan na maaaring makuha sa Rural Health Unit (RHU) ay sumasaklaw sa iba't ibang pangangailangan ng komunidad.</p>
+      </div>
+      <div class="card service-category">
+        <h3>Maternal and Child Health Care</h3>
+        <div class="service-description">
+          <h4>Prenatal at Postnatal Care</h4><p>Regular check‑ups, iron/folic acid supplementation, at counseling para sa mga buntis.</p>
+          <h4>Birthing / Maternity Services</h4><p>Normal Spontaneous Delivery (NSD) para sa low‑risk pregnancies at newborn care.</p>
+          <h4>Immunization Services</h4><p>Routine at catch‑up vaccines para sa mga sanggol at bata: <strong>BCG, DPT, Polio, Hep B, MMR</strong>.</p>
+          <h4>Under‑five Clinics</h4><p>Pagsubaybay sa paglaki at nutrisyon ng mga bata, kasama ang <strong>Operation Timbang</strong>.</p>
+          <h4>Newborn Screening & Hearing Tests</h4><p>Maagang pagtuklas ng mga congenital conditions.</p>
+        </div>
+      </div>
+      <div class="card service-category">
+        <h3>Reproductive Health and Family Planning</h3>
+        <div class="service-description">
+          <h4>Family Planning Counseling</h4><p>Counseling sa natural at artificial na pamamaraan.</p>
+          <h4>Contraceptive Distribution</h4><p>Pagbibigay ng pills, condoms, injectables, at IUD insertion.</p>
+          <h4>Pre‑marriage Counseling</h4><p>Mandatory counseling para sa mga aplikante ng marriage license.</p>
+        </div>
+      </div>
+      <div class="card service-category">
+        <h3>Laboratory and Diagnostic Services (Basic)</h3>
+        <div class="service-description">
+          <h4>Routine Lab Tests</h4><p>Complete Blood Count (CBC), urinalysis, fecalysis, at pregnancy tests.</p>
+          <h4>Specialized Screening</h4><p>Blood typing, sputum smear microscopy (para sa TB), malaria testing, at HIV/STI screening.</p>
+          <h4>Blood Chemistry</h4><p>Fasting blood sugar (FBS), cholesterol, at creatinine tests.</p>
+        </div>
+      </div>
+      <div class="card service-category">
+        <h3>Communicable / Non‑Communicable Disease Control</h3>
+        <div class="service-description">
+          <h4>National Tuberculosis Control Program (TB‑DOTS)</h4><p>Identification, diagnosis, at directly observed treatment.</p>
+          <h4>Lifestyle Diseases</h4><p>Screening at management ng Hypertension (HPN) at Diabetes Mellitus (DM).</p>
+          <h4>Rabies Prevention & Control</h4><p>Anti‑rabies vaccines (sa ilalim ng rabies control program).</p>
+        </div>
+      </div>
+      <div class="card service-category">
+        <h3>Environmental Health and Sanitation</h3>
+        <div class="service-description"><p>Inspeksyon ng food establishments, water supply testing, at pag‑iisyu ng sanitary permits.</p></div>
+      </div>
+      <div class="card service-category">
+        <h3>Dental Health Services</h3>
+        <div class="service-description"><p>Dental consultation, oral health education, tooth extraction, filling, at gum treatment.</p></div>
+      </div>
+      <div class="card service-category">
+        <h3>Iba Pang Mahahalagang Serbisyo</h3>
+        <div class="service-description">
+          <h4>Minor Surgical Cases</h4><p>Circumcision ("Operation Tuli"), suturing ng superficial lacerations, excision ng small cysts.</p>
+          <h4>Pharmacy Services (Medisina para sa Bayan)</h4><p>Libreng gamot para sa mga karaniwang karamdaman.</p>
+          <h4>Medical Certifications</h4><p>Pag‑iisyu ng sertipiko para sa employment, school admission, o PWD/senior citizen benefits.</p>
+          <h4>Mental Health Services</h4><p>Consultations at mental health education.</p>
+          <h4>Medical Outreach Services</h4><p>Mobile clinics at medical missions sa mga barangay.</p>
+        </div>
+      </div>
+
+      <div id="inventoryWarningCard" class="card" style="display: none; background: #ffeaea; border: 2px solid #cc0000;">
+        <h3 style="color: #cc0000; margin-top:0;">Babala: Hindi pa na-update ang imbentaryo!</h3>
+        <p style="color: #cc0000; font-weight: bold;">Ang listahan ng gamot ay mahigit 30 araw nang hindi nai-edit. Mangyaring i-check at i-update agad ang stock.</p>
+      </div>
+
+      <div id="lowStockSummary" class="low-stock-summary" style="display: none;"></div>
+
+      <div class="card">
+        <h3>Medicine Inventory</h3>
+        <div id="medicineContainer"><p>Loading inventory...</p></div>
+        <div style="margin-top:12px; display: flex; align-items: center; gap: 8px;">
+          <span style="font-size:0.8rem;" id="inventoryUpdatedLabel">Huling update:</span>
+          <span style="font-size:0.8rem; font-weight:500;" id="inventoryUpdatedDate"></span>
+          <button class="btn-outline" id="editInventoryDateBtn" style="display: none; padding: 4px 10px; width: auto; font-size:0.75rem;">Edit</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- EMERGENCY TAB -->
+    <div id="emergency" class="tab-content">
+      <div class="card">
+        <h2>Emergency Numbers</h2>
+        <div class="emergency-number"><p style="font-size:1.4rem;">911</p></div>
+        <ul class="contact-list">
+          <li>BFP <span>161</span></li>
+          <li>PNP <span>117</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- PATIENT RECORDS TAB -->
+    <div id="records" class="tab-content">
+      <div class="card">
+        <h2>Patient Record (Offline)</h2>
+        <p id="recordsAccessMessage">Mag-login upang makita ang iyong mga record.</p>
+        <div id="patientFormContainer" style="display: none;">
+          <form id="patientForm">
+            <label>Buong Pangalan</label>
+            <input type="text" id="patientName" required>
+            <label>Kapanganakan (Birthdate)</label>
+            <input type="date" id="patientBirthdate" required>
+            <label>Susunod na Bakuna (opsyonal)</label>
+            <input type="date" id="nextVaccineDate">
+            <button type="submit" class="btn">I-save</button>
+          </form>
+        </div>
+      </div>
+      <div class="card" id="patientListCard" style="display: none;">
+        <div id="userStatsContainer" style="display: none;"></div>
+        <h3>Mga Pasyente</h3>
+        <input type="text" id="patientSearch" placeholder="Maghanap ng pasyente..." style="margin-bottom: 12px;">
+        <div id="patientListContainer"></div>
+        <button class="btn-outline" id="clearStorageBtn">Burahin Lahat</button>
+      </div>
+      <div class="card reminder-alert" id="reminderCard" style="display: none;">
+        <h3>Mga Paalala</h3>
+        <div id="reminderDisplay"></div>
+      </div>
+    </div>
+
+    <!-- APPOINTMENTS TAB -->
+    <div id="appointments" class="tab-content">
+      <div class="card">
+        <h2>Mag-iskedyul ng Appointment</h2>
+        <p id="appointmentsAccessMessage">Mag-login upang mag-iskedyul ng appointment.</p>
+        <div id="appointmentFormContainer" style="display: none;">
+          <form id="appointmentForm">
+            <label>Pangalan ng Pasyente</label>
+            <input type="text" id="apptPatientName" required>
+            <label>Serbisyo</label>
+            <select id="apptService" required>
+              <option value="">-- Pumili --</option>
+              <option>Bakuna (Tigdas)</option>
+              <option>Bakuna (Pentavalent)</option>
+              <option>Bakuna (MMR)</option>
+              <option>Prenatal Checkup</option>
+              <option>General Checkup</option>
+              <option>Family Planning</option>
+              <option>Checkup</option>
+              <option>Follow-up</option>
+              <option>Labs</option>
+            </select>
+            <label>Petsa</label>
+            <input type="date" id="apptDate" required>
+            <label>Oras (opsyonal)</label>
+            <input type="time" id="apptTime">
+            <label>Karagdagang Detalye</label>
+            <textarea id="apptNotes" rows="2"></textarea>
+            <button type="submit" class="btn">I-schedule</button>
+            <button type="button" class="btn-outline" id="submitOnlineAppointmentBtn" style="margin-top:8px;">Ipadala bilang Online Request</button>
+          </form>
+        </div>
+      </div>
+        <div class="card" id="appointmentListCard" style="display: none;">
+        <h3>Mga Nakaiskedyul na Appointment</h3>
+        <div id="appointmentListContainer"></div>
+        <button class="btn-outline" id="clearAppointmentsBtn" style="margin-top:12px;">Burahin Lahat</button>
+      </div>
+      <!-- onlineRequestsCard is now a sibling -->
+      <div class="card" id="onlineRequestsCard" style="display:none;">
+        <h3>Mga Online na Appointment Request</h3>
+        <button class="btn-outline" id="fetchOnlineRequestsBtn" style="margin-bottom:8px;">Kunin ang mga Request</button>
+        <div id="onlineRequestsList"></div>
+      </div>
+    </div>   <!-- this closes the appointments tab-content -->
+    <!-- ACCOUNT TAB (fully integrated) -->
+    <div id="account" class="tab-content">
+      <!-- Admin setup (with strength meter) -->
+      <div class="card" id="accountSetupView" style="display: none;">
+        <h2>Admin Account Setup</h2>
+        <p>Gumawa ng administrator account para sa device na ito. Isang beses lang ito gagawin.</p>
+        <form id="adminSetupForm" class="auth-form">
+          <input type="text" id="setupUsername" placeholder="Admin Username" required>
+          <input type="password" id="setupPassword" placeholder="Password" required>
+          <div id="setupStrength" style="margin: 4px 0; height: 6px; background: #eee; border-radius: 3px;">
+            <div id="setupStrengthBar" style="width:0%; height:100%; border-radius:3px;"></div>
+          </div>
+          <small id="setupStrengthText"></small>
+          <input type="password" id="setupConfirmPassword" placeholder="Kumpirmahin ang Password" required>
+          <button type="submit">Gumawa ng Admin Account</button>
+          <div id="setupError" class="error-msg"></div>
+        </form>
+        <div id="recoveryPhraseDisplay" style="display:none; margin-top:16px; background:#fff3cd; padding:12px; border-radius:12px;">
+          <strong>Isulat ang recovery phrase:</strong>
+          <p id="recoveryPhraseText" style="word-break:break-all; margin:8px 0;"></p>
+          <small>Ito ang tanging paraan upang ma‑reset ang admin password. Itago sa ligtas na lugar.</small>
+        </div>
+      </div>
+
+      <!-- Login view (with keep me logged in) -->
+      <div class="card" id="accountLoggedOutView" style="display: none;">
+        <h2>Mag-login</h2>
+        <form id="accountLoginForm" class="auth-form">
+          <input type="text" id="accountLoginUsername" placeholder="Username" required>
+          <input type="password" id="accountLoginPassword" placeholder="Password" required>
+          <label style="display:flex; align-items:center; margin: 8px 0;">
+            <input type="checkbox" id="keepLoggedIn" style="width: auto; margin-right: 8px;"> Manatiling naka-login (24 oras)
+          </label>
+          <button type="submit">Login</button>
+          <div id="accountLoginError" class="error-msg"></div>
+        </form>
+        <p style="text-align:center; margin-top:12px;">
+          <a href="#" id="showRegisterLink">Walang account? Magparehistro</a><br>
+          <a href="#" id="showRecoveryLink" style="display:none;">Nakalimutan ang admin password?</a>
+        </p>
+      </div>
+
+      <!-- Registration view -->
+      <div class="card" id="accountRegisterView" style="display: none;">
+        <h2>Gumawa ng Account (Member)</h2>
+        <form id="registerForm" class="auth-form">
+          <input type="text" id="regFullName" placeholder="Buong Pangalan" required>
+          <input type="text" id="regUsername" placeholder="Username" required>
+          <input type="password" id="regPassword" placeholder="Password" required>
+          <input type="password" id="regConfirmPassword" placeholder="Kumpirmahin ang Password" required>
+          <button type="submit">Magparehistro</button>
+          <div id="registerError" class="error-msg"></div>
+        </form>
+        <p style="text-align:center; margin-top:8px;"><a href="#" id="backToLoginLink">← Balik sa Login</a></p>
+      </div>
+
+      <!-- Recovery view -->
+      <div class="card" id="accountRecoveryView" style="display: none;">
+        <h2>I‑recover ang Admin Account</h2>
+        <p>Ilagay ang recovery phrase na ibinigay noong setup.</p>
+        <input type="text" id="recoveryInput" placeholder="Recovery phrase" required>
+        <button class="btn" id="recoverBtn">I‑recover</button>
+        <div id="recoveryError" class="error-msg"></div>
+      </div>
+
+      <!-- Logged‑in view -->
+      <div class="card" id="accountLoggedInView" style="display: none;">
+        <h2>Account Information</h2>
+        <p><strong>Logged in as:</strong> <span id="accountUserName"></span></p>
+        <p><strong>Role:</strong> <span id="accountRole"></span></p>
+        <button class="btn-outline" id="changePasswordBtn" style="margin-top: 8px;">Palitan ang Password</button>
+        <button class="btn-outline" id="adminUserManagementBtn" style="display: none; margin-top: 8px;">Pamamahala ng User</button>
+        <button class="btn-outline" id="syncSettingsBtn" style="display: none; margin-top: 8px;">Online Sync</button>
+        <button class="btn-outline" id="accountLogoutBtn" style="margin-top: 16px;">Logout</button>
+      </div>
+
+      <!-- Change password view -->
+      <div class="card" id="changePasswordView" style="display: none;">
+        <h2>Palitan ang Password</h2>
+        <form id="changePasswordForm" class="auth-form">
+          <input type="password" id="oldPassword" placeholder="Kasalukuyang Password" required>
+          <input type="password" id="newPassword" placeholder="Bagong Password" required>
+          <input type="password" id="confirmNewPassword" placeholder="Kumpirmahin ang Bagong Password" required>
+          <div id="passwordStrength" style="margin: 4px 0; height: 6px; background: #eee; border-radius: 3px;"><div id="strengthBar" style="width:0%; height:100%; border-radius:3px;"></div></div>
+          <small id="strengthText"></small>
+          <button type="submit">I-save</button>
+          <div id="changePasswordError" class="error-msg"></div>
+        </form>
+        <button class="btn-outline" id="backToAccountBtn" style="margin-top:8px;">← Bumalik</button>
+      </div>
+
+      <!-- Admin user management -->
+      <div class="card" id="adminUserManagementView" style="display: none;">
+        <h2>Pamamahala ng User</h2>
+        <div id="userListContainer"></div>
+        <button class="btn-outline" id="backFromUserMgmtBtn" style="margin-top:12px;">← Bumalik</button>
+      </div>
+
+      <!-- Online Sync view -->
+      <div class="card" id="syncView" style="display: none;">
+        <h2>Online Sync (Admin)</h2>
+        <p>I‑sync ang lahat ng data sa isang server. Kailangan ng internet connection.</p>
+        <label>Server URL</label>
+        <input type="text" id="syncServerUrl" placeholder="https://halimbawa.com/api/sync" style="margin-bottom:12px;">
+        <label>Sync Passphrase</label>
+        <input type="password" id="syncPassphrase" placeholder="Malakas na passphrase" style="margin-bottom:12px;">
+        <label>Appointment Request Server URL</label>
+        <input type="text" id="apptServerUrlInput" placeholder="https://serverabotkamay.onrender.com/appointment-requests" style="margin-bottom:12px;">
+        <div style="display:flex; gap:8px;">
+          <button class="btn-outline" id="syncNowBtn" style="flex:1;">I‑sync Ngayon</button>
+          <button class="btn-outline" id="restoreFromServerBtn" style="flex:1;">I‑restore mula sa Server</button>
+        </div>
+        <div id="syncStatus" class="sync-status"></div>
+        <button class="btn-outline" id="backFromSyncBtn" style="margin-top:12px;">← Bumalik</button>
+      </div>
+    </div>
+
+    <!-- ADMIN LOGS TAB -->
+    <div id="adminLogs" class="tab-content">
+      <div class="card">
+        <h2>Audit Logs</h2>
+        <p>Mga naitalang kilos sa device na ito.</p>
+      </div>
+      <div class="card">
+        <div id="adminLogsContainer"></div>
+        <button class="btn-outline" id="exportLogsBtn" style="margin-top:12px;">I-export ang Logs</button>
+        <button class="btn-outline" id="clearLogsBtn" style="margin-top:8px;">Burahin ang Logs</button>
+      </div>
+    </div>
+
+    <div class="footer-note">Abot-Kamay · Batay sa Reyes et al. (2026)</div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ---------- CONSTANTS ----------
+    const USERS_KEY = 'abotKamayUsers';
+    const CURRENT_USER_KEY = 'abotKamayCurrentUser';
+    const PATIENT_KEY = 'abotKamayPatients';
+    const APPOINTMENT_KEY = 'abotKamayAppointments';
+    const AUDIT_LOG_KEY = 'abotKamayAuditLog';
+    const INVENTORY_LAST_UPDATED_KEY = 'abotKamayInventoryLastUpdated';
+    const RECOVERY_KEY = 'abotKamayRecovery';
+    const ENCRYPTED_PATIENT_KEY = 'abotKamayPatientsEncrypted';
+    const ENCRYPTED_APPOINTMENT_KEY = 'abotKamayAppointmentsEncrypted';
+    const MACHINE_KEY = 'abotKamayMachineKey';
+    const SYNC_SERVER_URL_KEY = 'abotKamaySyncServerUrl';
+    const SYNC_SALT_KEY = 'abotKamaySyncSalt';
+    const APPOINTMENT_SERVER_URL_KEY = 'abotKamayAppointmentServerUrl';
+    const OFFLINE_QUEUE_KEY = 'offlineApptQueue';
+    const DEFAULT_APPOINTMENT_SERVER_URL = 'https://serverabotkamay.onrender.com/appointment-requests';
+
+    // ---------- UUID GENERATOR ----------
+    function generateUUID() {
+      if (crypto.randomUUID) return crypto.randomUUID();
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, c => {
+        const r = Math.random() * 16 | 0;
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+      });
+    }
+
+    // ---------- PASSWORD UTILITIES (PBKDF2 + SALT) ----------
+    async function hashPasswordWithSalt(password, salt = null) {
+      const encoder = new TextEncoder();
+      const pwBuffer = encoder.encode(password);
+      let saltBuffer;
+      if (salt) {
+        saltBuffer = new Uint8Array(salt.match(/.{1,2}/g).map(byte => parseInt(byte, 16)));
+      } else {
+        saltBuffer = crypto.getRandomValues(new Uint8Array(16));
+      }
+      const iterations = 100000;
+      const keyMaterial = await crypto.subtle.importKey('raw', pwBuffer, { name: 'PBKDF2' }, false, ['deriveBits']);
+      const derivedBits = await crypto.subtle.deriveBits(
+        { name: 'PBKDF2', salt: saltBuffer, iterations, hash: 'SHA-256' },
+        keyMaterial,
+        256
+      );
+      const hashArray = Array.from(new Uint8Array(derivedBits));
+      const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      const saltHex = Array.from(saltBuffer).map(b => b.toString(16).padStart(2, '0')).join('');
+      return { hash: hashHex, salt: saltHex, iterations };
+    }
+
+    async function verifyPassword(password, user) {
+      if (!user.salt) {
+        const legacyHash = await hashPasswordLegacy(password);
+        if (user.passwordHash === legacyHash) {
+          const newAuth = await hashPasswordWithSalt(password);
+          user.passwordHash = newAuth.hash;
+          user.salt = newAuth.salt;
+          user.iterations = newAuth.iterations;
+          return true;
+        }
+        return false;
+      }
+      const { hash } = await hashPasswordWithSalt(password, user.salt);
+      return hash === user.passwordHash;
+    }
+
+    async function hashPasswordLegacy(pw) {
+      const msgUint8 = new TextEncoder().encode(pw);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgUint8);
+      return Array.from(new Uint8Array(hashBuffer)).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    // ---------- ENCRYPTION HELPERS ----------
+    async function encryptWithPassword(plainText, password) {
+      const encoder = new TextEncoder();
+      const pwUtf8 = encoder.encode(password);
+      const keyMaterial = await crypto.subtle.importKey('raw', pwUtf8, { name: 'PBKDF2' }, false, ['deriveKey']);
+      const salt = crypto.getRandomValues(new Uint8Array(16));
+      const key = await crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+        keyMaterial,
+        { name: 'AES-GCM', length: 256 },
+        false,
+        ['encrypt']
+      );
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, encoder.encode(plainText));
+      const saltHex = Array.from(salt).map(b => b.toString(16).padStart(2, '0')).join('');
+      const ivHex = Array.from(iv).map(b => b.toString(16).padStart(2, '0')).join('');
+      const dataHex = Array.from(new Uint8Array(encrypted)).map(b => b.toString(16).padStart(2, '0')).join('');
+      return saltHex + ':' + ivHex + ':' + dataHex;
+    }
+
+    async function decryptWithPassword(cipherText, password) {
+      const [saltHex, ivHex, dataHex] = cipherText.split(':');
+      const salt = new Uint8Array(saltHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+      const iv = new Uint8Array(ivHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+      const data = new Uint8Array(dataHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+      const encoder = new TextEncoder();
+      const pwUtf8 = encoder.encode(password);
+      const keyMaterial = await crypto.subtle.importKey('raw', pwUtf8, { name: 'PBKDF2' }, false, ['deriveKey']);
+      const key = await crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+        keyMaterial,
+        { name: 'AES-GCM', length: 256 },
+        false,
+        ['decrypt']
+      );
+      const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
+      return new TextDecoder().decode(decrypted);
+    }
+
+    // ---------- MACHINE ENCRYPTION FOR DATA AT REST ----------
+    async function getMachineKey() {
+      let rawHex = localStorage.getItem(MACHINE_KEY);
+      if (!rawHex) {
+        const raw = crypto.getRandomValues(new Uint8Array(32));
+        rawHex = Array.from(raw).map(b => b.toString(16).padStart(2, '0')).join('');
+        localStorage.setItem(MACHINE_KEY, rawHex);
+      }
+      const rawBytes = new Uint8Array(rawHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+      return crypto.subtle.importKey('raw', rawBytes, { name: 'AES-GCM' }, false, ['encrypt', 'decrypt']);
+    }
+
+    async function encryptDataMachine(plaintext) {
+      const key = await getMachineKey();
+      const iv = crypto.getRandomValues(new Uint8Array(12));
+      const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(plaintext));
+      const ivHex = Array.from(iv).map(b => b.toString(16).padStart(2, '0')).join('');
+      const dataHex = Array.from(new Uint8Array(encrypted)).map(b => b.toString(16).padStart(2, '0')).join('');
+      return ivHex + ':' + dataHex;
+    }
+
+    async function decryptDataMachine(ciphertext) {
+      const key = await getMachineKey();
+      const [ivHex, dataHex] = ciphertext.split(':');
+      const iv = new Uint8Array(ivHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+      const data = new Uint8Array(dataHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+      const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
+      return new TextDecoder().decode(decrypted);
+    }
+
+    // ---------- DEFAULT OFFLINE DATA ----------
+    const DEFAULT_OFFLINE_DATA = {
+      lastUpdated: "2026-04-24T00:00:00Z",
+      medicineInventory: [
+        { name: "Paracetamol 500mg", stock: "Available" },
+        { name: "Amoxicillin 250mg/5ml suspension", stock: "Low Stock" },
+        { name: "Losartan 50mg", stock: "Available" },
+        { name: "Metformin 500mg", stock: "Available" },
+        { name: "ORS (Oresol)", stock: "Available" },
+        { name: "Mefenamic Acid 500mg", stock: "Available" },
+        { name: "Ferrous Sulfate + Folic Acid", stock: "Low Stock" },
+        { name: "Calcium Carbonate 500mg", stock: "Available" },
+        { name: "Cotrimoxazole 480mg", stock: "Out of Stock" },
+        { name: "Albuterol inhaler 100mcg/dose", stock: "Low Stock" }
+      ],
+      healthModules: {
+        maternal: {
+          title: "Maternal & Child Health (Kalusugan ng Ina at Bata)",
+          intro: "Mahahalagang impormasyon para sa mga buntis, nagpapasuso, at kanilang mga sanggol.",
+          sections: [
+            { heading: "Prenatal Care", content: "Magkaroon ng hindi bababa sa 8 ANC contacts. Uminom ng iron at folic acid araw-araw. Iwasan ang sigarilyo at alak." },
+            { heading: "Breastfeeding", content: "I-exclusive breastfeeding sa unang 6 na buwan. Ang gatas ng ina ay proteksyon laban sa diarrhea at pneumonia." },
+            { heading: "Danger Signs sa Pagbubuntis", content: "Kapag may matinding sakit ng ulo, pagdurugo, panlalabo ng paningin, o pamamaga ng kamay at mukha—pumunta agad sa ospital o RHU." },
+            { heading: "Postpartum Care", content: "Magpa-check up 6 na linggo pagkatapos manganak. Uminom ng iron supplements. Gumamit ng family planning." }
+          ]
+        },
+        nutrition: {
+          title: "Nutrisyon (Pinggang Pinoy at Philippine Dietary Guidelines)",
+          intro: "Gabay ng FNRI-DOST para sa balanseng pagkain ng Pilipino.",
+          sections: [
+            { heading: "Pinggang Pinoy", content: "Hatiin ang plato: ½ gulay at prutas, ¼ kanin o kamote, ¼ isda, manok, itlog, o tokwa. Uminom ng tubig." },
+            { heading: "10 Kumainments", content: "1. Kumain ng iba't ibang pagkain. 2. Breastfeeding 0-6 months. 3. Maraming gulay at prutas. 4. Kumain ng isda, lean meat, at itlog. 5. Uminom ng gatas. 6. Ligtas na pagkain at tubig. 7. Gumamit ng iodized salt. 8. Limitahan ang maalat, mamantika, at matatamis. 9. Panatilihin ang tamang timbang. 10. Maging aktibo." }
+          ]
+        },
+        chronic: {
+          title: "Chronic Disease Prevention (Pag-iwas sa Di-Nakakahawang Sakit)",
+          intro: "Ang NCDs ay bumubuo ng ~70% ng lahat ng namamatay sa Pilipinas. Alamin ang mga risk factor.",
+          sections: [
+            { heading: "Altapresyon (Hypertension)", content: "Bawasan ang asin. Kumain ng saging at kamote. Mag-ehersisyo 30 minuto araw-araw. Magpa-BP check monthly." },
+            { heading: "Diabetes Mellitus", content: "Iwasan ang matatamis na inumin. Pumili ng brown rice o oatmeal. Magpa-blood sugar check tuwing 3–6 buwan." },
+            { heading: "Iba pang NCDs", content: "Ischemic heart disease at stroke: pangunahing sanhi ng kamatayan. Iwasan ang tabako, kontrolin ang BP at cholesterol. Cancer: magpa-screening. COPD: tumigil sa paninigarilyo." }
+          ]
+        }
+      }
+    };
+
+    // ---------- PHILIPPINE CHILDHOOD IMMUNIZATION SCHEDULE ----------
+    const VACCINE_SCHEDULE = [
+      { vaccine: "BCG", targetMonth: 0, message: "BCG vaccine laban sa TB" },
+      { vaccine: "Hepatitis B (1st dose)", targetMonth: 0, message: "Hepa B unang dose" },
+      { vaccine: "Pentavalent (DPT-HepB-Hib) 1", targetMonth: 1.5, message: "Unang dose ng Pentavalent" },
+      { vaccine: "Oral Polio Vaccine (OPV) 1", targetMonth: 1.5, message: "OPV unang dose" },
+      { vaccine: "Pentavalent 2", targetMonth: 2.5, message: "Ikalawang dose ng Pentavalent" },
+      { vaccine: "OPV 2", targetMonth: 2.5, message: "OPV ikalawang dose" },
+      { vaccine: "Pentavalent 3", targetMonth: 3.5, message: "Ikatlong dose ng Pentavalent" },
+      { vaccine: "OPV 3", targetMonth: 3.5, message: "OPV ikatlong dose" },
+      { vaccine: "Measles Containing Vaccine (MCV) 1", targetMonth: 9, message: "Unang dose ng Tigdas (MCV)" },
+      { vaccine: "MMR", targetMonth: 12, message: "MMR vaccine sa 12 buwan" }
+    ];
+
+    // ---------- GLOBAL STATE ----------
+    let currentUser = null;
+    let patients = [];
+    let appointments = [];
+    let inactivityTimer = null;
+    const INACTIVITY_TIMEOUT = 15 * 60 * 1000; // 15 minutes
+
+    // ---------- UTILITIES ----------
+    function getUsers() { return JSON.parse(localStorage.getItem(USERS_KEY) || '[]'); }
+    function saveUsers(users) { localStorage.setItem(USERS_KEY, JSON.stringify(users)); }
+
+    // ---------- INACTIVITY LOGOUT ----------
+    function resetInactivityTimer() {
+      if (!currentUser) return;
+      if (inactivityTimer) clearTimeout(inactivityTimer);
+      const timeout = currentUser.keepLoggedIn ? 24 * 60 * 60 * 1000 : INACTIVITY_TIMEOUT;
+      inactivityTimer = setTimeout(() => {
+        alert('Na-logout dahil sa kawalan ng aktibidad.');
+        logout();
+      }, timeout);
+    }
+    window.addEventListener('click', resetInactivityTimer);
+    window.addEventListener('keypress', resetInactivityTimer);
+
+    // ---------- AUDIT LOG ----------
+    function logEvent(action, details = '') {
+      const logEntry = {
+        timestamp: new Date().toISOString(),
+        user: currentUser ? currentUser.username : 'guest',
+        action: action,
+        details: details
+      };
+      const logs = JSON.parse(localStorage.getItem(AUDIT_LOG_KEY) || '[]');
+      logs.push(logEntry);
+      if (logs.length > 500) logs.shift();
+      localStorage.setItem(AUDIT_LOG_KEY, JSON.stringify(logs));
+    }
+
+    function renderAdminLogs() {
+      const container = document.getElementById('adminLogsContainer');
+      if (!container) return;
+      const logs = JSON.parse(localStorage.getItem(AUDIT_LOG_KEY) || '[]');
+      if (!logs.length) {
+        container.innerHTML = '<p>Walang nakatalang aktibidad.</p>';
+        return;
+      }
+      let html = '<ul style="list-style:none; padding:0;">';
+      logs.reverse().forEach(log => {
+        const date = new Date(log.timestamp).toLocaleString('tl-PH');
+        html += `<li style="padding:8px 0; border-bottom:1px solid #e2e8f0;">
+          <strong>${date}</strong><br>
+          User: ${log.user} · ${log.action} · ${log.details}
+        </li>`;
+      });
+      html += '</ul>';
+      container.innerHTML = html;
+    }
+
+    // ---------- PERMISSION HELPERS ----------
+    function isAdmin() { return currentUser && currentUser.role === 'admin'; }
+    function isOwner(record) { return record && record.userId === currentUser.uid; }
+    function canModify(record) { return isAdmin() || isOwner(record); }
+
+    function getFilteredPatients() { return isAdmin() ? patients : patients.filter(p => p.userId === currentUser.uid); }
+    function getFilteredAppointments() { return isAdmin() ? appointments : appointments.filter(a => a.userId === currentUser.uid); }
+
+    // ---------- AGE CALCULATION ----------
+    function calculateAge(birthdate) {
+      const birth = new Date(birthdate);
+      const now = new Date();
+      let months = (now.getFullYear() - birth.getFullYear()) * 12 + (now.getMonth() - birth.getMonth());
+      if (now.getDate() < birth.getDate()) months--;
+      return months;
+    }
+
+    function getDueVaccines(birthdate) {
+      if (!birthdate) return [];
+      const ageMonths = calculateAge(birthdate);
+      return VACCINE_SCHEDULE.filter(v => ageMonths >= v.targetMonth);
+    }
+
+    // ---------- NOTIFICATION BAR ----------
+    function updateTodayNotification() {
+      if (!currentUser) {
+        document.getElementById('todayNotificationBar').style.display = 'none';
+        return;
+      }
+      const today = new Date().toISOString().split('T')[0];
+      const filteredApps = getFilteredAppointments();
+      const filteredPats = getFilteredPatients();
+      const todayAppts = filteredApps.filter(a => a.date === today);
+      const todayVaccines = filteredPats.filter(p => p.nextVaccine === today);
+      const total = todayAppts.length + todayVaccines.length;
+      const bar = document.getElementById('todayNotificationBar');
+      const text = document.getElementById('todayNotificationText');
+      if (total > 0) {
+        bar.style.display = 'flex';
+        text.textContent = `Mayroon kang ${total} nakatakdang gawain ngayong araw (${todayAppts.length} appointment, ${todayVaccines.length} bakuna).`;
+      } else {
+        bar.style.display = 'none';
+      }
+    }
+
+    document.getElementById('dismissNotificationBtn').addEventListener('click', () => {
+      document.getElementById('todayNotificationBar').style.display = 'none';
+    });
+
+    // ---------- ENCRYPTED PATIENT STORAGE ----------
+    async function savePatients() {
+      const plain = JSON.stringify(patients);
+      const encrypted = await encryptDataMachine(plain);
+      localStorage.setItem(ENCRYPTED_PATIENT_KEY, encrypted);
+      localStorage.removeItem(PATIENT_KEY);
+    }
+
+    async function loadPatients() {
+      if (!currentUser) return;
+      const encrypted = localStorage.getItem(ENCRYPTED_PATIENT_KEY);
+      if (encrypted) {
+        try {
+          const decrypted = await decryptDataMachine(encrypted);
+          patients = JSON.parse(decrypted);
+        } catch (e) {
+          patients = JSON.parse(localStorage.getItem(PATIENT_KEY) || '[]');
+        }
+      } else {
+        patients = JSON.parse(localStorage.getItem(PATIENT_KEY) || '[]');
+        if (patients.length) await savePatients(); // migrate old data
+      }
+      let needsSave = false;
+      patients.forEach(p => {
+        if (!p.userId) { p.userId = currentUser.uid || 'admin'; needsSave = true; }
+        if (p.birthdate === undefined && p.age !== undefined) {
+          const now = new Date();
+          const birthYear = now.getFullYear() - parseInt(p.age);
+          p.birthdate = `${birthYear}-01-01`;
+          delete p.age;
+          needsSave = true;
+        }
+        if (p.age !== undefined) { delete p.age; needsSave = true; }
+      });
+      if (needsSave) await savePatients();
+      renderPatientList();
+      updateHomeStats();
+      updateNextAppointmentDisplay();
+      updateTodayNotification();
+    }
+
+    async function saveAppointments() {
+      const plain = JSON.stringify(appointments);
+      const encrypted = await encryptDataMachine(plain);
+      localStorage.setItem(ENCRYPTED_APPOINTMENT_KEY, encrypted);
+      localStorage.removeItem(APPOINTMENT_KEY);
+    }
+
+    async function loadAppointments() {
+      if (!currentUser) return;
+      const encrypted = localStorage.getItem(ENCRYPTED_APPOINTMENT_KEY);
+      if (encrypted) {
+        try {
+          const decrypted = await decryptDataMachine(encrypted);
+          appointments = JSON.parse(decrypted);
+        } catch (e) {
+          appointments = JSON.parse(localStorage.getItem(APPOINTMENT_KEY) || '[]');
+        }
+      } else {
+        appointments = JSON.parse(localStorage.getItem(APPOINTMENT_KEY) || '[]');
+        if (appointments.length) await saveAppointments();
+      }
+      let updated = false;
+      appointments.forEach(a => { if (!a.userId) { a.userId = currentUser.uid || 'admin'; updated = true; } });
+      if (updated) await saveAppointments();
+      renderAppointmentList();
+      updateNextAppointmentDisplay();
+      updateTodayNotification();
+    }
+
+    // ---------- APPOINTMENT RENDERING ----------
+    function renderAppointmentList(filterText = '') {
+      const container = document.getElementById('appointmentListContainer');
+      if (!container) return;
+      let displayed = getFilteredAppointments();
+      if (filterText.trim()) {
+        const q = filterText.trim().toLowerCase();
+        displayed = displayed.filter(a => a.patientName.toLowerCase().includes(q));
+      }
+      const sorted = [...displayed].sort((a, b) => (a.date + a.time).localeCompare(b.date + b.time));
+      if (!sorted.length) {
+        container.innerHTML = '<p>Walang nakaiskedyul na appointment.</p>';
+        return;
+      }
+      let html = '';
+      sorted.forEach(apt => {
+        const canEdit = canModify(apt);
+        html += `<div class="record-item" style="${canEdit ? '' : 'padding-right: 14px;'}">
+          <strong>${apt.patientName}</strong><br>
+          ${apt.service} · ${apt.date} ${apt.time ? apt.time : ''}<br>
+          ${apt.notes ? `<small>${apt.notes}</small>` : ''}
+          ${canEdit ? `
+          <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 6px;">
+            <button class="btn-outline edit-appt-btn" data-id="${apt.id}" style="padding: 4px 10px; width: auto;">Edit</button>
+            <button class="btn-outline delete-appt-btn" data-id="${apt.id}" style="padding: 4px 10px; width: auto;">Delete</button>
+          </div>` : ''}
+        </div>`;
+      });
+      container.innerHTML = html;
+    }
+
+    function updateNextAppointmentDisplay() {
+      const card = document.getElementById('nextAppointmentCard');
+      const textEl = document.getElementById('nextAppointmentText');
+      if (!currentUser) {
+        card.style.display = 'none';
+        return;
+      }
+      card.style.display = 'block';
+      const today = new Date().toISOString().split('T')[0];
+      const filteredApps = getFilteredAppointments();
+      const upcomingAppts = filteredApps.filter(a => a.date >= today).sort((a, b) => a.date.localeCompare(b.date));
+      if (upcomingAppts.length > 0) {
+        const apt = upcomingAppts[0];
+        textEl.textContent = `Ang iyong susunod na appointment: ${apt.service} para kay ${apt.patientName} sa ${apt.date}${apt.time ? ' ' + apt.time : ''}.`;
+        return;
+      }
+      const filteredPats = getFilteredPatients();
+      const upcomingPatients = filteredPats.filter(p => p.nextVaccine && p.nextVaccine >= today).sort((a, b) => a.nextVaccine.localeCompare(b.nextVaccine));
+      if (upcomingPatients.length > 0) {
+        const p = upcomingPatients[0];
+        textEl.textContent = `Paalala: Bakuna para kay ${p.name} sa ${p.nextVaccine}.`;
+        return;
+      }
+      textEl.textContent = 'Wala kang nakaiskedyul na appointment.';
+    }
+
+    // ---------- PATIENT RENDERING ----------
+    function renderPatientList(filterText = '') {
+      const container = document.getElementById('patientListContainer');
+      if (!container) return;
+      let displayed = getFilteredPatients();
+      if (filterText.trim()) {
+        const q = filterText.trim().toLowerCase();
+        displayed = displayed.filter(p => p.name.toLowerCase().includes(q));
+      }
+      if (!displayed.length) {
+        container.innerHTML = '<p>Walang pasyente.</p>';
+      } else {
+        container.innerHTML = displayed.map(p => {
+          const ageMonths = p.birthdate ? calculateAge(p.birthdate) : null;
+          const ageDisplay = ageMonths !== null ? (ageMonths < 24 ? `${ageMonths} buwan` : `${Math.floor(ageMonths/12)} taon`) : '???';
+          const dueVaccines = getDueVaccines(p.birthdate);
+          let vaccineBadgeHtml = '';
+          if (dueVaccines.length > 0) {
+            vaccineBadgeHtml = `<span class="vaccine-badge">Due: ${dueVaccines.map(v => v.vaccine).join(', ')}</span>`;
+          }
+          const editAllowed = canModify(p);
+          return `<div class="record-item" style="${editAllowed ? '' : 'padding-right: 14px;'}">
+            <strong>${p.name}</strong> · ${ageDisplay} gulang<br>
+            Bakuna: ${p.nextVaccine || 'wala'} ${vaccineBadgeHtml}
+            ${editAllowed ? `
+            <div style="position: absolute; top: 10px; right: 10px; display: flex; gap: 6px;">
+              <button class="btn-outline edit-patient-btn" data-id="${p.id}" style="padding: 4px 10px; width: auto;">Edit</button>
+              <button class="btn-outline delete-patient-btn" data-id="${p.id}" style="padding: 4px 10px; width: auto;">Delete</button>
+            </div>` : ''}
+          </div>`;
+        }).join('');
+      }
+      const today = new Date().toISOString().split('T')[0];
+      const filteredPats = getFilteredPatients();
+      const upcoming = filteredPats.filter(p => p.nextVaccine >= today);
+      document.getElementById('reminderDisplay').innerHTML = upcoming.length ? `${upcoming.length} paparating na paalala.` : 'Walang paalala.';
+      updateHomeStats();
+      updateNextAppointmentDisplay();
+      updateTodayNotification();
+      renderUserStats();
+    }
+
+    document.getElementById('patientSearch').addEventListener('input', function() {
+      renderPatientList(this.value);
+    });
+
+    function updateHomeStats() {
+      if (!currentUser) {
+        document.getElementById('homeStatsCard').style.display = 'none';
+        return;
+      }
+      document.getElementById('homeStatsCard').style.display = 'block';
+      const filteredPats = getFilteredPatients();
+      document.getElementById('totalPatientsStat').textContent = filteredPats.length;
+      const today = new Date().toISOString().split('T')[0];
+      const upcomingCount = filteredPats.filter(p => p.nextVaccine && p.nextVaccine >= today).length;
+      document.getElementById('upcomingVaccinesStat').textContent = upcomingCount;
+    }
+
+    function renderUserStats() {
+      const container = document.getElementById('userStatsContainer');
+      if (!container || !isAdmin()) {
+        if (container) container.style.display = 'none';
+        return;
+      }
+      container.style.display = 'block';
+      const stats = {};
+      patients.forEach(p => {
+        stats[p.userId] = (stats[p.userId] || 0) + 1;
+      });
+      if (Object.keys(stats).length === 0) {
+        container.innerHTML = '';
+        return;
+      }
+      let html = '<strong>Kabuuan ng Pasyente bawat User:</strong><ul style="margin-top:4px;">';
+      for (const [uid, count] of Object.entries(stats)) {
+        const user = getUsers().find(u => u.uid === uid);
+        const name = user ? user.fullName : uid;
+        html += `<li>${name}: ${count}</li>`;
+      }
+      html += '</ul>';
+      container.innerHTML = html;
+    }
+
+    // ---------- UI UPDATE ----------
+    function updateUIForLoginState() {
+      const loggedIn = !!currentUser;
+      document.getElementById('logoutBtn').style.display = loggedIn ? 'inline-block' : 'none';
+      const onlineRequestsCard = document.getElementById('onlineRequestsCard');
+      if (onlineRequestsCard) onlineRequestsCard.style.display = isAdmin() ? 'block' : 'none';
+      const displayName = loggedIn ? (currentUser.fullName || currentUser.username) : 'Bisita';
+      document.getElementById('loggedInUserDisplay').textContent = displayName;
+      document.getElementById('userRoleDisplay').textContent = loggedIn
+        ? `${currentUser.role === 'admin' ? 'Administrator' : 'Member'} · Barangay San Isidro`
+        : 'Bisita · Barangay San Isidro';
+
+      const recordsTabBtn = document.getElementById('recordsTabBtn');
+      const appointmentsTabBtn = document.getElementById('appointmentsTabBtn');
+      const adminLogsTabBtn = document.getElementById('adminLogsTabBtn');
+      const patientFormContainer = document.getElementById('patientFormContainer');
+      const patientListCard = document.getElementById('patientListCard');
+      const reminderCard = document.getElementById('reminderCard');
+      const appointmentFormContainer = document.getElementById('appointmentFormContainer');
+      const appointmentListCard = document.getElementById('appointmentListCard');
+      const recordsAccessMsg = document.getElementById('recordsAccessMessage');
+      const apptAccessMsg = document.getElementById('appointmentsAccessMessage');
+
+      if (loggedIn) {
+        recordsTabBtn.classList.remove('hidden-tab');
+        appointmentsTabBtn.classList.remove('hidden-tab');
+        patientFormContainer.style.display = 'block';
+        patientListCard.style.display = 'block';
+        reminderCard.style.display = 'block';
+        appointmentFormContainer.style.display = 'block';
+        appointmentListCard.style.display = 'block';
+        if (recordsAccessMsg) recordsAccessMsg.style.display = 'none';
+        if (apptAccessMsg) apptAccessMsg.style.display = 'none';
+      } else {
+        recordsTabBtn.classList.add('hidden-tab');
+        appointmentsTabBtn.classList.add('hidden-tab');
+        patientFormContainer.style.display = 'none';
+        patientListCard.style.display = 'none';
+        reminderCard.style.display = 'none';
+        appointmentFormContainer.style.display = 'none';
+        appointmentListCard.style.display = 'none';
+        if (recordsAccessMsg) recordsAccessMsg.style.display = 'block';
+        if (apptAccessMsg) apptAccessMsg.style.display = 'block';
+        if (document.querySelector('#records.tab-content.active') || document.querySelector('#appointments.tab-content.active')) {
+          document.querySelector('.tab-btn[data-tab="home"]').click();
+        }
+      }
+
+      if (isAdmin()) {
+        adminLogsTabBtn.classList.remove('hidden-tab');
+      } else {
+        adminLogsTabBtn.classList.add('hidden-tab');
+        if (document.querySelector('#adminLogs.tab-content.active')) {
+          document.querySelector('.tab-btn[data-tab="home"]').click();
+        }
+      }
+
+      const usersExist = getUsers().length > 0;
+      const setupView = document.getElementById('accountSetupView');
+      const loggedOutView = document.getElementById('accountLoggedOutView');
+      const registerView = document.getElementById('accountRegisterView');
+      const recoveryView = document.getElementById('accountRecoveryView');
+      const loggedInView = document.getElementById('accountLoggedInView');
+      const changePwView = document.getElementById('changePasswordView');
+      const adminMgmtView = document.getElementById('adminUserManagementView');
+      const syncView = document.getElementById('syncView');
+      const recoveryLink = document.getElementById('showRecoveryLink');
+
+      setupView.style.display = 'none';
+      loggedOutView.style.display = 'none';
+      registerView.style.display = 'none';
+      recoveryView.style.display = 'none';
+      loggedInView.style.display = 'none';
+      changePwView.style.display = 'none';
+      adminMgmtView.style.display = 'none';
+      syncView.style.display = 'none';
+      if (recoveryLink) recoveryLink.style.display = 'none';
+
+      const adminExists = getUsers().some(u => u.role === 'admin');
+
+      if (loggedIn) {
+        loggedInView.style.display = 'block';
+        document.getElementById('accountUserName').textContent = currentUser.fullName || currentUser.username;
+        document.getElementById('accountRole').textContent = currentUser.role === 'admin' ? 'Administrator' : 'Member';
+        if (document.getElementById('adminUserManagementBtn')) document.getElementById('adminUserManagementBtn').style.display = isAdmin() ? 'inline-block' : 'none';
+        if (document.getElementById('syncSettingsBtn')) document.getElementById('syncSettingsBtn').style.display = isAdmin() ? 'inline-block' : 'none';
+      } else if (!usersExist) {
+        setupView.style.display = 'block';
+      } else {
+        loggedOutView.style.display = 'block';
+        if (adminExists && recoveryLink) recoveryLink.style.display = 'inline';
+        document.getElementById('accountLoginForm').reset();
+        document.getElementById('accountLoginError').textContent = '';
+      }
+
+      const currentMeds = localStorage.getItem('abotKamayMedicine');
+      if (currentMeds) renderMedicineInventory(JSON.parse(currentMeds));
+      else renderMedicineInventory(DEFAULT_OFFLINE_DATA.medicineInventory);
+
+      updateTodayNotification();
+      updateNextAppointmentDisplay();
+      updateHomeStats();
+      resetInactivityTimer();
+    }
+
+    // ---------- setCurrentUser (with token) ----------
+    function generateSessionToken() {
+      return Array.from(crypto.getRandomValues(new Uint8Array(32))).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function setCurrentUser(user, keepLoggedIn = false) {
+      if (user) {
+        user.keepLoggedIn = keepLoggedIn;
+        const token = generateSessionToken();
+        const users = getUsers();
+        const idx = users.findIndex(u => u.uid === user.uid);
+        if (idx !== -1) {
+          users[idx].sessionToken = token;
+          saveUsers(users);
+        }
+        const sessionData = { user: { uid: user.uid, fullName: user.fullName, username: user.username, role: user.role, keepLoggedIn }, token };
+        localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(sessionData));
+        currentUser = user;
+        loadPatients();
+        loadAppointments();
+      } else {
+        if (currentUser) {
+          const users = getUsers();
+          const idx = users.findIndex(u => u.uid === currentUser.uid);
+          if (idx !== -1) {
+            users[idx].sessionToken = null;
+            saveUsers(users);
+          }
+        }
+        localStorage.removeItem(CURRENT_USER_KEY);
+        currentUser = null;
+      }
+      updateUIForLoginState();
+      resetInactivityTimer();
+    }
+
+    function logout() {
+      logEvent('LOGOUT');
+      if (inactivityTimer) clearTimeout(inactivityTimer);
+      setCurrentUser(null);
+    }
+
+    // ---------- ADMIN SETUP (strength check) ----------
+    document.getElementById('setupPassword').addEventListener('input', function() {
+      const pw = this.value;
+      const bar = document.getElementById('setupStrengthBar');
+      const text = document.getElementById('setupStrengthText');
+      if (!bar || !text) return;
+      const score = checkPasswordStrength(pw);
+      const colors = ['#ccc', '#f44336', '#ff9800', '#4caf50', '#2e7d32'];
+      bar.style.width = (score * 25) + '%';
+      bar.style.backgroundColor = colors[score];
+      text.textContent = ['', 'Mahina', 'Katamtaman', 'Malakas', 'Napakalakas'][score];
+    });
+
+    document.getElementById('adminSetupForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('setupUsername').value.trim();
+      const password = document.getElementById('setupPassword').value;
+      const confirm = document.getElementById('setupConfirmPassword').value;
+      const errorDiv = document.getElementById('setupError');
+      if (password !== confirm) { errorDiv.textContent = 'Hindi magkatugma ang password.'; return; }
+      if (password.length < 8) { errorDiv.textContent = 'Kinakailangang hindi bababa sa 8 character ang password.'; return; }
+      if (checkPasswordStrength(password) < 2) {
+        errorDiv.textContent = 'Mahina ang password. Kinakailangan ng halo ng malaki/maliit na letra at numero.';
+        return;
+      }
+      const users = getUsers();
+      if (users.length > 0) { errorDiv.textContent = 'Mayroon nang administrator account.'; return; }
+      const recoveryRaw = Array.from(crypto.getRandomValues(new Uint8Array(16))).map(b => b.toString(16).padStart(2,'0')).join('');
+      const encryptedRecovery = await encryptWithPassword(recoveryRaw, password);
+      localStorage.setItem(RECOVERY_KEY, encryptedRecovery);
+      const { hash, salt, iterations } = await hashPasswordWithSalt(password);
+      const newUser = {
+        uid: generateUUID(), fullName: 'Administrator', username,
+        passwordHash: hash, salt, iterations, role: 'admin',
+        registeredAt: new Date().toISOString(), lastLogin: null,
+        disabled: false, mustChangePassword: false, failedAttempts: 0, lockUntil: null
+      };
+      users.push(newUser);
+      saveUsers(users);
+      document.getElementById('recoveryPhraseText').textContent = recoveryRaw;
+      document.getElementById('recoveryPhraseDisplay').style.display = 'block';
+      errorDiv.textContent = 'Admin account created. Pakisulat ang recovery phrase sa itaas.';
+      document.getElementById('setupPassword').value = '';
+      document.getElementById('setupConfirmPassword').value = '';
+    });
+
+    // ---------- RECOVERY (placeholder) ----------
+    document.getElementById('showRecoveryLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('accountLoggedOutView').style.display = 'none';
+      document.getElementById('accountRecoveryView').style.display = 'block';
+    });
+    document.getElementById('recoverBtn').addEventListener('click', async () => {
+      document.getElementById('recoveryError').textContent = 'Feature not yet fully implemented. Use console to reset.';
+    });
+
+    // ---------- MEMBER REGISTRATION ----------
+    document.getElementById('registerForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const fullName = document.getElementById('regFullName').value.trim();
+      const username = document.getElementById('regUsername').value.trim();
+      const password = document.getElementById('regPassword').value;
+      const confirm = document.getElementById('regConfirmPassword').value;
+      const errorDiv = document.getElementById('registerError');
+      if (password !== confirm) { errorDiv.textContent = 'Hindi magkatugma ang password.'; return; }
+      if (password.length < 8) { errorDiv.textContent = 'Kinakailangang hindi bababa sa 8 character ang password.'; return; }
+      const strength = checkPasswordStrength(password);
+      if (strength < 2) { errorDiv.textContent = 'Mahina ang password. Gumamit ng halo ng malaki/maliit na letra at numero.'; return; }
+      const users = getUsers();
+      if (users.find(u => u.username === username)) { errorDiv.textContent = 'Ginagamit na ang username na ito.'; return; }
+      const { hash, salt, iterations } = await hashPasswordWithSalt(password);
+      const newUser = {
+        uid: generateUUID(), fullName, username, passwordHash: hash, salt, iterations,
+        role: 'member', registeredAt: new Date().toISOString(), lastLogin: null,
+        disabled: false, mustChangePassword: false, failedAttempts: 0, lockUntil: null
+      };
+      users.push(newUser);
+      saveUsers(users);
+      setCurrentUser({ uid: newUser.uid, fullName: newUser.fullName, username: newUser.username, role: 'member' });
+      logEvent('REGISTER', `Member ${username} registered`);
+      document.querySelector('.tab-btn[data-tab="home"]').click();
+    });
+
+    // ---------- LOGIN (with keepLoggedIn) ----------
+    document.getElementById('accountLoginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const username = document.getElementById('accountLoginUsername').value.trim();
+      const password = document.getElementById('accountLoginPassword').value;
+      const keepLoggedIn = document.getElementById('keepLoggedIn').checked;
+      const errorDiv = document.getElementById('accountLoginError');
+      const users = getUsers();
+      const userIndex = users.findIndex(u => u.username === username);
+      if (userIndex === -1) { errorDiv.textContent = 'Hindi nahanap ang account.'; return; }
+      let user = users[userIndex];
+      if (user.lockUntil && new Date(user.lockUntil) > new Date()) {
+        const remaining = Math.ceil((new Date(user.lockUntil) - new Date()) / 1000 / 60);
+        errorDiv.textContent = `Naka-lock ang account. Subukan muli sa ${remaining} minuto.`; return;
+      }
+      if (user.disabled) { errorDiv.textContent = 'Ang account na ito ay naka-disable. Makipag-ugnayan sa administrator.'; return; }
+      const isValid = await verifyPassword(password, user);
+      if (!isValid) {
+        user.failedAttempts = (user.failedAttempts || 0) + 1;
+        if (user.failedAttempts >= 5) { user.lockUntil = new Date(Date.now() + 5 * 60 * 1000).toISOString(); user.failedAttempts = 0; }
+        users[userIndex] = user; saveUsers(users);
+        errorDiv.textContent = 'Maling password.'; return;
+      }
+      user.failedAttempts = 0; user.lockUntil = null; user.lastLogin = new Date().toISOString();
+      users[userIndex] = user; saveUsers(users);
+      setCurrentUser({ uid: user.uid, fullName: user.fullName, username: user.username, role: user.role }, keepLoggedIn);
+      if (user.mustChangePassword) alert('Kinakailangan mong palitan ang iyong password. Pumunta sa Account settings.');
+      logEvent('LOGIN', `${user.role} ${username} logged in`);
+      errorDiv.textContent = '';
+      document.querySelector('.tab-btn[data-tab="home"]').click();
+    });
+
+    // ---------- ACCOUNT VIEW SWITCHING ----------
+    document.getElementById('showRegisterLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('accountLoggedOutView').style.display = 'none';
+      document.getElementById('accountRegisterView').style.display = 'block';
+    });
+    document.getElementById('backToLoginLink').addEventListener('click', (e) => {
+      e.preventDefault();
+      document.getElementById('accountRegisterView').style.display = 'none';
+      document.getElementById('accountLoggedOutView').style.display = 'block';
+    });
+
+    // ---------- LOGOUT ----------
+    document.getElementById('logoutBtn').addEventListener('click', logout);
+    document.getElementById('accountLogoutBtn').addEventListener('click', logout);
+
+    // ---------- TABS ----------
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.getAttribute('data-tab');
+        if (tabId === 'adminLogs' && !isAdmin()) return;
+        if ((tabId === 'records' || tabId === 'appointments') && !currentUser) return;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        btn.classList.add('active');
+        document.getElementById(tabId).classList.add('active');
+        if (tabId === 'adminLogs') renderAdminLogs();
+        resetInactivityTimer();
+      });
+    });
+
+    // ---------- PATIENT EDIT/DELETE (async saves) ----------
+    document.getElementById('patientListContainer').addEventListener('click', async (e) => {
+      const editBtn = e.target.closest('.edit-patient-btn');
+      const deleteBtn = e.target.closest('.delete-patient-btn');
+      if (editBtn) {
+        const id = editBtn.getAttribute('data-id');
+        const patient = patients.find(p => p.id == id);
+        if (!patient || !canModify(patient)) return;
+        document.getElementById('patientName').value = patient.name;
+        document.getElementById('patientBirthdate').value = patient.birthdate || '';
+        document.getElementById('nextVaccineDate').value = patient.nextVaccine || '';
+        patients = patients.filter(p => p.id != id);
+        await savePatients();
+        renderPatientList(document.getElementById('patientSearch').value);
+        document.querySelector('#patientForm button[type="submit"]').textContent = 'I-update';
+        document.getElementById('patientForm').dataset.editingId = id;
+      }
+      if (deleteBtn) {
+        const id = deleteBtn.getAttribute('data-id');
+        const patient = patients.find(p => p.id == id);
+        if (!patient || !canModify(patient)) return;
+        if (confirm('Tanggalin ang pasyenteng ito?')) {
+          patients = patients.filter(p => p.id != id);
+          await savePatients();
+          renderPatientList(document.getElementById('patientSearch').value);
+          logEvent('DELETE_PATIENT', `Patient ID: ${id}`);
+        }
+      }
+    });
+
+    document.getElementById('patientForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!currentUser) return;
+      const name = document.getElementById('patientName').value;
+      const birthdate = document.getElementById('patientBirthdate').value;
+      const next = document.getElementById('nextVaccineDate').value;
+      const editingId = e.target.dataset.editingId;
+      if (editingId) {
+        const index = patients.findIndex(p => p.id == editingId);
+        if (index !== -1) patients[index] = { ...patients[index], name, birthdate, nextVaccine: next };
+        delete e.target.dataset.editingId;
+        document.querySelector('#patientForm button[type="submit"]').textContent = 'I-save';
+        logEvent('UPDATE_PATIENT', `Patient: ${name}`);
+      } else {
+        patients.push({ id: Date.now(), userId: currentUser.uid, name, birthdate, nextVaccine: next });
+        logEvent('ADD_PATIENT', `Patient: ${name} by ${currentUser.username}`);
+      }
+      await savePatients();
+      renderPatientList(document.getElementById('patientSearch').value);
+      e.target.reset();
+      updateTodayNotification();
+    });
+
+    document.getElementById('clearStorageBtn').addEventListener('click', async () => {
+      if (!currentUser) return;
+      if (confirm(`Burahin lahat ng pasyente${isAdmin() ? '' : ' mo'}?`)) {
+        patients = isAdmin() ? [] : patients.filter(p => p.userId !== currentUser.uid);
+        await savePatients();
+        renderPatientList();
+        logEvent('CLEAR_PATIENTS', `Cleared by ${currentUser.username}`);
+        updateTodayNotification();
+      }
+    });
+
+    // ---------- APPOINTMENT EDIT/DELETE ----------
+    document.getElementById('appointmentListContainer').addEventListener('click', async (e) => {
+      const editBtn = e.target.closest('.edit-appt-btn');
+      const deleteBtn = e.target.closest('.delete-appt-btn');
+      if (editBtn) {
+        const id = editBtn.getAttribute('data-id');
+        const apt = appointments.find(a => a.id == id);
+        if (!apt || !canModify(apt)) return;
+        document.getElementById('apptPatientName').value = apt.patientName;
+        document.getElementById('apptService').value = apt.service;
+        document.getElementById('apptDate').value = apt.date;
+        document.getElementById('apptTime').value = apt.time || '';
+        document.getElementById('apptNotes').value = apt.notes || '';
+        appointments = appointments.filter(a => a.id != id);
+        await saveAppointments();
+        renderAppointmentList();
+        updateNextAppointmentDisplay();
+        updateTodayNotification();
+        document.querySelector('#appointmentForm button[type="submit"]').textContent = 'I-update';
+        document.getElementById('appointmentForm').dataset.editingId = id;
+      }
+      if (deleteBtn) {
+        const id = deleteBtn.getAttribute('data-id');
+        const apt = appointments.find(a => a.id == id);
+        if (!apt || !canModify(apt)) return;
+        if (confirm('Kanselahin ang appointment na ito?')) {
+          appointments = appointments.filter(a => a.id != id);
+          await saveAppointments();
+          renderAppointmentList();
+          updateNextAppointmentDisplay();
+          updateTodayNotification();
+          logEvent('DELETE_APPOINTMENT', `Appointment ID: ${id}`);
+        }
+      }
+    });
+
+    document.getElementById('appointmentForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!currentUser) return;
+      const patientName = document.getElementById('apptPatientName').value.trim();
+      const service = document.getElementById('apptService').value;
+      const date = document.getElementById('apptDate').value;
+      const time = document.getElementById('apptTime').value;
+      const notes = document.getElementById('apptNotes').value.trim();
+      const editingId = e.target.dataset.editingId;
+      if (editingId) {
+        const index = appointments.findIndex(a => a.id == editingId);
+        if (index !== -1) appointments[index] = { ...appointments[index], patientName, service, date, time, notes };
+        delete e.target.dataset.editingId;
+        document.querySelector('#appointmentForm button[type="submit"]').textContent = 'I-schedule';
+        logEvent('UPDATE_APPOINTMENT', `Appointment for ${patientName}`);
+      } else {
+        appointments.push({ id: Date.now(), userId: currentUser.uid, patientName, service, date, time, notes });
+        logEvent('ADD_APPOINTMENT', `Appointment for ${patientName} by ${currentUser.username}`);
+      }
+      await saveAppointments();
+      renderAppointmentList();
+      updateNextAppointmentDisplay();
+      updateTodayNotification();
+      e.target.reset();
+    });
+
+    document.getElementById('clearAppointmentsBtn').addEventListener('click', async () => {
+      if (!currentUser) return;
+      if (confirm(`Burahin lahat ng appointment${isAdmin() ? '' : ' mo'}?`)) {
+        appointments = isAdmin() ? [] : appointments.filter(a => a.userId !== currentUser.uid);
+        await saveAppointments();
+        renderAppointmentList();
+        updateNextAppointmentDisplay();
+        updateTodayNotification();
+        logEvent('CLEAR_APPOINTMENTS', `Cleared by ${currentUser.username}`);
+      }
+    });
+
+    // ---------- MEDICINE INVENTORY ----------
+    function saveMedicineInventory(medicines) {
+      localStorage.setItem('abotKamayMedicine', JSON.stringify(medicines));
+      localStorage.setItem(INVENTORY_LAST_UPDATED_KEY, new Date().toISOString());
+      renderLowStockSummary(medicines);
+    }
+
+    function updateInventoryLastUpdated(newISODate) {
+      localStorage.setItem(INVENTORY_LAST_UPDATED_KEY, newISODate);
+      const cachedMeds = localStorage.getItem('abotKamayMedicine');
+      const meds = cachedMeds ? JSON.parse(cachedMeds) : DEFAULT_OFFLINE_DATA.medicineInventory;
+      renderMedicineInventory(meds);
+      renderLowStockSummary(meds);
+    }
+
+    function updateInventoryWarning(lastUpdatedISO) {
+      const warningCard = document.getElementById('inventoryWarningCard');
+      if (!warningCard || !isAdmin()) { if (warningCard) warningCard.style.display = 'none'; return; }
+      const lastDate = new Date(lastUpdatedISO);
+      const diffDays = Math.floor((new Date() - lastDate) / (1000 * 60 * 60 * 24));
+      warningCard.style.display = diffDays > 30 ? 'block' : 'none';
+    }
+
+    function renderLowStockSummary(medicines) {
+      const container = document.getElementById('lowStockSummary');
+      if (!container || !isAdmin()) { if (container) container.style.display = 'none'; return; }
+      const low = medicines.filter(m => m.stock === 'Low Stock').length;
+      const out = medicines.filter(m => m.stock === 'Out of Stock').length;
+      if (low === 0 && out === 0) { container.style.display = 'none'; return; }
+      container.style.display = 'block';
+      container.innerHTML = `<strong>Imbentaryo:</strong> ${low} mababa ang stock, ${out} ubos na.`;
+    }
+
+    function renderMedicineInventory(medicines) {
+      const container = document.getElementById('medicineContainer');
+      if (!container) return;
+      const canEdit = isAdmin();
+      let html = '<ul style="list-style: none; padding: 0; margin: 0;">';
+      medicines.forEach((m, index) => {
+        let stockColor = '#2e7d32';
+        if (m.stock === 'Low Stock') stockColor = '#f57f17';
+        else if (m.stock === 'Out of Stock') stockColor = '#b71c1c';
+        html += `<li style="padding: 10px 0; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center;">
+          <span><strong>${m.name}</strong></span>
+          <span style="display: flex; align-items: center; gap: 8px;">
+            <span class="medicine-stock-badge" style="background: ${stockColor}; color: white; padding: 2px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: 600;">${m.stock}</span>`;
+        if (canEdit) {
+          html += `<select class="stock-select" data-index="${index}" style="width: auto; padding: 4px 8px; font-size: 0.8rem; border-radius: 20px;">
+            <option value="Available" ${m.stock === 'Available' ? 'selected' : ''}>Available</option>
+            <option value="Low Stock" ${m.stock === 'Low Stock' ? 'selected' : ''}>Low Stock</option>
+            <option value="Out of Stock" ${m.stock === 'Out of Stock' ? 'selected' : ''}>Out of Stock</option>
+          </select>`;
+        }
+        html += `</span></li>`;
+      });
+      html += '</ul>';
+      container.innerHTML = html;
+
+      const lastUpdated = localStorage.getItem(INVENTORY_LAST_UPDATED_KEY) || DEFAULT_OFFLINE_DATA.lastUpdated;
+      document.getElementById('inventoryUpdatedDate').textContent = new Date(lastUpdated).toLocaleDateString('tl-PH', { year:'numeric', month:'long', day:'numeric' });
+      document.getElementById('editInventoryDateBtn').style.display = canEdit ? 'inline-block' : 'none';
+      updateInventoryWarning(lastUpdated);
+      renderLowStockSummary(medicines);
+    }
+
+    document.getElementById('medicineContainer').addEventListener('change', (e) => {
+      if (!isAdmin()) return;
+      const select = e.target.closest('.stock-select');
+      if (!select) return;
+      const index = parseInt(select.getAttribute('data-index'));
+      const newStock = select.value;
+      const stored = localStorage.getItem('abotKamayMedicine');
+      const medicines = stored ? JSON.parse(stored) : DEFAULT_OFFLINE_DATA.medicineInventory;
+      if (index >= 0 && index < medicines.length) {
+        medicines[index].stock = newStock;
+        saveMedicineInventory(medicines);
+        renderMedicineInventory(medicines);
+      }
+    });
+
+    document.getElementById('editInventoryDateBtn').addEventListener('click', () => {
+      if (!isAdmin()) return;
+      const currentDate = localStorage.getItem(INVENTORY_LAST_UPDATED_KEY) || DEFAULT_OFFLINE_DATA.lastUpdated;
+      const newDate = prompt('Ilagay ang bagong petsa (YYYY-MM-DD):', currentDate.split('T')[0]);
+      if (newDate) updateInventoryLastUpdated(new Date(newDate + 'T12:00:00Z').toISOString());
+    });
+
+    // ---------- ADMIN USER MANAGEMENT (async deletions) ----------
+    function renderUserList() {
+      const container = document.getElementById('userListContainer');
+      if (!container) return;
+      const users = getUsers();
+      let html = '';
+      users.forEach(u => {
+        const disabledTag = u.disabled ? ' [Disabled]' : '';
+        html += `<div class="record-item" style="padding-right:14px;">
+          <strong>${u.fullName} (${u.username})</strong> ${disabledTag}<br>
+          Role: ${u.role} · Huling login: ${u.lastLogin ? new Date(u.lastLogin).toLocaleString('tl-PH') : 'wala pa'}<br>
+          <div style="margin-top:6px;">
+            <button class="btn-outline toggle-user-btn" data-username="${u.username}" style="padding:4px 10px; width:auto;">
+              ${u.disabled ? 'I-enable' : 'I-disable'}
+            </button>
+            <button class="btn-outline reset-user-pw-btn" data-username="${u.username}" style="padding:4px 10px; width:auto; margin-left:8px;">
+              I-reset ang Password
+            </button>
+            ${u.role !== 'admin' ? `<button class="btn-outline delete-user-btn" data-username="${u.username}" style="padding:4px 10px; width:auto; margin-left:8px;">Tanggalin</button>` : ''}
+          </div>
+        </div>`;
+      });
+      container.innerHTML = html || '<p>Walang user.</p>';
+      attachUserManagementEvents();
+    }
+
+    function attachUserManagementEvents() {
+      document.querySelectorAll('.toggle-user-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const username = btn.getAttribute('data-username');
+          const users = getUsers();
+          const user = users.find(u => u.username === username);
+          if (user) {
+            user.disabled = !user.disabled;
+            saveUsers(users);
+            logEvent('TOGGLE_USER', `${user.disabled ? 'Disabled' : 'Enabled'} ${username}`);
+            renderUserList();
+          }
+        });
+      });
+      document.querySelectorAll('.reset-user-pw-btn').forEach(btn => {
+        btn.addEventListener('click', async () => {
+          const username = btn.getAttribute('data-username');
+          const newPass = prompt('Ilagay ang pansamantalang password:');
+          if (!newPass) return;
+          const { hash, salt, iterations } = await hashPasswordWithSalt(newPass);
+          const users = getUsers();
+          const user = users.find(u => u.username === username);
+          if (user) {
+            user.passwordHash = hash; user.salt = salt; user.iterations = iterations;
+            user.mustChangePassword = true;
+            saveUsers(users);
+            logEvent('RESET_PASSWORD', `Admin reset ${username} password`);
+            alert('Password na-reset. Sabihan ang user na palitan agad.');
+            renderUserList();
+          }
+        });
+      });
+      document.querySelectorAll('.delete-user-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const username = btn.getAttribute('data-username');
+          if (confirm(`Tanggalin ang user na si ${username}? Ang kanilang mga record ay ililipat sa admin.`)) {
+            deleteUser(username);
+          }
+        });
+      });
+    }
+
+    async function deleteUser(username) {
+      const users = getUsers();
+      const userIndex = users.findIndex(u => u.username === username);
+      if (userIndex === -1) return;
+      const uid = users[userIndex].uid;
+      const adminUser = users.find(u => u.role === 'admin');
+      if (adminUser && uid) {
+        patients = patients.map(p => p.userId === uid ? { ...p, userId: adminUser.uid } : p);
+        await savePatients();
+        appointments = appointments.map(a => a.userId === uid ? { ...a, userId: adminUser.uid } : a);
+        await saveAppointments();
+      }
+      users.splice(userIndex, 1);
+      saveUsers(users);
+      logEvent('DELETE_USER', `Deleted user ${username}`);
+      renderUserList();
+      renderPatientList();
+      renderAppointmentList();
+    }
+
+    document.getElementById('adminUserManagementBtn').addEventListener('click', () => {
+      document.getElementById('accountLoggedInView').style.display = 'none';
+      document.getElementById('adminUserManagementView').style.display = 'block';
+      renderUserList();
+    });
+    document.getElementById('backFromUserMgmtBtn').addEventListener('click', () => {
+      document.getElementById('adminUserManagementView').style.display = 'none';
+      document.getElementById('accountLoggedInView').style.display = 'block';
+    });
+
+    // ---------- CHANGE PASSWORD ----------
+    function checkPasswordStrength(pw) {
+      let score = 0;
+      if (pw.length >= 8) score++;
+      if (/[a-z]/.test(pw) && /[A-Z]/.test(pw)) score++;
+      if (/\d/.test(pw)) score++;
+      if (/[^a-zA-Z0-9]/.test(pw)) score++;
+      return score;
+    }
+
+    document.getElementById('changePasswordBtn').addEventListener('click', () => {
+      document.getElementById('accountLoggedInView').style.display = 'none';
+      document.getElementById('changePasswordView').style.display = 'block';
+      document.getElementById('changePasswordForm').reset();
+      document.getElementById('changePasswordError').textContent = '';
+      updateStrengthMeter('');
+    });
+    document.getElementById('backToAccountBtn').addEventListener('click', () => {
+      document.getElementById('changePasswordView').style.display = 'none';
+      document.getElementById('adminUserManagementView').style.display = 'none';
+      document.getElementById('accountLoggedInView').style.display = 'block';
+    });
+
+    document.getElementById('newPassword').addEventListener('input', function() {
+      updateStrengthMeter(this.value);
+    });
+
+    function updateStrengthMeter(pw) {
+      const bar = document.getElementById('strengthBar');
+      const text = document.getElementById('strengthText');
+      if (!bar || !text) return;
+      const score = checkPasswordStrength(pw);
+      const colors = ['#ccc', '#f44336', '#ff9800', '#4caf50', '#2e7d32'];
+      bar.style.width = (score * 25) + '%';
+      bar.style.backgroundColor = colors[score];
+      const levels = ['', 'Mahina', 'Katamtaman', 'Malakas', 'Napakalakas'];
+      text.textContent = levels[score];
+    }
+
+    document.getElementById('changePasswordForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const oldPw = document.getElementById('oldPassword').value;
+      const newPw = document.getElementById('newPassword').value;
+      const confirmPw = document.getElementById('confirmNewPassword').value;
+      const errorDiv = document.getElementById('changePasswordError');
+      if (newPw !== confirmPw) { errorDiv.textContent = 'Hindi magkatugma ang bagong password.'; return; }
+      if (newPw.length < 8 || checkPasswordStrength(newPw) < 2) {
+        errorDiv.textContent = 'Masyadong mahina ang password. Sundin ang mga requirement.';
+        return;
+      }
+      const users = getUsers();
+      const userIndex = users.findIndex(u => u.uid === currentUser.uid);
+      if (userIndex === -1) return;
+      const user = users[userIndex];
+      const oldValid = await verifyPassword(oldPw, user);
+      if (!oldValid) { errorDiv.textContent = 'Mali ang kasalukuyang password.'; return; }
+      const { hash, salt, iterations } = await hashPasswordWithSalt(newPw);
+      user.passwordHash = hash; user.salt = salt; user.iterations = iterations; user.mustChangePassword = false;
+      saveUsers(users);
+      logEvent('CHANGE_PASSWORD', `${currentUser.username} changed password`);
+      alert('Password napalitan!');
+      document.getElementById('backToAccountBtn').click();
+    });
+    // ---------- ONLINE APPOINTMENT REQUEST FUNCTIONS ----------
+    function getApptServerUrl() {
+      const saved = localStorage.getItem(APPOINTMENT_SERVER_URL_KEY);
+      if (saved) return saved;
+      localStorage.setItem(APPOINTMENT_SERVER_URL_KEY, DEFAULT_APPOINTMENT_SERVER_URL);
+      return DEFAULT_APPOINTMENT_SERVER_URL;
+    }
+
+    function buildRequestData() {
+      return {
+        userId: currentUser.uid,
+        patientName: document.getElementById('apptPatientName').value.trim(),
+        service: document.getElementById('apptService').value,
+        requestedDate: document.getElementById('apptDate').value,
+        preferredTime: document.getElementById('apptTime').value,
+        notes: document.getElementById('apptNotes').value.trim(),
+        status: 'pending'
+      };
+    }
+
+    async function submitOnlineAppointment() {
+      const url = getApptServerUrl();
+      if (!url) {
+        alert('Hindi pa naka-set ang server URL. Makipag-ugnayan sa admin.');
+        return;
+      }
+      const data = buildRequestData();
+      if (!data.patientName || !data.service || !data.requestedDate) {
+        alert('Punan ang pangalan, serbisyo, at petsa.');
+        return;
+      }
+      if (!navigator.onLine) {
+        queueOfflineRequest(data);
+        return;
+      }
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (response.ok) {
+          alert('Naipadala na ang appointment request!');
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        alert('Hindi maipadala. Naka-queue offline.');
+        queueOfflineRequest(data);
+      }
+    }
+
+    function queueOfflineRequest(data = null) {
+      const queue = JSON.parse(localStorage.getItem(OFFLINE_QUEUE_KEY) || '[]');
+      if (!data) data = buildRequestData();
+      queue.push(data);
+      localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(queue));
+    }
+
+    window.addEventListener('online', sendOfflineQueue);
+
+    async function sendOfflineQueue() {
+      const url = getApptServerUrl();
+      if (!url) return;
+      const queue = JSON.parse(localStorage.getItem(OFFLINE_QUEUE_KEY) || '[]');
+      if (queue.length === 0) return;
+      for (const data of [...queue]) {
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          if (response.ok) {
+            queue.shift();
+            localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(queue));
+          } else {
+            break;
+          }
+        } catch (e) {
+          break;
+        }
+      }
+    }
+
+    async function fetchOnlineRequests() {
+      const url = getApptServerUrl();
+      if (!url) { alert('Wala pang server URL.'); return; }
+      if (!navigator.onLine) { alert('Walang internet.'); return; }
+      try {
+        const response = await fetch(url);
+        const requests = await response.json();
+        const list = document.getElementById('onlineRequestsList');
+        if (!requests.length) {
+          list.innerHTML = '<p>Walang pending requests.</p>';
+          return;
+        }
+        let html = '';
+        requests.forEach(req => {
+          html += `<div class="record-item" style="padding-right:14px;">
+            <strong>${req.patientName}</strong> (${req.service})<br>
+            Petsa: ${req.requestedDate} ${req.preferredTime || ''}<br>
+            Mula kay: ${req.userId || '???'}<br>
+            Mensahe: ${req.notes || '—'}<br>
+            <button class="btn-outline import-req-btn" data-id="${req.id}" style="margin-top:4px;">I-import bilang Lokal na Appointment</button>
+          </div>`;
+        });
+        list.innerHTML = html;
+        document.querySelectorAll('.import-req-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const reqId = btn.getAttribute('data-id');
+            const req = requests.find(r => r.id === reqId);
+            if (!req) return;
+            appointments.push({
+              id: Date.now(),
+              userId: req.userId,
+              patientName: req.patientName,
+              service: req.service,
+              date: req.requestedDate,
+              time: req.preferredTime,
+              notes: req.notes
+            });
+            await saveAppointments();
+            renderAppointmentList();
+            updateTodayNotification();
+            try {
+              await fetch(`${url}/${reqId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: 'imported' })
+              });
+            } catch(e) {}
+            alert('Na-import na ang appointment.');
+            fetchOnlineRequests();
+          });
+        });
+      } catch (err) {
+        alert('Error fetching requests.');
+      }
+    }
+    // ---------- SYNC FUNCTIONS ----------
+    async function deriveSyncKey(passphrase, saltHex) {
+      const encoder = new TextEncoder();
+      const salt = new Uint8Array(saltHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+      const keyMaterial = await crypto.subtle.importKey('raw', encoder.encode(passphrase), { name: 'PBKDF2' }, false, ['deriveKey']);
+      return crypto.subtle.deriveKey(
+        { name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' },
+        keyMaterial,
+        { name: 'AES-GCM', length: 256 },
+        false,
+        ['encrypt', 'decrypt']
+      );
+    }
+
+    async function performSync() {
+      const statusEl = document.getElementById('syncStatus');
+      if (!navigator.onLine) { statusEl.innerHTML = '<span class="sync-error">Walang internet connection.</span>'; return; }
+      const serverUrl = document.getElementById('syncServerUrl').value.trim();
+      const passphrase = document.getElementById('syncPassphrase').value;
+      if (!serverUrl || !passphrase) { statusEl.innerHTML = '<span class="sync-error">Ilagay ang server URL at passphrase.</span>'; return; }
+      localStorage.setItem(SYNC_SERVER_URL_KEY, serverUrl);
+      let saltHex = localStorage.getItem(SYNC_SALT_KEY);
+      if (!saltHex) {
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        saltHex = Array.from(salt).map(b => b.toString(16).padStart(2, '0')).join('');
+        localStorage.setItem(SYNC_SALT_KEY, saltHex);
+      }
+      try {
+        const key = await deriveSyncKey(passphrase, saltHex);
+        const syncData = {
+          users: getUsers(),
+          patients, appointments,
+          auditLogs: JSON.parse(localStorage.getItem(AUDIT_LOG_KEY) || '[]'),
+          medicine: JSON.parse(localStorage.getItem('abotKamayMedicine') || '[]'),
+          healthModules: JSON.parse(localStorage.getItem('abotKamayHealthModules') || 'null'),
+          timestamp: new Date().toISOString()
+        };
+        const plain = JSON.stringify(syncData);
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(plain));
+        const ivHex = Array.from(iv).map(b => b.toString(16).padStart(2, '0')).join('');
+        const dataHex = Array.from(new Uint8Array(encrypted)).map(b => b.toString(16).padStart(2, '0')).join('');
+        const response = await fetch(serverUrl, { method: 'POST', body: ivHex + ':' + dataHex });
+        if (response.ok) statusEl.innerHTML = '<span class="sync-success">Matagumpay na na-sync!</span>';
+        else statusEl.innerHTML = `<span class="sync-error">Server error: ${response.status}</span>`;
+      } catch (err) {
+        statusEl.innerHTML = `<span class="sync-error">Error: ${err.message}</span>`;
+      }
+    }
+
+    async function restoreFromServer() {
+      const statusEl = document.getElementById('syncStatus');
+      const serverUrl = document.getElementById('syncServerUrl').value.trim();
+      const passphrase = document.getElementById('syncPassphrase').value;
+      if (!serverUrl || !passphrase) { statusEl.innerHTML = '<span class="sync-error">Ilagay ang server URL at passphrase.</span>'; return; }
+      if (!confirm('I‑restore ang data mula sa server? Mapapalitan ang lahat ng lokal na data.')) return;
+      try {
+        const response = await fetch(serverUrl);
+        if (!response.ok) { statusEl.innerHTML = `<span class="sync-error">Server error: ${response.status}</span>`; return; }
+        const payload = await response.text();
+        const [ivHex, dataHex] = payload.split(':');
+        const saltHex = localStorage.getItem(SYNC_SALT_KEY);
+        if (!saltHex) { statusEl.innerHTML = '<span class="sync-error">Walang sync salt.</span>'; return; }
+        const key = await deriveSyncKey(passphrase, saltHex);
+        const iv = new Uint8Array(ivHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+        const data = new Uint8Array(dataHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+        const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
+        const syncData = JSON.parse(new TextDecoder().decode(decrypted));
+        saveUsers(syncData.users);
+        patients = syncData.patients; await savePatients();
+        appointments = syncData.appointments; await saveAppointments();
+        localStorage.setItem(AUDIT_LOG_KEY, JSON.stringify(syncData.auditLogs));
+        if (syncData.medicine) localStorage.setItem('abotKamayMedicine', JSON.stringify(syncData.medicine));
+        if (syncData.healthModules) localStorage.setItem('abotKamayHealthModules', JSON.stringify(syncData.healthModules));
+        statusEl.innerHTML = '<span class="sync-success">Data na-restore! Mag-logout at login muli.</span>';
+        logout();
+      } catch (err) {
+        statusEl.innerHTML = `<span class="sync-error">Error: ${err.message}</span>`;
+      }
+    }
+
+    document.getElementById('syncSettingsBtn').addEventListener('click', () => {
+      document.getElementById('accountLoggedInView').style.display = 'none';
+      document.getElementById('syncView').style.display = 'block';
+      document.getElementById('syncServerUrl').value = localStorage.getItem(SYNC_SERVER_URL_KEY) || '';
+      document.getElementById('syncStatus').innerHTML = '';
+      document.getElementById('apptServerUrlInput').value = getApptServerUrl();
+    });
+    document.getElementById('backFromSyncBtn').addEventListener('click', () => {
+      document.getElementById('syncView').style.display = 'none';
+      document.getElementById('accountLoggedInView').style.display = 'block';
+    });
+    document.getElementById('syncNowBtn').addEventListener('click', performSync);
+    document.getElementById('restoreFromServerBtn').addEventListener('click', restoreFromServer);
+    document.getElementById('apptServerUrlInput')?.addEventListener('change', function() {
+      localStorage.setItem(APPOINTMENT_SERVER_URL_KEY, this.value.trim());
+    });
+    document.getElementById('submitOnlineAppointmentBtn')?.addEventListener('click', submitOnlineAppointment);
+    document.getElementById('fetchOnlineRequestsBtn')?.addEventListener('click', fetchOnlineRequests);
+    // ---------- OFFLINE DATA LOADING ----------
+    function loadCachedOrFallback() {
+      const cachedMeds = localStorage.getItem('abotKamayMedicine');
+      const meds = cachedMeds ? JSON.parse(cachedMeds) : DEFAULT_OFFLINE_DATA.medicineInventory;
+      renderMedicineInventory(meds);
+      if (!localStorage.getItem(INVENTORY_LAST_UPDATED_KEY)) {
+        localStorage.setItem(INVENTORY_LAST_UPDATED_KEY, DEFAULT_OFFLINE_DATA.lastUpdated);
+      }
+      const cachedModules = localStorage.getItem('abotKamayHealthModules');
+      const modules = cachedModules ? JSON.parse(cachedModules) : DEFAULT_OFFLINE_DATA.healthModules;
+      document.getElementById('edIntro').textContent = modules.maternal?.intro || '';
+      const activeCat = document.querySelector('.edu-cat-btn.active')?.getAttribute('data-edu');
+      if (activeCat) renderCategoryContent(activeCat, modules);
+      updateLastUpdatedDisplay(localStorage.getItem(INVENTORY_LAST_UPDATED_KEY) || DEFAULT_OFFLINE_DATA.lastUpdated);
+    }
+
+    function renderCategoryContent(catKey, modules) {
+      const container = document.getElementById('eduCategoryContent');
+      const cat = modules[catKey];
+      if (!cat) return;
+      let html = `<h3>${cat.title}</h3><p style="margin-bottom:16px;">${cat.intro}</p>`;
+      cat.sections.forEach(s => html += `<div style="margin-bottom:20px;"><h4 style="color:#0b5e42;">${s.heading}</h4><p>${s.content}</p></div>`);
+      container.innerHTML = html;
+    }
+
+    function updateLastUpdatedDisplay(ts) {
+      const el = document.getElementById('eduLastUpdated');
+      if (el) el.textContent = `Huling update ng mga modyul: ${new Date(ts).toLocaleDateString('tl-PH')}`;
+    }
+
+    function setupEduButtons() {
+      document.querySelectorAll('.edu-cat-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.edu-cat-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          const cat = btn.getAttribute('data-edu');
+          const cached = localStorage.getItem('abotKamayHealthModules');
+          if (cached) renderCategoryContent(cat, JSON.parse(cached));
+          else renderCategoryContent(cat, DEFAULT_OFFLINE_DATA.healthModules);
+        });
+      });
+    }
+
+    // ---------- PWA ----------
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(registration => console.log('Service worker registered'))
+          .catch(err => console.log('Service worker registration failed', err));
+      });
+    }
+
+    // ---------- INIT (with session token verification) ----------
+    const savedSession = localStorage.getItem(CURRENT_USER_KEY);
+    if (savedSession) {
+      try {
+        const { user, token } = JSON.parse(savedSession);
+        const users = getUsers();
+        const storedUser = users.find(u => u.uid === user.uid);
+        if (storedUser && storedUser.sessionToken === token) {
+          currentUser = { uid: user.uid, fullName: storedUser.fullName, username: storedUser.username, role: storedUser.role, keepLoggedIn: user.keepLoggedIn };
+          updateUIForLoginState();
+          loadPatients();
+          loadAppointments();
+          sendOfflineQueue();
+          resetInactivityTimer();
+        } else {
+          localStorage.removeItem(CURRENT_USER_KEY);
+          updateUIForLoginState();
+        }
+      } catch(e) {
+        localStorage.removeItem(CURRENT_USER_KEY);
+        updateUIForLoginState();
+      }
+    } else {
+      updateUIForLoginState();
+    }
+
+    loadCachedOrFallback();
+    setupEduButtons();
+  })();
+</script>
+</body>
+</html>

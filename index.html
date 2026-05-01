@@ -2177,7 +2177,15 @@
           .catch(err => console.log('Service worker registration failed', err));
       });
     }
-
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        const banner = document.createElement('div');
+        banner.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#8deeff;color:#130420;padding:12px 24px;border-radius:30px;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;font-family:sans-serif;';
+        banner.textContent = 'New version ready – tap here to refresh';
+        banner.addEventListener('click', () => window.location.reload());
+        document.body.appendChild(banner);
+      });
+    }
     // ---------- INIT (with session token verification) ----------
     const savedSession = localStorage.getItem(CURRENT_USER_KEY);
     if (savedSession) {

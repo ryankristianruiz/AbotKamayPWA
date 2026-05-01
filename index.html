@@ -7,38 +7,38 @@
   <link rel="manifest" href="manifest.json">
 
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-      background: #f5f7fa;
-      color: #1e2b3c;
+      background: #130420;                /* Primary background */
+      color: #cf90ff;                     /* Primary body text */
       padding-bottom: 70px;
       line-height: 1.5;
     }
     #appContainer { display: block; }
     .app-header {
-      background: #3a08914f;
+      background: #1f003a;                /* Secondary background */
       color: #fff;
       padding: 16px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
       position: sticky;
       top: 0;
       z-index: 10;
     }
     .app-header h1 { font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
     .offline-badge {
-      background: #f0b429;
-      color: #1e2b3c;
+      background: #ffc2e8;                /* Accent */
+      color: #130420;
       font-size: 0.7rem;
       font-weight: bold;
       padding: 4px 10px;
       border-radius: 30px;
     }
     .logout-btn {
-      background: #1a7a5a;
+      background: #814daa;                /* Secondary button / border */
       border: none;
       color: white;
       padding: 6px 12px;
@@ -47,10 +47,12 @@
       font-weight: 500;
       cursor: pointer;
     }
+    .logout-btn:hover { filter: brightness(1.2); }
+
     .tab-bar {
       display: flex;
-      background: white;
-      border-bottom: 1px solid #d4dce4;
+      background: #1f003a;                /* Secondary background */
+      border-bottom: 1px solid #814daa;
       padding: 0 8px;
       overflow-x: auto;
       white-space: nowrap;
@@ -62,51 +64,61 @@
       padding: 14px 16px;
       font-size: 0.95rem;
       font-weight: 600;
-      color: #5e6f7e;
+      color: #cf90ff;
       border-bottom: 3px solid transparent;
       cursor: pointer;
       flex-shrink: 0;
     }
-    .tab-bar button.active { color: #0b5e42; border-bottom: 3px solid #0b5e42; }
+    .tab-bar button.active {
+      color: #8deeff;                     /* Primary action / active tab */
+      border-bottom: 3px solid #8deeff;
+    }
+
     .container { padding: 18px 16px; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
+
     .card {
-      background: white;
+      background: #ffffff;                /* Section block */
       border-radius: 20px;
       padding: 18px 16px;
       margin-bottom: 18px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
-      border: 1px solid #e9edf2;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      border: 1px solid #814daa;         /* UI borders */
+      color: #130420;                     /* Dark text on light cards */
     }
-    h2 { font-size: 1.35rem; margin-bottom: 12px; color: #0b3b2c; }
-    h3 { font-size: 1.2rem; margin: 16px 0 8px; color: #1e4a3a; border-bottom: 1px solid #d4dce4; padding-bottom: 4px; }
-    h4 { font-size: 1rem; margin: 12px 0 4px; color: #2a5e4a; font-weight: 600; }
+    h2 { font-size: 1.35rem; margin-bottom: 12px; color: #1f003a; }
+    h3 { font-size: 1.2rem; margin: 16px 0 8px; color: #1f003a; border-bottom: 1px solid #814daa; padding-bottom: 4px; }
+    h4 { font-size: 1rem; margin: 12px 0 4px; color: #814daa; font-weight: 600; }
+
     .service-list, .contact-list { list-style: none; }
     .service-list li, .contact-list li {
       padding: 12px 0;
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 1px solid #814daa;
       display: flex;
       justify-content: space-between;
     }
+
     .badge {
-      background: #e0f2e9;
-      color: #0b5e42;
+      background: #ffc2e8;
+      color: #130420;
       padding: 4px 10px;
       border-radius: 40px;
       font-size: 0.75rem;
       font-weight: 600;
     }
     .emergency-number {
-      background: #fff5e6;
-      border-left: 4px solid #d97706;
+      background: #ffc2e8;
+      border-left: 4px solid #cf90ff;
       padding: 12px;
       border-radius: 12px;
       margin-bottom: 12px;
+      color: #130420;
     }
+
     .btn {
-      background: #0b5e42;
-      color: white;
+      background: #8deeff;                /* Primary action */
+      color: #130420;                     /* Dark text for contrast */
       border: none;
       padding: 12px 18px;
       border-radius: 40px;
@@ -116,55 +128,69 @@
       cursor: pointer;
       margin-top: 10px;
     }
+    .btn:hover { filter: brightness(1.1); }
+
     .btn-outline {
-      background: white;
-      color: #0b5e42;
-      border: 1.5px solid #0b5e42;
+      background: transparent;
+      color: #8deeff;
+      border: 1.5px solid #814daa;
       box-shadow: none;
       cursor: pointer;
     }
+    .btn-outline:hover { background: rgba(141,238,255,0.1); }
+
     input, select, textarea {
       width: 100%;
       padding: 14px 16px;
       margin: 8px 0;
-      border: 1.5px solid #d0d9e2;
+      border: 1.5px solid #814daa;
       border-radius: 20px;
       font-size: 1rem;
+      background: #fff;
+      color: #130420;
     }
-    label { font-weight: 600; margin-top: 6px; display: block; }
+    label { font-weight: 600; margin-top: 6px; display: block; color: #1f003a; }
+
     .record-item {
-      background: #f4f9f6;
+      background: #f4f9f6;                /* keep a light, soft tint */
       padding: 14px;
       border-radius: 18px;
       margin-bottom: 10px;
       position: relative;
       padding-right: 80px;
+      color: #130420;
     }
     .reminder-alert {
-      background: #fef3c7;
+      background: #ffc2e8;
       border-radius: 16px;
       padding: 12px;
       margin: 15px 0;
-      border-left: 4px solid #eab308;
+      border-left: 4px solid #8deeff;
+      color: #130420;
     }
+
     .footer-note {
       text-align: center;
       font-size: 0.75rem;
-      color: #6b7b8a;
+      color: #cf90ff;
       margin-top: 25px;
     }
-    .edu-cat-btn.active { background: #0b5e42; color: white; }
+
+    .edu-cat-btn.active { background: #8deeff; color: #130420; }
+
     .auth-form input {
       width: 100%;
       padding: 14px 16px;
       margin: 10px 0;
-      border: 1.5px solid #d0d9e2;
+      border: 1.5px solid #814daa;
       border-radius: 30px;
       font-size: 1rem;
+      background: #fff;
+      color: #130420;
     }
     .auth-form button {
-      background: #0b5e42;
-      color: white;
+      background: #8deeff;
+      color: #130420;
       border: none;
       padding: 14px;
       border-radius: 40px;
@@ -173,21 +199,24 @@
       margin-top: 16px;
       cursor: pointer;
     }
-    .error-msg { color: #c00; margin-top: 8px; font-size: 0.9rem; }
+    .auth-form button:hover { filter: brightness(1.1); }
+
+    .error-msg { color: #ffc2e8; margin-top: 8px; font-size: 0.9rem; }
     .hidden-tab { display: none !important; }
 
     .service-category { margin-bottom: 16px; }
-    .service-description { padding-left: 8px; margin-bottom: 6px; color: #2d4a3e; }
+    .service-description { padding-left: 8px; margin-bottom: 6px; color: #130420; }
 
     .notification-bar {
-      background: #e0f2e9;
-      border: 1px solid #0b5e42;
+      background: #ffc2e8;
+      border: 1px solid #8deeff;
       border-radius: 20px;
       padding: 14px 16px;
       margin: 0 0 18px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      color: #130420;
     }
     .notification-bar p { margin: 0; }
     .notification-bar .close-btn {
@@ -195,18 +224,21 @@
       border: none;
       font-size: 1.2rem;
       cursor: pointer;
-      color: #0b5e42;
+      color: #130420;
     }
+
     .low-stock-summary {
-      background: #fff5e6;
-      border-left: 4px solid #f57f17;
+      background: #ffc2e8;
+      border-left: 4px solid #8deeff;
       padding: 12px;
       border-radius: 12px;
       margin-bottom: 16px;
+      color: #130420;
     }
+
     .vaccine-badge {
-      background: #d32f2f;
-      color: white;
+      background: #ffc2e8;
+      color: #130420;
       padding: 2px 10px;
       border-radius: 20px;
       font-size: 0.75rem;
@@ -215,15 +247,17 @@
       display: inline-block;
     }
     .user-stats {
-      background: #e6f2ed;
+      background: #ffc2e8;
       padding: 12px;
       border-radius: 12px;
       margin-bottom: 15px;
       font-size: 0.9rem;
+      color: #130420;
     }
+
     .sync-status { font-size: 0.9rem; margin: 8px 0; }
-    .sync-success { color: #2e7d32; }
-    .sync-error { color: #c00; }
+    .sync-success { color: #8deeff; }
+    .sync-error { color: #ffc2e8; }
   </style>
 </head>
 <body>
@@ -832,6 +866,7 @@
     let patients = [];
     let appointments = [];
     let inactivityTimer = null;
+    let adminAlreadyCreated = false; 
     const INACTIVITY_TIMEOUT = 15 * 60 * 1000; // 15 minutes
 
     // ---------- UTILITIES ----------
@@ -1305,23 +1340,32 @@
       text.textContent = ['', 'Mahina', 'Katamtaman', 'Malakas', 'Napakalakas'][score];
     });
 
-    document.getElementById('adminSetupForm').addEventListener('submit', async (e) => {
+      document.getElementById('adminSetupForm').addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      // If admin was already created on this page load, silently ignore
+      if (adminAlreadyCreated) return;
+
       const username = document.getElementById('setupUsername').value.trim();
       const password = document.getElementById('setupPassword').value;
       const confirm = document.getElementById('setupConfirmPassword').value;
       const errorDiv = document.getElementById('setupError');
+
       if (password !== confirm) { errorDiv.textContent = 'Hindi magkatugma ang password.'; return; }
       if (password.length < 8) { errorDiv.textContent = 'Kinakailangang hindi bababa sa 8 character ang password.'; return; }
       if (checkPasswordStrength(password) < 2) {
         errorDiv.textContent = 'Mahina ang password. Kinakailangan ng halo ng malaki/maliit na letra at numero.';
         return;
       }
+
       const users = getUsers();
       if (users.length > 0) { errorDiv.textContent = 'Mayroon nang administrator account.'; return; }
+
+      // ----- Admin creation starts -----
       const recoveryRaw = Array.from(crypto.getRandomValues(new Uint8Array(16))).map(b => b.toString(16).padStart(2,'0')).join('');
       const encryptedRecovery = await encryptWithPassword(recoveryRaw, password);
       localStorage.setItem(RECOVERY_KEY, encryptedRecovery);
+
       const { hash, salt, iterations } = await hashPasswordWithSalt(password);
       const newUser = {
         uid: generateUUID(), fullName: 'Administrator', username,
@@ -1331,11 +1375,30 @@
       };
       users.push(newUser);
       saveUsers(users);
+
+      // Show the recovery phrase
       document.getElementById('recoveryPhraseText').textContent = recoveryRaw;
       document.getElementById('recoveryPhraseDisplay').style.display = 'block';
-      errorDiv.textContent = 'Admin account created. Pakisulat ang recovery phrase sa itaas.';
-      document.getElementById('setupPassword').value = '';
-      document.getElementById('setupConfirmPassword').value = '';
+      errorDiv.textContent = 'Admin account created. Pakisulat ang recovery phrase.';
+
+      // ----- Prevent accidental re‑submission -----
+      adminAlreadyCreated = true;
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      if (submitBtn) submitBtn.disabled = true;
+      const inputs = e.target.querySelectorAll('input');
+      inputs.forEach(inp => inp.disabled = true);
+
+      // Optionally show a button to proceed to login
+      const proceedBtn = document.createElement('button');
+      proceedBtn.type = 'button';
+      proceedBtn.className = 'btn-outline';
+      proceedBtn.style.marginTop = '12px';
+      proceedBtn.textContent = 'Naitala na ang recovery phrase. Mag‑login';
+      proceedBtn.addEventListener('click', () => {
+        // Force UI update so the login view appears
+        updateUIForLoginState();
+      });
+      e.target.appendChild(proceedBtn);
     });
 
     // ---------- RECOVERY (placeholder) ----------

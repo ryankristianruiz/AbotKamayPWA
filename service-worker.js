@@ -1,4 +1,4 @@
-const CACHE_NAME = 'abotkamay-v1';
+const CACHE_NAME = 'abotkamay-v1';   // change to v2, v3 etc. when you push a new release
 const urlsToCache = [
   './',
   './index.html',
@@ -12,16 +12,18 @@ self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => cache.addAll(urlsToCache))
   );
+  // Force the waiting service worker to become the active service worker
+  self.skipWaiting();
 });
 
-// Activate – remove old caches so users never pull stale files
+// Activate – remove old caches, then take control of all pages immediately
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => {
       return Promise.all(
         keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
       );
-    })
+    }).then(() => self.clients.claim())
   );
 });
 

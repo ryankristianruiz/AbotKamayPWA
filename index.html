@@ -7,18 +7,22 @@
   <link rel="manifest" href="manifest.json">
 
   <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
-      background: #130420;                /* Primary background */
-      color: #cf90ff;                     /* Primary body text */
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      background: #130420;                /* Secondary Background Color (dark purple) */
+      color: #ffffff;                     /* Primary Body Texts (white) */
       padding-bottom: 70px;
-      line-height: 1.5;
+      line-height: 1.6;
+      font-size: 16px;
     }
+
     #appContainer { display: block; }
+
+    /* Header – solid dark purple */
     .app-header {
-      background: #1f003a;                /* Secondary background */
-      color: #fff;
+      background: #1f003a;                /* Dark purple */
+      color: #ffffff;
       padding: 16px 18px;
       display: flex;
       align-items: center;
@@ -28,30 +32,40 @@
       top: 0;
       z-index: 10;
     }
-    .app-header h1 { font-size: 1.5rem; font-weight: 600; display: flex; align-items: center; gap: 8px; }
+    .app-header h1 {
+      font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+      font-weight: bold;
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
     .offline-badge {
-      background: #ffc2e8;                /* Accent */
+      background: #8deeff;                /* Accent / Notification (pastel azure) */
       color: #130420;
       font-size: 0.7rem;
       font-weight: bold;
       padding: 4px 10px;
       border-radius: 30px;
     }
+
     .logout-btn {
-      background: #814daa;                /* Secondary button / border */
+      background: #814daa;                /* UI Borders / Secondary Buttons (purple) */
       border: none;
-      color: white;
+      color: #ffffff;
       padding: 6px 12px;
       border-radius: 30px;
       font-size: 0.8rem;
       font-weight: 500;
       cursor: pointer;
     }
-    .logout-btn:hover { filter: brightness(1.2); }
+    .logout-btn:hover { background: #1f003a; }  /* Interactive / Hover States */
 
+    /* Tab bar – slightly different dark purple */
     .tab-bar {
       display: flex;
-      background: #1f003a;                /* Secondary background */
+      background: #200548;                /* Midnight Blue */
       border-bottom: 1px solid #814daa;
       padding: 0 8px;
       overflow-x: auto;
@@ -59,37 +73,46 @@
       scrollbar-width: none;
     }
     .tab-bar button {
+      font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+      font-weight: 500;
       background: none;
       border: none;
       padding: 14px 16px;
       font-size: 0.95rem;
-      font-weight: 600;
-      color: #cf90ff;
+      color: #ffffff;
       border-bottom: 3px solid transparent;
       cursor: pointer;
       flex-shrink: 0;
     }
     .tab-bar button.active {
-      color: #8deeff;                     /* Primary action / active tab */
-      border-bottom: 3px solid #8deeff;
+      color: #8deeff;                     /* Primary Action / Links */
+      border-bottom: 3px solid #cf90ff;  /* Pastel lavender */
     }
 
     .container { padding: 18px 16px; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
+    /* Cards – deep purple with subtle gradient */
     .card {
-      background: #ffffff;                /* Section block */
+      background: linear-gradient(135deg, #1f003a, #130420);
       border-radius: 20px;
       padding: 18px 16px;
       margin-bottom: 18px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      border: 1px solid #814daa;         /* UI borders */
-      color: #130420;                     /* Dark text on light cards */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border: 1px solid #814daa;         /* UI Borders / Secondary Buttons */
+      color: #ffffff;
     }
-    h2 { font-size: 1.35rem; margin-bottom: 12px; color: #1f003a; }
-    h3 { font-size: 1.2rem; margin: 16px 0 8px; color: #1f003a; border-bottom: 1px solid #814daa; padding-bottom: 4px; }
-    h4 { font-size: 1rem; margin: 12px 0 4px; color: #814daa; font-weight: 600; }
+
+    h2, h3, h4 {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-weight: bold;
+      color: #ffffff;
+      margin-bottom: 12px;
+    }
+    h2 { font-size: 1.35rem; }
+    h3 { font-size: 1.2rem; border-bottom: 1px solid #814daa; padding-bottom: 4px; }
+    h4 { font-size: 1rem; color: #cf90ff; }
 
     .service-list, .contact-list { list-style: none; }
     .service-list li, .contact-list li {
@@ -97,10 +120,11 @@
       border-bottom: 1px solid #814daa;
       display: flex;
       justify-content: space-between;
+      color: #ffffff;
     }
 
     .badge {
-      background: #ffc2e8;
+      background: #8deeff;                /* Accent / Notification */
       color: #130420;
       padding: 4px 10px;
       border-radius: 40px;
@@ -108,7 +132,7 @@
       font-weight: 600;
     }
     .emergency-number {
-      background: #ffc2e8;
+      background: #ffc2e8;                /* Light magenta */
       border-left: 4px solid #cf90ff;
       padding: 12px;
       border-radius: 12px;
@@ -116,28 +140,32 @@
       color: #130420;
     }
 
+    /* Primary Action / Links: Pastel lavender */
     .btn {
-      background: #8deeff;                /* Primary action */
-      color: #130420;                     /* Dark text for contrast */
+      background: #cf90ff;
+      color: #130420;
       border: none;
       padding: 12px 18px;
       border-radius: 40px;
-      font-weight: 600;
+      font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+      font-weight: bold;
       font-size: 0.95rem;
       width: 100%;
       cursor: pointer;
       margin-top: 10px;
     }
-    .btn:hover { filter: brightness(1.1); }
+    .btn:hover { background: #1f003a; color: #ffffff; }
 
+    /* Secondary Buttons / UI Borders: Purple */
     .btn-outline {
       background: transparent;
-      color: #8deeff;
+      color: #cf90ff;
       border: 1.5px solid #814daa;
-      box-shadow: none;
+      font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+      font-weight: bold;
       cursor: pointer;
     }
-    .btn-outline:hover { background: rgba(141,238,255,0.1); }
+    .btn-outline:hover { background: #1f003a; color: #ffffff; border-color: #cf90ff; }
 
     input, select, textarea {
       width: 100%;
@@ -146,26 +174,26 @@
       border: 1.5px solid #814daa;
       border-radius: 20px;
       font-size: 1rem;
-      background: #fff;
-      color: #130420;
+      background: #200548;
+      color: #ffffff;
     }
-    label { font-weight: 600; margin-top: 6px; display: block; color: #1f003a; }
+    label { font-weight: 600; margin-top: 6px; display: block; color: #ffffff; }
 
     .record-item {
-      background: #f4f9f6;                /* keep a light, soft tint */
+      background: rgba(255,255,255,0.05);
       padding: 14px;
       border-radius: 18px;
       margin-bottom: 10px;
       position: relative;
       padding-right: 80px;
-      color: #130420;
+      color: #ffffff;
     }
     .reminder-alert {
-      background: #ffc2e8;
+      background: #8deeff;
       border-radius: 16px;
       padding: 12px;
       margin: 15px 0;
-      border-left: 4px solid #8deeff;
+      border-left: 4px solid #cf90ff;
       color: #130420;
     }
 
@@ -176,7 +204,7 @@
       margin-top: 25px;
     }
 
-    .edu-cat-btn.active { background: #8deeff; color: #130420; }
+    .edu-cat-btn.active { background: #cf90ff; color: #130420; }
 
     .auth-form input {
       width: 100%;
@@ -185,31 +213,32 @@
       border: 1.5px solid #814daa;
       border-radius: 30px;
       font-size: 1rem;
-      background: #fff;
-      color: #130420;
+      background: #200548;
+      color: #ffffff;
     }
     .auth-form button {
-      background: #8deeff;
+      background: #cf90ff;
       color: #130420;
       border: none;
       padding: 14px;
       border-radius: 40px;
-      font-weight: 600;
+      font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+      font-weight: bold;
       width: 100%;
       margin-top: 16px;
       cursor: pointer;
     }
-    .auth-form button:hover { filter: brightness(1.1); }
+    .auth-form button:hover { background: #1f003a; color: #ffffff; }
 
     .error-msg { color: #ffc2e8; margin-top: 8px; font-size: 0.9rem; }
     .hidden-tab { display: none !important; }
 
     .service-category { margin-bottom: 16px; }
-    .service-description { padding-left: 8px; margin-bottom: 6px; color: #130420; }
+    .service-description { padding-left: 8px; margin-bottom: 6px; color: #ffffff; }
 
     .notification-bar {
-      background: #ffc2e8;
-      border: 1px solid #8deeff;
+      background: #8deeff;
+      border: 1px solid #cf90ff;
       border-radius: 20px;
       padding: 14px 16px;
       margin: 0 0 18px 0;
@@ -229,7 +258,7 @@
 
     .low-stock-summary {
       background: #ffc2e8;
-      border-left: 4px solid #8deeff;
+      border-left: 4px solid #cf90ff;
       padding: 12px;
       border-radius: 12px;
       margin-bottom: 16px;
@@ -237,7 +266,7 @@
     }
 
     .vaccine-badge {
-      background: #ffc2e8;
+      background: #8deeff;
       color: #130420;
       padding: 2px 10px;
       border-radius: 20px;
@@ -246,6 +275,7 @@
       margin-left: 8px;
       display: inline-block;
     }
+
     .user-stats {
       background: #ffc2e8;
       padding: 12px;
@@ -258,6 +288,10 @@
     .sync-status { font-size: 0.9rem; margin: 8px 0; }
     .sync-success { color: #8deeff; }
     .sync-error { color: #ffc2e8; }
+
+    /* Links */
+    a { color: #cf90ff; text-decoration: none; }
+    a:hover { color: #ffc2e8; }
   </style>
 </head>
 <body>
@@ -269,7 +303,6 @@
       Abot-Kamay
     </h1>
     <div style="display: flex; gap: 8px;">
-      <span class="offline-badge" id="offlineIndicator">Fully Offline</span>
       <button class="logout-btn" id="logoutBtn" style="display: none;">Logout</button>
     </div>
   </header>

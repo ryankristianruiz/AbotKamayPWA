@@ -2541,7 +2541,13 @@ const CAROUSEL_DEFAULT = [
 
     fetch(CAROUSEL_JSON_URL)
       .then(res => res.json())
-      .then(data => { if (Array.isArray(data) && data.length) buildCarousel(data); })
+      .then(data => {
+        if (Array.isArray(data) && data.length) {
+          buildCarousel(data);
+        } else {
+          buildCarousel(CAROUSEL_DEFAULT);
+        }
+      })
       .catch(() => buildCarousel(CAROUSEL_DEFAULT));
     // ---------- INIT (with session token verification) ----------
     const savedSession = localStorage.getItem(CURRENT_USER_KEY);

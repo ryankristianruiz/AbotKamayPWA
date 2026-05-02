@@ -5,7 +5,7 @@
     "body": "8:00 AM – 2:00 PM sa Barangay Hall. Magdala ng baby book.",
     "cta": "I-iskedyul",
     "ctaLink": "#",
-    "image": "💉",
+    "image": "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/vax.webp",
     "tagBg": "#e8eeff",
     "tagColor": "#3352cc"
   },
@@ -15,7 +15,7 @@
     "body": "9:00 AM – 4:00 PM. Magdala ng ID at gamot.",
     "cta": "Magbasa pa",
     "ctaLink": "#",
-    "image": "🩺",
+    "image": "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medmission.jpeg",
     "tagBg": "#e6f9ee",
     "tagColor": "#1a7a45"
   },
@@ -25,7 +25,7 @@
     "body": "Lunes hanggang Biyernes, 8:00 AM – 5:00 PM.",
     "cta": "Matuto pa",
     "ctaLink": "#",
-    "image": "🤰",
+    "image": "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prenatal.webp",
     "tagBg": "#fff7e6",
     "tagColor": "#a05a00"
   },
@@ -35,7 +35,7 @@
     "body": "Mga libreng timbang at konsulta para sa mga bata.",
     "cta": "Sumali",
     "ctaLink": "#",
-    "image": "🥗",
+    "image": "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/feeding.jpeg",
     "tagBg": "#fde8f0",
     "tagColor": "#9c2254"
   }

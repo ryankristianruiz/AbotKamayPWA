@@ -1,7 +1,7 @@
 const CACHE_NAME = 'abotkamay-v1';   // change to v2, v3 etc. when you push a new release
 const urlsToCache = [
   './',
-  './index.html',
+  './index-2.html',
   './manifest.json',
   './logo.png',
   './logo-192.png'

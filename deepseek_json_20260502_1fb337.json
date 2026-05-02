@@ -1,0 +1,42 @@
+[
+  {
+    "tag": "Vaccination",
+    "title": "Libreng Bakuna sa Tigdas – Marso 20",
+    "body": "8:00 AM – 2:00 PM sa Barangay Hall. Magdala ng baby book.",
+    "cta": "I-iskedyul",
+    "ctaLink": "#",
+    "image": "💉",
+    "tagBg": "#e8eeff",
+    "tagColor": "#3352cc"
+  },
+  {
+    "tag": "Mission",
+    "title": "Medical Mission – Abril 5",
+    "body": "9:00 AM – 4:00 PM. Magdala ng ID at gamot.",
+    "cta": "Magbasa pa",
+    "ctaLink": "#",
+    "image": "🩺",
+    "tagBg": "#e6f9ee",
+    "tagColor": "#1a7a45"
+  },
+  {
+    "tag": "Checkup",
+    "title": "Prenatal Checkup – Araw‑araw",
+    "body": "Lunes hanggang Biyernes, 8:00 AM – 5:00 PM.",
+    "cta": "Matuto pa",
+    "ctaLink": "#",
+    "image": "🤰",
+    "tagBg": "#fff7e6",
+    "tagColor": "#a05a00"
+  },
+  {
+    "tag": "Nutrition",
+    "title": "Nutrition Fair – Abril 2",
+    "body": "Mga libreng timbang at konsulta para sa mga bata.",
+    "cta": "Sumali",
+    "ctaLink": "#",
+    "image": "🥗",
+    "tagBg": "#fde8f0",
+    "tagColor": "#9c2254"
+  }
+]

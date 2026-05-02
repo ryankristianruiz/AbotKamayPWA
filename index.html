@@ -292,6 +292,150 @@
     /* Links */
     a { color: #cf90ff; text-decoration: none; }
     a:hover { color: #ffc2e8; }
+    /* ---- Carousel container ---- */
+    .carousel-wrapper {
+      width: 100%;
+      margin-top: 18px;
+      margin-bottom: 18px;
+    }
+    .carousel {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      border: 1px solid #814daa;        /* your UI border colour */
+      background: linear-gradient(135deg, #1f003a, #130420);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .track {
+      display: flex;
+      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .slide {
+      min-width: 100%;
+      padding: 1.5rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .slide-image {
+      width: 100%;
+      height: 100px;
+      border-radius: 10px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-top: 6px;
+      background: rgba(255,255,255,0.08);
+    }
+    .tag {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 3px 10px;
+      border-radius: 99px;
+      display: inline-block;
+      width: fit-content;
+    }
+    .slide-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+    .slide-body {
+      font-size: 13px;
+      color: #cf90ff;
+      line-height: 1.65;
+    }
+    .slide-cta {
+      margin-top: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border: 1px solid #814daa;
+      border-radius: 8px;
+      padding: 6px 14px;
+      background: transparent;
+      color: #8deeff;
+      width: fit-content;
+      text-decoration: none;
+      transition: background 0.15s;
+    }
+    .slide-cta:hover {
+      background: rgba(141,238,255,0.1);
+    }
+    .nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: #1f003a;
+      border: 1px solid #814daa;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 14px;
+      color: #ffffff;
+      z-index: 10;
+      transition: background 0.15s;
+    }
+    .nav:hover { background: #814daa; }
+    .nav-left  { left: 8px; }
+    .nav-right { right: 8px; }
+    .progress {
+      height: 3px;
+      background: #814daa;
+    }
+    .progress-bar {
+      height: 100%;
+      background: #8deeff;
+      width: 0%;
+      transition: width linear;
+    }
+    .dots {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 0.7rem 0 0.3rem;
+    }
+    .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #814daa;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .dot.active {
+      background: #8deeff;
+      transform: scale(1.35);
+    }
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0 4px;
+    }
+    .controls-label {
+      font-size: 12px;
+      color: #cf90ff;
+    }
+    .toggle-btn {
+      font-size: 12px;
+      color: #cf90ff;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+    }
+    .toggle-btn:hover { color: #8deeff; }
   </style>
 </head>
 <body>
@@ -307,16 +451,31 @@
     </div>
   </header>
 
-  <div class="tab-bar">
-    <button class="tab-btn active" data-tab="home">Home</button>
-    <button class="tab-btn" data-tab="education">Health Ed</button>
-    <button class="tab-btn" data-tab="rhu">RHU Services</button>
-    <button class="tab-btn" data-tab="emergency">Emergency</button>
-    <button class="tab-btn" data-tab="records" id="recordsTabBtn">Patient Records</button>
-    <button class="tab-btn" data-tab="appointments" id="appointmentsTabBtn">Appointments</button>
-    <button class="tab-btn" data-tab="account">Account</button>
-    <button class="tab-btn hidden-tab" data-tab="adminLogs" id="adminLogsTabBtn">Logs</button>
-  </div>
+<div class="tab-bar">
+  <button class="tab-btn active" data-tab="home">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
+    Home
+  </button>
+  <button class="tab-btn" data-tab="education">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
+    Health Ed
+  </button>
+  <button class="tab-btn" data-tab="rhu">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-3 12h-2v2h-2v-2h-2v-2h2v-2h2v2h2v2zM4 4h16v2H4V4zm0 4h7v2H4V8zm0 10h16v2H4v-2z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
+    RHU Services
+  </button>
+  <button class="tab-btn" data-tab="emergency">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
+    Emergency
+  </button>
+  <button class="tab-btn" data-tab="records" id="recordsTabBtn">Patient Records</button>
+  <button class="tab-btn" data-tab="appointments" id="appointmentsTabBtn">Appointments</button>
+  <button class="tab-btn" data-tab="account">
+    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
+    Account
+  </button>
+  <button class="tab-btn hidden-tab" data-tab="adminLogs" id="adminLogsTabBtn">Logs</button>
+</div>
 
   <div class="container">
     <!-- HOME TAB -->
@@ -328,8 +487,25 @@
 
       <div class="card">
         <h2>Mabuhay, <span id="loggedInUserDisplay">Bisita</span>!</h2>
-        <p id="userRoleDisplay">Bisita · Barangay TestingLang</p>
+        <p id="userRoleDisplay">Bisita · Barangay Magsaysay</p>
       </div>
+            <!-- CAROUSEL ANNOUNCEMENTS -->
+      <div class="carousel-wrapper" id="carouselWrapper">
+        <div class="controls-row">
+          <span class="controls-label" id="slide-counter">1 / 4</span>
+          <button class="toggle-btn" id="carouselAutoplayBtn">pause</button>
+        </div>
+        <div class="progress">
+          <div class="progress-bar" id="progress-bar"></div>
+        </div>
+        <div class="carousel" id="carousel">
+          <div class="track" id="track"></div>
+          <button class="nav nav-left"  id="prev">&#8592;</button>
+          <button class="nav nav-right" id="next">&#8594;</button>
+        </div>
+        <div class="dots" id="dots"></div>
+      </div>
+      <!-- END CAROUSEL -->
       <div class="card">
         <h3>Batay kay Reyes et al. (2026)</h3>
         <p>Mas pinipili ng mga komunidad sa kanayunan ang <strong>community health fairs</strong> at mga <strong>materyal sa sariling wika</strong>.</p>
@@ -359,16 +535,9 @@
           </div>
         </div>
       </div>
-      <div class="card" style="background: #e6f2ed;">
-        <h3>Alam Mo Ba?</h3>
+      <div class="card" style="background:#450968 #e6f2ed;">
+        <h3 style="color: #ffffff;">Alam Mo Ba?</h3>
         <p id="healthTipText">Ang regular na paghuhugas ng kamay ay nakakabawas ng 30% ng mga sakit tulad ng diarrhea at pneumonia.</p>
-      </div>
-      <div class="card">
-        <h3>Mga Anunsyo mula sa RHU</h3>
-        <ul style="list-style: none;">
-          <li style="padding: 8px 0; border-bottom: 1px solid #e2e8f0;">Libreng Bakuna sa Tigdas – Marso 20, 8AM–2PM sa Barangay Hall.</li>
-          <li style="padding: 8px 0;">Medical Mission – Abril 5, 9AM–4PM. Magdala ng ID.</li>
-        </ul>
       </div>
     </div>
 
@@ -1222,8 +1391,8 @@
       const displayName = loggedIn ? (currentUser.fullName || currentUser.username) : 'Bisita';
       document.getElementById('loggedInUserDisplay').textContent = displayName;
       document.getElementById('userRoleDisplay').textContent = loggedIn
-        ? `${currentUser.role === 'admin' ? 'Administrator' : 'Member'} · Barangay San Isidro`
-        : 'Bisita · Barangay San Isidro';
+        ? `${currentUser.role === 'admin' ? 'Administrator' : 'Member'} · Barangay Magsaysay`
+        : 'Bisita · Barangay Magsaysay';
 
       const recordsTabBtn = document.getElementById('recordsTabBtn');
       const appointmentsTabBtn = document.getElementById('appointmentsTabBtn');
@@ -2219,6 +2388,159 @@
         document.body.appendChild(banner);
       });
     }
+        // ---------- CAROUSEL SYSTEM ----------
+    const CAROUSEL_DURATION = 4000;         // ms per slide
+    let carouselTimer, carouselPlaying = true;
+    let carouselCurrent = 0;
+    let carouselSlides = [];                // will hold the data objects
+
+    // Data source – replace with your GitHub raw JSON URL later
+    // (For now, we use hard‑coded slides as a fallback)
+    const CAROUSEL_DEFAULT = [
+      {
+        tag: "Vaccination",
+        title: "Libreng Bakuna sa Tigdas – Marso 20",
+        body: "8:00 AM – 2:00 PM sa Barangay Hall. Magdala ng baby book.",
+        cta: "I-iskedyul",
+        ctaLink: "#",
+        image: "💉",
+        tagBg: "#e8eeff",
+        tagColor: "#3352cc"
+      },
+      {
+        tag: "Mission",
+        title: "Medical Mission – Abril 5",
+        body: "9:00 AM – 4:00 PM. Magdala ng ID at gamot.",
+        cta: "Magbasa pa",
+        ctaLink: "#",
+        image: "🩺",
+        tagBg: "#e6f9ee",
+        tagColor: "#1a7a45"
+      },
+      {
+        tag: "Checkup",
+        title: "Prenatal Checkup – Araw‑araw",
+        body: "Lunes hanggang Biyernes, 8:00 AM – 5:00 PM.",
+        cta: "Matuto pa",
+        ctaLink: "#",
+        image: "🤰",
+        tagBg: "#fff7e6",
+        tagColor: "#a05a00"
+      },
+      {
+        tag: "Nutrition",
+        title: "Nutrition Fair – Abril 2",
+        body: "Mga libreng timbang at konsulta para sa mga bata.",
+        cta: "Sumali",
+        ctaLink: "#",
+        image: "🥗",
+        tagBg: "#fde8f0",
+        tagColor: "#9c2254"
+      }
+    ];
+
+    function buildCarousel(slidesData) {
+      carouselSlides = slidesData;
+      const track = document.getElementById('track');
+      const dotsWrap = document.getElementById('dots');
+      // Clear existing content
+      track.innerHTML = '';
+      dotsWrap.innerHTML = '';
+      carouselCurrent = 0;
+      carouselPlaying = true;
+      document.getElementById('carouselAutoplayBtn').textContent = 'pause';
+      document.getElementById('progress-bar').style.transition = 'none';
+      document.getElementById('progress-bar').style.width = '0%';
+
+      slidesData.forEach((item, i) => {
+        // Create slide HTML
+        const slideDiv = document.createElement('div');
+        slideDiv.className = 'slide';
+        slideDiv.innerHTML = `
+          <span class="tag" style="background:${item.tagBg}; color:${item.tagColor};">${item.tag}</span>
+          <div class="slide-title">${item.title}</div>
+          <div class="slide-body">${item.body}</div>
+          <a class="slide-cta" href="${item.ctaLink}">${item.cta}</a>
+          <div class="slide-image">${item.image}</div>
+        `;
+        track.appendChild(slideDiv);
+
+        // Dot indicator
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.onclick = () => goTo(i);
+        dotsWrap.appendChild(dot);
+      });
+
+      goTo(0);
+      if (CAROUSEL_DURATION > 0) startAutoplay();
+    }
+
+    function goTo(n) {
+      carouselCurrent = (n + carouselSlides.length) % carouselSlides.length;
+      document.getElementById('track').style.transform = `translateX(-${carouselCurrent * 100}%)`;
+      document.querySelectorAll('.dot').forEach((d, i) =>
+        d.classList.toggle('active', i === carouselCurrent)
+      );
+      document.getElementById('slide-counter').textContent = `${carouselCurrent + 1} / ${carouselSlides.length}`;
+      if (carouselPlaying) restartProgress();
+    }
+
+    function restartProgress() {
+      clearTimeout(carouselTimer);
+      const bar = document.getElementById('progress-bar');
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        bar.style.transition = `width ${CAROUSEL_DURATION}ms linear`;
+        bar.style.width = '100%';
+      }));
+      carouselTimer = setTimeout(() => goTo(carouselCurrent + 1), CAROUSEL_DURATION);
+    }
+
+    function stopAutoplay() {
+      clearTimeout(carouselTimer);
+      const bar = document.getElementById('progress-bar');
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      carouselPlaying = false;
+      document.getElementById('carouselAutoplayBtn').textContent = 'resume';
+    }
+
+    function startAutoplay() {
+      carouselPlaying = true;
+      document.getElementById('carouselAutoplayBtn').textContent = 'pause';
+      restartProgress();
+    }
+
+    // Attach events
+    document.getElementById('prev').addEventListener('click', () => {
+      goTo(carouselCurrent - 1);
+      if (!carouselPlaying) stopAutoplay();
+    });
+    document.getElementById('next').addEventListener('click', () => {
+      goTo(carouselCurrent + 1);
+      if (!carouselPlaying) stopAutoplay();
+    });
+    document.getElementById('carouselAutoplayBtn').addEventListener('click', () => {
+      carouselPlaying ? stopAutoplay() : startAutoplay();
+    });
+
+    // Keyboard support
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  goTo(carouselCurrent - 1);
+      if (e.key === 'ArrowRight') goTo(carouselCurrent + 1);
+    });
+
+    // Initialise with default data – later replace with fetch()
+    // Try to fetch live data from GitHub; if offline or fails, use defaults
+    const CAROUSEL_JSON_URL = 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/deepseek_json_20260502_1fb337.json';
+
+    fetch(CAROUSEL_JSON_URL)
+      .then(res => res.json())
+      .then(data => { if (Array.isArray(data) && data.length) buildCarousel(data); })
+      .catch(() => buildCarousel(CAROUSEL_DEFAULT));
     // ---------- INIT (with session token verification) ----------
     const savedSession = localStorage.getItem(CURRENT_USER_KEY);
     if (savedSession) {

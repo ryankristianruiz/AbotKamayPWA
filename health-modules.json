@@ -8,10 +8,48 @@
       { "heading": "Dengue", "content": "..." }
     ]
   },
-  "noncommunicable": { ... },
-  "dohprograms": { ... },
-  "prepartum": { ... },
-  "postpartum": { ... },
-  "newborn": { ... },
-  "infant": { ... }
+  "noncommunicable": {
+    "title": "Common Non‑Communicable Diseases",
+    "intro": "Mga sakit na hindi nakakahawa ngunit madalas na sanhi ng pamumuhay.",
+    "sections": [
+      { "heading": "Hypertension", "content": "..." },
+      { "heading": "Diabetes", "content": "..." }
+    ]
+  },
+  "dohprograms": {
+    "title": "DOH Health Programs",
+    "intro": "Mga pambansang programang pangkalusugan na maaaring makinabang sa inyong barangay.",
+    "sections": [
+      { "heading": "National Immunization Program", "content": "..." },
+      { "heading": "Maternal, Newborn and Child Health and Nutrition Program", "content": "..." }
+    ]
+  },
+  "prepartum": {
+    "title": "Prepartum Care",
+    "intro": "Pangangalaga sa buntis bago manganak.",
+    "sections": [
+      { "heading": "Antenatal Checkups", "content": "..." }
+    ]
+  },
+  "postpartum": {
+    "title": "Postpartum Care",
+    "intro": "Pangangalaga pagkatapos manganak.",
+    "sections": [
+      { "heading": "Pagpapagaling pagkatapos manganak", "content": "..." }
+    ]
+  },
+  "newborn": {
+    "title": "Newborn Care",
+    "intro": "Pangangalaga sa bagong silang na sanggol (0‑28 araw).",
+    "sections": [
+      { "heading": "Unang Yakap (Essential Newborn Care)", "content": "..." }
+    ]
+  },
+  "infant": {
+    "title": "Infant Care",
+    "intro": "Pangangalaga sa sanggol (1‑12 buwan).",
+    "sections": [
+      { "heading": "Eksklusibong Pagpapasuso", "content": "..." }
+    ]
+  }
 }

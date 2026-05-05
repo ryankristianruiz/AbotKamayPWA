@@ -1,0 +1,17 @@
+{
+  "lastUpdated": "2026-05-05T12:00:00Z",
+  "communicable": {
+    "title": "Common Communicable Diseases",
+    "intro": "Mga karaniwang nakakahawang sakit at kung paano ito maiiwasan.",
+    "sections": [
+      { "heading": "Tuberculosis (TB)", "content": "..." },
+      { "heading": "Dengue", "content": "..." }
+    ]
+  },
+  "noncommunicable": { ... },
+  "dohprograms": { ... },
+  "prepartum": { ... },
+  "postpartum": { ... },
+  "newborn": { ... },
+  "infant": { ... }
+}

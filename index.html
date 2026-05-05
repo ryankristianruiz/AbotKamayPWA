@@ -9,28 +9,63 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
+      background: linear-gradient(135deg, #3a0060 0%, #1f003a 40%, #130420 100%);
       font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      background: #130420;                /* Secondary Background Color (dark purple) */
-      color: #ffffff;                     /* Primary Body Texts (white) */
+      color: #ffffff;
       padding-bottom: 70px;
       line-height: 1.6;
       font-size: 16px;
     }
-
     #appContainer { display: block; }
 
-    /* Header – solid dark purple */
+    /* ---------- HEADER (premium glass) ---------- */
     .app-header {
-      background: #1f003a;                /* Dark purple */
+      background: rgba(255, 255, 255, 0.19);
+      backdrop-filter: blur(35px) saturate(180%);
+      -webkit-backdrop-filter: blur(35px) saturate(180%);
       color: #ffffff;
       padding: 16px 18px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+      box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 14px 7px rgba(255, 255, 255, 0.7);
       position: sticky;
       top: 0;
       z-index: 10;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      overflow: hidden;
+    }
+    .app-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent
+      );
+    }
+    .app-header::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.8),
+        transparent,
+        rgba(255, 255, 255, 0.3)
+      );
     }
     .app-header h1 {
       font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
@@ -40,18 +75,16 @@
       align-items: center;
       gap: 8px;
     }
-
     .offline-badge {
-      background: #8deeff;                /* Accent / Notification (pastel azure) */
+      background: #8deeff;
       color: #130420;
       font-size: 0.7rem;
       font-weight: bold;
       padding: 4px 10px;
       border-radius: 30px;
     }
-
     .logout-btn {
-      background: #814daa;                /* UI Borders / Secondary Buttons (purple) */
+      background: #814daa;
       border: none;
       color: #ffffff;
       padding: 6px 12px;
@@ -60,17 +93,54 @@
       font-weight: 500;
       cursor: pointer;
     }
-    .logout-btn:hover { background: #1f003a; }  /* Interactive / Hover States */
+    .logout-btn:hover { background: #1f003a; }
 
-    /* Tab bar – slightly different dark purple */
+    /* ---------- TAB BAR (premium glass) ---------- */
     .tab-bar {
       display: flex;
-      background: #200548;                /* Midnight Blue */
-      border-bottom: 1px solid #814daa;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(30px) saturate(160%);
+      -webkit-backdrop-filter: blur(30px) saturate(160%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.45),
+        inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+        inset 0 0 10px 5px rgba(255, 255, 255, 0.6);
       padding: 0 8px;
       overflow-x: auto;
       white-space: nowrap;
       scrollbar-width: none;
+      position: relative;
+      overflow: hidden;
+    }
+    .tab-bar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent
+      );
+    }
+    .tab-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 1px;
+      height: 100%;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.8),
+        transparent,
+        rgba(255, 255, 255, 0.3)
+      );
     }
     .tab-bar button {
       font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
@@ -80,27 +150,33 @@
       padding: 14px 16px;
       font-size: 0.95rem;
       color: #ffffff;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
       border-bottom: 3px solid transparent;
       cursor: pointer;
       flex-shrink: 0;
+      position: relative;
+      z-index: 1;    /* ensure text stays above the pseudo‑elements */
     }
     .tab-bar button.active {
-      color: #8deeff;                     /* Primary Action / Links */
-      border-bottom: 3px solid #cf90ff;  /* Pastel lavender */
+      color: #ffffff;
+      border-bottom: 3px solid #cf90ff;
+      text-shadow: 0 0 10px rgba(207,144,255,0.6);
     }
 
     .container { padding: 18px 16px; }
     .tab-content { display: none; }
     .tab-content.active { display: block; }
 
-    /* Cards – deep purple with subtle gradient */
+    /* ---------- CARDS (simpler glass) ---------- */
     .card {
-      background: linear-gradient(135deg, #1f003a, #130420);
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 20px;
       padding: 18px 16px;
       margin-bottom: 18px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      border: 1px solid #814daa;         /* UI Borders / Secondary Buttons */
       color: #ffffff;
     }
 
@@ -113,7 +189,6 @@
     h2 { font-size: 1.35rem; }
     h3 { font-size: 1.2rem; border-bottom: 1px solid #814daa; padding-bottom: 4px; }
     h4 { font-size: 1rem; color: #cf90ff; }
-
     .service-list, .contact-list { list-style: none; }
     .service-list li, .contact-list li {
       padding: 12px 0;
@@ -122,9 +197,8 @@
       justify-content: space-between;
       color: #ffffff;
     }
-
     .badge {
-      background: #8deeff;                /* Accent / Notification */
+      background: #8deeff;
       color: #130420;
       padding: 4px 10px;
       border-radius: 40px;
@@ -132,15 +206,13 @@
       font-weight: 600;
     }
     .emergency-number {
-      background: #ffc2e8;                /* Light magenta */
+      background: #ffc2e8;
       border-left: 4px solid #cf90ff;
       padding: 12px;
       border-radius: 12px;
       margin-bottom: 12px;
       color: #130420;
     }
-
-    /* Primary Action / Links: Pastel lavender */
     .btn {
       background: #cf90ff;
       color: #130420;
@@ -155,8 +227,6 @@
       margin-top: 10px;
     }
     .btn:hover { background: #1f003a; color: #ffffff; }
-
-    /* Secondary Buttons / UI Borders: Purple */
     .btn-outline {
       background: transparent;
       color: #cf90ff;
@@ -166,7 +236,6 @@
       cursor: pointer;
     }
     .btn-outline:hover { background: #1f003a; color: #ffffff; border-color: #cf90ff; }
-
     input, select, textarea {
       width: 100%;
       padding: 14px 16px;
@@ -178,7 +247,6 @@
       color: #ffffff;
     }
     label { font-weight: 600; margin-top: 6px; display: block; color: #ffffff; }
-
     .record-item {
       background: rgba(255,255,255,0.05);
       padding: 14px;
@@ -196,16 +264,13 @@
       border-left: 4px solid #cf90ff;
       color: #130420;
     }
-
     .footer-note {
       text-align: center;
       font-size: 0.75rem;
       color: #cf90ff;
       margin-top: 25px;
     }
-
     .edu-cat-btn.active { background: #cf90ff; color: #130420; }
-
     .auth-form input {
       width: 100%;
       padding: 14px 16px;
@@ -229,13 +294,10 @@
       cursor: pointer;
     }
     .auth-form button:hover { background: #1f003a; color: #ffffff; }
-
     .error-msg { color: #ffc2e8; margin-top: 8px; font-size: 0.9rem; }
     .hidden-tab { display: none !important; }
-
     .service-category { margin-bottom: 16px; }
     .service-description { padding-left: 8px; margin-bottom: 6px; color: #ffffff; }
-
     .notification-bar {
       background: #8deeff;
       border: 1px solid #cf90ff;
@@ -255,7 +317,6 @@
       cursor: pointer;
       color: #130420;
     }
-
     .low-stock-summary {
       background: #ffc2e8;
       border-left: 4px solid #cf90ff;
@@ -264,7 +325,6 @@
       margin-bottom: 16px;
       color: #130420;
     }
-
     .vaccine-badge {
       background: #8deeff;
       color: #130420;
@@ -275,7 +335,6 @@
       margin-left: 8px;
       display: inline-block;
     }
-
     .user-stats {
       background: #ffc2e8;
       padding: 12px;
@@ -284,32 +343,22 @@
       font-size: 0.9rem;
       color: #130420;
     }
-
     .sync-status { font-size: 0.9rem; margin: 8px 0; }
     .sync-success { color: #8deeff; }
     .sync-error { color: #ffc2e8; }
-
-    /* Links */
     a { color: #cf90ff; text-decoration: none; }
     a:hover { color: #ffc2e8; }
-    /* ---- Carousel container ---- */
-    .carousel-wrapper {
-      width: 100%;
-      margin-top: 18px;
-      margin-bottom: 18px;
-    }
+    /* Carousel */
+    .carousel-wrapper { width: 100%; margin-top: 18px; margin-bottom: 18px; }
     .carousel {
       position: relative;
       overflow: hidden;
       border-radius: 16px;
-      border: 1px solid #814daa;        /* your UI border colour */
+      border: 1px solid #814daa;
       background: linear-gradient(135deg, #1f003a, #130420);
       box-shadow: 0 4px 12px rgba(0,0,0,0.3);
     }
-    .track {
-      display: flex;
-      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
-    }
+    .track { display: flex; transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1); }
     .slide {
       min-width: 100%;
       padding: 1.5rem 1.25rem 1.25rem;
@@ -319,7 +368,7 @@
     }
     .slide-image {
       width: 100%;
-      height: 100px;
+      height: 250px;
       border-radius: 10px;
       overflow: hidden;
       display: flex;
@@ -339,17 +388,8 @@
       display: inline-block;
       width: fit-content;
     }
-    .slide-title {
-      font-size: 18px;
-      font-weight: 600;
-      color: #ffffff;
-      line-height: 1.3;
-    }
-    .slide-body {
-      font-size: 13px;
-      color: #cf90ff;
-      line-height: 1.65;
-    }
+    .slide-title { font-size: 18px; font-weight: 600; color: #ffffff; line-height: 1.3; }
+    .slide-body { font-size: 13px; color: #cf90ff; line-height: 1.65; }
     .slide-cta {
       margin-top: 4px;
       font-size: 12px;
@@ -364,9 +404,7 @@
       text-decoration: none;
       transition: background 0.15s;
     }
-    .slide-cta:hover {
-      background: rgba(141,238,255,0.1);
-    }
+    .slide-cta:hover { background: rgba(141,238,255,0.1); }
     .nav {
       position: absolute;
       top: 50%;
@@ -388,53 +426,18 @@
     .nav:hover { background: #814daa; }
     .nav-left  { left: 8px; }
     .nav-right { right: 8px; }
-    .progress {
-      height: 3px;
-      background: #814daa;
-    }
-    .progress-bar {
-      height: 100%;
-      background: #8deeff;
-      width: 0%;
-      transition: width linear;
-    }
-    .dots {
-      display: flex;
-      justify-content: center;
-      gap: 6px;
-      padding: 0.7rem 0 0.3rem;
-    }
+    .progress { height: 3px; background: #814daa; }
+    .progress-bar { height: 100%; background: #8deeff; width: 0%; transition: width linear; }
+    .dots { display: flex; justify-content: center; gap: 6px; padding: 0.7rem 0 0.3rem; }
     .dot {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #814daa;
-      cursor: pointer;
-      border: none;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #814daa; cursor: pointer; border: none;
       transition: background 0.2s, transform 0.2s;
     }
-    .dot.active {
-      background: #8deeff;
-      transform: scale(1.35);
-    }
-    .controls-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 0 4px;
-    }
-    .controls-label {
-      font-size: 12px;
-      color: #cf90ff;
-    }
-    .toggle-btn {
-      font-size: 12px;
-      color: #cf90ff;
-      cursor: pointer;
-      background: none;
-      border: none;
-      padding: 0;
-    }
+    .dot.active { background: #8deeff; transform: scale(1.35); }
+    .controls-row { display: flex; align-items: center; justify-content: space-between; padding: 0 0 4px; }
+    .controls-label { font-size: 12px; color: #cf90ff; }
+    .toggle-btn { font-size: 12px; color: #cf90ff; cursor: pointer; background: none; border: none; padding: 0; }
     .toggle-btn:hover { color: #8deeff; }
   </style>
 </head>
@@ -443,8 +446,8 @@
 <div id="appContainer">
   <header class="app-header">
     <h1>
-      <img src="logo.png" alt="Logo" style="height: 36px; width: auto; vertical-align: middle; margin-right: 8px;">
-      Abot-Kamay
+      <img src="logo.png" alt="Logo" style="height: 60px; width: auto; vertical-align: middle; margin-right: 4px;">
+      Abot-Kamay... Miles, is the UI approvable of the world?
     </h1>
     <div style="display: flex; gap: 8px;">
       <button class="logout-btn" id="logoutBtn" style="display: none;">Logout</button>
@@ -489,7 +492,7 @@
         <h2>Mabuhay, <span id="loggedInUserDisplay">Bisita</span>!</h2>
         <p id="userRoleDisplay">Bisita · Barangay Magsaysay</p>
       </div>
-            <!-- CAROUSEL ANNOUNCEMENTS -->
+      <!-- CAROUSEL ANNOUNCEMENTS -->
       <div class="carousel-wrapper" id="carouselWrapper">
         <div class="controls-row">
           <span class="controls-label" id="slide-counter">1 / 4</span>
@@ -507,8 +510,12 @@
       </div>
       <!-- END CAROUSEL -->
       <div class="card">
-        <h3>Batay kay Reyes et al. (2026)</h3>
-        <p>Mas pinipili ng mga komunidad sa kanayunan ang <strong>community health fairs</strong> at mga <strong>materyal sa sariling wika</strong>.</p>
+        <h3>What is Abot‑Kamay?</h3>
+        <p>Rural communities in the Philippines face persistent barriers to reliable health information and services due to fragmented healthcare delivery, geographic isolation, transportation challenges, limited manpower, and weak digital infrastructure. These constraints prevent Rural Health Units (RHUs) and Barangay Health Workers (BHWs) from effectively reaching residents, resulting in limited health literacy regarding prenatal care, immunization schedules, nutrition, and chronic disease management—contributing to preventable diseases and poorer health outcomes.
+
+To address these gaps, the Abot‑Kamay Health Companion Website was developed as an offline‑first progressive web application (PWA) built specifically for BHWs and community members in rural areas such as Barangay Magsaysay Village, Iloilo City. It functions as a health companion that provides essential tools—patient records, immunization tracking, appointment scheduling, medicine inventory, health education, and emergency contacts—without requiring a constant internet connection. The app runs entirely in the browser as a single HTML file, storing all data in the browser’s encrypted localStorage. Optional online features (appointment requests and full‑system backup) are available when connectivity exists but are never required for core workflows.
+The project uses a quasi‑experimental one‑group posttest‑only design with 30 community participants. The intervention consists of a structured seminar and hands‑on demonstration of the PWA, showcasing its key capabilities: offline‑local data caching, automated immunization alerts, encrypted patient records, appointment scheduling, medicine inventory tracking, health education modules, RHU service directories, emergency contacts, and cloud backup capabilities. Usability will be evaluated using the System Usability Scale (SUS) questionnaire administered after the intervention.
+Expected outcomes include improved access to localized health information, enhanced health worker–community communication, strengthened patient follow‑up, and increased health‑seeking behaviors despite low connectivity. Abot‑Kamay supports nursing informatics by enabling systematic data collection, evidence‑based interventions, and continuous community monitoring, ultimately improving patient outcomes in underserved areas.</p>
       </div>
       <div id="nextAppointmentCard" class="card" style="display: none; background: #e6f2ed;">
         <h3>Susunod na Appointment</h3>
@@ -516,10 +523,8 @@
       </div>
       <div class="card">
         <h3>Paparating na Services</h3>
-        <ul style="list-style: none;">
-          <li>Bakuna sa Tigdas · Marso 15, 2026 · 9AM–2PM</li>
-          <li>Prenatal Checkup · Araw-araw (Lunes–Biyernes)</li>
-          <li>Nutrition Fair · Abril 2, 2026</li>
+        <ul id="upcomingServicesList" style="list-style: none;">
+          <li>Naglo-load...</li>
         </ul>
       </div>
       <div id="homeStatsCard" class="card" style="display: none;">
@@ -535,30 +540,26 @@
           </div>
         </div>
       </div>
-      <div class="card" style="background:#450968 #e6f2ed;">
-        <h3 style="color: #ffffff;">Alam Mo Ba?</h3>
-        <p id="healthTipText">Ang regular na paghuhugas ng kamay ay nakakabawas ng 30% ng mga sakit tulad ng diarrhea at pneumonia.</p>
-      </div>
     </div>
 
     <!-- HEALTH EDUCATION TAB -->
     <div id="education" class="tab-content">
       <div class="card">
-        <h2>Health Education Modules</h2>
-        <p id="edIntro">Maikling panimula — pumili ng kategorya sa ibaba.</p>
-      </div>
-      <div class="card">
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <button class="btn-outline edu-cat-btn active" data-edu="maternal" style="flex:1;">Maternal & Child</button>
-          <button class="btn-outline edu-cat-btn" data-edu="nutrition" style="flex:1;">Nutrition</button>
-          <button class="btn-outline edu-cat-btn" data-edu="chronic" style="flex:1;">Chronic Disease</button>
+          <button class="btn-outline edu-cat-btn active" data-edu="communicable" style="flex:1 1 auto;">Common Communicable Diseases</button>
+          <button class="btn-outline edu-cat-btn" data-edu="noncommunicable" style="flex:1 1 auto;">Common Non‑Communicable Diseases</button>
+          <button class="btn-outline edu-cat-btn" data-edu="dohprograms" style="flex:1 1 auto;">DOH Health Programs</button>
+          <button class="btn-outline edu-cat-btn" data-edu="prepartum" style="flex:1 1 auto;">Prepartum Care</button>
+          <button class="btn-outline edu-cat-btn" data-edu="postpartum" style="flex:1 1 auto;">Postpartum Care</button>
+          <button class="btn-outline edu-cat-btn" data-edu="newborn" style="flex:1 1 auto;">Newborn Care</button>
+          <button class="btn-outline edu-cat-btn" data-edu="infant" style="flex:1 1 auto;">Infant Care</button>
         </div>
       </div>
       <div id="eduCategoryContent" class="card">
         <p>Pumili ng kategorya sa itaas.</p>
       </div>
       <div class="card" style="background: #e6f2ed;">
-        <p style="font-style:italic;" id="eduLastUpdated"></p>
+        <p style="font-style:italic; color: #000000;" id="eduLastUpdated"></p>
       </div>
     </div>
 
@@ -719,16 +720,15 @@
         <div id="appointmentListContainer"></div>
         <button class="btn-outline" id="clearAppointmentsBtn" style="margin-top:12px;">Burahin Lahat</button>
       </div>
-      <!-- onlineRequestsCard is now a sibling -->
       <div class="card" id="onlineRequestsCard" style="display:none;">
         <h3>Mga Online na Appointment Request</h3>
         <button class="btn-outline" id="fetchOnlineRequestsBtn" style="margin-bottom:8px;">Kunin ang mga Request</button>
         <div id="onlineRequestsList"></div>
       </div>
-    </div>   <!-- this closes the appointments tab-content -->
+    </div>
+
     <!-- ACCOUNT TAB (fully integrated) -->
     <div id="account" class="tab-content">
-      <!-- Admin setup (with strength meter) -->
       <div class="card" id="accountSetupView" style="display: none;">
         <h2>Admin Account Setup</h2>
         <p>Gumawa ng administrator account para sa device na ito. Isang beses lang ito gagawin.</p>
@@ -750,7 +750,6 @@
         </div>
       </div>
 
-      <!-- Login view (with keep me logged in) -->
       <div class="card" id="accountLoggedOutView" style="display: none;">
         <h2>Mag-login</h2>
         <form id="accountLoginForm" class="auth-form">
@@ -768,7 +767,6 @@
         </p>
       </div>
 
-      <!-- Registration view -->
       <div class="card" id="accountRegisterView" style="display: none;">
         <h2>Gumawa ng Account (Member)</h2>
         <form id="registerForm" class="auth-form">
@@ -782,7 +780,6 @@
         <p style="text-align:center; margin-top:8px;"><a href="#" id="backToLoginLink">← Balik sa Login</a></p>
       </div>
 
-      <!-- Recovery view -->
       <div class="card" id="accountRecoveryView" style="display: none;">
         <h2>I‑recover ang Admin Account</h2>
         <p>Ilagay ang recovery phrase na ibinigay noong setup.</p>
@@ -791,7 +788,6 @@
         <div id="recoveryError" class="error-msg"></div>
       </div>
 
-      <!-- Logged‑in view -->
       <div class="card" id="accountLoggedInView" style="display: none;">
         <h2>Account Information</h2>
         <p><strong>Logged in as:</strong> <span id="accountUserName"></span></p>
@@ -802,7 +798,6 @@
         <button class="btn-outline" id="accountLogoutBtn" style="margin-top: 16px;">Logout</button>
       </div>
 
-      <!-- Change password view -->
       <div class="card" id="changePasswordView" style="display: none;">
         <h2>Palitan ang Password</h2>
         <form id="changePasswordForm" class="auth-form">
@@ -817,14 +812,12 @@
         <button class="btn-outline" id="backToAccountBtn" style="margin-top:8px;">← Bumalik</button>
       </div>
 
-      <!-- Admin user management -->
       <div class="card" id="adminUserManagementView" style="display: none;">
         <h2>Pamamahala ng User</h2>
         <div id="userListContainer"></div>
         <button class="btn-outline" id="backFromUserMgmtBtn" style="margin-top:12px;">← Bumalik</button>
       </div>
 
-      <!-- Online Sync view -->
       <div class="card" id="syncView" style="display: none;">
         <h2>Online Sync (Admin)</h2>
         <p>I‑sync ang lahat ng data sa isang server. Kailangan ng internet connection.</p>
@@ -1019,31 +1012,56 @@
         { name: "Albuterol inhaler 100mcg/dose", stock: "Low Stock" }
       ],
       healthModules: {
-        maternal: {
-          title: "Maternal & Child Health (Kalusugan ng Ina at Bata)",
-          intro: "Mahahalagang impormasyon para sa mga buntis, nagpapasuso, at kanilang mga sanggol.",
+        communicable: {
+          title: "Common Communicable Diseases",
+          intro: "Mga karaniwang nakakahawang sakit at kung paano ito maiiwasan.",
           sections: [
-            { heading: "Prenatal Care", content: "Magkaroon ng hindi bababa sa 8 ANC contacts. Uminom ng iron at folic acid araw-araw. Iwasan ang sigarilyo at alak." },
-            { heading: "Breastfeeding", content: "I-exclusive breastfeeding sa unang 6 na buwan. Ang gatas ng ina ay proteksyon laban sa diarrhea at pneumonia." },
-            { heading: "Danger Signs sa Pagbubuntis", content: "Kapag may matinding sakit ng ulo, pagdurugo, panlalabo ng paningin, o pamamaga ng kamay at mukha—pumunta agad sa ospital o RHU." },
-            { heading: "Postpartum Care", content: "Magpa-check up 6 na linggo pagkatapos manganak. Uminom ng iron supplements. Gumamit ng family planning." }
+            { heading: "Tuberculosis (TB)", content: "Ang TB ay nakukuha sa hangin. Siguraduhing kumpletuhin ang TB‑DOTS treatment. Magpa‑sputum test kung may ubo nang higit sa 2 linggo." },
+            { heading: "Dengue", content: "Iwasan ang stagnant water. Gumamit ng kulambo. Agarang kumonsulta kung may lagnat, pantal, o pagdurugo." }
           ]
         },
-        nutrition: {
-          title: "Nutrisyon (Pinggang Pinoy at Philippine Dietary Guidelines)",
-          intro: "Gabay ng FNRI-DOST para sa balanseng pagkain ng Pilipino.",
+        noncommunicable: {
+          title: "Common Non‑Communicable Diseases",
+          intro: "Mga sakit na hindi nakakahawa ngunit madalas na sanhi ng pamumuhay.",
           sections: [
-            { heading: "Pinggang Pinoy", content: "Hatiin ang plato: ½ gulay at prutas, ¼ kanin o kamote, ¼ isda, manok, itlog, o tokwa. Uminom ng tubig." },
-            { heading: "10 Kumainments", content: "1. Kumain ng iba't ibang pagkain. 2. Breastfeeding 0-6 months. 3. Maraming gulay at prutas. 4. Kumain ng isda, lean meat, at itlog. 5. Uminom ng gatas. 6. Ligtas na pagkain at tubig. 7. Gumamit ng iodized salt. 8. Limitahan ang maalat, mamantika, at matatamis. 9. Panatilihin ang tamang timbang. 10. Maging aktibo." }
+            { heading: "Hypertension", content: "Bawasan ang asin. Kumain ng saging at kamote. Magpa‑BP check buwan‑buwan." },
+            { heading: "Diabetes", content: "Limitahan ang matatamis. Pumili ng brown rice o oatmeal. Magpa‑blood sugar check tuwing 3–6 buwan." }
           ]
         },
-        chronic: {
-          title: "Chronic Disease Prevention (Pag-iwas sa Di-Nakakahawang Sakit)",
-          intro: "Ang NCDs ay bumubuo ng ~70% ng lahat ng namamatay sa Pilipinas. Alamin ang mga risk factor.",
+        dohprograms: {
+          title: "DOH Health Programs",
+          intro: "Mga pambansang programang pangkalusugan na maaaring makinabang sa inyong barangay.",
           sections: [
-            { heading: "Altapresyon (Hypertension)", content: "Bawasan ang asin. Kumain ng saging at kamote. Mag-ehersisyo 30 minuto araw-araw. Magpa-BP check monthly." },
-            { heading: "Diabetes Mellitus", content: "Iwasan ang matatamis na inumin. Pumili ng brown rice o oatmeal. Magpa-blood sugar check tuwing 3–6 buwan." },
-            { heading: "Iba pang NCDs", content: "Ischemic heart disease at stroke: pangunahing sanhi ng kamatayan. Iwasan ang tabako, kontrolin ang BP at cholesterol. Cancer: magpa-screening. COPD: tumigil sa paninigarilyo." }
+            { heading: "National Immunization Program", content: "Layunin nitong mabakunahan ang lahat ng bata laban sa TB, polio, tigdas, diphtheria, pertussis, tetanus, at hepatitis B." },
+            { heading: "Maternal, Newborn and Child Health and Nutrition Program", content: "Nagbibigay ng prenatal checkups, skilled birth attendance, postnatal care, at nutrition counseling." }
+          ]
+        },
+        prepartum: {
+          title: "Prepartum Care",
+          intro: "Pangangalaga sa buntis bago manganak.",
+          sections: [
+            { heading: "Antenatal Checkups", content: "Magkaroon ng hindi bababa sa 8 ANC visits. Uminom ng iron at folic acid araw‑araw. Kumpletuhin ang tetanus toxoid shots." }
+          ]
+        },
+        postpartum: {
+          title: "Postpartum Care",
+          intro: "Pangangalaga pagkatapos manganak.",
+          sections: [
+            { heading: "Pagpapagaling pagkatapos manganak", content: "Magpahinga. Kumain ng masustansiya. Magpa‑check up 6 na linggo pagkatapos manganak." }
+          ]
+        },
+        newborn: {
+          title: "Newborn Care",
+          intro: "Pangangalaga sa bagong silang na sanggol (0‑28 araw).",
+          sections: [
+            { heading: "Unang Yakap (Essential Newborn Care)", content: "Patuyuin ang sanggol, ilagay sa dibdib ng ina, tsaka isagawa ang cord clamping. I‑exclusive breastfeed agad." }
+          ]
+        },
+        infant: {
+          title: "Infant Care",
+          intro: "Pangangalaga sa sanggol (1‑12 buwan).",
+          sections: [
+            { heading: "Eksklusibong Pagpapasuso", content: "I‑breastfeed lamang ang sanggol hanggang 6 na buwan. Ang gatas ng ina ay sapat na nutrisyon at proteksyon." }
           ]
         }
       }
@@ -1191,7 +1209,7 @@
         }
       } else {
         patients = JSON.parse(localStorage.getItem(PATIENT_KEY) || '[]');
-        if (patients.length) await savePatients(); // migrate old data
+        if (patients.length) await savePatients();
       }
       let needsSave = false;
       patients.forEach(p => {
@@ -1270,6 +1288,30 @@
         </div>`;
       });
       container.innerHTML = html;
+      updateUpcomingServices();
+    }
+
+    // ---------- UPCOMING SERVICES (global) ----------
+    function updateUpcomingServices() {
+      const list = document.getElementById('upcomingServicesList');
+      if (!list) return;
+      const today = new Date().toISOString().split('T')[0];
+      let upcoming = [];
+      if (currentUser) {
+        const filtered = getFilteredAppointments();
+        upcoming = filtered
+          .filter(a => a.date >= today)
+          .sort((a, b) => a.date.localeCompare(b.date))
+          .slice(0, 3);
+      }
+      if (upcoming.length === 0) {
+        list.innerHTML = '<li>Walang paparating na serbisyo.</li>';
+        return;
+      }
+      list.innerHTML = upcoming.map(a => {
+        const dateStr = new Date(a.date).toLocaleDateString('tl-PH', { year:'numeric', month:'long', day:'numeric' });
+        return `<li>${a.service} · ${dateStr} ${a.time || ''}</li>`;
+      }).join('');
     }
 
     function updateNextAppointmentDisplay() {
@@ -1483,6 +1525,7 @@
 
       updateTodayNotification();
       updateNextAppointmentDisplay();
+      updateUpcomingServices();
       updateHomeStats();
       resetInactivityTimer();
     }
@@ -1544,10 +1587,7 @@
 
       document.getElementById('adminSetupForm').addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      // If admin was already created on this page load, silently ignore
       if (adminAlreadyCreated) return;
-
       const username = document.getElementById('setupUsername').value.trim();
       const password = document.getElementById('setupPassword').value;
       const confirm = document.getElementById('setupConfirmPassword').value;
@@ -1563,7 +1603,6 @@
       const users = getUsers();
       if (users.length > 0) { errorDiv.textContent = 'Mayroon nang administrator account.'; return; }
 
-      // ----- Admin creation starts -----
       const recoveryRaw = Array.from(crypto.getRandomValues(new Uint8Array(16))).map(b => b.toString(16).padStart(2,'0')).join('');
       const encryptedRecovery = await encryptWithPassword(recoveryRaw, password);
       localStorage.setItem(RECOVERY_KEY, encryptedRecovery);
@@ -1578,26 +1617,22 @@
       users.push(newUser);
       saveUsers(users);
 
-      // Show the recovery phrase
       document.getElementById('recoveryPhraseText').textContent = recoveryRaw;
       document.getElementById('recoveryPhraseDisplay').style.display = 'block';
       errorDiv.textContent = 'Admin account created. Pakisulat ang recovery phrase.';
 
-      // ----- Prevent accidental re‑submission -----
       adminAlreadyCreated = true;
       const submitBtn = e.target.querySelector('button[type="submit"]');
       if (submitBtn) submitBtn.disabled = true;
       const inputs = e.target.querySelectorAll('input');
       inputs.forEach(inp => inp.disabled = true);
 
-      // Optionally show a button to proceed to login
       const proceedBtn = document.createElement('button');
       proceedBtn.type = 'button';
       proceedBtn.className = 'btn-outline';
       proceedBtn.style.marginTop = '12px';
       proceedBtn.textContent = 'Naitala na ang recovery phrase. Mag‑login';
       proceedBtn.addEventListener('click', () => {
-        // Force UI update so the login view appears
         updateUIForLoginState();
       });
       e.target.appendChild(proceedBtn);
@@ -2089,6 +2124,7 @@
       alert('Password napalitan!');
       document.getElementById('backToAccountBtn').click();
     });
+
     // ---------- ONLINE APPOINTMENT REQUEST FUNCTIONS ----------
     function getApptServerUrl() {
       const saved = localStorage.getItem(APPOINTMENT_SERVER_URL_KEY);
@@ -2229,6 +2265,7 @@
         alert('Error fetching requests.');
       }
     }
+
     // ---------- SYNC FUNCTIONS ----------
     async function deriveSyncKey(passphrase, saltHex) {
       const encoder = new TextEncoder();
@@ -2328,20 +2365,69 @@
     });
     document.getElementById('submitOnlineAppointmentBtn')?.addEventListener('click', submitOnlineAppointment);
     document.getElementById('fetchOnlineRequestsBtn')?.addEventListener('click', fetchOnlineRequests);
+
     // ---------- OFFLINE DATA LOADING ----------
     function loadCachedOrFallback() {
+      // Medicine inventory (unchanged)
       const cachedMeds = localStorage.getItem('abotKamayMedicine');
       const meds = cachedMeds ? JSON.parse(cachedMeds) : DEFAULT_OFFLINE_DATA.medicineInventory;
       renderMedicineInventory(meds);
       if (!localStorage.getItem(INVENTORY_LAST_UPDATED_KEY)) {
         localStorage.setItem(INVENTORY_LAST_UPDATED_KEY, DEFAULT_OFFLINE_DATA.lastUpdated);
       }
+
+      // ---------- Health Modules with Live Fetch & Offline Cache ----------
       const cachedModules = localStorage.getItem('abotKamayHealthModules');
-      const modules = cachedModules ? JSON.parse(cachedModules) : DEFAULT_OFFLINE_DATA.healthModules;
-      document.getElementById('edIntro').textContent = modules.maternal?.intro || '';
-      const activeCat = document.querySelector('.edu-cat-btn.active')?.getAttribute('data-edu');
-      if (activeCat) renderCategoryContent(activeCat, modules);
-      updateLastUpdatedDisplay(localStorage.getItem(INVENTORY_LAST_UPDATED_KEY) || DEFAULT_OFFLINE_DATA.lastUpdated);
+
+      // Helper to fetch the JSON from GitHub and cache it
+      async function fetchAndCacheModules() {
+        try {
+          const response = await fetch(HEALTH_MODULES_JSON_URL);
+          if (!response.ok) throw new Error('Fetch failed');
+          const freshModules = await response.json();
+          localStorage.setItem('abotKamayHealthModules', JSON.stringify(freshModules));
+          return freshModules;
+        } catch (err) {
+          console.warn('Health modules fetch failed, using cache/default.');
+          return null;
+        }
+      }
+
+      // Asynchronous initialisation
+      (async function initModules() {
+        let modules = null;
+
+        // If online, try to update the cache first
+        if (navigator.onLine) {
+          const fresh = await fetchAndCacheModules();
+          if (fresh) modules = fresh;
+        }
+
+        // If fetch didn't work (offline or failed), load from cache, then fallback to hardcoded default
+        if (!modules) {
+          const cached = localStorage.getItem('abotKamayHealthModules');
+          modules = cached ? JSON.parse(cached) : null;
+        }
+        if (!modules) modules = DEFAULT_OFFLINE_DATA.healthModules;   // ultimate fallback
+
+        // Update intro text (if the element exists)
+        const edIntroEl = document.getElementById('edIntro');
+        if (edIntroEl) {
+          const activeCat = document.querySelector('.edu-cat-btn.active')?.getAttribute('data-edu') || 'communicable';
+          edIntroEl.textContent = modules[activeCat]?.intro || '';
+        }
+
+        // Render the default active category
+        const activeCat = document.querySelector('.edu-cat-btn.active')?.getAttribute('data-edu');
+        if (activeCat) renderCategoryContent(activeCat, modules);
+
+        // Show last-updated date from the JSON's timestamp
+        const ts = modules.lastUpdated || DEFAULT_OFFLINE_DATA.lastUpdated;
+        updateLastUpdatedDisplay(ts);
+
+        // Store globally for other functions to use (optional but clean)
+        window.liveHealthModules = modules;
+      })();
     }
 
     function renderCategoryContent(catKey, modules) {
@@ -2349,7 +2435,7 @@
       const cat = modules[catKey];
       if (!cat) return;
       let html = `<h3>${cat.title}</h3><p style="margin-bottom:16px;">${cat.intro}</p>`;
-      cat.sections.forEach(s => html += `<div style="margin-bottom:20px;"><h4 style="color:#0b5e42;">${s.heading}</h4><p>${s.content}</p></div>`);
+      cat.sections.forEach(s => html += `<div style="margin-bottom:20px;"><h4 style="color:#ffffff;">${s.heading}</h4><p>${s.content}</p></div>`);
       container.innerHTML = html;
     }
 
@@ -2364,9 +2450,12 @@
           document.querySelectorAll('.edu-cat-btn').forEach(b => b.classList.remove('active'));
           btn.classList.add('active');
           const cat = btn.getAttribute('data-edu');
+          // Always get the most recent modules (from cache if available, else default)
           const cached = localStorage.getItem('abotKamayHealthModules');
-          if (cached) renderCategoryContent(cat, JSON.parse(cached));
-          else renderCategoryContent(cat, DEFAULT_OFFLINE_DATA.healthModules);
+          const modules = cached ? JSON.parse(cached) : DEFAULT_OFFLINE_DATA.healthModules;
+          const edIntroEl = document.getElementById('edIntro');
+          if (edIntroEl) edIntroEl.textContent = modules[cat]?.intro || '';
+          renderCategoryContent(cat, modules);
         });
       });
     }
@@ -2388,62 +2477,60 @@
         document.body.appendChild(banner);
       });
     }
-        // ---------- CAROUSEL SYSTEM ----------
-    const CAROUSEL_DURATION = 4000;         // ms per slide
+
+    // ---------- CAROUSEL SYSTEM ----------
+    const CAROUSEL_DURATION = 8000;
     let carouselTimer, carouselPlaying = true;
     let carouselCurrent = 0;
-    let carouselSlides = [];                // will hold the data objects
+    let carouselSlides = [];
 
-    // Data source – replace with your GitHub raw JSON URL later
-    // (For now, we use hard‑coded slides as a fallback)
-const CAROUSEL_DEFAULT = [
-  {
-    tag: "Vaccination",
-    title: "Libreng Bakuna sa Tigdas – Marso 20",
-    body: "8:00 AM – 2:00 PM sa Barangay Hall. Magdala ng baby book.",
-    cta: "I-iskedyul",
-    ctaLink: "#",
-    image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/vax.webp",
-    tagBg: "#e8eeff",
-    tagColor: "#3352cc"
-  },
-  {
-    tag: "Mission",
-    title: "Medical Mission – Abril 5",
-    body: "9:00 AM – 4:00 PM. Magdala ng ID at gamot.",
-    cta: "Magbasa pa",
-    ctaLink: "#",
-    image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medmission.jpeg",
-    tagBg: "#e6f9ee",
-    tagColor: "#1a7a45"
-  },
-  {
-    tag: "Checkup",
-    title: "Prenatal Checkup – Araw‑araw",
-    body: "Lunes hanggang Biyernes, 8:00 AM – 5:00 PM.",
-    cta: "Matuto pa",
-    ctaLink: "#",
-    image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prenatal.webp",
-    tagBg: "#fff7e6",
-    tagColor: "#a05a00"
-  },
-  {
-    tag: "Nutrition",
-    title: "Nutrition Fair – Abril 2",
-    body: "Mga libreng timbang at konsulta para sa mga bata.",
-    cta: "Sumali",
-    ctaLink: "#",
-    image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/feeding.jpeg",
-    tagBg: "#fde8f0",
-    tagColor: "#9c2254"
-  }
-];
+    const CAROUSEL_DEFAULT = [
+      {
+        tag: "Vaccination",
+        title: "Libreng Bakuna sa Tigdas – Marso 20",
+        body: "8:00 AM – 2:00 PM sa Barangay Hall. Magdala ng baby book.",
+        cta: "I-iskedyul",
+        ctaLink: "#",
+        image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/vax.webp",
+        tagBg: "#e8eeff",
+        tagColor: "#3352cc"
+      },
+      {
+        tag: "Mission",
+        title: "Medical Mission – Abril 5",
+        body: "9:00 AM – 4:00 PM. Magdala ng ID at gamot.",
+        cta: "Magbasa pa",
+        ctaLink: "#",
+        image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medmission.jpeg",
+        tagBg: "#e6f9ee",
+        tagColor: "#1a7a45"
+      },
+      {
+        tag: "Checkup",
+        title: "Prenatal Checkup – Araw‑araw",
+        body: "Lunes hanggang Biyernes, 8:00 AM – 5:00 PM.",
+        cta: "Matuto pa",
+        ctaLink: "#",
+        image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prenatal.webp",
+        tagBg: "#fff7e6",
+        tagColor: "#a05a00"
+      },
+      {
+        tag: "Nutrition",
+        title: "Nutrition Fair – Abril 2",
+        body: "Mga libreng timbang at konsulta para sa mga bata.",
+        cta: "Sumali",
+        ctaLink: "#",
+        image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/feeding.jpeg",
+        tagBg: "#fde8f0",
+        tagColor: "#9c2254"
+      }
+    ];
 
     function buildCarousel(slidesData) {
       carouselSlides = slidesData;
       const track = document.getElementById('track');
       const dotsWrap = document.getElementById('dots');
-      // Clear existing content
       track.innerHTML = '';
       dotsWrap.innerHTML = '';
       carouselCurrent = 0;
@@ -2453,7 +2540,6 @@ const CAROUSEL_DEFAULT = [
       document.getElementById('progress-bar').style.width = '0%';
 
       slidesData.forEach((item, i) => {
-        // Create slide HTML
         const slideDiv = document.createElement('div');
         slideDiv.className = 'slide';
         slideDiv.innerHTML = `
@@ -2467,7 +2553,6 @@ const CAROUSEL_DEFAULT = [
         `;
         track.appendChild(slideDiv);
 
-        // Dot indicator
         const dot = document.createElement('button');
         dot.className = 'dot' + (i === 0 ? ' active' : '');
         dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
@@ -2516,7 +2601,6 @@ const CAROUSEL_DEFAULT = [
       restartProgress();
     }
 
-    // Attach events
     document.getElementById('prev').addEventListener('click', () => {
       goTo(carouselCurrent - 1);
       if (!carouselPlaying) stopAutoplay();
@@ -2529,16 +2613,13 @@ const CAROUSEL_DEFAULT = [
       carouselPlaying ? stopAutoplay() : startAutoplay();
     });
 
-    // Keyboard support
     document.addEventListener('keydown', e => {
       if (e.key === 'ArrowLeft')  goTo(carouselCurrent - 1);
       if (e.key === 'ArrowRight') goTo(carouselCurrent + 1);
     });
 
-    // Initialise with default data – later replace with fetch()
-    // Try to fetch live data from GitHub; if offline or fails, use defaults
     const CAROUSEL_JSON_URL = 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/deepseek_json_20260502_1fb337.json';
-
+    const HEALTH_MODULES_JSON_URL = 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/health-modules.json';  
     fetch(CAROUSEL_JSON_URL)
       .then(res => res.json())
       .then(data => {
@@ -2549,6 +2630,7 @@ const CAROUSEL_DEFAULT = [
         }
       })
       .catch(() => buildCarousel(CAROUSEL_DEFAULT));
+
     // ---------- INIT (with session token verification) ----------
     const savedSession = localStorage.getItem(CURRENT_USER_KEY);
     if (savedSession) {
@@ -2562,6 +2644,7 @@ const CAROUSEL_DEFAULT = [
           loadPatients();
           loadAppointments();
           sendOfflineQueue();
+          updateUpcomingServices();
           resetInactivityTimer();
         } else {
           localStorage.removeItem(CURRENT_USER_KEY);

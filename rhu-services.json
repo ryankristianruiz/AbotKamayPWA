@@ -1,0 +1,61 @@
+{
+  "lastUpdated": "2026-05-05T12:00:00Z",
+  "categories": {
+    "maternal": {
+      "title": "Maternal and Child Health Care",
+      "services": [
+        { "name": "Prenatal at Postnatal Care", "description": "Regular check‑ups, iron/folic acid supplementation, at counseling para sa mga buntis." },
+        { "name": "Birthing / Maternity Services", "description": "Normal Spontaneous Delivery (NSD) para sa low‑risk pregnancies at newborn care." },
+        { "name": "Immunization Services", "description": "Routine at catch‑up vaccines para sa mga sanggol at bata: <strong>BCG, DPT, Polio, Hep B, MMR</strong>." },
+        { "name": "Under‑five Clinics", "description": "Pagsubaybay sa paglaki at nutrisyon ng mga bata, kasama ang <strong>Operation Timbang</strong>." },
+        { "name": "Newborn Screening & Hearing Tests", "description": "Maagang pagtuklas ng mga congenital conditions." }
+      ]
+    },
+    "reproductive": {
+      "title": "Reproductive Health and Family Planning",
+      "services": [
+        { "name": "Family Planning Counseling", "description": "Counseling sa natural at artificial na pamamaraan." },
+        { "name": "Contraceptive Distribution", "description": "Pagbibigay ng pills, condoms, injectables, at IUD insertion." },
+        { "name": "Pre‑marriage Counseling", "description": "Mandatory counseling para sa mga aplikante ng marriage license." }
+      ]
+    },
+    "lab": {
+      "title": "Laboratory and Diagnostic Services (Basic)",
+      "services": [
+        { "name": "Routine Lab Tests", "description": "Complete Blood Count (CBC), urinalysis, fecalysis, at pregnancy tests." },
+        { "name": "Specialized Screening", "description": "Blood typing, sputum smear microscopy (para sa TB), malaria testing, at HIV/STI screening." },
+        { "name": "Blood Chemistry", "description": "Fasting blood sugar (FBS), cholesterol, at creatinine tests." }
+      ]
+    },
+    "disease": {
+      "title": "Communicable / Non‑Communicable Disease Control",
+      "services": [
+        { "name": "National Tuberculosis Control Program (TB‑DOTS)", "description": "Identification, diagnosis, at directly observed treatment." },
+        { "name": "Lifestyle Diseases", "description": "Screening at management ng Hypertension (HPN) at Diabetes Mellitus (DM)." },
+        { "name": "Rabies Prevention & Control", "description": "Anti‑rabies vaccines (sa ilalim ng rabies control program)." }
+      ]
+    },
+    "environment": {
+      "title": "Environmental Health and Sanitation",
+      "services": [
+        { "name": "Food & Water Safety", "description": "Inspeksyon ng food establishments, water supply testing, at pag‑iisyu ng sanitary permits." }
+      ]
+    },
+    "dental": {
+      "title": "Dental Health Services",
+      "services": [
+        { "name": "Dental Services", "description": "Dental consultation, oral health education, tooth extraction, filling, at gum treatment." }
+      ]
+    },
+    "other": {
+      "title": "Iba Pang Mahahalagang Serbisyo",
+      "services": [
+        { "name": "Minor Surgical Cases", "description": "Circumcision (\"Operation Tuli\"), suturing ng superficial lacerations, excision ng small cysts." },
+        { "name": "Pharmacy Services (Medisina para sa Bayan)", "description": "Libreng gamot para sa mga karaniwang karamdaman." },
+        { "name": "Medical Certifications", "description": "Pag‑iisyu ng sertipiko para sa employment, school admission, o PWD/senior citizen benefits." },
+        { "name": "Mental Health Services", "description": "Consultations at mental health education." },
+        { "name": "Medical Outreach Services", "description": "Mobile clinics at medical missions sa mga barangay." }
+      ]
+    }
+  }
+}

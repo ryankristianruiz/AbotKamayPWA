@@ -1,0 +1,15 @@
+{
+  "lastUpdated": "2026-05-05T12:00:00Z",
+  "inventory": [
+    { "name": "Paracetamol 500mg", "stock": "Available" },
+    { "name": "Amoxicillin 250mg/5ml suspension", "stock": "Low Stock" },
+    { "name": "Losartan 50mg", "stock": "Available" },
+    { "name": "Metformin 500mg", "stock": "Available" },
+    { "name": "ORS (Oresol)", "stock": "Available" },
+    { "name": "Mefenamic Acid 500mg", "stock": "Available" },
+    { "name": "Ferrous Sulfate + Folic Acid", "stock": "Low Stock" },
+    { "name": "Calcium Carbonate 500mg", "stock": "Available" },
+    { "name": "Cotrimoxazole 480mg", "stock": "Out of Stock" },
+    { "name": "Albuterol inhaler 100mcg/dose", "stock": "Low Stock" }
+  ]
+}

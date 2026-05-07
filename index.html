@@ -19,8 +19,9 @@
     #appContainer { display: block; }
 
     /* ---------- HEADER (premium glass) ---------- */
-    .app-header {
-      background: rgba(255, 255, 255, 0.19);
+      .app-header {
+      background: rgba(31, 0, 58, 0.65);   /* dark purple glass */
+      /* keep all other properties (backdrop-filter, box-shadow, etc.) unchanged */
       backdrop-filter: blur(35px) saturate(180%);
       -webkit-backdrop-filter: blur(35px) saturate(180%);
       color: #ffffff;
@@ -98,7 +99,7 @@
     /* ---------- TAB BAR (premium glass) ---------- */
     .tab-bar {
       display: flex;
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(32, 5, 72, 0.65); 
       backdrop-filter: blur(30px) saturate(160%);
       -webkit-backdrop-filter: blur(30px) saturate(160%);
       border-bottom: 1px solid rgba(255, 255, 255, 0.3);
@@ -161,6 +162,17 @@
       color: #ffffff;
       border-bottom: 3px solid #cf90ff;
       text-shadow: 0 0 10px rgba(207,144,255,0.6);
+    }
+    .rhu-subtab.active {
+      background: #cf90ff;
+      color: #130420;
+      border-color: #cf90ff;
+    }
+    .rhu-subtab {
+      flex: 1;                  /* equal width for all buttons */
+      min-width: 0;             /* allow them to shrink if needed */
+      text-align: center;       /* keep labels centered */
+      white-space: nowrap;      /* prevent text wrapping (optional) */
     }
 
     .container { padding: 18px 16px; }
@@ -271,6 +283,12 @@
       margin-top: 25px;
     }
     .edu-cat-btn.active { background: #cf90ff; color: #130420; }
+    .edu-cat-btn {
+    flex: 1;                /* equal width for all buttons */
+    min-width: 0;           /* allow shrinking if needed */
+    text-align: center;     /* keep labels centred */
+    white-space: nowrap;    /* prevent text wrapping (optional) */
+    }
     .auth-form input {
       width: 100%;
       padding: 14px 16px;
@@ -447,7 +465,7 @@
   <header class="app-header">
     <h1>
       <img src="logo.png" alt="Logo" style="height: 60px; width: auto; vertical-align: middle; margin-right: 4px;">
-      Abot-Kamay... Miles, is the UI approvable of the world?
+      Abot-Kamay
     </h1>
     <div style="display: flex; gap: 8px;">
       <button class="logout-btn" id="logoutBtn" style="display: none;">Logout</button>
@@ -511,9 +529,7 @@
       <!-- END CAROUSEL -->
       <div class="card">
         <h3>What is Abot‑Kamay?</h3>
-        <p>Rural communities in the Philippines face persistent barriers to reliable health information and services due to fragmented healthcare delivery, geographic isolation, transportation challenges, limited manpower, and weak digital infrastructure. These constraints prevent Rural Health Units (RHUs) and Barangay Health Workers (BHWs) from effectively reaching residents, resulting in limited health literacy regarding prenatal care, immunization schedules, nutrition, and chronic disease management—contributing to preventable diseases and poorer health outcomes.
-
-To address these gaps, the Abot‑Kamay Health Companion Website was developed as an offline‑first progressive web application (PWA) built specifically for BHWs and community members in rural areas such as Barangay Magsaysay Village, Iloilo City. It functions as a health companion that provides essential tools—patient records, immunization tracking, appointment scheduling, medicine inventory, health education, and emergency contacts—without requiring a constant internet connection. The app runs entirely in the browser as a single HTML file, storing all data in the browser’s encrypted localStorage. Optional online features (appointment requests and full‑system backup) are available when connectivity exists but are never required for core workflows.
+        <p>Rural communities in the Philippines face persistent barriers to reliable health information and services due to fragmented healthcare delivery, geographic isolation, transportation challenges, limited manpower, and weak digital infrastructure. These constraints prevent Rural Health Units (RHUs) and Barangay Health Workers (BHWs) from effectively reaching residents, resulting in limited health literacy regarding prenatal care, immunization schedules, nutrition, and chronic disease management—contributing to preventable diseases and poorer health outcomes. To address these gaps, the Abot‑Kamay Health Companion Website was developed as an offline‑first progressive web application (PWA) built specifically for BHWs and community members in rural areas such as Barangay Magsaysay Village, Iloilo City. It functions as a health companion that provides essential tools—patient records, immunization tracking, appointment scheduling, medicine inventory, health education, and emergency contacts—without requiring a constant internet connection. The app runs entirely in the browser as a single HTML file, storing all data in the browser’s encrypted localStorage. Optional online features (appointment requests and full‑system backup) are available when connectivity exists but are never required for core workflows.
 The project uses a quasi‑experimental one‑group posttest‑only design with 30 community participants. The intervention consists of a structured seminar and hands‑on demonstration of the PWA, showcasing its key capabilities: offline‑local data caching, automated immunization alerts, encrypted patient records, appointment scheduling, medicine inventory tracking, health education modules, RHU service directories, emergency contacts, and cloud backup capabilities. Usability will be evaluated using the System Usability Scale (SUS) questionnaire administered after the intervention.
 Expected outcomes include improved access to localized health information, enhanced health worker–community communication, strengthened patient follow‑up, and increased health‑seeking behaviors despite low connectivity. Abot‑Kamay supports nursing informatics by enabling systematic data collection, evidence‑based interventions, and continuous community monitoring, ultimately improving patient outcomes in underserved areas.</p>
       </div>
@@ -546,13 +562,13 @@ Expected outcomes include improved access to localized health information, enhan
     <div id="education" class="tab-content">
       <div class="card">
         <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-          <button class="btn-outline edu-cat-btn active" data-edu="communicable" style="flex:1 1 auto;">Common Communicable Diseases</button>
-          <button class="btn-outline edu-cat-btn" data-edu="noncommunicable" style="flex:1 1 auto;">Common Non‑Communicable Diseases</button>
-          <button class="btn-outline edu-cat-btn" data-edu="dohprograms" style="flex:1 1 auto;">DOH Health Programs</button>
-          <button class="btn-outline edu-cat-btn" data-edu="prepartum" style="flex:1 1 auto;">Prepartum Care</button>
-          <button class="btn-outline edu-cat-btn" data-edu="postpartum" style="flex:1 1 auto;">Postpartum Care</button>
-          <button class="btn-outline edu-cat-btn" data-edu="newborn" style="flex:1 1 auto;">Newborn Care</button>
-          <button class="btn-outline edu-cat-btn" data-edu="infant" style="flex:1 1 auto;">Infant Care</button>
+          <button class="btn-outline edu-cat-btn active" data-edu="communicable" >Communicable Diseases</button>
+          <button class="btn-outline edu-cat-btn" data-edu="noncommunicable">Non‑Communicable Diseases</button>
+          <button class="btn-outline edu-cat-btn" data-edu="dohprograms" >DOH Health Programs</button>
+          <button class="btn-outline edu-cat-btn" data-edu="prepartum" >Prepartum Care</button>
+          <button class="btn-outline edu-cat-btn" data-edu="postpartum" >Postpartum Care</button>
+          <button class="btn-outline edu-cat-btn" data-edu="newborn" >Newborn Care</button>
+          <button class="btn-outline edu-cat-btn" data-edu="infant" >Infant Care</button>
         </div>
       </div>
       <div id="eduCategoryContent" class="card">
@@ -563,79 +579,47 @@ Expected outcomes include improved access to localized health information, enhan
       </div>
     </div>
 
-    <!-- RHU SERVICES TAB -->
-    <div id="rhu" class="tab-content">
+          <div id="rhu" class="tab-content">
+      <!-- Intro card – visible on all sub‑tabs -->
       <div class="card">
         <h2>Barangay RHU Services</h2>
         <p>Ang mga serbisyong pangkalusugan na maaaring makuha sa Rural Health Unit (RHU) ay sumasaklaw sa iba't ibang pangangailangan ng komunidad.</p>
       </div>
-      <div class="card service-category">
-        <h3>Maternal and Child Health Care</h3>
-        <div class="service-description">
-          <h4>Prenatal at Postnatal Care</h4><p>Regular check‑ups, iron/folic acid supplementation, at counseling para sa mga buntis.</p>
-          <h4>Birthing / Maternity Services</h4><p>Normal Spontaneous Delivery (NSD) para sa low‑risk pregnancies at newborn care.</p>
-          <h4>Immunization Services</h4><p>Routine at catch‑up vaccines para sa mga sanggol at bata: <strong>BCG, DPT, Polio, Hep B, MMR</strong>.</p>
-          <h4>Under‑five Clinics</h4><p>Pagsubaybay sa paglaki at nutrisyon ng mga bata, kasama ang <strong>Operation Timbang</strong>.</p>
-          <h4>Newborn Screening & Hearing Tests</h4><p>Maagang pagtuklas ng mga congenital conditions.</p>
-        </div>
-      </div>
-      <div class="card service-category">
-        <h3>Reproductive Health and Family Planning</h3>
-        <div class="service-description">
-          <h4>Family Planning Counseling</h4><p>Counseling sa natural at artificial na pamamaraan.</p>
-          <h4>Contraceptive Distribution</h4><p>Pagbibigay ng pills, condoms, injectables, at IUD insertion.</p>
-          <h4>Pre‑marriage Counseling</h4><p>Mandatory counseling para sa mga aplikante ng marriage license.</p>
-        </div>
-      </div>
-      <div class="card service-category">
-        <h3>Laboratory and Diagnostic Services (Basic)</h3>
-        <div class="service-description">
-          <h4>Routine Lab Tests</h4><p>Complete Blood Count (CBC), urinalysis, fecalysis, at pregnancy tests.</p>
-          <h4>Specialized Screening</h4><p>Blood typing, sputum smear microscopy (para sa TB), malaria testing, at HIV/STI screening.</p>
-          <h4>Blood Chemistry</h4><p>Fasting blood sugar (FBS), cholesterol, at creatinine tests.</p>
-        </div>
-      </div>
-      <div class="card service-category">
-        <h3>Communicable / Non‑Communicable Disease Control</h3>
-        <div class="service-description">
-          <h4>National Tuberculosis Control Program (TB‑DOTS)</h4><p>Identification, diagnosis, at directly observed treatment.</p>
-          <h4>Lifestyle Diseases</h4><p>Screening at management ng Hypertension (HPN) at Diabetes Mellitus (DM).</p>
-          <h4>Rabies Prevention & Control</h4><p>Anti‑rabies vaccines (sa ilalim ng rabies control program).</p>
-        </div>
-      </div>
-      <div class="card service-category">
-        <h3>Environmental Health and Sanitation</h3>
-        <div class="service-description"><p>Inspeksyon ng food establishments, water supply testing, at pag‑iisyu ng sanitary permits.</p></div>
-      </div>
-      <div class="card service-category">
-        <h3>Dental Health Services</h3>
-        <div class="service-description"><p>Dental consultation, oral health education, tooth extraction, filling, at gum treatment.</p></div>
-      </div>
-      <div class="card service-category">
-        <h3>Iba Pang Mahahalagang Serbisyo</h3>
-        <div class="service-description">
-          <h4>Minor Surgical Cases</h4><p>Circumcision ("Operation Tuli"), suturing ng superficial lacerations, excision ng small cysts.</p>
-          <h4>Pharmacy Services (Medisina para sa Bayan)</h4><p>Libreng gamot para sa mga karaniwang karamdaman.</p>
-          <h4>Medical Certifications</h4><p>Pag‑iisyu ng sertipiko para sa employment, school admission, o PWD/senior citizen benefits.</p>
-          <h4>Mental Health Services</h4><p>Consultations at mental health education.</p>
-          <h4>Medical Outreach Services</h4><p>Mobile clinics at medical missions sa mga barangay.</p>
+
+      <!-- Sub‑tab Navigation (scrolls horizontally if needed) -->
+      <div class="card" style="padding: 8px;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <button class="btn-outline rhu-subtab active" data-rhu-tab="maternal">Maternal &amp; Child</button>
+          <button class="btn-outline rhu-subtab" data-rhu-tab="reproductive">Reproductive Health</button>
+          <button class="btn-outline rhu-subtab" data-rhu-tab="lab">Lab &amp; Diagnostics</button>
+          <button class="btn-outline rhu-subtab" data-rhu-tab="disease">Disease Control</button>
+          <button class="btn-outline rhu-subtab" data-rhu-tab="environment">Environment &amp; Sanitation</button>
+          <button class="btn-outline rhu-subtab" data-rhu-tab="dental">Dental</button>
+          <button class="btn-outline rhu-subtab" data-rhu-tab="other">Iba Pang Serbisyo</button>
+          <button class="btn-outline rhu-subtab" data-rhu-tab="medicine">Medicine Inventory</button>
         </div>
       </div>
 
-      <div id="inventoryWarningCard" class="card" style="display: none; background: #ffeaea; border: 2px solid #cc0000;">
-        <h3 style="color: #cc0000; margin-top:0;">Babala: Hindi pa na-update ang imbentaryo!</h3>
-        <p style="color: #cc0000; font-weight: bold;">Ang listahan ng gamot ay mahigit 30 araw nang hindi nai-edit. Mangyaring i-check at i-update agad ang stock.</p>
-      </div>
+      <!-- Dynamic RHU content pane (all sub‑tabs except Medicine) -->
+      <div id="rhu-dynamic" class="rhu-pane" style="display:block;"></div>
 
-      <div id="lowStockSummary" class="low-stock-summary" style="display: none;"></div>
+      <!-- PANE 8: Medicine Inventory (all original IDs unchanged) -->
+      <div id="rhu-medicine" class="rhu-pane" style="display:none;">
+        <div id="inventoryWarningCard" class="card" style="display: none; background: #ffeaea; border: 2px solid #cc0000;">
+          <h3 style="color: #cc0000; margin-top:0;">Babala: Hindi pa na-update ang imbentaryo!</h3>
+          <p style="color: #cc0000; font-weight: bold;">Ang listahan ng gamot ay mahigit 30 araw nang hindi nai-edit. Mangyaring i-check at i-update agad ang stock.</p>
+        </div>
 
-      <div class="card">
-        <h3>Medicine Inventory</h3>
-        <div id="medicineContainer"><p>Loading inventory...</p></div>
-        <div style="margin-top:12px; display: flex; align-items: center; gap: 8px;">
-          <span style="font-size:0.8rem;" id="inventoryUpdatedLabel">Huling update:</span>
-          <span style="font-size:0.8rem; font-weight:500;" id="inventoryUpdatedDate"></span>
-          <button class="btn-outline" id="editInventoryDateBtn" style="display: none; padding: 4px 10px; width: auto; font-size:0.75rem;">Edit</button>
+        <div id="lowStockSummary" class="low-stock-summary" style="display: none;"></div>
+
+        <div class="card">
+          <h3>Medicine Inventory</h3>
+          <div id="medicineContainer"><p>Loading inventory...</p></div>
+          <div style="margin-top:12px; display: flex; align-items: center; gap: 8px;">
+            <span style="font-size:0.8rem;" id="inventoryUpdatedLabel">Huling update:</span>
+            <span style="font-size:0.8rem; font-weight:500;" id="inventoryUpdatedDate"></span>
+            <button class="btn-outline" id="editInventoryDateBtn" style="display: none; padding: 4px 10px; width: auto; font-size:0.75rem;">Edit</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1737,7 +1721,23 @@ Expected outcomes include improved access to localized health information, enhan
         resetInactivityTimer();
       });
     });
+    // Sub‑tabs inside RHU Services
+    document.querySelectorAll('.rhu-subtab').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.rhu-subtab').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const tabId = btn.getAttribute('data-rhu-tab');
 
+        document.querySelectorAll('.rhu-pane').forEach(pane => pane.style.display = 'none');
+
+        if (tabId === 'medicine') {
+          document.getElementById('rhu-medicine').style.display = 'block';
+        } else {
+          document.getElementById('rhu-dynamic').style.display = 'block';
+          renderRHUPane(tabId);
+        }
+      });
+    });
     // ---------- PATIENT EDIT/DELETE (async saves) ----------
     document.getElementById('patientListContainer').addEventListener('click', async (e) => {
       const editBtn = e.target.closest('.edit-patient-btn');
@@ -2368,18 +2368,80 @@ Expected outcomes include improved access to localized health information, enhan
 
     // ---------- OFFLINE DATA LOADING ----------
     function loadCachedOrFallback() {
-      // Medicine inventory (unchanged)
-      const cachedMeds = localStorage.getItem('abotKamayMedicine');
-      const meds = cachedMeds ? JSON.parse(cachedMeds) : DEFAULT_OFFLINE_DATA.medicineInventory;
-      renderMedicineInventory(meds);
-      if (!localStorage.getItem(INVENTORY_LAST_UPDATED_KEY)) {
-        localStorage.setItem(INVENTORY_LAST_UPDATED_KEY, DEFAULT_OFFLINE_DATA.lastUpdated);
+      // ---------- MEDICINE INVENTORY (fetch & override) ----------
+      async function fetchAndOverrideMedicine() {
+        try {
+          const response = await fetch(MEDICINE_JSON_URL);
+          if (!response.ok) throw new Error('Fetch failed');
+          const data = await response.json();
+          if (data.inventory && Array.isArray(data.inventory)) {
+            localStorage.setItem('abotKamayMedicine', JSON.stringify(data.inventory));
+            if (data.lastUpdated) {
+              localStorage.setItem(INVENTORY_LAST_UPDATED_KEY, data.lastUpdated);
+            }
+            renderMedicineInventory(data.inventory);
+          }
+        } catch (err) {
+          console.warn('Medicine fetch failed, using local cache.');
+        }
       }
 
-      // ---------- Health Modules with Live Fetch & Offline Cache ----------
+      // On first load, if online, override local inventory with server version
+      if (navigator.onLine) {
+        fetchAndOverrideMedicine().then(() => {
+          // fallback – if no data at all, use default
+          if (!localStorage.getItem('abotKamayMedicine')) {
+            localStorage.setItem('abotKamayMedicine', JSON.stringify(DEFAULT_OFFLINE_DATA.medicineInventory));
+            renderMedicineInventory(DEFAULT_OFFLINE_DATA.medicineInventory);
+          }
+        });
+      } else {
+        // Offline: load whatever is locally stored
+        const localMeds = localStorage.getItem('abotKamayMedicine');
+        if (localMeds) {
+          renderMedicineInventory(JSON.parse(localMeds));
+        } else {
+          localStorage.setItem('abotKamayMedicine', JSON.stringify(DEFAULT_OFFLINE_DATA.medicineInventory));
+          renderMedicineInventory(DEFAULT_OFFLINE_DATA.medicineInventory);
+        }
+      }
+
+      // ---------- RHU SERVICES (fetch & cache) ----------
+      async function fetchAndCacheRHU() {
+        try {
+          const response = await fetch(RHU_SERVICES_JSON_URL);
+          if (!response.ok) throw new Error('Fetch failed');
+          const data = await response.json();
+          localStorage.setItem(RHU_SERVICES_CACHE_KEY, JSON.stringify(data));
+          return data;
+        } catch (err) {
+          console.warn('RHU services fetch failed, using cache.');
+          return null;
+        }
+      }
+
+      (async function initRHU() {
+        let data = null;
+        if (navigator.onLine) {
+          data = await fetchAndCacheRHU();
+        }
+        if (!data) {
+          const cached = localStorage.getItem(RHU_SERVICES_CACHE_KEY);
+          data = cached ? JSON.parse(cached) : null;
+        }
+        if (data) {
+          rhuData = data;
+          const activeBtn = document.querySelector('.rhu-subtab.active');
+          if (activeBtn) {
+            const tabId = activeBtn.getAttribute('data-rhu-tab');
+            if (tabId !== 'medicine') renderRHUPane(tabId);
+          }
+        }
+      })();
+
+      // ---------- HEALTH MODULES (unchanged) ----------
       const cachedModules = localStorage.getItem('abotKamayHealthModules');
 
-      // Helper to fetch the JSON from GitHub and cache it
       async function fetchAndCacheModules() {
         try {
           const response = await fetch(HEALTH_MODULES_JSON_URL);
@@ -2393,39 +2455,27 @@ Expected outcomes include improved access to localized health information, enhan
         }
       }
 
-      // Asynchronous initialisation
       (async function initModules() {
         let modules = null;
-
-        // If online, try to update the cache first
         if (navigator.onLine) {
           const fresh = await fetchAndCacheModules();
           if (fresh) modules = fresh;
         }
-
-        // If fetch didn't work (offline or failed), load from cache, then fallback to hardcoded default
         if (!modules) {
           const cached = localStorage.getItem('abotKamayHealthModules');
           modules = cached ? JSON.parse(cached) : null;
         }
-        if (!modules) modules = DEFAULT_OFFLINE_DATA.healthModules;   // ultimate fallback
+        if (!modules) modules = DEFAULT_OFFLINE_DATA.healthModules;
 
-        // Update intro text (if the element exists)
         const edIntroEl = document.getElementById('edIntro');
         if (edIntroEl) {
           const activeCat = document.querySelector('.edu-cat-btn.active')?.getAttribute('data-edu') || 'communicable';
           edIntroEl.textContent = modules[activeCat]?.intro || '';
         }
-
-        // Render the default active category
         const activeCat = document.querySelector('.edu-cat-btn.active')?.getAttribute('data-edu');
         if (activeCat) renderCategoryContent(activeCat, modules);
-
-        // Show last-updated date from the JSON's timestamp
         const ts = modules.lastUpdated || DEFAULT_OFFLINE_DATA.lastUpdated;
         updateLastUpdatedDisplay(ts);
-
-        // Store globally for other functions to use (optional but clean)
         window.liveHealthModules = modules;
       })();
     }
@@ -2436,6 +2486,23 @@ Expected outcomes include improved access to localized health information, enhan
       if (!cat) return;
       let html = `<h3>${cat.title}</h3><p style="margin-bottom:16px;">${cat.intro}</p>`;
       cat.sections.forEach(s => html += `<div style="margin-bottom:20px;"><h4 style="color:#ffffff;">${s.heading}</h4><p>${s.content}</p></div>`);
+      container.innerHTML = html;
+    }
+   
+    function renderRHUPane(catKey) {
+      const container = document.getElementById('rhu-dynamic');
+      if (!container || !rhuData || !rhuData.categories) return;
+
+      const cat = rhuData.categories[catKey];
+      if (!cat) return;
+
+      let html = `<div class="card service-category">
+        <h3>${cat.title}</h3>
+        <div class="service-description">`;
+      cat.services.forEach(s => {
+        html += `<h4>${s.name}</h4><p>${s.description}</p>`;
+      });
+      html += `</div></div>`;
       container.innerHTML = html;
     }
 
@@ -2620,6 +2687,10 @@ Expected outcomes include improved access to localized health information, enhan
 
     const CAROUSEL_JSON_URL = 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/deepseek_json_20260502_1fb337.json';
     const HEALTH_MODULES_JSON_URL = 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/health-modules.json';  
+    const MEDICINE_JSON_URL = 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicine-inventory.json';  // replace with your raw URL
+    const RHU_SERVICES_JSON_URL = 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rhu-services.json';    // replace with your raw URL
+    const RHU_SERVICES_CACHE_KEY = 'abotKamayRHUServices';
+    let rhuData = null;
     fetch(CAROUSEL_JSON_URL)
       .then(res => res.json())
       .then(data => {
@@ -2630,6 +2701,47 @@ Expected outcomes include improved access to localized health information, enhan
         }
       })
       .catch(() => buildCarousel(CAROUSEL_DEFAULT));
+
+      window.addEventListener('online', () => {
+      // Refresh medicine from server
+      async function refreshMedicine() {
+        try {
+          const response = await fetch(MEDICINE_JSON_URL);
+          if (!response.ok) throw new Error('Fetch failed');
+          const data = await response.json();
+          if (data.inventory && Array.isArray(data.inventory)) {
+            localStorage.setItem('abotKamayMedicine', JSON.stringify(data.inventory));
+            if (data.lastUpdated) {
+              localStorage.setItem(INVENTORY_LAST_UPDATED_KEY, data.lastUpdated);
+            }
+            renderMedicineInventory(data.inventory);
+          }
+        } catch (err) {
+          console.warn('Online medicine refresh failed.');
+        }
+      }
+
+      // Refresh RHU services
+      async function refreshRHU() {
+        try {
+          const response = await fetch(RHU_SERVICES_JSON_URL);
+          if (!response.ok) throw new Error('Fetch failed');
+          const data = await response.json();
+          localStorage.setItem(RHU_SERVICES_CACHE_KEY, JSON.stringify(data));
+          rhuData = data;
+          const activeBtn = document.querySelector('.rhu-subtab.active');
+          if (activeBtn) {
+            const tabId = activeBtn.getAttribute('data-rhu-tab');
+            if (tabId !== 'medicine') renderRHUPane(tabId);
+          }
+        } catch (err) {
+          console.warn('Online RHU refresh failed.');
+        }
+      }
+
+      refreshMedicine();
+      refreshRHU();
+    });
 
     // ---------- INIT (with session token verification) ----------
     const savedSession = localStorage.getItem(CURRENT_USER_KEY);

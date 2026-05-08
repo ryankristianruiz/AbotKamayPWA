@@ -1065,6 +1065,142 @@
       line-height: 1.6;
       margin-top: 4px;
     }
+
+        /* ── Hero section (TB detail) ── */
+    .detail-hero {
+      position: relative;
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, #380070 0%, #6500B8 60%, #8A00DD 100%);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .hero-bacteria {
+      position: absolute;
+      left: -28px;
+      bottom: 0;
+      width: 210px;
+      height: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.55));
+      z-index: 2;
+    }
+    .hero-text {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      text-align: right;
+      z-index: 3;
+    }
+    .hero-title {
+      font-size: 30px;
+      font-weight: 900;
+      color: white;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .hero-subtitle {
+      font-size: 13px;
+      color: rgba(255,255,255,0.72);
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+    .description-card {
+      margin-top: 12px;
+      padding: 14px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.09);
+      backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 16px;
+      display: none;
+    }
+
+    /* ── FAQ section ── */
+    .faq-row {
+      flex-direction: column;
+      align-items: stretch;
+      padding: 12px 14px;
+      cursor: default;
+    }
+    .faq-top-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .faq-answer {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      font-size: 12px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.65;
+      display: none;
+    }
+    .faq-answer.open {
+      display: block;
+    }
+
+    /* ── Info grid labels ── */
+    .info-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      text-align: right;
+      margin-bottom: 10px;
+      padding-right: 4px;
+    }
+
+    /* ── Grid card sub‑detail view ── */
+    .sub-detail-view {
+      display: none;
+      margin-top: 10px;
+    }
+    .sub-hero {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      height: 200px;
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 16px;
+    }
+    .sub-hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(30,0,60,0.1) 0%, rgba(10,0,40,0.9) 100%);
+      border-radius: 20px;
+    }
+    .sub-hero-title {
+      position: absolute;
+      bottom: 16px;
+      left: 16px;
+      font-size: 24px;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+    .sub-content {
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 16px;
+      padding: 16px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.7;
+    }
+
   </style>
 </head>
 <body>
@@ -3308,62 +3444,154 @@ Expected outcomes include improved access to localized health information, enhan
       }
 
       // ── DISEASE DETAIL LAYOUT (hero image + FAQ + info grid) ──
-      if (topic.heroImage && topic.gridCards) {
-        let faqHtml = '';
-        if (topic.faqs) {
-          topic.faqs.forEach(q => {
-            faqHtml += `<div class="faq-row glass-card">
-              <span>${q.question}</span>
-              <button class="pill-btn">See more. <span class="arrow-icon">→</span></button>
-            </div>`;
-          });
-        }
+            if (topic.heroImage && topic.gridCards) {
+        // ── TB DETAIL PAGE (hero image + grid cards) ──
 
+        // 1) Build FAQ rows with hidden answers
+        let faqHtml = '';
+        topic.faqs.forEach((q, idx) => {
+          faqHtml += `
+            <div class="faq-row glass-card">
+              <div class="faq-top-row">
+                <span class="faq-question">${q.question}</span>
+                <button class="pill-btn faq-toggle-btn" data-faq-index="${idx}">
+                  See more.
+                  <span class="arrow-circle">→</span>
+                </button>
+              </div>
+              <div class="faq-answer" id="faqAnswer${idx}">
+                <p>Mahalagang impormasyon tungkol sa tanong na ito.</p>
+              </div>
+            </div>`;
+        });
+
+        // 2) Build the 6‑card grid
         let gridHtml = '<div class="info-grid">';
-        topic.gridCards.forEach(card => {
-          gridHtml += `<div class="grid-card" style="background-image:url('${card.image}');">
-            <div class="grid-card-title">${card.title.replace(/\n/g, '<br>')}</div>
-            <button class="pill-btn mini">See more. <span class="arrow-icon">→</span></button>
-          </div>`;
+        topic.gridCards.forEach((card, idx) => {
+          gridHtml += `
+            <div class="grid-card" style="background-image:url('${card.image}');" data-card-index="${idx}">
+              <div class="grid-card-overlay"></div>
+              <div class="grid-card-body">
+                <h3 class="grid-card-title">${card.title.replace(/\n/g, '<br>')}</h3>
+                <button class="pill-btn mini">
+                  See more.
+                  <span class="arrow-circle">→</span>
+                </button>
+              </div>
+            </div>`;
         });
         gridHtml += '</div>';
 
-        // Back button label: go to parent overview if opened from one, else go to main
-        const backLabel = parentKey ? '← Bumalik sa Communicable Diseases' : '← Bumalik sa mga Paksa';
-
         const detailHtml = `
-          <button class="back-button" id="backToMainBtn">${backLabel}</button>
+          <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
+
+          <!-- HERO SECTION -->
           <div class="detail-hero">
-            <img src="${topic.heroImage}" class="hero-bacteria" alt="">
-            <div class="hero-right">
-              <h1>${topic.title}</h1>
-              <p>${topic.subtitle || ''}</p>
-              <button class="pill-btn">Description <span class="arrow-icon">→</span></button>
+            <img src="${topic.heroImage}" class="hero-bacteria" alt="TB bacteria">
+            <div class="hero-text">
+              <h1 class="hero-title">${topic.title}</h1>
+              <p class="hero-subtitle">${topic.subtitle || ''}</p>
+              <button class="pill-btn" id="descriptionToggleBtn">
+                Description
+                <span class="arrow-circle">→</span>
+              </button>
             </div>
           </div>
+
+          <!-- Description card (hidden initially) -->
+          <div class="description-card" id="descriptionCard">
+            Ang Tuberculosis (TB) ay isang nakakahawang sakit na dulot ng bakteryang <em>Mycobacterium tuberculosis</em>.
+            Karaniwang umaatake ito sa baga ngunit maaari ring kumalat sa ibang bahagi ng katawan.
+            Ang sakit ay nakukuha sa pamamagitan ng hangin kapag ang isang taong may aktibong TB ay umuubo o bumabahing.
+          </div>
+
+          <!-- FAQ SECTION -->
           <div class="faq-section">
-            <h2>FAQ.</h2>
+            <h2 class="faq-heading" style="font-size:17px; font-weight:700; color:white; margin-bottom:12px;">FAQ.</h2>
             ${faqHtml}
           </div>
+
+          <!-- IMPORMASYON GRID SECTION -->
           <div class="info-section">
-            <h3 class="info-label">IMPORMASYON</h3>
+            <p class="info-label">IMPORMASYON</p>
             ${gridHtml}
           </div>
+
+          <!-- Sub‑detail view (hidden) -->
+          <div class="sub-detail-view" id="subDetailView"></div>
         `;
 
         detailView.innerHTML = detailHtml;
         mainView.classList.add('hidden-view');
         detailView.style.display = 'block';
 
+        // ── Back button ──
         document.getElementById('backToMainBtn').addEventListener('click', () => {
           if (parentKey) {
-            // Go back to the overview page (e.g. Communicable Diseases)
             showDetailedTopic(parentKey);
           } else {
             mainView.classList.remove('hidden-view');
             detailView.style.display = 'none';
             if (categoryContentDiv) categoryContentDiv.style.display = 'block';
           }
+        });
+
+        // ── Description toggle ──
+        const descCard = document.getElementById('descriptionCard');
+        const descToggle = document.getElementById('descriptionToggleBtn');
+        if (descToggle && descCard) {
+          descToggle.addEventListener('click', () => {
+            descCard.style.display = descCard.style.display === 'block' ? 'none' : 'block';
+          });
+        }
+
+        // ── FAQ accordion ──
+        document.querySelectorAll('.faq-toggle-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const index = btn.getAttribute('data-faq-index');
+            const answer = document.getElementById('faqAnswer' + index);
+            const arrow = btn.querySelector('.arrow-circle');
+            if (answer.classList.contains('open')) {
+              answer.classList.remove('open');
+              arrow.textContent = '→';
+            } else {
+              answer.classList.add('open');
+              arrow.textContent = '↑';
+            }
+          });
+        });
+
+        // ── Grid card click → sub‑detail view ──
+        document.querySelectorAll('.grid-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const idx = card.getAttribute('data-card-index');
+            const gridCardData = topic.gridCards[idx];
+
+            const subDetail = document.getElementById('subDetailView');
+            subDetail.innerHTML = `
+              <button class="back-button" id="subBackBtn">← Bumalik</button>
+              <div class="sub-hero" style="background-image:url('${gridCardData.image}')">
+                <div class="sub-hero-overlay"></div>
+                <h1 class="sub-hero-title">${gridCardData.title.replace(/\n/g, '<br>')}</h1>
+              </div>
+              <div class="sub-content">
+                <p>Karagdagang impormasyon tungkol sa <strong>${gridCardData.title.replace(/\n/g, ' ')}</strong>.</p>
+              </div>
+            `;
+            subDetail.style.display = 'block';
+            // Hide main sections while sub‑detail is open
+            document.querySelector('.detail-hero').style.display = 'none';
+            document.querySelector('.faq-section').style.display = 'none';
+            document.querySelector('.info-section').style.display = 'none';
+            document.getElementById('descriptionCard').style.display = 'none';
+            document.getElementById('subBackBtn').addEventListener('click', () => {
+              subDetail.style.display = 'none';
+              document.querySelector('.detail-hero').style.display = '';
+              document.querySelector('.faq-section').style.display = '';
+              document.querySelector('.info-section').style.display = '';
+              // Keep description card hidden unless it was open (optional)
+            });
+          });
         });
 
       } else {

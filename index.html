@@ -3192,11 +3192,28 @@ Expected outcomes include improved access to localized health information, enhan
       // ── OVERVIEW LAYOUT (e.g. Communicable Diseases index page) ──
 // ── OVERVIEW LAYOUT (Communicable Diseases) ──
       if (topic.isOverview) {
-        const spreadHtml = topic.spreadModes.map(m => `
-          <div class="spread-item">
-            <span class="spread-icon">${m.icon}</span>
-            <span>${m.label.replace(/\n/g,'<br>')}</span>
-          </div>`).join('');
+        const spreadHtml = `
+          <ul style="list-style: none; padding: 0; margin: 0 0 24px 0;">
+            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-weight: 600; font-size: 1.05rem;">
+              💨 Hangin (Airborne Transmission)
+            </li>
+            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-weight: 600; font-size: 1.05rem;">
+              🤝 Direktang Kontak (Direct Contact)
+            </li>
+            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-weight: 600; font-size: 1.05rem;">
+              🦟 Insektong Tagapagsalat (Vector-borne)
+            </li>
+            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-weight: 600; font-size: 1.05rem;">
+              💧 Tubig at Pagkain (Water and Food)
+            </li>
+            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-weight: 600; font-size: 1.05rem;">
+              🩸 Dugo at Body Fluids (Blood and Body Fluids)
+            </li>
+            <li style="padding: 12px 0; font-weight: 600; font-size: 1.05rem;">
+              🐾 Hayop (Zoonotic)
+            </li>
+          </ul>
+        `;
 
         const diseaseCardsHtml = topic.diseases.map(d => `
           <div class="disease-nav-card" 
@@ -3214,12 +3231,10 @@ Expected outcomes include improved access to localized health information, enhan
         const detailHtml = `
           <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
           
-          <!-- Glass Card with BIG Image + Description -->
+          <!-- Glass Card with Image + Description -->
           <div class="card" style="display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; padding: 26px;">
-            
-            <!-- BIG Image (you can easily change this) -->
             <div style="flex: 1.15; min-width: 240px; max-width: 400px;">
-              <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/communicable-real.jpg" 
+              <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/communicable.jpg" 
                   alt="Communicable Diseases" 
                   style="width: 100%; 
                           height: 340px; 
@@ -3229,7 +3244,6 @@ Expected outcomes include improved access to localized health information, enhan
                           box-shadow: 0 10px 30px rgba(0,0,0,0.45);">
             </div>
 
-            <!-- Text Content -->
             <div style="flex: 1.85; min-width: 300px;">
               <div class="hero-tag">${topic.tagline}</div>
               <h1 style="margin: 12px 0 18px 0; font-size: 2.1rem;">${topic.title}</h1>
@@ -3240,7 +3254,7 @@ Expected outcomes include improved access to localized health information, enhan
           </div>
 
           <p class="section-label-left">Paraan ng Pagkalat</p>
-          <div class="spread-row">${spreadHtml}</div>
+          ${spreadHtml}
           
           <p class="section-label-left">Mga Sakit</p>
           <div class="disease-nav-grid">${diseaseCardsHtml}</div>

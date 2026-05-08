@@ -1,6 +1,6 @@
-<!DOCTYPE html>
-<html lang="tl">
-<head>
+<!DOCTYPE html> 
+<html lang="tl"> 
+<head> 
   <meta charset="UTF-8">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
@@ -931,6 +931,138 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
+    }
+
+    /* ---------- COMMUNICABLE OVERVIEW PAGE ---------- */
+    .comm-overview-hero {
+      background: linear-gradient(135deg, #4B0082 0%, #7B00CC 100%);
+      border-radius: 20px;
+      padding: 24px 20px;
+      margin-bottom: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .comm-overview-hero::before {
+      content: '🦠';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 72px;
+      opacity: 0.18;
+    }
+    .comm-overview-hero h1 {
+      font-size: 22px;
+      font-weight: 900;
+      color: white;
+      margin-bottom: 4px;
+    }
+    .comm-overview-hero .hero-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.35);
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 12px;
+      color: white;
+      margin-bottom: 12px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .comm-overview-hero p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.82);
+      line-height: 1.6;
+      max-width: 280px;
+    }
+    .spread-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+    .spread-item {
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 12px 8px;
+      text-align: center;
+    }
+    .spread-item .spread-icon {
+      font-size: 22px;
+      display: block;
+      margin-bottom: 5px;
+    }
+    .spread-item span:last-child {
+      font-size: 10px;
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+      line-height: 1.3;
+      display: block;
+    }
+    .section-label-left {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+    .disease-nav-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .disease-nav-card {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      height: 150px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .disease-nav-card:hover { transform: scale(1.02); }
+    .disease-nav-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 30%, rgba(20,0,50,0.85));
+    }
+    .disease-nav-card-body {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px;
+      z-index: 2;
+    }
+    .disease-nav-card-body .d-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      line-height: 1.2;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      margin-bottom: 6px;
+    }
+    .disease-nav-card-body .d-sub {
+      font-size: 10px;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 6px;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+    }
+    .tip-box {
+      background: rgba(155,48,255,0.25);
+      border: 1px solid rgba(155,48,255,0.4);
+      border-radius: 16px;
+      padding: 14px;
+      font-size: 12px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+      margin-top: 4px;
     }
   </style>
 </head>
@@ -2869,10 +3001,49 @@ Expected outcomes include improved access to localized health information, enhan
 
     // ---------- NEW HEALTH EDUCATION SYSTEM ----------
     const detailedData = {
-      communicable: {
+    communicable: {
+      isOverview: true,
+      title: "Communicable Diseases",
+      tagline: "Mga Nakakahawang Sakit",
+      description: "Ang communicable diseases o nakakahawang sakit ay mga karamdamang maaaring maipasa mula sa isang tao patungo sa isa pa sa pamamagitan ng mga mikrobyo tulad ng bacteria, virus, parasites, o fungi. Ang mga sakit na ito ay kumakalat sa pamamagitan ng iba't ibang paraan.",
+      spreadModes: [
+        { icon: "💨", label: "Hangin\n(Airborne)" },
+        { icon: "🤝", label: "Direktang\nKontak" },
+        { icon: "🦟", label: "Insektong\nTagapagsalat" },
+        { icon: "💧", label: "Tubig at\nPagkain" },
+        { icon: "🩸", label: "Dugo at\nFluids" },
+        { icon: "🐾", label: "Hayop\n(Zoonotic)" }
+      ],
+      diseases: [
+        {
+          key: "tb",
+          title: "Tuberculosis",
+          subtitle: "Bacterial · Nakukuha sa hangin",
+          image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/tuberculosis-tb-disease.webp"
+        },
+        {
+          key: "dengue",
+          title: "Dengue Fever",
+          subtitle: "Viral · Dala ng lamok",
+          image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue.jpg"
+        },
+        {
+          key: "influenza",
+          title: "Influenza",
+          subtitle: "Viral · Trangkaso",
+          image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenza.jpg"
+        },
+        {
+          key: "covid",
+          title: "COVID-19",
+          subtitle: "Coronavirus · Respiratory",
+          image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/covid.jpg"
+        }
+      ]
+    },
+      tb: {
         title: "TUBERCULOSIS",
         subtitle: "Communicable Disease",
-        hero: "Ang mga sakit na ito ay kumakalat sa pamamagitan ng virus, bacteria, o parasites. Alamin ang tungkol sa Tuberculosis, Dengue, at iba pa.",
         heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/TB-Bacteria-1.jpg",
         faqs: [
           { question: "Ano ang <strong>causative agent?</strong>" },
@@ -2888,9 +3059,69 @@ Expected outcomes include improved access to localized health information, enhan
           { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg" }
         ],
         sections: [
-          { heading: "Tuberculosis (TB) - Sakit sa Bagà", content: "<strong>Sintomas:</strong> Ubo >2 linggo, lagnat sa hapon, pagpapawis sa gabi, pagbaba ng timbang.<br><strong>Paano nakukuha:</strong> Sa hangin sa pamamagitan ng pag-ubo o pagbahin.<br><strong>Paggamot:</strong> LIBRENG DOTS therapy sa RHU (6-9 na buwan).<br><strong>Prevention:</strong> BCG vaccine sa sanggol, magbukas ng bintana, iwasan ang siksikan." },
-          { heading: "Dengue Fever", content: "Dala ng Aedes aegypti. <strong>Sintomas:</strong> Biglang lagnat, sakit ng kalamnan, pantal.<br><strong>4S strategy:</strong> Search and destroy (puksain ang lamok), Self-protection (kulambo), Seek early consultation, Say no to fogging kung walang outbreak." },
-          { heading: "Influenza (Trangkaso)", content: "Lagnat, sipon, ubo, panghihina. Bakuna taun-taon para sa matatanda at bata. Maghugas ng kamay." },
+          { heading: "Tuberculosis (TB) - Sakit sa Bagà", content: "<strong>Sintomas:</strong> Ubo >2 linggo, lagnat sa hapon, pagpapawis sa gabi, pagbaba ng timbang.<br><strong>Paano nakukuha:</strong> Sa hangin sa pamamagitan ng pag-ubo o pagbahin.<br><strong>Paggamot:</strong> LIBRENG DOTS therapy sa RHU (6-9 na buwan).<br><strong>Prevention:</strong> BCG vaccine sa sanggol, magbukas ng bintana, iwasan ang siksikan." }
+        ]
+      },
+      dengue: {
+        title: "DENGUE FEVER",
+        subtitle: "Communicable Disease",
+        heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malnutrition.jpg",
+        faqs: [
+          { question: "Ano ang <strong>causative agent?</strong>" },
+          { question: "Anu-ano ang <strong>mga sintomas?</strong>" },
+          { question: "Paano <strong>maiwasan</strong> ang Dengue?" }
+        ],
+        gridCards: [
+          { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/cough.jpg" },
+          { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malnutrition.jpg" },
+          { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/lung-xray.jpg" },
+          { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.jpg" },
+          { title: "4S Strategy", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg" },
+          { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg" }
+        ],
+        sections: [
+          { heading: "Dengue Fever", content: "Dala ng Aedes aegypti. <strong>Sintomas:</strong> Biglang lagnat, sakit ng kalamnan, pantal.<br><strong>4S strategy:</strong> Search and destroy (puksain ang lamok), Self-protection (kulambo), Seek early consultation, Say no to fogging kung walang outbreak." }
+        ]
+      },
+      influenza: {
+        title: "INFLUENZA",
+        subtitle: "Communicable Disease · Trangkaso",
+        heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/lung-xray.jpg",
+        faqs: [
+          { question: "Ano ang <strong>causative agent?</strong>" },
+          { question: "Anu-ano ang <strong>mga sintomas?</strong>" },
+          { question: "Mayroon bang <strong>bakuna</strong> para sa Influenza?" }
+        ],
+        gridCards: [
+          { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/cough.jpg" },
+          { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malnutrition.jpg" },
+          { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/lung-xray.jpg" },
+          { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.jpg" },
+          { title: "Bakuna", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg" },
+          { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg" }
+        ],
+        sections: [
+          { heading: "Influenza (Trangkaso)", content: "Lagnat, sipon, ubo, panghihina. Bakuna taun-taon para sa matatanda at bata. Maghugas ng kamay." }
+        ]
+      },
+      covid: {
+        title: "COVID-19",
+        subtitle: "Communicable Disease · Coronavirus",
+        heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg",
+        faqs: [
+          { question: "Ano ang <strong>causative agent?</strong>" },
+          { question: "Paano <strong>kumakalat</strong> ang COVID-19?" },
+          { question: "Anu-ano ang <strong>mga bakuna</strong> para dito?" }
+        ],
+        gridCards: [
+          { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/cough.jpg" },
+          { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malnutrition.jpg" },
+          { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/lung-xray.jpg" },
+          { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.jpg" },
+          { title: "Mga Bakuna", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg" },
+          { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg" }
+        ],
+        sections: [
           { heading: "COVID-19", content: "Patuloy na paghuhugas ng kamay, pagsusuot ng mask kung may sintomas, at booster vaccines." }
         ]
       },
@@ -2954,11 +3185,93 @@ Expected outcomes include improved access to localized health information, enhan
     const searchInput = document.getElementById('healthSearch');
     const catSlider = document.getElementById('eduCatSlider');
 
-    function showDetailedTopic(categoryKey) {
+    function showDetailedTopic(categoryKey, parentKey) {
       const topic = detailedData[categoryKey];
       if (!topic) return;
 
-      // If the topic has a hero image + grid cards, use the new layout
+      // ── OVERVIEW LAYOUT (e.g. Communicable Diseases index page) ──
+// ── OVERVIEW LAYOUT (Communicable Diseases) ──
+      if (topic.isOverview) {
+        const spreadHtml = topic.spreadModes.map(m => `
+          <div class="spread-item">
+            <span class="spread-icon">${m.icon}</span>
+            <span>${m.label.replace(/\n/g,'<br>')}</span>
+          </div>`).join('');
+
+        const diseaseCardsHtml = topic.diseases.map(d => `
+          <div class="disease-nav-card" 
+              style="background-image: url('${d.image}'); height: 178px;" 
+              data-disease-key="${d.key}">
+            <div class="disease-nav-card-body">
+              <div class="d-title">${d.title}</div>
+              <div class="d-sub">${d.subtitle}</div>
+              <button class="pill-btn mini">
+                Basahin <span class="arrow-icon">→</span>
+              </button>
+            </div>
+          </div>`).join('');
+
+        const detailHtml = `
+          <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
+          
+          <!-- Glass Card with BIG Image + Description -->
+          <div class="card" style="display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; padding: 26px;">
+            
+            <!-- BIG Image (you can easily change this) -->
+            <div style="flex: 1.15; min-width: 240px; max-width: 400px;">
+              <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/communicable-real.jpg" 
+                  alt="Communicable Diseases" 
+                  style="width: 100%; 
+                          height: 340px; 
+                          object-fit: cover;
+                          object-position: center top;
+                          border-radius: 16px; 
+                          box-shadow: 0 10px 30px rgba(0,0,0,0.45);">
+            </div>
+
+            <!-- Text Content -->
+            <div style="flex: 1.85; min-width: 300px;">
+              <div class="hero-tag">${topic.tagline}</div>
+              <h1 style="margin: 12px 0 18px 0; font-size: 2.1rem;">${topic.title}</h1>
+              <p style="font-size: 1.08rem; line-height: 1.78; color: rgba(255,255,255,0.95);">
+                ${topic.description}
+              </p>
+            </div>
+          </div>
+
+          <p class="section-label-left">Paraan ng Pagkalat</p>
+          <div class="spread-row">${spreadHtml}</div>
+          
+          <p class="section-label-left">Mga Sakit</p>
+          <div class="disease-nav-grid">${diseaseCardsHtml}</div>
+          
+          <div class="tip-box">
+            💡 <strong>Tandaan:</strong> Kumonsulta sa inyong RHU o Barangay Health Worker para sa libreng pagsusuri at paggamot.
+          </div>
+        `;
+
+        detailView.innerHTML = detailHtml;
+        mainView.classList.add('hidden-view');
+        detailView.style.display = 'block';
+
+        // Back button
+        document.getElementById('backToMainBtn').addEventListener('click', () => {
+          mainView.classList.remove('hidden-view');
+          detailView.style.display = 'none';
+        });
+
+        // Clickable disease cards
+        detailView.querySelectorAll('.disease-nav-card').forEach(card => {
+          card.addEventListener('click', () => {
+            const diseaseKey = card.getAttribute('data-disease-key');
+            showDetailedTopic(diseaseKey, categoryKey);
+          });
+        });
+
+        return;
+      }
+
+      // ── DISEASE DETAIL LAYOUT (hero image + FAQ + info grid) ──
       if (topic.heroImage && topic.gridCards) {
         let faqHtml = '';
         if (topic.faqs) {
@@ -2979,8 +3292,11 @@ Expected outcomes include improved access to localized health information, enhan
         });
         gridHtml += '</div>';
 
+        // Back button label: go to parent overview if opened from one, else go to main
+        const backLabel = parentKey ? '← Bumalik sa Communicable Diseases' : '← Bumalik sa mga Paksa';
+
         const detailHtml = `
-          <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
+          <button class="back-button" id="backToMainBtn">${backLabel}</button>
           <div class="detail-hero">
             <img src="${topic.heroImage}" class="hero-bacteria" alt="">
             <div class="hero-right">
@@ -3004,9 +3320,14 @@ Expected outcomes include improved access to localized health information, enhan
         detailView.style.display = 'block';
 
         document.getElementById('backToMainBtn').addEventListener('click', () => {
-          mainView.classList.remove('hidden-view');
-          detailView.style.display = 'none';
-          if (categoryContentDiv) categoryContentDiv.style.display = 'block';
+          if (parentKey) {
+            // Go back to the overview page (e.g. Communicable Diseases)
+            showDetailedTopic(parentKey);
+          } else {
+            mainView.classList.remove('hidden-view');
+            detailView.style.display = 'none';
+            if (categoryContentDiv) categoryContentDiv.style.display = 'block';
+          }
         });
 
       } else {
@@ -3019,7 +3340,7 @@ Expected outcomes include improved access to localized health information, enhan
         const detailHtml = `
           <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
           <h2 style="color:#cf90ff; font-size:1.8rem;">${topic.title}</h2>
-          <div class="info-card">${topic.intro}</div>
+          <div class="info-card">${topic.intro || ''}</div>
           ${sectionsHtml}
           <div style="margin-top:20px; padding:12px; background:rgba(129,77,170,0.4); border-radius:20px;"><strong>💡 Tandaan:</strong> Kumonsulta sa inyong RHU o Barangay Health Worker para sa libreng serbisyo.</div>
         `;

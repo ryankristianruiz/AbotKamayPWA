@@ -784,10 +784,158 @@
       margin: 16px 0;
     }
     .hidden-view { display: none; }
+    /* Detail hero */
+    .detail-hero {
+      position: relative;
+      background: linear-gradient(135deg, #4B0082 0%, #7B00CC 100%);
+      padding: 20px;
+      overflow: hidden;
+      height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+    .hero-bacteria {
+      position: absolute;
+      left: -20px;
+      top: 30px;
+      width: 180px;
+      height: 160px;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 32px rgba(0,0,0,0.5));
+    }
+    .hero-right {
+      text-align: right;
+      z-index: 1;
+    }
+    .hero-right h1 {
+      font-size: 28px;
+      font-weight: 900;
+      color: white;
+    }
+    .hero-right p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.75);
+      margin-top: 8px;
+    }
+
+    /* FAQ rows */
+    .faq-section { padding: 16px 0; }
+    .faq-section h2 { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: white; }
+    .faq-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      margin-bottom: 8px;
+      border-radius: 12px;
+      color: white;
+    }
+    .faq-row span { font-size: 13px; }
+    .faq-row strong { font-weight: 700; }
+
+    /* Info grid */
+    .info-label {
+      text-align: right;
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: rgba(255,255,255,0.8);
+      margin: 0 0 10px;
+      text-transform: uppercase;
+    }
+    .info-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .grid-card {
+      position: relative;
+      border-radius: 18px;
+      overflow: hidden;
+      height: 160px;
+      background-size: cover;
+      background-position: center;
+    }
+    .grid-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(transparent 40%, rgba(20,0,50,0.8));
+    }
+    .grid-card-title {
+      position: absolute;
+      bottom: 50px;
+      left: 10px;
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      line-height: 1.2;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+      z-index: 2;
+    }
+    .grid-card .pill-btn.mini {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      padding: 5px 10px;
+      font-size: 10px;
+      z-index: 2;
+    }
+
+    /* Glass card (reuse) */
+    .glass-card {
+      background: rgba(255,255,255,0.09);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: white;
+    }
+
+    /* Pill button & arrow icon */
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: var(--color-pill-bg);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .arrow-icon {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: white;
+      color: #2D0060;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .back-button {
+      background: var(--color-accent);
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
   </style>
 </head>
 <body>
-  <body>
+
     <!-- Background image -->
     <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/landscape.jpg"
         style="position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;"
@@ -804,46 +952,42 @@
         z-index:1; pointer-events:none;"></div>
 
     <div id="appContainer">
-      <!-- … rest of your app (header, tabs, container, etc.) … -->
-    </div>
+      <header class="app-header">
+        <h1>
+          <img src="logo.png" alt="Logo" style="height: 60px; width: auto; vertical-align: middle; margin-right: 4px;">
+          Abot-Kamay
+        </h1>
+        <div style="display: flex; gap: 8px; align-items: center;">
+          <span style="font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif; font-weight: 400; font-size: 1.7rem; color: rgb(255, 255, 255); letter-spacing: 0.03em;">A Health Companion</span>
+          <button class="logout-btn" id="logoutBtn" style="display: none;">Logout</button>
+        </div>
+      </header>
 
-<div id="appContainer">
-  <header class="app-header">
-    <h1>
-      <img src="logo.png" alt="Logo" style="height: 60px; width: auto; vertical-align: middle; margin-right: 4px;">
-      Abot-Kamay
-    </h1>
-    <div style="display: flex; gap: 8px; align-items: center;">
-      <span style="font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif; font-weight: 400; font-size: 1.7rem; color: rgb(255, 255, 255); letter-spacing: 0.03em;">A Health Companion</span>
-      <button class="logout-btn" id="logoutBtn" style="display: none;">Logout</button>
+    <div class="tab-bar">
+      <button class="tab-btn active" data-tab="home">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
+        Home
+      </button>
+      <button class="tab-btn" data-tab="education">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
+        Health Ed
+      </button>
+      <button class="tab-btn" data-tab="rhu">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-3 12h-2v2h-2v-2h-2v-2h2v-2h2v2h2v2zM4 4h16v2H4V4zm0 4h7v2H4V8zm0 10h16v2H4v-2z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
+        RHU Services
+      </button>
+      <button class="tab-btn" data-tab="emergency">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
+        Emergency
+      </button>
+      <button class="tab-btn" data-tab="records" id="recordsTabBtn">Patient Records</button>
+      <button class="tab-btn" data-tab="appointments" id="appointmentsTabBtn">Appointments</button>
+      <button class="tab-btn" data-tab="account">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
+        Account
+      </button>
+      <button class="tab-btn hidden-tab" data-tab="adminLogs" id="adminLogsTabBtn">Logs</button>
     </div>
-  </header>
-
-<div class="tab-bar">
-  <button class="tab-btn active" data-tab="home">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
-    Home
-  </button>
-  <button class="tab-btn" data-tab="education">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82zM12 3L1 9l11 6 9-4.91V17h2V9L12 3z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
-    Health Ed
-  </button>
-  <button class="tab-btn" data-tab="rhu">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-3 12h-2v2h-2v-2h-2v-2h2v-2h2v2h2v2zM4 4h16v2H4V4zm0 4h7v2H4V8zm0 10h16v2H4v-2z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
-    RHU Services
-  </button>
-  <button class="tab-btn" data-tab="emergency">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M6.62 10.79c1.44 2.83 3.76 5.15 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
-    Emergency
-  </button>
-  <button class="tab-btn" data-tab="records" id="recordsTabBtn">Patient Records</button>
-  <button class="tab-btn" data-tab="appointments" id="appointmentsTabBtn">Appointments</button>
-  <button class="tab-btn" data-tab="account">
-    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z'/%3E%3C/svg%3E" alt="" style="height: 20px; width: auto; vertical-align: middle; margin-right: 4px;">
-    Account
-  </button>
-  <button class="tab-btn hidden-tab" data-tab="adminLogs" id="adminLogsTabBtn">Logs</button>
-</div>
 
   <div class="container">
     <!-- HOME TAB -->
@@ -1419,11 +1563,21 @@ Expected outcomes include improved access to localized health information, enhan
       ],
       healthModules: {
         communicable: {
-          title: "Common Communicable Diseases",
-          intro: "Mga karaniwang nakakahawang sakit at kung paano ito maiiwasan.",
-          sections: [
-            { heading: "Tuberculosis (TB)", content: "Ang TB ay nakukuha sa hangin. Siguraduhing kumpletuhin ang TB‑DOTS treatment. Magpa‑sputum test kung may ubo nang higit sa 2 linggo." },
-            { heading: "Dengue", content: "Iwasan ang stagnant water. Gumamit ng kulambo. Agarang kumonsulta kung may lagnat, pantal, o pagdurugo." }
+          title: "TUBERCULOSIS",
+          subtitle: "Communicable Disease",
+          heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/TB-Bacteria-1.jpg",
+          faqs: [
+            { question: "Ano ang <strong>causative agent?</strong>" },
+            { question: "Ano ang mga <strong>types?</strong>" },
+            { question: "Paano <strong>mag-transmit</strong> ang TB?" }
+          ],
+          gridCards: [
+            { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/cough.jpg" },
+            { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malnutrition.jpg" },
+            { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/lung-xray.jpg" },
+            { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.jpg" },
+            { title: "BCG Vaccine", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg" },
+            { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg" }
           ]
         },
         noncommunicable: {
@@ -2716,8 +2870,23 @@ Expected outcomes include improved access to localized health information, enhan
     // ---------- NEW HEALTH EDUCATION SYSTEM ----------
     const detailedData = {
       communicable: {
-        title: "🦠 Communicable Diseases - Mga Nakakahawang Sakit",
+        title: "TUBERCULOSIS",
+        subtitle: "Communicable Disease",
         hero: "Ang mga sakit na ito ay kumakalat sa pamamagitan ng virus, bacteria, o parasites. Alamin ang tungkol sa Tuberculosis, Dengue, at iba pa.",
+        heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/TB-Bacteria-1.jpg",
+        faqs: [
+          { question: "Ano ang <strong>causative agent?</strong>" },
+          { question: "Ano ang mga <strong>types?</strong>" },
+          { question: "Paano <strong>mag-transmit</strong> ang TB?" }
+        ],
+        gridCards: [
+          { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/cough.jpg" },
+          { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malnutrition.jpg" },
+          { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/lung-xray.jpg" },
+          { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.jpg" },
+          { title: "BCG Vaccine", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg" },
+          { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg" }
+        ],
         sections: [
           { heading: "Tuberculosis (TB) - Sakit sa Bagà", content: "<strong>Sintomas:</strong> Ubo >2 linggo, lagnat sa hapon, pagpapawis sa gabi, pagbaba ng timbang.<br><strong>Paano nakukuha:</strong> Sa hangin sa pamamagitan ng pag-ubo o pagbahin.<br><strong>Paggamot:</strong> LIBRENG DOTS therapy sa RHU (6-9 na buwan).<br><strong>Prevention:</strong> BCG vaccine sa sanggol, magbukas ng bintana, iwasan ang siksikan." },
           { heading: "Dengue Fever", content: "Dala ng Aedes aegypti. <strong>Sintomas:</strong> Biglang lagnat, sakit ng kalamnan, pantal.<br><strong>4S strategy:</strong> Search and destroy (puksain ang lamok), Self-protection (kulambo), Seek early consultation, Say no to fogging kung walang outbreak." },
@@ -2788,25 +2957,83 @@ Expected outcomes include improved access to localized health information, enhan
     function showDetailedTopic(categoryKey) {
       const topic = detailedData[categoryKey];
       if (!topic) return;
-      let sectionsHtml = '';
-      topic.sections.forEach(s => {
-        sectionsHtml += `<div class="detail-section"><h4>${s.heading}</h4><div>${s.content}</div></div>`;
-      });
-      const detailHtml = `
-        <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
-        <h2 style="color:#cf90ff; font-size:1.8rem;">${topic.title}</h2>
-        <div class="info-card">${topic.hero}</div>
-        ${sectionsHtml}
-        <div style="margin-top:20px; padding:12px; background:rgba(129,77,170,0.4); border-radius:20px;"><strong>💡 Tandaan:</strong> Kumonsulta sa inyong RHU o Barangay Health Worker para sa libreng serbisyo.</div>
-      `;
-      detailView.innerHTML = detailHtml;
-      mainView.classList.add('hidden-view');
-      detailView.style.display = 'block';
-      document.getElementById('backToMainBtn').addEventListener('click', () => {
-        mainView.classList.remove('hidden-view');
-        detailView.style.display = 'none';
-        if (categoryContentDiv) categoryContentDiv.style.display = 'block';
-      });
+
+      // If the topic has a hero image + grid cards, use the new layout
+      if (topic.heroImage && topic.gridCards) {
+        let faqHtml = '';
+        if (topic.faqs) {
+          topic.faqs.forEach(q => {
+            faqHtml += `<div class="faq-row glass-card">
+              <span>${q.question}</span>
+              <button class="pill-btn">See more. <span class="arrow-icon">→</span></button>
+            </div>`;
+          });
+        }
+
+        let gridHtml = '<div class="info-grid">';
+        topic.gridCards.forEach(card => {
+          gridHtml += `<div class="grid-card" style="background-image:url('${card.image}');">
+            <div class="grid-card-title">${card.title.replace(/\n/g, '<br>')}</div>
+            <button class="pill-btn mini">See more. <span class="arrow-icon">→</span></button>
+          </div>`;
+        });
+        gridHtml += '</div>';
+
+        const detailHtml = `
+          <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
+          <div class="detail-hero">
+            <img src="${topic.heroImage}" class="hero-bacteria" alt="">
+            <div class="hero-right">
+              <h1>${topic.title}</h1>
+              <p>${topic.subtitle || ''}</p>
+              <button class="pill-btn">Description <span class="arrow-icon">→</span></button>
+            </div>
+          </div>
+          <div class="faq-section">
+            <h2>FAQ.</h2>
+            ${faqHtml}
+          </div>
+          <div class="info-section">
+            <h3 class="info-label">IMPORMASYON</h3>
+            ${gridHtml}
+          </div>
+        `;
+
+        detailView.innerHTML = detailHtml;
+        mainView.classList.add('hidden-view');
+        detailView.style.display = 'block';
+
+        document.getElementById('backToMainBtn').addEventListener('click', () => {
+          mainView.classList.remove('hidden-view');
+          detailView.style.display = 'none';
+          if (categoryContentDiv) categoryContentDiv.style.display = 'block';
+        });
+
+      } else {
+        // Fallback to plain text sections if no grid cards exist
+        let sectionsHtml = '';
+        topic.sections.forEach(s => {
+          sectionsHtml += `<div class="detail-section"><h4>${s.heading}</h4><div>${s.content}</div></div>`;
+        });
+
+        const detailHtml = `
+          <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
+          <h2 style="color:#cf90ff; font-size:1.8rem;">${topic.title}</h2>
+          <div class="info-card">${topic.intro}</div>
+          ${sectionsHtml}
+          <div style="margin-top:20px; padding:12px; background:rgba(129,77,170,0.4); border-radius:20px;"><strong>💡 Tandaan:</strong> Kumonsulta sa inyong RHU o Barangay Health Worker para sa libreng serbisyo.</div>
+        `;
+
+        detailView.innerHTML = detailHtml;
+        mainView.classList.add('hidden-view');
+        detailView.style.display = 'block';
+
+        document.getElementById('backToMainBtn').addEventListener('click', () => {
+          mainView.classList.remove('hidden-view');
+          detailView.style.display = 'none';
+          if (categoryContentDiv) categoryContentDiv.style.display = 'block';
+        });
+      }
     }
 
     function attachCategoryEvents() {

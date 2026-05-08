@@ -2,24 +2,37 @@
 <html lang="tl">
 <head>
   <meta charset="UTF-8">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&display=swap" rel="stylesheet">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover">
   <title>Abot-Kamay · Health Companion</title>
   <link rel="manifest" href="manifest.json">
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      background:
-        linear-gradient(135deg,
-          rgba(200, 180, 230, 0.70) 0%,
-          rgba(170, 140, 210, 0.70) 40%,
-          rgba(140, 100, 190, 0.70) 100%),
-        url(https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/landscape.jpg) center / cover no-repeat fixed;
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      color: #ffffff;
-      padding-bottom: 70px;
-      line-height: 1.6;
-      font-size: 16px;
+
+    :root {
+      --color-bg-deep:       #2D0060;
+      --color-bg-mid:        #4B0082;
+      --color-bg-light:      #6A0DAD;
+      --color-accent:        #9B30FF;
+      --color-card-glass:    rgba(255,255,255,0.10);
+      --color-card-border:   rgba(255,255,255,0.18);
+      --color-text-primary:  #FFFFFF;
+      --color-text-muted:    rgba(255,255,255,0.65);
+      --color-pill-bg:       rgba(255,255,255,0.15);
+      --color-pill-hover:    rgba(255,255,255,0.25);
+      --color-tag-gold:      #C8A84B;
+    }
+      body {
+        font-family: 'Poppins', sans-serif;
+        color: #ffffff;
+        padding-bottom: 70px;
+        line-height: 1.6;
+        font-size: 16px;
+      }
+      #appContainer {
+      position: relative;
+      z-index: 2;
     }
     #appContainer { display: block; }
 
@@ -29,7 +42,7 @@
       -webkit-backdrop-filter: blur(72px) saturate(180%);
       background: rgba(31, 0, 58, 0.55);
       border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 
+      box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.5),
         inset 0 -1px 0 rgba(255, 255, 255, 0.1),
@@ -105,7 +118,7 @@
       -webkit-backdrop-filter: blur(64px) saturate(160%);
       background: rgba(31, 0, 58, 0.55);
       border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 
+      box-shadow:
         0 8px 20px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.5),
         inset 0 -1px 0 rgba(255, 255, 255, 0.1),
@@ -186,7 +199,7 @@
       -webkit-backdrop-filter: blur(5px);
       border-radius: 20px;
       border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 
+      box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.5),
         inset 0 -1px 0 rgba(255, 255, 255, 0.1),
@@ -333,12 +346,6 @@
       margin-top: 25px;
     }
     .edu-cat-btn.active { background: #cf90ff; color: #130420; }
-    .edu-cat-btn {
-      flex: 1;
-      min-width: 0;
-      text-align: center;
-      white-space: nowrap;
-    }
     .auth-form input {
       width: 100%;
       padding: 14px 16px;
@@ -425,7 +432,7 @@
       border-radius: 16px;
       background: rgba(31, 0, 58, 0.55);
       border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 
+      box-shadow:
         0 8px 32px rgba(0, 0, 0, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.5),
         inset 0 -1px 0 rgba(255, 255, 255, 0.1),
@@ -664,11 +671,34 @@
         color: rgba(255,255,255,0.7) !important;
       }
           /* ---------- HEALTH EDUCATION – IMAGE CATEGORY GRID ---------- */
-    .edu-cat-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 12px;
-    }
+        .edu-cat-slider {
+          display: flex;
+          gap: 20px;
+          overflow-x: auto;
+          scroll-snap-type: x mandatory;
+          -webkit-overflow-scrolling: touch;
+          padding-bottom: 4px;
+          /* no more scrollbar-width or ::-webkit-scrollbar rules */
+        }
+
+
+        /* Each button becomes a fixed‑width slide */
+        .edu-cat-slider .edu-cat-btn {
+          flex: 0 0 120px;      /* fixed width 160px – adjust as you like */
+          aspect-ratio: 1 / 1;
+          scroll-snap-align: start;
+          border-radius: 16px;
+          background-size: cover;
+          background-position: center;
+          position: relative;
+          overflow: hidden;
+          cursor: pointer;
+          border: 2px solid transparent;
+          transition: border-color 0.25s, transform 0.2s;
+          display: flex;
+          align-items: flex-end;
+          padding: 10px;
+        }
 
     .edu-cat-btn {
       aspect-ratio: 1 / 1;                 /* perfect square */
@@ -683,8 +713,6 @@
       display: flex;
       align-items: flex-end;
       padding: 10px;
-      flex: none;                            /* override old flex: 1 */
-      min-width: 0;
     }
 
     .edu-cat-btn:hover {
@@ -720,9 +748,64 @@
       background: none;                     /* clear old purple background */
       color: inherit;
     }
+      .health-ed-detail {
+      background: rgba(20, 5, 40, 0.9);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 20px;
+      margin-top: 10px;
+      color: #fff;
+    }
+    .back-button {
+      background: #cf90ff;
+      color: #130420;
+      border: none;
+      padding: 8px 20px;
+      border-radius: 40px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .detail-section { margin-bottom: 28px; }
+    .detail-section h4 {
+      font-size: 1.3rem;
+      color: #cf90ff;
+      border-left: 4px solid #cf90ff;
+      padding-left: 12px;
+      margin-bottom: 8px;
+    }
+    .info-card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 16px;
+      margin: 16px 0;
+    }
+    .hidden-view { display: none; }
   </style>
 </head>
 <body>
+  <body>
+    <!-- Background image -->
+    <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/landscape.jpg"
+        style="position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;"
+        alt="" />
+
+    <!-- Purple overlay -->
+    <div style="position:fixed;top:0;left:0;width:100%;height:100%;
+        background: rgba(60,0,100,0.78); z-index:1;"></div>
+
+    <!-- Grid pattern overlay -->
+    <div style="position:fixed;top:0;left:0;width:100%;height:100%;
+        background-image: repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 20px),
+                          repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 20px);
+        z-index:1; pointer-events:none;"></div>
+
+    <div id="appContainer">
+      <!-- … rest of your app (header, tabs, container, etc.) … -->
+    </div>
 
 <div id="appContainer">
   <header class="app-header">
@@ -854,76 +937,61 @@ Expected outcomes include improved access to localized health information, enhan
     <!-- HEALTH EDUCATION TAB -->
     <div id="education" class="tab-content">
       <!-- Description card -->
-      <div class="card">
-        <h3 style="margin-bottom:4px;">Health Education</h3>
-        <p style="font-size:0.9rem; opacity:0.8;">
-          Pumili ng kategorya sa ibaba upang matuto tungkol sa iba't ibang paksa ng kalusugan ayon sa mga alituntunin ng DOH at WHO.
-        </p>
-      </div>
+    <div class="card" style="background: none; backdrop-filter: none; -webkit-backdrop-filter: none; border: none; box-shadow: none;">
+      <h3 style="margin-bottom:4px;">Health Education</h3>
+      <p style="font-size:0.95rem; opacity:0.9;">
+        Alamin ang mahahalagang impormasyon tungkol sa kalusugan sa pamamagitan ng mga sumusunod na modyul.
+      </p>
+    </div>
 
-      <!-- Search bar -->
-      <div class="card" style="padding:12px 16px;">
-        <div style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.08); border-radius:30px; padding:8px 14px;">
-          <span style="opacity:0.6;">🔍</span>
+      <!-- Main view: Search + Category slider + Placeholder card -->
+      <div id="eduMainView">
+        <!-- Search bar -->
+        <div class="card" style="padding:12px 16px;">
           <input type="text" id="healthSearch" placeholder="Search Health Education"
-                 style="background:none; border:none; outline:none; color:#fff; flex:1; font-size:0.95rem;" />
+                style="background:none; border:none; outline:none; color:#fff; width:100%;">
+        </div>
+
+        <!-- Category slider (big buttons) — make sure overflow: visible on the card -->
+        <div class="card" style="padding:12px; overflow: visible;">
+          <div class="edu-cat-slider" id="eduCatSlider">
+            <div class="edu-cat-btn active" data-edu="communicable" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/communicable.jpg');">
+              <span class="edu-cat-label">Communicable Diseases</span>
+            </div>
+            <div class="edu-cat-btn" data-edu="noncommunicable" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/noncommunicable.jpg');">
+              <span class="edu-cat-label">Non‑Communicable Diseases</span>
+            </div>
+            <div class="edu-cat-btn" data-edu="dohprograms" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg');">
+              <span class="edu-cat-label">DOH Health Programs</span>
+            </div>
+            <div class="edu-cat-btn" data-edu="prepartum" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg');">
+              <span class="edu-cat-label">Prepartum Care</span>
+            </div>
+            <div class="edu-cat-btn" data-edu="postpartum" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/postpartum.jpg');">
+              <span class="edu-cat-label">Postpartum Care</span>
+            </div>
+            <div class="edu-cat-btn" data-edu="newborn" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg');">
+              <span class="edu-cat-label">Newborn Care</span>
+            </div>
+            <div class="edu-cat-btn" data-edu="infant" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/infant.jpg');">
+              <span class="edu-cat-label">Infant Care</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Placeholder card – will be hidden when a topic is opened -->
+        <div id="eduCategoryContent" class="card">
+          <p>Mag‑click sa isang paksa upang mabasa ang buong gabay.</p>
+        </div>
+
+        <!-- Last updated card (kept) -->
+        <div class="card" style="background: #e6f2ed;">
+          <p style="font-style:italic; color: #000000;" id="eduLastUpdated"></p>
         </div>
       </div>
 
-      <!-- Recently Viewed hero card -->
-      <div id="recentlyViewedCard" class="card" style="display:none; padding:0; overflow:hidden; position:relative; min-height:180px;">
-        <img id="recentHeroImg" src="" alt="" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.6;" />
-        <div style="position:absolute; inset:0; background:linear-gradient(transparent 30%, rgba(0,0,0,0.7) 100%);"></div>
-        <div style="position:relative; z-index:1; padding:16px; display:flex; flex-direction:column; justify-content:flex-end; height:100%; min-height:180px;">
-          <div id="recentHeroTitle" style="font-weight:bold; font-size:1.3rem;"></div>
-          <div id="recentHeroDesc" style="font-size:0.85rem; opacity:0.85;"></div>
-          <button id="recentHeroBtn" class="btn-pill" style="margin-top:8px; align-self:flex-end;">Continue →</button>
-        </div>
-      </div>
-
-      <!-- Category buttons – now as image squares -->
-      <div class="card" style="padding:12px;">
-        <div class="edu-cat-grid">
-          <div class="edu-cat-btn active" data-edu="communicable" tabindex="0" role="button"
-               style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/communicable.jpg');">
-            <span class="edu-cat-label">Communicable Diseases</span>
-          </div>
-          <div class="edu-cat-btn" data-edu="noncommunicable" tabindex="0" role="button"
-               style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/noncommunicable.jpg');">
-            <span class="edu-cat-label">Non‑Communicable Diseases</span>
-          </div>
-          <div class="edu-cat-btn" data-edu="dohprograms" tabindex="0" role="button"
-               style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg');">
-            <span class="edu-cat-label">DOH Health Programs</span>
-          </div>
-          <div class="edu-cat-btn" data-edu="prepartum" tabindex="0" role="button"
-               style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg');">
-            <span class="edu-cat-label">Prepartum Care</span>
-          </div>
-          <div class="edu-cat-btn" data-edu="postpartum" tabindex="0" role="button"
-               style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/postpartum.jpg');">
-            <span class="edu-cat-label">Postpartum Care</span>
-          </div>
-          <div class="edu-cat-btn" data-edu="newborn" tabindex="0" role="button"
-               style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg');">
-            <span class="edu-cat-label">Newborn Care</span>
-          </div>
-          <div class="edu-cat-btn" data-edu="infant" tabindex="0" role="button"
-               style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/infant.jpg');">
-            <span class="edu-cat-label">Infant Care</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Module detail content -->
-      <div id="eduCategoryContent" class="card">
-        <p>Pumili ng kategorya sa itaas.</p>
-      </div>
-
-      <!-- Last updated -->
-      <div class="card" style="background: #e6f2ed;">
-        <p style="font-style:italic; color: #000000;" id="eduLastUpdated"></p>
-      </div>
+      <!-- Detail view – hidden initially, filled by JavaScript -->
+      <div id="eduDetailView" class="health-ed-detail" style="display:none;"></div>
     </div>
 
     <!-- RHU SERVICES TAB -->
@@ -1424,7 +1492,7 @@ Expected outcomes include improved access to localized health information, enhan
     let patients = [];
     let appointments = [];
     let inactivityTimer = null;
-    let adminAlreadyCreated = false; 
+    let adminAlreadyCreated = false;
     const INACTIVITY_TIMEOUT = 15 * 60 * 1000;
 
     // ---------- UTILITIES ----------
@@ -1758,7 +1826,7 @@ Expected outcomes include improved access to localized health information, enhan
 
     // ---------- UI UPDATE ----------
     function updateUIForLoginState() {
-      const loggedIn = !!currentUser;  // ← THIS LINE WAS MISSING – NOW FIXED
+      const loggedIn = !!currentUser;
 
       document.getElementById('logoutBtn').style.display = loggedIn ? 'inline-block' : 'none';
       const onlineRequestsCard = document.getElementById('onlineRequestsCard');
@@ -2049,6 +2117,13 @@ Expected outcomes include improved access to localized health information, enhan
         btn.classList.add('active');
         document.getElementById(tabId).classList.add('active');
         if (tabId === 'adminLogs') renderAdminLogs();
+        // Reset education detail view when leaving the tab
+        if (tabId !== 'education') {
+          const mainView = document.getElementById('eduMainView');
+          const detailView = document.getElementById('eduDetailView');
+          if (mainView) mainView.classList.remove('hidden-view');
+          if (detailView) detailView.style.display = 'none';
+        }
         resetInactivityTimer();
       });
     });
@@ -2329,31 +2404,240 @@ Expected outcomes include improved access to localized health information, enhan
       logEvent('CHANGE_PASSWORD', `${currentUser.username} changed password`); alert('Password napalitan!'); document.getElementById('backToAccountBtn').click();
     });
 
-    // ---------- ONLINE APPOINTMENT REQUEST FUNCTIONS ----------
-    function getApptServerUrl() { const saved = localStorage.getItem(APPOINTMENT_SERVER_URL_KEY); if (saved) return saved; localStorage.setItem(APPOINTMENT_SERVER_URL_KEY, DEFAULT_APPOINTMENT_SERVER_URL); return DEFAULT_APPOINTMENT_SERVER_URL; }
-    function buildRequestData() { return { userId: currentUser.uid, patientName: document.getElementById('apptPatientName').value.trim(), service: document.getElementById('apptService').value, requestedDate: document.getElementById('apptDate').value, preferredTime: document.getElementById('apptTime').value, notes: document.getElementById('apptNotes').value.trim(), status: 'pending' }; }
-    async function submitOnlineAppointment() { /* … unchanged … */ }
-    function queueOfflineRequest(data = null) { /* … unchanged … */ }
-    window.addEventListener('online', sendOfflineQueue);
-    async function sendOfflineQueue() { /* … unchanged … */ }
-    async function fetchOnlineRequests() { /* … unchanged … */ }
-    /* … remaining functions unchanged … */
-    async function submitOnlineAppointment() {
-      const url = getApptServerUrl(); if (!url) { alert('Hindi pa naka-set ang server URL. Makipag-ugnayan sa admin.'); return; }
-      const data = buildRequestData(); if (!data.patientName || !data.service || !data.requestedDate) { alert('Punan ang pangalan, serbisyo, at petsa.'); return; }
-      if (!navigator.onLine) { queueOfflineRequest(data); return; }
-      try { const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); if (response.ok) { alert('Naipadala na ang appointment request!'); } else { throw new Error('Server error'); } } catch (err) { alert('Hindi maipadala. Naka-queue offline.'); queueOfflineRequest(data); }
+    // ---------- ONLINE APPOINTMENT REQUEST FUNCTIONS (single definition) ----------
+    function getApptServerUrl() {
+      const saved = localStorage.getItem(APPOINTMENT_SERVER_URL_KEY);
+      if (saved) return saved;
+      localStorage.setItem(APPOINTMENT_SERVER_URL_KEY, DEFAULT_APPOINTMENT_SERVER_URL);
+      return DEFAULT_APPOINTMENT_SERVER_URL;
     }
-    function queueOfflineRequest(data = null) { const queue = JSON.parse(localStorage.getItem(OFFLINE_QUEUE_KEY) || '[]'); if (!data) data = buildRequestData(); queue.push(data); localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(queue)); }
+    function buildRequestData() {
+      return {
+        userId: currentUser.uid,
+        patientName: document.getElementById('apptPatientName').value.trim(),
+        service: document.getElementById('apptService').value,
+        requestedDate: document.getElementById('apptDate').value,
+        preferredTime: document.getElementById('apptTime').value,
+        notes: document.getElementById('apptNotes').value.trim(),
+        status: 'pending'
+      };
+    }
+    async function submitOnlineAppointment() {
+      const url = getApptServerUrl();
+      if (!url) {
+        alert('Hindi pa naka-set ang server URL. Makipag-ugnayan sa admin.');
+        return;
+      }
+      const data = buildRequestData();
+      if (!data.patientName || !data.service || !data.requestedDate) {
+        alert('Punan ang pangalan, serbisyo, at petsa.');
+        return;
+      }
+      if (!navigator.onLine) {
+        queueOfflineRequest(data);
+        return;
+      }
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        });
+        if (response.ok) {
+          alert('Naipadala na ang appointment request!');
+        } else {
+          throw new Error('Server error');
+        }
+      } catch (err) {
+        alert('Hindi maipadala. Naka-queue offline.');
+        queueOfflineRequest(data);
+      }
+    }
+    function queueOfflineRequest(data = null) {
+      const queue = JSON.parse(localStorage.getItem(OFFLINE_QUEUE_KEY) || '[]');
+      if (!data) data = buildRequestData();
+      queue.push(data);
+      localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(queue));
+    }
     window.addEventListener('online', sendOfflineQueue);
-    async function sendOfflineQueue() { const url = getApptServerUrl(); if (!url) return; const queue = JSON.parse(localStorage.getItem(OFFLINE_QUEUE_KEY) || '[]'); if (queue.length === 0) return; for (const data of [...queue]) { try { const response = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(data) }); if (response.ok) { queue.shift(); localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(queue)); } else { break; } } catch (e) { break; } } }
-    async function fetchOnlineRequests() { const url = getApptServerUrl(); if (!url) { alert('Wala pang server URL.'); return; } if (!navigator.onLine) { alert('Walang internet.'); return; } try { const response = await fetch(url); const requests = await response.json(); const list = document.getElementById('onlineRequestsList'); if (!requests.length) { list.innerHTML = '<p>Walang pending requests.</p>'; return; } let html = ''; requests.forEach(req => { html += `<div class="record-item" style="padding-right:14px;"><strong>${req.patientName}</strong> (${req.service})<br>Petsa: ${req.requestedDate} ${req.preferredTime || ''}<br>Mula kay: ${req.userId || '???'}<br>Mensahe: ${req.notes || '—'}<br><button class="btn-outline import-req-btn" data-id="${req.id}" style="margin-top:4px;">I-import bilang Lokal na Appointment</button></div>`; }); list.innerHTML = html; document.querySelectorAll('.import-req-btn').forEach(btn => { btn.addEventListener('click', async () => { const reqId = btn.getAttribute('data-id'); const req = requests.find(r => r.id === reqId); if (!req) return; appointments.push({ id: Date.now(), userId: req.userId, patientName: req.patientName, service: req.service, date: req.requestedDate, time: req.preferredTime, notes: req.notes }); await saveAppointments(); renderAppointmentList(); updateTodayNotification(); try { await fetch(`${url}/${reqId}`, { method: 'PATCH', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ status: 'imported' }) }); } catch(e) {} alert('Na-import na ang appointment.'); fetchOnlineRequests(); }); }); } catch (err) { alert('Error fetching requests.'); } }
+    async function sendOfflineQueue() {
+      const url = getApptServerUrl();
+      if (!url) return;
+      const queue = JSON.parse(localStorage.getItem(OFFLINE_QUEUE_KEY) || '[]');
+      if (queue.length === 0) return;
+      for (const data of [...queue]) {
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+          });
+          if (response.ok) {
+            queue.shift();
+            localStorage.setItem(OFFLINE_QUEUE_KEY, JSON.stringify(queue));
+          } else {
+            break;
+          }
+        } catch (e) {
+          break;
+        }
+      }
+    }
+    async function fetchOnlineRequests() {
+      const url = getApptServerUrl();
+      if (!url) {
+        alert('Wala pang server URL.');
+        return;
+      }
+      if (!navigator.onLine) {
+        alert('Walang internet.');
+        return;
+      }
+      try {
+        const response = await fetch(url);
+        const requests = await response.json();
+        const list = document.getElementById('onlineRequestsList');
+        if (!requests.length) {
+          list.innerHTML = '<p>Walang pending requests.</p>';
+          return;
+        }
+        let html = '';
+        requests.forEach(req => {
+          html += `<div class="record-item" style="padding-right:14px;">
+            <strong>${req.patientName}</strong> (${req.service})<br>
+            Petsa: ${req.requestedDate} ${req.preferredTime || ''}<br>
+            Mula kay: ${req.userId || '???'}<br>
+            Mensahe: ${req.notes || '—'}<br>
+            <button class="btn-outline import-req-btn" data-id="${req.id}" style="margin-top:4px;">I-import bilang Lokal na Appointment</button>
+          </div>`;
+        });
+        list.innerHTML = html;
+        document.querySelectorAll('.import-req-btn').forEach(btn => {
+          btn.addEventListener('click', async () => {
+            const reqId = btn.getAttribute('data-id');
+            const req = requests.find(r => r.id === reqId);
+            if (!req) return;
+            appointments.push({
+              id: Date.now(),
+              userId: req.userId,
+              patientName: req.patientName,
+              service: req.service,
+              date: req.requestedDate,
+              time: req.preferredTime,
+              notes: req.notes
+            });
+            await saveAppointments();
+            renderAppointmentList();
+            updateTodayNotification();
+            try {
+              await fetch(`${url}/${reqId}`, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ status: 'imported' })
+              });
+            } catch(e) {}
+            alert('Na-import na ang appointment.');
+            fetchOnlineRequests();
+          });
+        });
+      } catch (err) {
+        alert('Error fetching requests.');
+      }
+    }
 
     // ---------- SYNC FUNCTIONS ----------
-    /* … unchanged … */
-    async function deriveSyncKey(passphrase, saltHex) { const encoder = new TextEncoder(); const salt = new Uint8Array(saltHex.match(/.{1,2}/g).map(b => parseInt(b, 16))); const keyMaterial = await crypto.subtle.importKey('raw', encoder.encode(passphrase), { name: 'PBKDF2' }, false, ['deriveKey']); return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' }, keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']); }
-    async function performSync() { const statusEl = document.getElementById('syncStatus'); if (!navigator.onLine) { statusEl.innerHTML = '<span class="sync-error">Walang internet connection.</span>'; return; } const serverUrl = document.getElementById('syncServerUrl').value.trim(); const passphrase = document.getElementById('syncPassphrase').value; if (!serverUrl || !passphrase) { statusEl.innerHTML = '<span class="sync-error">Ilagay ang server URL at passphrase.</span>'; return; } localStorage.setItem(SYNC_SERVER_URL_KEY, serverUrl); let saltHex = localStorage.getItem(SYNC_SALT_KEY); if (!saltHex) { const salt = crypto.getRandomValues(new Uint8Array(16)); saltHex = Array.from(salt).map(b => b.toString(16).padStart(2, '0')).join(''); localStorage.setItem(SYNC_SALT_KEY, saltHex); } try { const key = await deriveSyncKey(passphrase, saltHex); const syncData = { users: getUsers(), patients, appointments, auditLogs: JSON.parse(localStorage.getItem(AUDIT_LOG_KEY) || '[]'), medicine: JSON.parse(localStorage.getItem('abotKamayMedicine') || '[]'), healthModules: JSON.parse(localStorage.getItem('abotKamayHealthModules') || 'null'), timestamp: new Date().toISOString() }; const plain = JSON.stringify(syncData); const iv = crypto.getRandomValues(new Uint8Array(12)); const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(plain)); const ivHex = Array.from(iv).map(b => b.toString(16).padStart(2, '0')).join(''); const dataHex = Array.from(new Uint8Array(encrypted)).map(b => b.toString(16).padStart(2, '0')).join(''); const response = await fetch(serverUrl, { method: 'POST', body: ivHex + ':' + dataHex }); if (response.ok) statusEl.innerHTML = '<span class="sync-success">Matagumpay na na-sync!</span>'; else statusEl.innerHTML = `<span class="sync-error">Server error: ${response.status}</span>`; } catch (err) { statusEl.innerHTML = `<span class="sync-error">Error: ${err.message}</span>`; } }
-    async function restoreFromServer() { const statusEl = document.getElementById('syncStatus'); const serverUrl = document.getElementById('syncServerUrl').value.trim(); const passphrase = document.getElementById('syncPassphrase').value; if (!serverUrl || !passphrase) { statusEl.innerHTML = '<span class="sync-error">Ilagay ang server URL at passphrase.</span>'; return; } if (!confirm('I‑restore ang data mula sa server? Mapapalitan ang lahat ng lokal na data.')) return; try { const response = await fetch(serverUrl); if (!response.ok) { statusEl.innerHTML = `<span class="sync-error">Server error: ${response.status}</span>`; return; } const payload = await response.text(); const [ivHex, dataHex] = payload.split(':'); const saltHex = localStorage.getItem(SYNC_SALT_KEY); if (!saltHex) { statusEl.innerHTML = '<span class="sync-error">Walang sync salt.</span>'; return; } const key = await deriveSyncKey(passphrase, saltHex); const iv = new Uint8Array(ivHex.match(/.{1,2}/g).map(b => parseInt(b, 16))); const data = new Uint8Array(dataHex.match(/.{1,2}/g).map(b => parseInt(b, 16))); const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data); const syncData = JSON.parse(new TextDecoder().decode(decrypted)); saveUsers(syncData.users); patients = syncData.patients; await savePatients(); appointments = syncData.appointments; await saveAppointments(); localStorage.setItem(AUDIT_LOG_KEY, JSON.stringify(syncData.auditLogs)); if (syncData.medicine) localStorage.setItem('abotKamayMedicine', JSON.stringify(syncData.medicine)); if (syncData.healthModules) localStorage.setItem('abotKamayHealthModules', JSON.stringify(syncData.healthModules)); statusEl.innerHTML = '<span class="sync-success">Data na-restore! Mag-logout at login muli.</span>'; logout(); } catch (err) { statusEl.innerHTML = `<span class="sync-error">Error: ${err.message}</span>`; } }
+    async function deriveSyncKey(passphrase, saltHex) {
+      const encoder = new TextEncoder();
+      const salt = new Uint8Array(saltHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+      const keyMaterial = await crypto.subtle.importKey('raw', encoder.encode(passphrase), { name: 'PBKDF2' }, false, ['deriveKey']);
+      return crypto.subtle.deriveKey({ name: 'PBKDF2', salt, iterations: 100000, hash: 'SHA-256' }, keyMaterial, { name: 'AES-GCM', length: 256 }, false, ['encrypt', 'decrypt']);
+    }
+    async function performSync() {
+      const statusEl = document.getElementById('syncStatus');
+      if (!navigator.onLine) {
+        statusEl.innerHTML = '<span class="sync-error">Walang internet connection.</span>';
+        return;
+      }
+      const serverUrl = document.getElementById('syncServerUrl').value.trim();
+      const passphrase = document.getElementById('syncPassphrase').value;
+      if (!serverUrl || !passphrase) {
+        statusEl.innerHTML = '<span class="sync-error">Ilagay ang server URL at passphrase.</span>';
+        return;
+      }
+      localStorage.setItem(SYNC_SERVER_URL_KEY, serverUrl);
+      let saltHex = localStorage.getItem(SYNC_SALT_KEY);
+      if (!saltHex) {
+        const salt = crypto.getRandomValues(new Uint8Array(16));
+        saltHex = Array.from(salt).map(b => b.toString(16).padStart(2, '0')).join('');
+        localStorage.setItem(SYNC_SALT_KEY, saltHex);
+      }
+      try {
+        const key = await deriveSyncKey(passphrase, saltHex);
+        const syncData = {
+          users: getUsers(),
+          patients,
+          appointments,
+          auditLogs: JSON.parse(localStorage.getItem(AUDIT_LOG_KEY) || '[]'),
+          medicine: JSON.parse(localStorage.getItem('abotKamayMedicine') || '[]'),
+          healthModules: JSON.parse(localStorage.getItem('abotKamayHealthModules') || 'null'),
+          timestamp: new Date().toISOString()
+        };
+        const plain = JSON.stringify(syncData);
+        const iv = crypto.getRandomValues(new Uint8Array(12));
+        const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, new TextEncoder().encode(plain));
+        const ivHex = Array.from(iv).map(b => b.toString(16).padStart(2, '0')).join('');
+        const dataHex = Array.from(new Uint8Array(encrypted)).map(b => b.toString(16).padStart(2, '0')).join('');
+        const response = await fetch(serverUrl, { method: 'POST', body: ivHex + ':' + dataHex });
+        if (response.ok) {
+          statusEl.innerHTML = '<span class="sync-success">Matagumpay na na-sync!</span>';
+        } else {
+          statusEl.innerHTML = `<span class="sync-error">Server error: ${response.status}</span>`;
+        }
+      } catch (err) {
+        statusEl.innerHTML = `<span class="sync-error">Error: ${err.message}</span>`;
+      }
+    }
+    async function restoreFromServer() {
+      const statusEl = document.getElementById('syncStatus');
+      const serverUrl = document.getElementById('syncServerUrl').value.trim();
+      const passphrase = document.getElementById('syncPassphrase').value;
+      if (!serverUrl || !passphrase) {
+        statusEl.innerHTML = '<span class="sync-error">Ilagay ang server URL at passphrase.</span>';
+        return;
+      }
+      if (!confirm('I‑restore ang data mula sa server? Mapapalitan ang lahat ng lokal na data.')) return;
+      try {
+        const response = await fetch(serverUrl);
+        if (!response.ok) {
+          statusEl.innerHTML = `<span class="sync-error">Server error: ${response.status}</span>`;
+          return;
+        }
+        const payload = await response.text();
+        const [ivHex, dataHex] = payload.split(':');
+        const saltHex = localStorage.getItem(SYNC_SALT_KEY);
+        if (!saltHex) {
+          statusEl.innerHTML = '<span class="sync-error">Walang sync salt.</span>';
+          return;
+        }
+        const key = await deriveSyncKey(passphrase, saltHex);
+        const iv = new Uint8Array(ivHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+        const data = new Uint8Array(dataHex.match(/.{1,2}/g).map(b => parseInt(b, 16)));
+        const decrypted = await crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, data);
+        const syncData = JSON.parse(new TextDecoder().decode(decrypted));
+        saveUsers(syncData.users);
+        patients = syncData.patients;
+        await savePatients();
+        appointments = syncData.appointments;
+        await saveAppointments();
+        localStorage.setItem(AUDIT_LOG_KEY, JSON.stringify(syncData.auditLogs));
+        if (syncData.medicine) localStorage.setItem('abotKamayMedicine', JSON.stringify(syncData.medicine));
+        if (syncData.healthModules) localStorage.setItem('abotKamayHealthModules', JSON.stringify(syncData.healthModules));
+        statusEl.innerHTML = '<span class="sync-success">Data na-restore! Mag-logout at login muli.</span>';
+        logout();
+      } catch (err) {
+        statusEl.innerHTML = `<span class="sync-error">Error: ${err.message}</span>`;
+      }
+    }
     document.getElementById('syncSettingsBtn').addEventListener('click', () => { document.getElementById('accountLoggedInView').style.display = 'none'; document.getElementById('syncView').style.display = 'block'; document.getElementById('syncServerUrl').value = localStorage.getItem(SYNC_SERVER_URL_KEY) || ''; document.getElementById('syncStatus').innerHTML = ''; document.getElementById('apptServerUrlInput').value = getApptServerUrl(); });
     document.getElementById('backFromSyncBtn').addEventListener('click', () => { document.getElementById('syncView').style.display = 'none'; document.getElementById('accountLoggedInView').style.display = 'block'; });
     document.getElementById('syncNowBtn').addEventListener('click', performSync);
@@ -2364,140 +2648,397 @@ Expected outcomes include improved access to localized health information, enhan
 
     // ---------- OFFLINE DATA LOADING ----------
     function loadCachedOrFallback() {
-      async function fetchAndOverrideMedicine() { try { const response = await fetch(MEDICINE_JSON_URL); if (!response.ok) throw new Error('Fetch failed'); const data = await response.json(); if (data.inventory && Array.isArray(data.inventory)) { localStorage.setItem('abotKamayMedicine', JSON.stringify(data.inventory)); if (data.lastUpdated) { localStorage.setItem(INVENTORY_LAST_UPDATED_KEY, data.lastUpdated); } renderMedicineInventory(data.inventory); } } catch (err) { console.warn('Medicine fetch failed, using local cache.'); } }
-      if (navigator.onLine) { fetchAndOverrideMedicine().then(() => { if (!localStorage.getItem('abotKamayMedicine')) { localStorage.setItem('abotKamayMedicine', JSON.stringify(DEFAULT_OFFLINE_DATA.medicineInventory)); renderMedicineInventory(DEFAULT_OFFLINE_DATA.medicineInventory); } }); }
-      else { const localMeds = localStorage.getItem('abotKamayMedicine'); if (localMeds) { renderMedicineInventory(JSON.parse(localMeds)); } else { localStorage.setItem('abotKamayMedicine', JSON.stringify(DEFAULT_OFFLINE_DATA.medicineInventory)); renderMedicineInventory(DEFAULT_OFFLINE_DATA.medicineInventory); } }
-
-      async function fetchAndCacheRHU() { try { const response = await fetch(RHU_SERVICES_JSON_URL); if (!response.ok) throw new Error('Fetch failed'); const data = await response.json(); localStorage.setItem(RHU_SERVICES_CACHE_KEY, JSON.stringify(data)); return data; } catch (err) { console.warn('RHU services fetch failed, using cache.'); return null; } }
-      (async function initRHU() { let data = null; if (navigator.onLine) { data = await fetchAndCacheRHU(); } if (!data) { const cached = localStorage.getItem(RHU_SERVICES_CACHE_KEY); data = cached ? JSON.parse(cached) : null; } if (data) { rhuData = data; const activeBtn = document.querySelector('.rhu-subtab.active'); if (activeBtn) { const tabId = activeBtn.getAttribute('data-rhu-tab'); if (tabId !== 'medicine') renderRHUPane(tabId); } } })();
-
-      const cachedModules = localStorage.getItem('abotKamayHealthModules');
-      async function fetchAndCacheModules() { try { const response = await fetch(HEALTH_MODULES_JSON_URL); if (!response.ok) throw new Error('Fetch failed'); const freshModules = await response.json(); localStorage.setItem('abotKamayHealthModules', JSON.stringify(freshModules)); return freshModules; } catch (err) { console.warn('Health modules fetch failed, using cache/default.'); return null; } }
-      (async function initModules() { let modules = null; if (navigator.onLine) { const fresh = await fetchAndCacheModules(); if (fresh) modules = fresh; } if (!modules) { const cached = localStorage.getItem('abotKamayHealthModules'); modules = cached ? JSON.parse(cached) : null; } if (!modules) modules = DEFAULT_OFFLINE_DATA.healthModules; const edIntroEl = document.getElementById('edIntro'); if (edIntroEl) { const activeCat = document.querySelector('.edu-cat-btn.active')?.getAttribute('data-edu') || 'communicable'; edIntroEl.textContent = modules[activeCat]?.intro || ''; } const activeCat = document.querySelector('.edu-cat-btn.active')?.getAttribute('data-edu'); if (activeCat) renderCategoryContent(activeCat, modules); const ts = modules.lastUpdated || DEFAULT_OFFLINE_DATA.lastUpdated; updateLastUpdatedDisplay(ts); window.liveHealthModules = modules; })();
-    }
-
-    // ---------- HEALTH EDUCATION RENDERING FUNCTIONS ----------
-    function renderCategoryContent(catKey, modules) {
-      const container = document.getElementById('eduCategoryContent');
-      const cat = modules[catKey];
-      if (!cat) return;
-
-      // Update the hero card
-      const heroCard = document.getElementById('recentlyViewedCard');
-      const heroImg = document.getElementById('recentHeroImg');
-      const heroTitle = document.getElementById('recentHeroTitle');
-      const heroDesc = document.getElementById('recentHeroDesc');
-      const heroBtn = document.getElementById('recentHeroBtn');
-      if (heroCard && cat.image) {
-        heroCard.style.display = 'block';
-        heroImg.src = cat.image;
-        heroTitle.textContent = cat.title;
-        heroDesc.textContent = cat.intro;
-        heroBtn.onclick = () => {};
-      } else if (heroCard) {
-        heroCard.style.display = 'none';
-      }
-
-      // Build the module content
-      let html = `<h3>${cat.title}</h3><p style="margin-bottom:16px;">${cat.intro}</p>`;
-      cat.sections.forEach(s => {
-        html += `<div style="margin-bottom:20px;"><h4 style="color:#ffffff;">${s.heading}</h4><p>${s.content}</p></div>`;
-      });
-      container.innerHTML = html;
-
-      // Populate the "Read More" row with other categories
-      fillReadMoreRow(catKey, modules);
-    }
-
-    function fillReadMoreRow(currentCat, modules) {
-      const row = document.getElementById('readMoreRow');
-      if (!row) return;
-      const categoryKeys = Object.keys(modules).filter(k => k !== currentCat && modules[k].title);
-      let html = '';
-      categoryKeys.forEach(key => {
-        const cat = modules[key];
-        const img = cat.image || '';
-        html += `
-          <div class="mini-card" style="background-image:url('${img}');" onclick="document.querySelector('.edu-cat-btn[data-edu='${key}']").click()">
-            <div class="title">${cat.title}</div>
-            <div class="desc">${cat.intro ? cat.intro.slice(0,60)+'…' : ''}</div>
-          </div>`;
-      });
-      row.innerHTML = html;
-    }
-
-    function setupEduButtons() {
-      const MAX_RECENT = 1;
-
-      document.querySelectorAll('.edu-cat-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          document.querySelectorAll('.edu-cat-btn').forEach(b => b.classList.remove('active'));
-          btn.classList.add('active');
-          const cat = btn.getAttribute('data-edu');
-
-          // Save to recently viewed
-          let recent = JSON.parse(localStorage.getItem('abotKamayRecentModules') || '[]');
-          recent = recent.filter(c => c !== cat);
-          recent.unshift(cat);
-          if (recent.length > MAX_RECENT) recent = recent.slice(0, MAX_RECENT);
-          localStorage.setItem('abotKamayRecentModules', JSON.stringify(recent));
-
-          // Load modules and render
-          const cached = localStorage.getItem('abotKamayHealthModules');
-          const modules = cached ? JSON.parse(cached) : DEFAULT_OFFLINE_DATA.healthModules;
-          const edIntroEl = document.getElementById('edIntro');
-          if (edIntroEl) edIntroEl.textContent = modules[cat]?.intro || '';
-          renderCategoryContent(cat, modules);
-        });
-      });
-
-      // Search functionality
-      const searchInput = document.getElementById('healthSearch');
-      if (searchInput) {
-        searchInput.addEventListener('input', () => {
-          const query = searchInput.value.toLowerCase().trim();
-          document.querySelectorAll('.edu-cat-btn').forEach(btn => {
-            const text = btn.textContent.toLowerCase();
-            btn.style.display = text.includes(query) ? '' : 'none';
-          });
-        });
-      }
-
-      // On initial load, restore the hero if a recent module exists
-      const recentList = JSON.parse(localStorage.getItem('abotKamayRecentModules') || '[]');
-      if (recentList.length > 0) {
-        const cached = localStorage.getItem('abotKamayHealthModules');
-        const modules = cached ? JSON.parse(cached) : DEFAULT_OFFLINE_DATA.healthModules;
-        const lastCat = recentList[0];
-        if (modules[lastCat]) {
-          renderCategoryContent(lastCat, modules);
-          document.querySelectorAll('.edu-cat-btn').forEach(b => {
-            if (b.getAttribute('data-edu') === lastCat) b.classList.add('active');
-            else b.classList.remove('active');
-          });
+      async function fetchAndOverrideMedicine() {
+        try {
+          const response = await fetch(MEDICINE_JSON_URL);
+          if (!response.ok) throw new Error('Fetch failed');
+          const data = await response.json();
+          if (data.inventory && Array.isArray(data.inventory)) {
+            localStorage.setItem('abotKamayMedicine', JSON.stringify(data.inventory));
+            if (data.lastUpdated) {
+              localStorage.setItem(INVENTORY_LAST_UPDATED_KEY, data.lastUpdated);
+            }
+            renderMedicineInventory(data.inventory);
+          }
+        } catch (err) {
+          console.warn('Medicine fetch failed, using local cache.');
         }
       }
+      if (navigator.onLine) {
+        fetchAndOverrideMedicine().then(() => {
+          if (!localStorage.getItem('abotKamayMedicine')) {
+            localStorage.setItem('abotKamayMedicine', JSON.stringify(DEFAULT_OFFLINE_DATA.medicineInventory));
+            renderMedicineInventory(DEFAULT_OFFLINE_DATA.medicineInventory);
+          }
+        });
+      } else {
+        const localMeds = localStorage.getItem('abotKamayMedicine');
+        if (localMeds) {
+          renderMedicineInventory(JSON.parse(localMeds));
+        } else {
+          localStorage.setItem('abotKamayMedicine', JSON.stringify(DEFAULT_OFFLINE_DATA.medicineInventory));
+          renderMedicineInventory(DEFAULT_OFFLINE_DATA.medicineInventory);
+        }
+      }
+
+      async function fetchAndCacheRHU() {
+        try {
+          const response = await fetch(RHU_SERVICES_JSON_URL);
+          if (!response.ok) throw new Error('Fetch failed');
+          const data = await response.json();
+          localStorage.setItem(RHU_SERVICES_CACHE_KEY, JSON.stringify(data));
+          return data;
+        } catch (err) {
+          console.warn('RHU services fetch failed, using cache.');
+          return null;
+        }
+      }
+      (async function initRHU() {
+        let data = null;
+        if (navigator.onLine) {
+          data = await fetchAndCacheRHU();
+        }
+        if (!data) {
+          const cached = localStorage.getItem(RHU_SERVICES_CACHE_KEY);
+          data = cached ? JSON.parse(cached) : null;
+        }
+        if (data) {
+          rhuData = data;
+          const activeBtn = document.querySelector('.rhu-subtab.active');
+          if (activeBtn) {
+            const tabId = activeBtn.getAttribute('data-rhu-tab');
+            if (tabId !== 'medicine') renderRHUPane(tabId);
+          }
+        }
+      })();
     }
 
-    function renderRHUPane(catKey) { const container = document.getElementById('rhu-dynamic'); if (!container || !rhuData || !rhuData.categories) return; const cat = rhuData.categories[catKey]; if (!cat) return; let html = `<div class="card service-category"><h3>${cat.title}</h3><div class="service-description">`; cat.services.forEach(s => { html += `<h4>${s.name}</h4><p>${s.description}</p>`; }); html += `</div></div>`; container.innerHTML = html; }
-    function updateLastUpdatedDisplay(ts) { const el = document.getElementById('eduLastUpdated'); if (el) el.textContent = `Huling update ng mga modyul: ${new Date(ts).toLocaleDateString('tl-PH')}`; }
+    // ---------- NEW HEALTH EDUCATION SYSTEM ----------
+    const detailedData = {
+      communicable: {
+        title: "🦠 Communicable Diseases - Mga Nakakahawang Sakit",
+        hero: "Ang mga sakit na ito ay kumakalat sa pamamagitan ng virus, bacteria, o parasites. Alamin ang tungkol sa Tuberculosis, Dengue, at iba pa.",
+        sections: [
+          { heading: "Tuberculosis (TB) - Sakit sa Bagà", content: "<strong>Sintomas:</strong> Ubo >2 linggo, lagnat sa hapon, pagpapawis sa gabi, pagbaba ng timbang.<br><strong>Paano nakukuha:</strong> Sa hangin sa pamamagitan ng pag-ubo o pagbahin.<br><strong>Paggamot:</strong> LIBRENG DOTS therapy sa RHU (6-9 na buwan).<br><strong>Prevention:</strong> BCG vaccine sa sanggol, magbukas ng bintana, iwasan ang siksikan." },
+          { heading: "Dengue Fever", content: "Dala ng Aedes aegypti. <strong>Sintomas:</strong> Biglang lagnat, sakit ng kalamnan, pantal.<br><strong>4S strategy:</strong> Search and destroy (puksain ang lamok), Self-protection (kulambo), Seek early consultation, Say no to fogging kung walang outbreak." },
+          { heading: "Influenza (Trangkaso)", content: "Lagnat, sipon, ubo, panghihina. Bakuna taun-taon para sa matatanda at bata. Maghugas ng kamay." },
+          { heading: "COVID-19", content: "Patuloy na paghuhugas ng kamay, pagsusuot ng mask kung may sintomas, at booster vaccines." }
+        ]
+      },
+      noncommunicable: {
+        title: "❤️ Non-Communicable Diseases",
+        hero: "Mga sakit na hindi nakakahawa ngunit dulot ng lifestyle. Alamin ang tungkol sa High Blood, Diabetes, at pangangalaga sa puso.",
+        sections: [
+          { heading: "Hypertension", content: "BP ≥140/90. <strong>Pangangalaga:</strong> Bawasan ang asin, kumain ng gulay, ehersisyo 30 min/araw, uminom ng maintenance meds." },
+          { heading: "Diabetes", content: "Mataas na asukal sa dugo. Iwasan ang matatamis, kumain ng brown rice, maglakad araw-araw, magpa-blood sugar test." },
+          { heading: "Sakit sa Puso at Stroke", content: "Panatilihing normal ang BP at cholesterol. Iwasan ang tabako at stress." }
+        ]
+      },
+      dohprograms: {
+        title: "🏛️ DOH National Health Programs",
+        hero: "Mga programang pangkalusugan ng gobyerno na makakatulong sa barangay.",
+        sections: [
+          { heading: "National Immunization Program", content: "Libreng bakuna: BCG, Hepatitis B, Polio, Pentavalent, Measles, MMR. Kumpletuhin ang bakuna bago mag-1 taon." },
+          { heading: "TB-DOTS Program", content: "Libreng gamutan para sa Tuberculosis sa lahat ng RHU." },
+          { heading: "Family Planning", content: "Contraceptive options (pills, injectables, IUD, implant) para sa responsableng pagpaplano." }
+        ]
+      },
+      prepartum: {
+        title: "🤰 Prepartum Care (Pangangalaga sa Buntis)",
+        hero: "Mahalaga ang regular na check-up upang mapanatiling ligtas ang ina at sanggol.",
+        sections: [
+          { heading: "Antenatal Checkups", content: "Hindi bababa sa 8 beses na ANC. Kasama ang timbang, BP, ihi, dugo, at tetanus toxoid." },
+          { heading: "Nutrisyon at Supplement", content: "Uminom ng Iron + Folic Acid araw-araw. Kumain ng itlog, karne, prutas, gulay." },
+          { heading: "Warning Signs", content: "Pagdurugo, malakas na sakit ng ulo, malabong paningin – magpatingin agad." }
+        ]
+      },
+      postpartum: {
+        title: "👩 Postpartum Care",
+        hero: "Unang 6 na linggo pagkatapos manganak kritikal para sa kalusugan ng ina.",
+        sections: [
+          { heading: "Postnatal Checkup", content: "Magpatingin sa RHU sa loob ng 48 oras, 1 linggo, at 6 na linggo." },
+          { heading: "Pagpapagaling", content: "Kumain ng masustansya, uminom ng maraming tubig, iwasan ang mabigat na buhatin." }
+        ]
+      },
+      newborn: {
+        title: "👶 Newborn Care (0–28 araw)",
+        hero: "Unang buwan ng buhay – espesyal na pangangailangan.",
+        sections: [
+          { heading: "Essential Newborn Care", content: "Patuyuin, ilagay sa dibdib ng ina, at i-breastfeed sa unang oras." },
+          { heading: "Newborn Screening", content: "Mahalagang magpa-screening sa loob ng 48 oras para makita ang congenital disorders." }
+        ]
+      },
+      infant: {
+        title: "🍼 Infant Care (1–12 buwan)",
+        hero: "Unang taon – panahon ng paglago at pag-unlad.",
+        sections: [
+          { heading: "Eksklusibong Pagpapasuso", content: "I-breastfeed lamang hanggang 6 na buwan." },
+          { heading: "Complementary Foods", content: "Simula 6 na buwan, magdagdag ng lugaw, gulay, prutas, itlog." },
+          { heading: "Vaccination Schedule", content: "Pentavalent, OPV, Measles sa 9 na buwan, MMR sa 12 buwan." }
+        ]
+      }
+    };
+
+    const mainView = document.getElementById('eduMainView');
+    const detailView = document.getElementById('eduDetailView');
+    const categoryContentDiv = document.getElementById('eduCategoryContent');
+    const searchInput = document.getElementById('healthSearch');
+    const catSlider = document.getElementById('eduCatSlider');
+
+    function showDetailedTopic(categoryKey) {
+      const topic = detailedData[categoryKey];
+      if (!topic) return;
+      let sectionsHtml = '';
+      topic.sections.forEach(s => {
+        sectionsHtml += `<div class="detail-section"><h4>${s.heading}</h4><div>${s.content}</div></div>`;
+      });
+      const detailHtml = `
+        <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
+        <h2 style="color:#cf90ff; font-size:1.8rem;">${topic.title}</h2>
+        <div class="info-card">${topic.hero}</div>
+        ${sectionsHtml}
+        <div style="margin-top:20px; padding:12px; background:rgba(129,77,170,0.4); border-radius:20px;"><strong>💡 Tandaan:</strong> Kumonsulta sa inyong RHU o Barangay Health Worker para sa libreng serbisyo.</div>
+      `;
+      detailView.innerHTML = detailHtml;
+      mainView.classList.add('hidden-view');
+      detailView.style.display = 'block';
+      document.getElementById('backToMainBtn').addEventListener('click', () => {
+        mainView.classList.remove('hidden-view');
+        detailView.style.display = 'none';
+        if (categoryContentDiv) categoryContentDiv.style.display = 'block';
+      });
+    }
+
+    function attachCategoryEvents() {
+      document.querySelectorAll('#eduCatSlider .edu-cat-btn').forEach(btn => {
+        btn.removeEventListener('click', categoryClickHandler);
+        btn.addEventListener('click', categoryClickHandler);
+      });
+    }
+    function categoryClickHandler(e) {
+      const btn = e.currentTarget;
+      const category = btn.getAttribute('data-edu');
+      document.querySelectorAll('#eduCatSlider .edu-cat-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      showDetailedTopic(category);
+    }
+    function filterCategories() {
+      const query = searchInput.value.toLowerCase().trim();
+      document.querySelectorAll('#eduCatSlider .edu-cat-btn').forEach(btn => {
+        const label = btn.querySelector('.edu-cat-label')?.innerText.toLowerCase() || '';
+        btn.style.display = label.includes(query) ? 'flex' : 'none';
+      });
+    }
+    if (searchInput) searchInput.addEventListener('input', filterCategories);
+    function setLastUpdated() {
+      document.getElementById('eduLastUpdated').innerHTML = '📅 Huling update: ' + new Date().toLocaleDateString('tl-PH');
+    }
+    attachCategoryEvents();
+    setLastUpdated();
+
+    // ---------- RHU PANE RENDERING (unchanged) ----------
+    function renderRHUPane(catKey) {
+      const container = document.getElementById('rhu-dynamic');
+      if (!container || !rhuData || !rhuData.categories) return;
+      const cat = rhuData.categories[catKey];
+      if (!cat) return;
+      let html = `<div class="card service-category"><h3>${cat.title}</h3><div class="service-description">`;
+      cat.services.forEach(s => {
+        html += `<h4>${s.name}</h4><p>${s.description}</p>`;
+      });
+      html += `</div></div>`;
+      container.innerHTML = html;
+    }
 
     // ---------- PWA ----------
-    if ('serviceWorker' in navigator) { window.addEventListener('load', () => { navigator.serviceWorker.register('service-worker.js').then(registration => console.log('Service worker registered')).catch(err => console.log('Service worker registration failed', err)); }); }
-    if ('serviceWorker' in navigator) { navigator.serviceWorker.addEventListener('controllerchange', () => { const banner = document.createElement('div'); banner.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#8deeff;color:#130420;padding:12px 24px;border-radius:30px;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;font-family:sans-serif;'; banner.textContent = 'New version ready – tap here to refresh'; banner.addEventListener('click', () => window.location.reload()); document.body.appendChild(banner); }); }
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(registration => console.log('Service worker registered'))
+          .catch(err => console.log('Service worker registration failed', err));
+      });
+    }
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        const banner = document.createElement('div');
+        banner.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#8deeff;color:#130420;padding:12px 24px;border-radius:30px;box-shadow:0 2px 8px rgba(0,0,0,0.3);z-index:9999;cursor:pointer;font-family:sans-serif;';
+        banner.textContent = 'New version ready – tap here to refresh';
+        banner.addEventListener('click', () => window.location.reload());
+        document.body.appendChild(banner);
+      });
+    }
 
     // ---------- CAROUSEL SYSTEM ----------
-    /* … unchanged carousel code … */
-    const CAROUSEL_DURATION = 10000; let carouselTimer, carouselPlaying = true; let carouselCurrent = 0; let carouselSlides = []; let slideOffset = 0; let carouselWidth = 0;
-    const CLONE_COUNT = 2; let totalSlides = 0; let realSlideCount = 0; let isTransitioning = false;
-    const CAROUSEL_DEFAULT = [ { tag: "Vaccination", title: "Libreng Bakuna sa Tigdas – Marso 20", body: "8:00 AM – 2:00 PM sa Barangay Hall. Magdala ng baby book.", cta: "I-iskedyul", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/vax.webp", tagBg: "#e8eeff", tagColor: "#3352cc" }, { tag: "Mission", title: "Medical Mission – Abril 5", body: "9:00 AM – 4:00 PM. Magdala ng ID at gamot.", cta: "Magbasa pa", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medmission.jpeg", tagBg: "#e6f9ee", tagColor: "#1a7a45" }, { tag: "Checkup", title: "Prenatal Checkup – Araw‑araw", body: "Lunes hanggang Biyernes, 8:00 AM – 5:00 PM.", cta: "Matuto pa", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prenatal.webp", tagBg: "#fff7e6", tagColor: "#a05a00" }, { tag: "Nutrition", title: "Nutrition Fair – Abril 2", body: "Mga libreng timbang at konsulta para sa mga bata.", cta: "Sumali", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/feeding.jpeg", tagBg: "#fde8f0", tagColor: "#9c2254" } ];
-    /* … buildCarousel, goToImmediate, goTo, etc. … */
-    function buildCarousel(slidesData) { carouselSlides = slidesData; realSlideCount = slidesData.length; totalSlides = realSlideCount + 2 * CLONE_COUNT; const track = document.getElementById('track'); const dotsWrap = document.getElementById('dots'); track.innerHTML = ''; dotsWrap.innerHTML = ''; function createSlide(item) { const div = document.createElement('div'); div.className = 'slide'; div.innerHTML = `<span class="tag" style="background:${item.tagBg}; color:${item.tagColor};">${item.tag}</span><div class="slide-title">${item.title}</div><div class="slide-body">${item.body}</div><a class="slide-cta" href="${item.ctaLink}">${item.cta}</a><div class="slide-image">${item.image && (item.image.startsWith('http') || item.image.startsWith('data:image')) ? `<img src="${item.image}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;" />` : item.image}</div>`; return div; } for (let i = realSlideCount - CLONE_COUNT; i < realSlideCount; i++) { track.appendChild(createSlide(slidesData[i])); } slidesData.forEach(item => track.appendChild(createSlide(item))); for (let i = 0; i < CLONE_COUNT; i++) { track.appendChild(createSlide(slidesData[i])); } carouselCurrent = CLONE_COUNT; carouselPlaying = true; document.getElementById('carouselAutoplayBtn').textContent = 'pause'; document.getElementById('progress-bar').style.transition = 'none'; document.getElementById('progress-bar').style.width = '0%'; slidesData.forEach((_, i) => { const dot = document.createElement('button'); dot.className = 'dot' + (i === 0 ? ' active' : ''); dot.setAttribute('aria-label', `Go to slide ${i + 1}`); dot.onclick = () => goTo(CLONE_COUNT + i); dotsWrap.appendChild(dot); }); function updateSlideOffset() { const firstSlide = track.querySelector('.slide'); if (firstSlide) { const style = getComputedStyle(firstSlide); const marginLeft = parseFloat(style.marginLeft) || 0; const marginRight = parseFloat(style.marginRight) || 0; slideOffset = firstSlide.offsetWidth + marginLeft + marginRight; carouselWidth = track.parentElement.clientWidth; } } updateSlideOffset(); track.style.transition = 'none'; goToImmediate(carouselCurrent); track.offsetHeight; track.style.transition = 'transform 0.38s cubic-bezier(0.4, 0, 0.2, 1)'; function handleTransitionEnd() { if (carouselCurrent < CLONE_COUNT) { carouselCurrent = realSlideCount + carouselCurrent; goToImmediate(carouselCurrent); } else if (carouselCurrent >= realSlideCount + CLONE_COUNT) { carouselCurrent = carouselCurrent - realSlideCount; goToImmediate(carouselCurrent); } const realIndex = (carouselCurrent - CLONE_COUNT + realSlideCount) % realSlideCount; document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === realIndex)); document.getElementById('slide-counter').textContent = `${realIndex + 1} / ${realSlideCount}`; } track.removeEventListener('transitionend', handleTransitionEnd); track.addEventListener('transitionend', handleTransitionEnd); window.addEventListener('resize', () => { updateSlideOffset(); goToImmediate(carouselCurrent); }); if (CAROUSEL_DURATION > 0) startAutoplay(); const images = track.querySelectorAll('img'); let loadedCount = 0; if (images.length > 0) { images.forEach(img => { if (img.complete) { loadedCount++; } else { img.addEventListener('load', () => { loadedCount++; if (loadedCount === images.length) { updateSlideOffset(); goToImmediate(carouselCurrent); } }, { once: true }); } }); if (loadedCount === images.length) { updateSlideOffset(); goToImmediate(carouselCurrent); } } else { setTimeout(() => { updateSlideOffset(); goToImmediate(carouselCurrent); }, 100); } }
-    function goToImmediate(n) { const track = document.getElementById('track'); const firstSlide = track.querySelector('.slide'); if (!firstSlide) return; const style = getComputedStyle(firstSlide); const marginLeft = parseFloat(style.marginLeft) || 0; const marginRight = parseFloat(style.marginRight) || 0; slideOffset = firstSlide.offsetWidth + marginLeft + marginRight; carouselWidth = track.parentElement.clientWidth; const offset = n * slideOffset + marginLeft - (carouselWidth - firstSlide.offsetWidth) / 2; track.style.transition = 'none'; track.style.transform = `translateX(-${offset}px)`; }
-    function goTo(n) { carouselCurrent = (n + totalSlides) % totalSlides; const track = document.getElementById('track'); const firstSlide = track.querySelector('.slide'); if (!firstSlide) return; const style = getComputedStyle(firstSlide); const marginLeft = parseFloat(style.marginLeft) || 0; const marginRight = parseFloat(style.marginRight) || 0; slideOffset = firstSlide.offsetWidth + marginLeft + marginRight; carouselWidth = track.parentElement.clientWidth; const offset = carouselCurrent * slideOffset + marginLeft - (carouselWidth - firstSlide.offsetWidth) / 2; track.style.transition = 'transform 0.38s cubic-bezier(0.4, 0, 0.2, 1)'; track.style.transform = `translateX(-${offset}px)`; const realIndex = (carouselCurrent - CLONE_COUNT + realSlideCount) % realSlideCount; document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === realIndex)); document.getElementById('slide-counter').textContent = `${realIndex + 1} / ${realSlideCount}`; if (carouselPlaying) restartProgress(); }
-    function restartProgress() { clearTimeout(carouselTimer); const bar = document.getElementById('progress-bar'); bar.style.transition = 'none'; bar.style.width = '0%'; requestAnimationFrame(() => requestAnimationFrame(() => { bar.style.transition = `width ${CAROUSEL_DURATION}ms linear`; bar.style.width = '100%'; })); carouselTimer = setTimeout(() => goTo(carouselCurrent + 1), CAROUSEL_DURATION); }
-    function stopAutoplay() { clearTimeout(carouselTimer); const bar = document.getElementById('progress-bar'); bar.style.transition = 'none'; bar.style.width = '0%'; carouselPlaying = false; document.getElementById('carouselAutoplayBtn').textContent = 'resume'; }
-    function startAutoplay() { carouselPlaying = true; document.getElementById('carouselAutoplayBtn').textContent = 'pause'; restartProgress(); }
+    const CAROUSEL_DURATION = 10000;
+    let carouselTimer, carouselPlaying = true;
+    let carouselCurrent = 0;
+    let carouselSlides = [];
+    let slideOffset = 0;
+    let carouselWidth = 0;
+    const CLONE_COUNT = 2;
+    let totalSlides = 0;
+    let realSlideCount = 0;
+    let isTransitioning = false;
+    const CAROUSEL_DEFAULT = [
+      { tag: "Vaccination", title: "Libreng Bakuna sa Tigdas – Marso 20", body: "8:00 AM – 2:00 PM sa Barangay Hall. Magdala ng baby book.", cta: "I-iskedyul", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/vax.webp", tagBg: "#e8eeff", tagColor: "#3352cc" },
+      { tag: "Mission", title: "Medical Mission – Abril 5", body: "9:00 AM – 4:00 PM. Magdala ng ID at gamot.", cta: "Magbasa pa", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medmission.jpeg", tagBg: "#e6f9ee", tagColor: "#1a7a45" },
+      { tag: "Checkup", title: "Prenatal Checkup – Araw‑araw", body: "Lunes hanggang Biyernes, 8:00 AM – 5:00 PM.", cta: "Matuto pa", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prenatal.webp", tagBg: "#fff7e6", tagColor: "#a05a00" },
+      { tag: "Nutrition", title: "Nutrition Fair – Abril 2", body: "Mga libreng timbang at konsulta para sa mga bata.", cta: "Sumali", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/feeding.jpeg", tagBg: "#fde8f0", tagColor: "#9c2254" }
+    ];
+    function buildCarousel(slidesData) {
+      carouselSlides = slidesData;
+      realSlideCount = slidesData.length;
+      totalSlides = realSlideCount + 2 * CLONE_COUNT;
+      const track = document.getElementById('track');
+      const dotsWrap = document.getElementById('dots');
+      track.innerHTML = '';
+      dotsWrap.innerHTML = '';
+      function createSlide(item) {
+        const div = document.createElement('div');
+        div.className = 'slide';
+        div.innerHTML =
+          `<span class="tag" style="background:${item.tagBg}; color:${item.tagColor};">${item.tag}</span>
+           <div class="slide-title">${item.title}</div>
+           <div class="slide-body">${item.body}</div>
+           <a class="slide-cta" href="${item.ctaLink}">${item.cta}</a>
+           <div class="slide-image">${item.image && (item.image.startsWith('http') || item.image.startsWith('data:image')) ? `<img src="${item.image}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;" />` : item.image}</div>`;
+        return div;
+      }
+      for (let i = realSlideCount - CLONE_COUNT; i < realSlideCount; i++) {
+        track.appendChild(createSlide(slidesData[i]));
+      }
+      slidesData.forEach(item => track.appendChild(createSlide(item)));
+      for (let i = 0; i < CLONE_COUNT; i++) {
+        track.appendChild(createSlide(slidesData[i]));
+      }
+      carouselCurrent = CLONE_COUNT;
+      carouselPlaying = true;
+      document.getElementById('carouselAutoplayBtn').textContent = 'pause';
+      document.getElementById('progress-bar').style.transition = 'none';
+      document.getElementById('progress-bar').style.width = '0%';
+      slidesData.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+        dot.onclick = () => goTo(CLONE_COUNT + i);
+        dotsWrap.appendChild(dot);
+      });
+      function updateSlideOffset() {
+        const firstSlide = track.querySelector('.slide');
+        if (firstSlide) {
+          const style = getComputedStyle(firstSlide);
+          const marginLeft = parseFloat(style.marginLeft) || 0;
+          const marginRight = parseFloat(style.marginRight) || 0;
+          slideOffset = firstSlide.offsetWidth + marginLeft + marginRight;
+          carouselWidth = track.parentElement.clientWidth;
+        }
+      }
+      updateSlideOffset();
+      track.style.transition = 'none';
+      goToImmediate(carouselCurrent);
+      track.offsetHeight;
+      track.style.transition = 'transform 0.38s cubic-bezier(0.4, 0, 0.2, 1)';
+      function handleTransitionEnd() {
+        if (carouselCurrent < CLONE_COUNT) {
+          carouselCurrent = realSlideCount + carouselCurrent;
+          goToImmediate(carouselCurrent);
+        } else if (carouselCurrent >= realSlideCount + CLONE_COUNT) {
+          carouselCurrent = carouselCurrent - realSlideCount;
+          goToImmediate(carouselCurrent);
+        }
+        const realIndex = (carouselCurrent - CLONE_COUNT + realSlideCount) % realSlideCount;
+        document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === realIndex));
+        document.getElementById('slide-counter').textContent = `${realIndex + 1} / ${realSlideCount}`;
+      }
+      track.removeEventListener('transitionend', handleTransitionEnd);
+      track.addEventListener('transitionend', handleTransitionEnd);
+      window.addEventListener('resize', () => {
+        updateSlideOffset();
+        goToImmediate(carouselCurrent);
+      });
+      if (CAROUSEL_DURATION > 0) startAutoplay();
+      const images = track.querySelectorAll('img');
+      let loadedCount = 0;
+      if (images.length > 0) {
+        images.forEach(img => {
+          if (img.complete) {
+            loadedCount++;
+          } else {
+            img.addEventListener('load', () => {
+              loadedCount++;
+              if (loadedCount === images.length) {
+                updateSlideOffset();
+                goToImmediate(carouselCurrent);
+              }
+            }, { once: true });
+          }
+        });
+        if (loadedCount === images.length) {
+          updateSlideOffset();
+          goToImmediate(carouselCurrent);
+        }
+      } else {
+        setTimeout(() => {
+          updateSlideOffset();
+          goToImmediate(carouselCurrent);
+        }, 100);
+      }
+    }
+    function goToImmediate(n) {
+      const track = document.getElementById('track');
+      const firstSlide = track.querySelector('.slide');
+      if (!firstSlide) return;
+      const style = getComputedStyle(firstSlide);
+      const marginLeft = parseFloat(style.marginLeft) || 0;
+      const marginRight = parseFloat(style.marginRight) || 0;
+      slideOffset = firstSlide.offsetWidth + marginLeft + marginRight;
+      carouselWidth = track.parentElement.clientWidth;
+      const offset = n * slideOffset + marginLeft - (carouselWidth - firstSlide.offsetWidth) / 2;
+      track.style.transition = 'none';
+      track.style.transform = `translateX(-${offset}px)`;
+    }
+    function goTo(n) {
+      carouselCurrent = (n + totalSlides) % totalSlides;
+      const track = document.getElementById('track');
+      const firstSlide = track.querySelector('.slide');
+      if (!firstSlide) return;
+      const style = getComputedStyle(firstSlide);
+      const marginLeft = parseFloat(style.marginLeft) || 0;
+      const marginRight = parseFloat(style.marginRight) || 0;
+      slideOffset = firstSlide.offsetWidth + marginLeft + marginRight;
+      carouselWidth = track.parentElement.clientWidth;
+      const offset = carouselCurrent * slideOffset + marginLeft - (carouselWidth - firstSlide.offsetWidth) / 2;
+      track.style.transition = 'transform 0.38s cubic-bezier(0.4, 0, 0.2, 1)';
+      track.style.transform = `translateX(-${offset}px)`;
+      const realIndex = (carouselCurrent - CLONE_COUNT + realSlideCount) % realSlideCount;
+      document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === realIndex));
+      document.getElementById('slide-counter').textContent = `${realIndex + 1} / ${realSlideCount}`;
+      if (carouselPlaying) restartProgress();
+    }
+    function restartProgress() {
+      clearTimeout(carouselTimer);
+      const bar = document.getElementById('progress-bar');
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        bar.style.transition = `width ${CAROUSEL_DURATION}ms linear`;
+        bar.style.width = '100%';
+      }));
+      carouselTimer = setTimeout(() => goTo(carouselCurrent + 1), CAROUSEL_DURATION);
+    }
+    function stopAutoplay() {
+      clearTimeout(carouselTimer);
+      const bar = document.getElementById('progress-bar');
+      bar.style.transition = 'none';
+      bar.style.width = '0%';
+      carouselPlaying = false;
+      document.getElementById('carouselAutoplayBtn').textContent = 'resume';
+    }
+    function startAutoplay() {
+      carouselPlaying = true;
+      document.getElementById('carouselAutoplayBtn').textContent = 'pause';
+      restartProgress();
+    }
     document.getElementById('prev').addEventListener('click', () => { goTo(carouselCurrent - 1); if (!carouselPlaying) stopAutoplay(); });
     document.getElementById('next').addEventListener('click', () => { goTo(carouselCurrent + 1); if (!carouselPlaying) stopAutoplay(); });
     document.getElementById('carouselAutoplayBtn').addEventListener('click', () => { carouselPlaying ? stopAutoplay() : startAutoplay(); });
@@ -2507,15 +3048,101 @@ Expected outcomes include improved access to localized health information, enhan
     const HEALTH_MODULES_JSON_URL = 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/health-modules.json';
     const MEDICINE_JSON_URL = 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicine-inventory.json';
     const RHU_SERVICES_JSON_URL = 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rhu-services.json';
-    const RHU_SERVICES_CACHE_KEY = 'abotKamayRHUServices'; let rhuData = null;
-    fetch(CAROUSEL_JSON_URL).then(res => res.json()).then(data => { if (Array.isArray(data) && data.length) { buildCarousel(data); } else { buildCarousel(CAROUSEL_DEFAULT); } }).catch(() => buildCarousel(CAROUSEL_DEFAULT));
-    window.addEventListener('online', () => { async function refreshMedicine() { try { const response = await fetch(MEDICINE_JSON_URL); if (!response.ok) throw new Error('Fetch failed'); const data = await response.json(); if (data.inventory && Array.isArray(data.inventory)) { localStorage.setItem('abotKamayMedicine', JSON.stringify(data.inventory)); if (data.lastUpdated) { localStorage.setItem(INVENTORY_LAST_UPDATED_KEY, data.lastUpdated); } renderMedicineInventory(data.inventory); } } catch (err) { console.warn('Online medicine refresh failed.'); } } async function refreshRHU() { try { const response = await fetch(RHU_SERVICES_JSON_URL); if (!response.ok) throw new Error('Fetch failed'); const data = await response.json(); localStorage.setItem(RHU_SERVICES_CACHE_KEY, JSON.stringify(data)); rhuData = data; const activeBtn = document.querySelector('.rhu-subtab.active'); if (activeBtn) { const tabId = activeBtn.getAttribute('data-rhu-tab'); if (tabId !== 'medicine') renderRHUPane(tabId); } } catch (err) { console.warn('Online RHU refresh failed.'); } } refreshMedicine(); refreshRHU(); });
+    const RHU_SERVICES_CACHE_KEY = 'abotKamayRHUServices';
+    let rhuData = null;
+
+    fetch(CAROUSEL_JSON_URL)
+      .then(res => res.json())
+      .then(data => {
+        if (Array.isArray(data) && data.length) {
+          buildCarousel(data);
+        } else {
+          buildCarousel(CAROUSEL_DEFAULT);
+        }
+      })
+      .catch(() => buildCarousel(CAROUSEL_DEFAULT));
+
+    window.addEventListener('online', () => {
+      async function refreshMedicine() {
+        try {
+          const response = await fetch(MEDICINE_JSON_URL);
+          if (!response.ok) throw new Error('Fetch failed');
+          const data = await response.json();
+          if (data.inventory && Array.isArray(data.inventory)) {
+            localStorage.setItem('abotKamayMedicine', JSON.stringify(data.inventory));
+            if (data.lastUpdated) {
+              localStorage.setItem(INVENTORY_LAST_UPDATED_KEY, data.lastUpdated);
+            }
+            renderMedicineInventory(data.inventory);
+          }
+        } catch (err) {
+          console.warn('Online medicine refresh failed.');
+        }
+      }
+      async function refreshRHU() {
+        try {
+          const response = await fetch(RHU_SERVICES_JSON_URL);
+          if (!response.ok) throw new Error('Fetch failed');
+          const data = await response.json();
+          localStorage.setItem(RHU_SERVICES_CACHE_KEY, JSON.stringify(data));
+          rhuData = data;
+          const activeBtn = document.querySelector('.rhu-subtab.active');
+          if (activeBtn) {
+            const tabId = activeBtn.getAttribute('data-rhu-tab');
+            if (tabId !== 'medicine') renderRHUPane(tabId);
+          }
+        } catch (err) {
+          console.warn('Online RHU refresh failed.');
+        }
+      }
+      refreshMedicine();
+      refreshRHU();
+    });
 
     // ---------- INIT ----------
     const savedSession = localStorage.getItem(CURRENT_USER_KEY);
-    if (savedSession) { try { const { user, token } = JSON.parse(savedSession); const users = getUsers(); const storedUser = users.find(u => u.uid === user.uid); if (storedUser && storedUser.sessionToken === token) { currentUser = { uid: user.uid, fullName: storedUser.fullName, username: storedUser.username, role: storedUser.role, keepLoggedIn: user.keepLoggedIn }; updateUIForLoginState(); loadPatients(); loadAppointments(); sendOfflineQueue(); updateUpcomingServices(); resetInactivityTimer(); } else { localStorage.removeItem(CURRENT_USER_KEY); updateUIForLoginState(); } } catch(e) { localStorage.removeItem(CURRENT_USER_KEY); updateUIForLoginState(); } } else { updateUIForLoginState(); }
-    loadCachedOrFallback(); setupEduButtons();
-    (function setTodayDate() { const today = new Date(); const dateEl = document.getElementById('currentDate'); const dayEl  = document.getElementById('currentDay'); if (dateEl) { dateEl.textContent = today.toLocaleDateString('tl-PH', { year: 'numeric', month: 'long', day: 'numeric' }).replace('  ', ' '); } if (dayEl) { dayEl.textContent = today.toLocaleDateString('tl-PH', { weekday: 'long' }); } })();
+    if (savedSession) {
+      try {
+        const { user, token } = JSON.parse(savedSession);
+        const users = getUsers();
+        const storedUser = users.find(u => u.uid === user.uid);
+        if (storedUser && storedUser.sessionToken === token) {
+          currentUser = {
+            uid: user.uid,
+            fullName: storedUser.fullName,
+            username: storedUser.username,
+            role: storedUser.role,
+            keepLoggedIn: user.keepLoggedIn
+          };
+          updateUIForLoginState();
+          loadPatients();
+          loadAppointments();
+          sendOfflineQueue();
+          updateUpcomingServices();
+          resetInactivityTimer();
+        } else {
+          localStorage.removeItem(CURRENT_USER_KEY);
+          updateUIForLoginState();
+        }
+      } catch(e) {
+        localStorage.removeItem(CURRENT_USER_KEY);
+        updateUIForLoginState();
+      }
+    } else {
+      updateUIForLoginState();
+    }
+    loadCachedOrFallback();
+    (function setTodayDate() {
+      const today = new Date();
+      const dateEl = document.getElementById('currentDate');
+      const dayEl  = document.getElementById('currentDay');
+      if (dateEl) {
+        dateEl.textContent = today.toLocaleDateString('tl-PH', { year: 'numeric', month: 'long', day: 'numeric' }).replace('  ', ' ');
+      }
+      if (dayEl) {
+        dayEl.textContent = today.toLocaleDateString('tl-PH', { weekday: 'long' });
+      }
+    })();
   })();
 </script>
 </body>

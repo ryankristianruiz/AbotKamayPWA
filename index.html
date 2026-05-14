@@ -7,1173 +7,1356 @@
   <title>Abot-Kamay · Health Companion</title>
   <link rel="manifest" href="manifest.json">
 
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    :root {
-      --color-bg-deep:       #2D0060;
-      --color-bg-mid:        #4B0082;
-      --color-bg-light:      #6A0DAD;
-      --color-accent:        #9B30FF;
-      --color-card-glass:    rgba(255,255,255,0.10);
-      --color-card-border:   rgba(255,255,255,0.18);
-      --color-text-primary:  #FFFFFF;
-      --color-text-muted:    rgba(255,255,255,0.65);
-      --color-pill-bg:       rgba(255,255,255,0.15);
-      --color-pill-hover:    rgba(255,255,255,0.25);
-      --color-tag-gold:      #C8A84B;
-    }
-      body {
-        font-family: 'Poppins', sans-serif;
-        color: #ffffff;
-        padding-bottom: 70px;
-        line-height: 1.6;
-        font-size: 16px;
-      }
-      #appContainer {
-      position: relative;
-      z-index: 2;
-    }
-    #appContainer { display: block; }
+  :root {
+    --color-bg-deep:       #2D0060;
+    --color-bg-mid:        #4B0082;
+    --color-bg-light:      #6A0DAD;
+    --color-accent:        #9B30FF;
+    --color-card-glass:    rgba(255,255,255,0.10);
+    --color-card-border:   rgba(255,255,255,0.18);
+    --color-text-primary:  #FFFFFF;
+    --color-text-muted:    rgba(255,255,255,0.65);
+    --color-pill-bg:       rgba(255,255,255,0.15);
+    --color-pill-hover:    rgba(255,255,255,0.25);
+    --color-tag-gold:      #C8A84B;
+  }
+  body {
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    padding-bottom: 70px;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+  #appContainer {
+    position: relative;
+    z-index: 2;
+  }
+  #appContainer { display: block; }
 
-    /* ---------- HEADER (premium glass) ---------- */
-    .app-header {
-      backdrop-filter: blur(72px) saturate(180%);
-      -webkit-backdrop-filter: blur(72px) saturate(180%);
-      background: rgba(31, 0, 58, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
-      color: #ffffff;
-      padding: 16px 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-      overflow: hidden;
-    }
-    .app-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.8),
-        transparent
-      );
-    }
-    .app-header::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 1px;
-      height: 100%;
-      background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.8),
-        transparent,
-        rgba(255, 255, 255, 0.3)
-      );
-    }
+  /* ---------- HEADER (premium glass) ---------- */
+  .app-header {
+    backdrop-filter: blur(72px) saturate(180%);
+    -webkit-backdrop-filter: blur(72px) saturate(180%);
+    background: rgba(31, 0, 58, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+    color: #ffffff;
+    padding: 16px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    overflow: hidden;
+  }
+  .app-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  }
+  .app-header::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent, rgba(255, 255, 255, 0.3));
+  }
+  .app-header h1 {
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 2.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .offline-badge {
+    background: #8deeff;
+    color: #130420;
+    font-size: 0.7rem;
+    font-weight: bold;
+    padding: 4px 10px;
+    border-radius: 30px;
+  }
+  .logout-btn {
+    background: #814daa;
+    border: none;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+  }
+  .logout-btn:hover { background: #1f003a; }
+
+  /* ---------- TAB BAR (premium glass) ---------- */
+  .tab-bar {
+    display: flex;
+    backdrop-filter: blur(64px) saturate(160%);
+    -webkit-backdrop-filter: blur(64px) saturate(160%);
+    background: rgba(31, 0, 58, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+    padding: 0 8px;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .tab-bar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  }
+  .tab-bar::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent, rgba(255, 255, 255, 0.3));
+  }
+  .tab-bar button {
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+    font-weight: 500;
+    background: none;
+    border: none;
+    padding: 14px 16px;
+    font-size: 0.95rem;
+    color: #ffffff;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.4);
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .tab-bar button.active {
+    color: #ffffff;
+    border-bottom: 3px solid #cf90ff;
+    text-shadow: 0 0 10px rgba(207,144,255,0.6);
+  }
+  .rhu-subtab.active {
+    background: #cf90ff;
+    color: #130420;
+    border-color: #cf90ff;
+  }
+  .rhu-subtab {
+    flex: 1;
+    min-width: 0;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .container { padding: 18px 16px; }
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* ---------- CARDS (glass) ---------- */
+  .card {
+    background: rgba(31, 0, 58, 0.55);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+    padding: 18px 16px;
+    margin-bottom: 18px;
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
+  }
+  .card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent, rgba(255, 255, 255, 0.3));
+  }
+
+  h2, h3, h4 {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 12px;
+  }
+  h2 { font-size: 1.35rem; }
+  h3 { font-size: 1.2rem; border-bottom: 1px solid #814daa; padding-bottom: 4px; }
+  h4 { font-size: 1rem; color: #cf90ff; }
+  .service-list, .contact-list { list-style: none; }
+  .service-list li, .contact-list li {
+    padding: 12px 0;
+    border-bottom: 1px solid #814daa;
+    display: flex;
+    justify-content: space-between;
+    color: #ffffff;
+  }
+  .badge {
+    background: #8deeff;
+    color: #130420;
+    padding: 4px 10px;
+    border-radius: 40px;
+    font-size: 0.75rem;
+    font-weight: 600;
+  }
+  .emergency-number {
+    background: #ffc2e8;
+    border-left: 4px solid #cf90ff;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    color: #130420;
+  }
+  .btn {
+    background: #cf90ff;
+    color: #130420;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 40px;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+    font-weight: bold;
+    font-size: 0.95rem;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .btn:hover { background: #1f003a; color: #ffffff; }
+  .btn-outline {
+    background: transparent;
+    color: #cf90ff;
+    border: 1.5px solid #814daa;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .btn-outline:hover { background: #1f003a; color: #ffffff; border-color: #cf90ff; }
+  .btn-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 40px;
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+  }
+  .btn-pill:hover { background: rgba(255,255,255,0.22); }
+  input, select, textarea {
+    width: 100%;
+    padding: 14px 16px;
+    margin: 8px 0;
+    border: 1.5px solid #814daa;
+    border-radius: 20px;
+    font-size: 1rem;
+    background: #200548;
+    color: #ffffff;
+  }
+  label { font-weight: 600; margin-top: 6px; display: block; color: #ffffff; }
+  .record-item {
+    background: rgba(255,255,255,0.05);
+    padding: 14px;
+    border-radius: 18px;
+    margin-bottom: 10px;
+    position: relative;
+    padding-right: 80px;
+    color: #ffffff;
+  }
+  .reminder-alert {
+    background: #8deeff;
+    border-radius: 16px;
+    padding: 12px;
+    margin: 15px 0;
+    border-left: 4px solid #cf90ff;
+    color: #130420;
+  }
+  .footer-note {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #cf90ff;
+    margin-top: 25px;
+  }
+  .edu-cat-btn.active { background: #cf90ff; color: #130420; }
+  .auth-form input {
+    width: 100%;
+    padding: 14px 16px;
+    margin: 10px 0;
+    border: 1.5px solid #814daa;
+    border-radius: 30px;
+    font-size: 1rem;
+    background: #200548;
+    color: #ffffff;
+  }
+  .auth-form button {
+    background: #cf90ff;
+    color: #130420;
+    border: none;
+    padding: 14px;
+    border-radius: 40px;
+    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
+    font-weight: bold;
+    width: 100%;
+    margin-top: 16px;
+    cursor: pointer;
+  }
+  .auth-form button:hover { background: #1f003a; color: #ffffff; }
+  .error-msg { color: #ffc2e8; margin-top: 8px; font-size: 0.9rem; }
+  .hidden-tab { display: none !important; }
+  .service-category { margin-bottom: 16px; }
+  .service-description { padding-left: 8px; margin-bottom: 6px; color: #ffffff; }
+  .notification-bar {
+    background: #8deeff;
+    border: 1px solid #cf90ff;
+    border-radius: 20px;
+    padding: 14px 16px;
+    margin: 0 0 18px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #130420;
+  }
+  .notification-bar p { margin: 0; }
+  .notification-bar .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #130420;
+  }
+  .low-stock-summary {
+    background: #ffc2e8;
+    border-left: 4px solid #cf90ff;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    color: #130420;
+  }
+  .vaccine-badge {
+    background: #8deeff;
+    color: #130420;
+    padding: 2px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-left: 8px;
+    display: inline-block;
+  }
+  .user-stats {
+    background: #ffc2e8;
+    padding: 12px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+    color: #130420;
+  }
+  .sync-status { font-size: 0.9rem; margin: 8px 0; }
+  .sync-success { color: #8deeff; }
+  .sync-error { color: #ffc2e8; }
+  a { color: #cf90ff; text-decoration: none; }
+  a:hover { color: #ffc2e8; }
+
+  /* Carousel */
+  .carousel-wrapper { width: 100%; margin-top: 18px; margin-bottom: 18px; }
+  .carousel {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    background: rgba(31, 0, 58, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+  }
+  .track {
+    display: flex;
+    gap: 0;
+    transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .slide {
+    min-width: 0;
+    width: 70%;
+    flex-shrink: 0;
+    padding: 1.5rem 1.25rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-left: 15%;
+    margin-right: 15%;
+  }
+  .slide-image {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    height: auto;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    margin-top: 6px;
+    background: rgba(255,255,255,0.08);
+  }
+  .tag {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 99px;
+    display: inline-block;
+    width: fit-content;
+  }
+  .slide-title { font-size: 18px; font-weight: 600; color: #ffffff; line-height: 1.3; }
+  .slide-body { font-size: 13px; color: #cf90ff; line-height: 1.65; }
+  .slide-cta {
+    margin-top: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid #814daa;
+    border-radius: 8px;
+    padding: 6px 14px;
+    background: transparent;
+    color: #8deeff;
+    width: fit-content;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+  .slide-cta:hover { background: rgba(141,238,255,0.1); }
+  .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #1f003a;
+    border: 1px solid #814daa;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 14px;
+    color: #ffffff;
+    z-index: 10;
+    transition: background 0.15s;
+  }
+  .nav:hover { background: #814daa; }
+  .nav-left  { left: 8px; }
+  .nav-right { right: 8px; }
+  .progress { height: 3px; background: #814daa; }
+  .progress-bar { height: 100%; background: #8deeff; width: 0%; transition: width linear; }
+  .dots { display: flex; justify-content: center; gap: 6px; padding: 0.7rem 0 0.3rem; }
+  .dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: #814daa; cursor: pointer; border: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .dot.active { background: #8deeff; transform: scale(1.35); }
+  .controls-row { display: flex; align-items: center; justify-content: space-between; padding: 0 0 4px; }
+  .controls-label { font-size: 12px; color: #cf90ff; }
+  .toggle-btn { font-size: 12px; color: #cf90ff; cursor: pointer; background: none; border: none; padding: 0; }
+  .toggle-btn:hover { color: #8deeff; }
+
+  /* ---------- BENTO HOME LAYOUT ---------- */
+  .home-bento {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+  .home-bento .card {
+    margin-bottom: 0;
+  }
+  .card-greeting {
+    grid-column: 1 / 2;
+    grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .card-user {
+    grid-column: 2 / 3;
+    grid-row: 1 / 2;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .card-date {
+    grid-column: 2 / 3;
+    grid-row: 2 / 3;
+  }
+  /* HOME PAGE FONT SIZES (default for larger screens) */
+  .card-greeting h2 {
+    font-size: 2.8rem;
+    line-height: 1.1;
+  }
+  .card-greeting p {
+    font-size: 1.4rem;
+  }
+  .card-user #accountTypeDisplay {
+    font-size: 2.2rem;
+  }
+  .card-user > div:last-child {
+    font-size: 1.3rem;
+  }
+  .card-date #currentDate {
+    font-size: 4rem;
+    line-height: 1.1;
+  }
+  .card-date #currentDay {
+    font-size: 1.6rem;
+    margin-top: 6px;
+  }
+  .card-greeting p:last-of-type {
+    font-size: 1.15rem;
+  }
+
+  /* ---------- HEALTH ED – HORIZONTAL SCROLL & HERO CARD ---------- */
+  #readMoreRow .mini-card {
+    flex: 0 0 170px;
+    height: 185px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.2);
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 10px;
+    color: #fff;
+    cursor: pointer;
+  }
+  #readMoreRow .mini-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 40%, rgba(0,0,0,0.6) 100%);
+    pointer-events: none;
+  }
+  #readMoreRow .mini-card .title {
+    position: relative;
+    z-index: 1;
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  #readMoreRow .mini-card .desc {
+    position: relative;
+    z-index: 1;
+    font-size: 1.1rem;
+    opacity: 0.8;
+  }
+  /* HEALTH ED TAB – WHITE & LARGER TEXT */
+  #education .card h3,
+  #education .card h4,
+  #education .card p,
+  #education .card span,
+  #education .card button,
+  #education .card input,
+  #education .card div {
+    color: #ffffff !important;
+  }
+  #education .card h3 {
+    font-size: 1.6rem !important;
+  }
+  #education .card h4 {
+    font-size: 1.2rem !important;
+  }
+  #education .card p,
+  #education .card button {
+    font-size: 1.05rem !important;
+  }
+  #education .edu-cat-btn {
+    color: #ffffff !important;
+    border-color: rgba(255,255,255,0.5) !important;
+  }
+  #education .edu-cat-btn.active {
+    background: #cf90ff;
+    color: #130420 !important;
+  }
+  #education #healthSearch {
+    color: #ffffff !important;
+    font-size: 1.05rem !important;
+  }
+  #education #healthSearch::placeholder {
+    color: rgba(255,255,255,0.7) !important;
+  }
+  /* HEALTH EDUCATION – IMAGE CATEGORY GRID */
+  .edu-cat-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+  .edu-cat-slider .edu-cat-btn {
+    flex: 0 0 230px;
+    height: 400px;
+    scroll-snap-align: start;
+    border-radius: 16px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.25s, transform 0.2s;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+  }
+  .edu-cat-btn {
+    aspect-ratio: 1 / 1;
+    border-radius: 16px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: border-color 0.25s, transform 0.2s;
+    display: flex;
+    align-items: flex-end;
+    padding: 10px;
+  }
+  .edu-cat-btn:hover {
+    transform: scale(1.03);
+  }
+  .edu-cat-btn.active {
+    border-color: #cf90ff;
+  }
+  .edu-cat-btn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 35%, rgba(0,0,0,0.65) 100%);
+    pointer-events: none;
+  }
+  .edu-cat-label {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+    font-weight: 700;
+    font-size: 1rem;
+    line-height: 1.2;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    text-align: left;
+    white-space: normal;
+  }
+  .edu-cat-btn {
+    background: none;
+    color: inherit;
+  }
+  .health-ed-detail {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 24px;
+    padding: 20px;
+    margin-top: 10px;
+    color: #fff;
+  }
+  .detail-section { margin-bottom: 28px; }
+  .detail-section h4 {
+    font-size: 1.3rem;
+    color: #cf90ff;
+    border-left: 4px solid #cf90ff;
+    padding-left: 12px;
+    margin-bottom: 8px;
+  }
+  .info-card {
+    background: rgba(255,255,255,0.08);
+    border-radius: 20px;
+    padding: 16px;
+    margin: 16px 0;
+  }
+  .hidden-view { display: none; }
+
+  /* FAQ rows */
+  .faq-section { padding: 16px 0; }
+  .faq-section h2 { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: white; }
+  .faq-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    margin-bottom: 8px;
+    border-radius: 12px;
+    color: white;
+  }
+  .faq-row span { font-size: 13px; }
+  .faq-row strong { font-weight: 700; }
+
+  /* Info grid */
+  .info-label {
+    text-align: right;
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.8);
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+  .info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .grid-card {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    height: 450px;
+    background-size: cover;
+    background-position: center;
+  }
+  .grid-card-body {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    right: 8px;
+    padding: 10px 12px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 14px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .grid-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, transparent 60%, rgba(20,0,50,0.2));
+    border-radius: 18px;
+  }
+  .grid-card-title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 1.2;
+    color: white;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+  }
+  .grid-card .pill-btn.mini {
+    z-index: 2;
+    font-size: 10px;
+    padding: 5px 10px;
+    align-self: flex-start;
+  }
+  .pill-btn.mini {
+    font-size: 10px;
+    padding: 5px 10px 5px 12px;
+  }
+  .pill-btn.mini .arrow-circle {
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+  }
+
+  /* Glass card (reuse) */
+  .glass-card {
+    background: rgba(255,255,255,0.09);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.18);
+    color: white;
+  }
+
+  /* Pill button & arrow icon */
+  .pill-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--color-pill-bg);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 999px;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .arrow-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: white;
+    color: #2D0060;
+    font-size: 12px;
+    font-weight: bold;
+  }
+
+  .back-button {
+    background: var(--color-accent);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ---------- COMMUNICABLE OVERVIEW PAGE ---------- */
+  .comm-overview-hero {
+    background: linear-gradient(135deg, #4B0082 0%, #7B00CC 100%);
+    border-radius: 20px;
+    padding: 24px 20px;
+    margin-bottom: 16px;
+    position: relative;
+    overflow: hidden;
+  }
+  .comm-overview-hero::before {
+    content: '🦠';
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 72px;
+    opacity: 0.18;
+  }
+  .comm-overview-hero h1 {
+    font-size: 22px;
+    font-weight: 900;
+    color: white;
+    margin-bottom: 4px;
+  }
+  .comm-overview-hero .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 12px;
+    color: white;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.35);
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 12px;
+    color: white;
+    margin-bottom: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+  .comm-overview-hero p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.6;
+    max-width: 280px;
+  }
+  .spread-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .spread-item {
+    background: rgba(255,255,255,0.09);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 14px;
+    padding: 12px 8px;
+    text-align: center;
+  }
+  .spread-item .spread-icon {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 5px;
+  }
+  .spread-item span:last-child {
+    font-size: 10px;
+    color: rgba(255,255,255,0.75);
+    font-weight: 600;
+    line-height: 1.3;
+    display: block;
+  }
+  .section-label-left {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+  .disease-nav-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .disease-nav-card {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+  .disease-nav-card:hover { transform: scale(1.02); }
+  .disease-nav-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(transparent 30%, rgba(20,0,50,0.85));
+  }
+  .disease-nav-card-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    z-index: 2;
+  }
+  .disease-nav-card-body .d-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+    line-height: 1.2;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+    margin-bottom: 6px;
+  }
+  .disease-nav-card-body .d-sub {
+    font-size: 10px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 6px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+  }
+  .tip-box {
+    background: rgba(155,48,255,0.25);
+    border: 1px solid rgba(155,48,255,0.4);
+    border-radius: 16px;
+    padding: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+
+  /* Hero section (TB detail) */
+  .detail-hero {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero-bacteria {
+    width: 250px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.55));
+    flex-shrink: 0;
+    margin-left: 0;
+  }
+  .hero-text {
+    text-align: left;
+    z-index: 3;
+  }
+  .hero-title {
+    font-size: 60px;
+    font-weight: 900;
+    color: white;
+    letter-spacing: -0.5px;
+    line-height: 1;
+    margin-bottom: 4px;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+  }
+  .hero-subtitle {
+    font-size: 13px;
+    color: rgba(255,255,255,0.72);
+    font-weight: 400;
+    margin-bottom: 14px;
+  }
+  .description-card {
+    margin-top: 12px;
+    padding: 14px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    background: rgba(255,255,255,0.09);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 16px;
+    display: none;
+  }
+
+  /* FAQ section (vertical layout) */
+  .faq-row {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 14px;
+    cursor: default;
+  }
+  .faq-top-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .faq-answer {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 12px;
+    color: rgba(255,255,255,0.82);
+    line-height: 1.65;
+    display: none;
+  }
+  .faq-answer.open {
+    display: block;
+  }
+
+  /* Grid card sub‑detail view */
+  .sub-detail-view {
+    display: none;
+    margin-top: 10px;
+  }
+  .sub-hero {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+    margin-bottom: 16px;
+  }
+  .sub-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(30,0,60,0.1) 0%, rgba(10,0,40,0.9) 100%);
+    border-radius: 20px;
+  }
+  .sub-hero-title {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    font-size: 24px;
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+  }
+  .sub-content {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.18);
+    border-radius: 16px;
+    padding: 16px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.9);
+    line-height: 1.7;
+  }
+
+  /* Increase FAQ font size */
+  .faq-question {
+    font-size: 1rem !important;
+    line-height: 1.5;
+  }
+  .faq-answer {
+    font-size: 1rem !important;
+    line-height: 1.6;
+  }
+  .pill-btn {
+    font-size: 0.85rem !important;
+  }
+
+  /* ========== RESPONSIVE ADDITIONS (modified) ========== */
+
+  /* For tablets and smaller desktops (max-width: 1024px) */
+  @media (max-width: 1024px) {
     .app-header h1 {
-      font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
-      font-weight: bold;
-      font-size: 2.2rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 1.6rem;
     }
-    .offline-badge {
-      background: #8deeff;
-      color: #130420;
-      font-size: 0.7rem;
-      font-weight: bold;
-      padding: 4px 10px;
-      border-radius: 30px;
-    }
-    .logout-btn {
-      background: #814daa;
-      border: none;
-      color: #ffffff;
-      padding: 6px 12px;
-      border-radius: 30px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      cursor: pointer;
-    }
-    .logout-btn:hover { background: #1f003a; }
-
-    /* ---------- TAB BAR (premium glass) ---------- */
-    .tab-bar {
-      display: flex;
-      backdrop-filter: blur(64px) saturate(160%);
-      -webkit-backdrop-filter: blur(64px) saturate(160%);
-      background: rgba(31, 0, 58, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
-      padding: 0 8px;
-      overflow-x: auto;
-      white-space: nowrap;
-      scrollbar-width: none;
-      position: relative;
-      overflow: hidden;
-    }
-    .tab-bar::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.8),
-        transparent
-      );
-    }
-    .tab-bar::after {
-      content: '';
-      position: absolute;
-      top: 0; left: 0;
-      width: 1px;
-      height: 100%;
-      background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.8),
-        transparent,
-        rgba(255, 255, 255, 0.3)
-      );
-    }
-
-    .tab-bar button {
-      font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
-      font-weight: 500;
-      background: none;
-      border: none;
-      padding: 14px 16px;
-      font-size: 0.95rem;
-      color: #ffffff;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.4);
-      border-bottom: 3px solid transparent;
-      cursor: pointer;
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-    }
-    .tab-bar button.active {
-      color: #ffffff;
-      border-bottom: 3px solid #cf90ff;
-      text-shadow: 0 0 10px rgba(207,144,255,0.6);
-    }
-    .rhu-subtab.active {
-      background: #cf90ff;
-      color: #130420;
-      border-color: #cf90ff;
-    }
-    .rhu-subtab {
-      flex: 1;
-      min-width: 0;
-      text-align: center;
-      white-space: nowrap;
-    }
-
-    .container { padding: 18px 16px; }
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    /* ---------- CARDS (glass) ---------- */
-    .card {
-      background: rgba(31, 0, 58, 0.55);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
-      padding: 18px 16px;
-      margin-bottom: 18px;
-      color: #ffffff;
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(255, 255, 255, 0.8),
-        transparent
-      );
-    }
-
-    .card::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 1px;
-      height: 100%;
-      background: linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.8),
-        transparent,
-        rgba(255, 255, 255, 0.3)
-      );
-    }
-
-    h2, h3, h4 {
-      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-      font-weight: bold;
-      color: #ffffff;
-      margin-bottom: 12px;
-    }
-    h2 { font-size: 1.35rem; }
-    h3 { font-size: 1.2rem; border-bottom: 1px solid #814daa; padding-bottom: 4px; }
-    h4 { font-size: 1rem; color: #cf90ff; }
-    .service-list, .contact-list { list-style: none; }
-    .service-list li, .contact-list li {
-      padding: 12px 0;
-      border-bottom: 1px solid #814daa;
-      display: flex;
-      justify-content: space-between;
-      color: #ffffff;
-    }
-    .badge {
-      background: #8deeff;
-      color: #130420;
-      padding: 4px 10px;
-      border-radius: 40px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-    .emergency-number {
-      background: #ffc2e8;
-      border-left: 4px solid #cf90ff;
-      padding: 12px;
-      border-radius: 12px;
-      margin-bottom: 12px;
-      color: #130420;
-    }
-    .btn {
-      background: #cf90ff;
-      color: #130420;
-      border: none;
-      padding: 12px 18px;
-      border-radius: 40px;
-      font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
-      font-weight: bold;
-      font-size: 0.95rem;
-      width: 100%;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .btn:hover { background: #1f003a; color: #ffffff; }
-    .btn-outline {
-      background: transparent;
-      color: #cf90ff;
-      border: 1.5px solid #814daa;
-      font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .btn-outline:hover { background: #1f003a; color: #ffffff; border-color: #cf90ff; }
-    .btn-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 18px;
-      background: rgba(255,255,255,0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 40px;
-      color: #ffffff;
-      cursor: pointer;
-      font-size: 0.9rem;
-      font-weight: 500;
-      text-decoration: none;
-    }
-    .btn-pill:hover { background: rgba(255,255,255,0.22); }
-    input, select, textarea {
-      width: 100%;
-      padding: 14px 16px;
-      margin: 8px 0;
-      border: 1.5px solid #814daa;
-      border-radius: 20px;
-      font-size: 1rem;
-      background: #200548;
-      color: #ffffff;
-    }
-    label { font-weight: 600; margin-top: 6px; display: block; color: #ffffff; }
-    .record-item {
-      background: rgba(255,255,255,0.05);
-      padding: 14px;
-      border-radius: 18px;
-      margin-bottom: 10px;
-      position: relative;
-      padding-right: 80px;
-      color: #ffffff;
-    }
-    .reminder-alert {
-      background: #8deeff;
-      border-radius: 16px;
-      padding: 12px;
-      margin: 15px 0;
-      border-left: 4px solid #cf90ff;
-      color: #130420;
-    }
-    .footer-note {
-      text-align: center;
-      font-size: 0.75rem;
-      color: #cf90ff;
-      margin-top: 25px;
-    }
-    .edu-cat-btn.active { background: #cf90ff; color: #130420; }
-    .auth-form input {
-      width: 100%;
-      padding: 14px 16px;
-      margin: 10px 0;
-      border: 1.5px solid #814daa;
-      border-radius: 30px;
-      font-size: 1rem;
-      background: #200548;
-      color: #ffffff;
-    }
-    .auth-form button {
-      background: #cf90ff;
-      color: #130420;
-      border: none;
-      padding: 14px;
-      border-radius: 40px;
-      font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
-      font-weight: bold;
-      width: 100%;
-      margin-top: 16px;
-      cursor: pointer;
-    }
-    .auth-form button:hover { background: #1f003a; color: #ffffff; }
-    .error-msg { color: #ffc2e8; margin-top: 8px; font-size: 0.9rem; }
-    .hidden-tab { display: none !important; }
-    .service-category { margin-bottom: 16px; }
-    .service-description { padding-left: 8px; margin-bottom: 6px; color: #ffffff; }
-    .notification-bar {
-      background: #8deeff;
-      border: 1px solid #cf90ff;
-      border-radius: 20px;
-      padding: 14px 16px;
-      margin: 0 0 18px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #130420;
-    }
-    .notification-bar p { margin: 0; }
-    .notification-bar .close-btn {
-      background: none;
-      border: none;
-      font-size: 1.2rem;
-      cursor: pointer;
-      color: #130420;
-    }
-    .low-stock-summary {
-      background: #ffc2e8;
-      border-left: 4px solid #cf90ff;
-      padding: 12px;
-      border-radius: 12px;
-      margin-bottom: 16px;
-      color: #130420;
-    }
-    .vaccine-badge {
-      background: #8deeff;
-      color: #130420;
-      padding: 2px 10px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      margin-left: 8px;
-      display: inline-block;
-    }
-    .user-stats {
-      background: #ffc2e8;
-      padding: 12px;
-      border-radius: 12px;
-      margin-bottom: 15px;
-      font-size: 0.9rem;
-      color: #130420;
-    }
-    .sync-status { font-size: 0.9rem; margin: 8px 0; }
-    .sync-success { color: #8deeff; }
-    .sync-error { color: #ffc2e8; }
-    a { color: #cf90ff; text-decoration: none; }
-    a:hover { color: #ffc2e8; }
-
-    /* Carousel */
-    .carousel-wrapper { width: 100%; margin-top: 18px; margin-bottom: 18px; }
-    .carousel {
-      position: relative;
-      overflow: hidden;
-      border-radius: 16px;
-      background: rgba(31, 0, 58, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5),
-        inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-        inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
-    }
-    .track {
-      display: flex;
-      gap: 0;
-      transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+    .app-header > div > span {
+      font-size: 1.2rem !important;
     }
     .slide {
-      min-width: 0;
-      width: 70%;
-      flex-shrink: 0;
-      padding: 1.5rem 1.25rem 1.25rem;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-left: 15%;
-      margin-right: 15%;
+      width: 85%;
+      margin-left: 7.5%;
+      margin-right: 7.5%;
     }
-    .slide-image {
-      width: 100%;
-      aspect-ratio: 1 / 1;
-      height: auto;
-      border-radius: 10px;
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 40px;
-      margin-top: 6px;
-      background: rgba(255,255,255,0.08);
+    .edu-cat-slider .edu-cat-btn {
+      width: 200px;
+      height: 350px;
     }
-    .tag {
-      font-size: 11px;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 3px 10px;
-      border-radius: 99px;
-      display: inline-block;
-      width: fit-content;
-    }
-    .slide-title { font-size: 18px; font-weight: 600; color: #ffffff; line-height: 1.3; }
-    .slide-body { font-size: 13px; color: #cf90ff; line-height: 1.65; }
-    .slide-cta {
-      margin-top: 4px;
-      font-size: 12px;
-      font-weight: 500;
-      cursor: pointer;
-      border: 1px solid #814daa;
-      border-radius: 8px;
-      padding: 6px 14px;
-      background: transparent;
-      color: #8deeff;
-      width: fit-content;
-      text-decoration: none;
-      transition: background 0.15s;
-    }
-    .slide-cta:hover { background: rgba(141,238,255,0.1); }
-    .nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: #1f003a;
-      border: 1px solid #814daa;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      font-size: 14px;
-      color: #ffffff;
-      z-index: 10;
-      transition: background 0.15s;
-    }
-    .nav:hover { background: #814daa; }
-    .nav-left  { left: 8px; }
-    .nav-right { right: 8px; }
-    .progress { height: 3px; background: #814daa; }
-    .progress-bar { height: 100%; background: #8deeff; width: 0%; transition: width linear; }
-    .dots { display: flex; justify-content: center; gap: 6px; padding: 0.7rem 0 0.3rem; }
-    .dot {
-      width: 7px; height: 7px; border-radius: 50%;
-      background: #814daa; cursor: pointer; border: none;
-      transition: background 0.2s, transform 0.2s;
-    }
-    .dot.active { background: #8deeff; transform: scale(1.35); }
-    .controls-row { display: flex; align-items: center; justify-content: space-between; padding: 0 0 4px; }
-    .controls-label { font-size: 12px; color: #cf90ff; }
-    .toggle-btn { font-size: 12px; color: #cf90ff; cursor: pointer; background: none; border: none; padding: 0; }
-    .toggle-btn:hover { color: #8deeff; }
+  }
 
-    /* ---------- BENTO HOME LAYOUT ---------- */
-    .home-bento {
-      display: grid;
-      grid-template-columns: 1.15fr 1fr;
-      grid-template-rows: auto auto;
-      gap: 14px;
-      margin-bottom: 14px;
+  /* For large phones / small tablets (max-width: 768px) */
+  @media (max-width: 768px) {
+    .tab-bar button {
+      padding: 10px 12px;
+      font-size: 0.85rem;
     }
-    .home-bento .card {
-      margin-bottom: 0;
+    .card {
+      padding: 14px 12px;
     }
-    .card-greeting {
-      grid-column: 1 / 2;
-      grid-row: 1 / 3;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-    .card-user {
-      grid-column: 2 / 3;
-      grid-row: 1 / 2;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-    .card-date {
-      grid-column: 2 / 3;
-      grid-row: 2 / 3;
-    }
-    @media (max-width: 620px) {
-      .home-bento {
-        grid-template-columns: 1fr;
-      }
-      .card-greeting { grid-column: 1; grid-row: 1; }
-      .card-user    { grid-column: 1; grid-row: 2; }
-      .card-date    { grid-column: 1; grid-row: 3; }
-    }
-
-    /* ---------- HOME PAGE FONT SIZES ---------- */
     .card-greeting h2 {
-      font-size: 2.8rem;
-      line-height: 1.1;
+      font-size: 2rem;
     }
     .card-greeting p {
-      font-size: 1.4rem;
-    }
-    .card-user #accountTypeDisplay {
-      font-size: 2.2rem;
-    }
-    .card-user > div:last-child {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
     }
     .card-date #currentDate {
-      font-size: 4rem;
-      line-height: 1.1;
+      font-size: 2.5rem;
     }
     .card-date #currentDay {
-      font-size: 1.6rem;
-      margin-top: 6px;
+      font-size: 1.2rem;
     }
-    .card-greeting p:last-of-type {
-      font-size: 1.15rem;
+    .card-user #accountTypeDisplay {
+      font-size: 1.5rem;
     }
-
-    /* ---------- HEALTH ED – HORIZONTAL SCROLL & HERO CARD ---------- */
-    #readMoreRow .mini-card {
-      flex: 0 0 170px;
-      height: 185px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.2);
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      padding: 10px;
-      color: #fff;
-      cursor: pointer;
-    }
-    #readMoreRow .mini-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(transparent 40%, rgba(0,0,0,0.6) 100%);
-      pointer-events: none;
-    }
-    #readMoreRow .mini-card .title {
-      position: relative;
-      z-index: 1;
-      font-weight: bold;
-      font-size: 1.1rem;
-    }
-    #readMoreRow .mini-card .desc {
-      position: relative;
-      z-index: 1;
-      font-size: 1.1rem;
-      opacity: 0.8;
-    }
-          /* ---------- HEALTH ED TAB – WHITE & LARGER TEXT ---------- */
-      #education .card h3,
-      #education .card h4,
-      #education .card p,
-      #education .card span,
-      #education .card button,
-      #education .card input,
-      #education .card div {
-        color: #ffffff !important;                /* force white */
-      }
-
-      /* Increase key font sizes */
-      #education .card h3 {
-        font-size: 1.6rem !important;            /* "Health Education" title */
-      }
-      #education .card h4 {
-        font-size: 1.2rem !important;            /* "Read More" label, module headings */
-      }
-      #education .card p,
-      #education .card button {
-        font-size: 1.05rem !important;
-      }
-
-      /* Category buttons – make them white with a soft outline */
-      #education .edu-cat-btn {
-        color: #ffffff !important;
-        border-color: rgba(255,255,255,0.5) !important;
-      }
-      #education .edu-cat-btn.active {
-        background: #cf90ff;                     /* keep active visual */
-        color: #130420 !important;               /* dark text on light bg for contrast */
-      }
-
-      /* Search bar text */
-      #education #healthSearch {
-        color: #ffffff !important;
-        font-size: 1.05rem !important;
-      }
-      #education #healthSearch::placeholder {
-        color: rgba(255,255,255,0.7) !important;
-      }
-          /* ---------- HEALTH EDUCATION – IMAGE CATEGORY GRID ---------- */
-        .edu-cat-slider {
-          display: flex;
-          gap: 20px;
-          overflow-x: auto;
-          scroll-snap-type: x mandatory;
-          -webkit-overflow-scrolling: touch;
-          padding-bottom: 4px;
-          /* no more scrollbar-width or ::-webkit-scrollbar rules */
-        }
-
-
-        /* Each button becomes a fixed‑width slide */
-        .edu-cat-slider .edu-cat-btn {
-          flex: 0 0 230px;      /* fixed width 160px – adjust as you like */
-          height: 400px;
-          scroll-snap-align: start;
-          border-radius: 16px;
-          background-size: cover;
-          background-position: center;
-          position: relative;
-          overflow: hidden;
-          cursor: pointer;
-          border: 2px solid transparent;
-          transition: border-color 0.25s, transform 0.2s;
-          display: flex;
-          align-items: flex-end;
-          padding: 10px;
-        }
-
-    .edu-cat-btn {
-      aspect-ratio: 1 / 1;                 /* perfect square */
-      border-radius: 16px;
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-      border: 2px solid transparent;
-      transition: border-color 0.25s, transform 0.2s;
-      display: flex;
-      align-items: flex-end;
-      padding: 10px;
-    }
-
-    .edu-cat-btn:hover {
-      transform: scale(1.03);
-    }
-
-    .edu-cat-btn.active {
-      border-color: #cf90ff;                /* accent highlight */
-    }
-
-    .edu-cat-btn::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(transparent 35%, rgba(0,0,0,0.65) 100%);
-      pointer-events: none;
-    }
-
-    .edu-cat-label {
-      position: relative;
-      z-index: 1;
-      color: #fff;
-      font-weight: 700;
+    .card-user > div:last-child {
       font-size: 1rem;
-      line-height: 1.2;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.6);
-      text-align: left;
-      white-space: normal;                  /* allow wrapping */
-    }
-
-    /* Remove old conflicting rules */
-    .edu-cat-btn {
-      background: none;                     /* clear old purple background */
-      color: inherit;
-    }
-    .health-ed-detail {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 24px;
-      padding: 20px;
-      margin-top: 10px;
-      color: #fff;
-    }
-    .detail-section { margin-bottom: 28px; }
-    .detail-section h4 {
-      font-size: 1.3rem;
-      color: #cf90ff;
-      border-left: 4px solid #cf90ff;
-      padding-left: 12px;
-      margin-bottom: 8px;
-    }
-    .info-card {
-      background: rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 16px;
-      margin: 16px 0;
-    }
-    .hidden-view { display: none; }
-
-    /* FAQ rows */
-    .faq-section { padding: 16px 0; }
-    .faq-section h2 { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: white; }
-    .faq-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 16px;
-      margin-bottom: 8px;
-      border-radius: 12px;
-      color: white;
-    }
-    .faq-row span { font-size: 13px; }
-    .faq-row strong { font-weight: 700; }
-
-    /* Info grid */
-    .info-label {
-      text-align: right;
-      font-size: 11px;
-      letter-spacing: 2px;
-      color: rgba(255,255,255,0.8);
-      margin: 0 0 10px;
-      text-transform: uppercase;
-    }
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-    }
-    .grid-card {
-      position: relative;
-      border-radius: 18px;
-      overflow: hidden;
-      height: 450px;
-      background-size: cover;
-      background-position: center;
-    }
-    .grid-card-body {
-      position: absolute;
-      bottom: 8px;
-      left: 8px;
-      right: 8px;
-      padding: 10px 12px;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 14px;
-      z-index: 3;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .grid-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, transparent 60%, rgba(20,0,50,0.2));
-      border-radius: 18px;
-    }
-    .grid-card-title {
-      font-weight: 700;
-      font-size: 16px;
-      line-height: 1.2;
-      color: white;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-    }
-    .grid-card .pill-btn.mini {
-      z-index: 2;
-      font-size: 10px;
-      padding: 5px 10px;
-      align-self: flex-start;
-    }
-    .pill-btn.mini {
-      font-size: 10px;
-      padding: 5px 10px 5px 12px;
-    }
-    .pill-btn.mini .arrow-circle {
-      width: 18px;
-      height: 18px;
-      font-size: 10px;
-    }
-
-    /* Glass card (reuse) */
-    .glass-card {
-      background: rgba(255,255,255,0.09);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,0.18);
-      color: white;
-    }
-
-    /* Pill button & arrow icon */
-    .pill-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: var(--color-pill-bg);
-      border: 1px solid rgba(255,255,255,0.25);
-      border-radius: 999px;
-      color: white;
-      font-size: 12px;
-      font-weight: 600;
-      cursor: pointer;
-    }
-    .arrow-icon {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      width: 22px; height: 22px;
-      border-radius: 50%;
-      background: white;
-      color: #2D0060;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .back-button {
-      background: var(--color-accent);
-      color: white;
-      border: none;
-      padding: 8px 20px;
-      border-radius: 40px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-bottom: 20px;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    /* ---------- COMMUNICABLE OVERVIEW PAGE ---------- */
-    .comm-overview-hero {
-      background: linear-gradient(135deg, #4B0082 0%, #7B00CC 100%);
-      border-radius: 20px;
-      padding: 24px 20px;
-      margin-bottom: 16px;
-      position: relative;
-      overflow: hidden;
-    }
-    .comm-overview-hero::before {
-      content: '🦠';
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 72px;
-      opacity: 0.18;
-    }
-    .comm-overview-hero h1 {
-      font-size: 22px;
-      font-weight: 900;
-      color: white;
-      margin-bottom: 4px;
-    }
-    .comm-overview-hero .hero-tag {
-      display: inline-block;
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 12px;
-      color: white;
-      margin-bottom: 12px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .hero-tag {
-      display: inline-block;
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.35);
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 12px;
-      color: white;
-      margin-bottom: 12px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
-    .comm-overview-hero p {
-      font-size: 13px;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.6;
-      max-width: 280px;
-    }
-    .spread-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 8px;
-      margin-bottom: 20px;
-    }
-    .spread-item {
-      background: rgba(255,255,255,0.09);
-      border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 14px;
-      padding: 12px 8px;
-      text-align: center;
-    }
-    .spread-item .spread-icon {
-      font-size: 22px;
-      display: block;
-      margin-bottom: 5px;
-    }
-    .spread-item span:last-child {
-      font-size: 10px;
-      color: rgba(255,255,255,0.75);
-      font-weight: 600;
-      line-height: 1.3;
-      display: block;
-    }
-    .section-label-left {
-      font-size: 11px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.7);
-      margin-bottom: 12px;
-      font-weight: 600;
     }
     .disease-nav-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(2, 1fr); /* keep 2 columns */
     }
-    .disease-nav-card {
-      position: relative;
-      border-radius: 18px;
-      overflow: hidden;
-      height: 150px;
-      background-size: cover;
-      background-position: center;
-      cursor: pointer;
-      transition: transform 0.2s;
+    .edu-cat-slider .edu-cat-btn {
+      width: 180px;
+      height: 320px;
     }
-    .disease-nav-card:hover { transform: scale(1.02); }
-    .disease-nav-card::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(transparent 30%, rgba(20,0,50,0.85));
-    }
-    .disease-nav-card-body {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      padding: 10px;
-      z-index: 2;
-    }
-    .disease-nav-card-body .d-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: white;
-      line-height: 1.2;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-      margin-bottom: 6px;
-    }
-    .disease-nav-card-body .d-sub {
-      font-size: 10px;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 6px;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.7);
-    }
-    .tip-box {
-      background: rgba(155,48,255,0.25);
-      border: 1px solid rgba(155,48,255,0.4);
-      border-radius: 16px;
-      padding: 14px;
-      font-size: 12px;
-      color: rgba(255,255,255,0.85);
-      line-height: 1.6;
-      margin-top: 4px;
-    }
-
-    /* ── Hero section (TB detail) ── */
     .detail-hero {
-      position: relative;
-      width: 100%;
-      height: 250px;
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      overflow: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      border-radius: 20px;
-      margin-bottom: 16px;
+      flex-direction: column;
+      height: auto;
+      text-align: center;
+      padding: 20px;
     }
     .hero-bacteria {
-      width: 250px;                          /* adjust to your liking */
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 24px rgba(0,0,0,0.55));
-      flex-shrink: 0;                        /* prevent image from shrinking */
-      margin-left: 0;                        /* no offset needed */
-    }
-    .hero-text {
-      text-align: left;                      /* or center, whichever you prefer */
-      z-index: 3;
+      width: 180px;
+      margin-top: 10px;
     }
     .hero-title {
-      font-size: 60px;
-      font-weight: 900;
-      color: white;
-      letter-spacing: -0.5px;
-      line-height: 1;
-      margin-bottom: 4px;
-      text-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      font-size: 36px;
     }
-    .hero-subtitle {
-      font-size: 13px;
-      color: rgba(255,255,255,0.72);
-      font-weight: 400;
-      margin-bottom: 14px;
+    .rhu-subtab {
+      font-size: 0.75rem;
+      padding: 6px 10px;
     }
-    .description-card {
-      margin-top: 12px;
-      padding: 14px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.9);
-      background: rgba(255,255,255,0.09);
-      backdrop-filter: blur(14px);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 16px;
-      display: none;
-    }
+  }
 
-    /* ── FAQ section (vertical layout) ── */
-    .faq-row {
+  /* For mobile phones (max-width: 480px) - ONLY FONT & COSMETIC, NO LAYOUT STACKING */
+  @media (max-width: 480px) {
+    .slide-image img {
+      object-fit: contain;
+      height: auto;
+      max-height: 150px;
+    }
+    .auth-form input,
+    .auth-form button {
+      font-size: 0.9rem;
+      padding: 10px 12px;
+    }
+    .app-header {
       flex-direction: column;
-      align-items: stretch;
-      padding: 12px 14px;
-      cursor: default;
+      align-items: flex-start;
+      gap: 8px;
     }
-    .faq-top-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+    .app-header h1 {
+      font-size: 1.4rem;
     }
-    .faq-answer {
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid rgba(255,255,255,0.12);
+    .app-header > div > span {
+      display: none;
+    }
+    .logout-btn {
+      align-self: flex-end;
+    }
+    .tab-bar {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+    .tab-bar button {
+      font-size: 0.75rem;
+      padding: 8px 12px;
+    }
+    .container {
+      padding: 12px 12px;
+    }
+    .card-greeting h2 {
+      font-size: 1.5rem;
+    }
+    .card-greeting p {
+      font-size: 1rem;
+    }
+    .card-date #currentDate {
+      font-size: 2rem;
+    }
+    .card-date #currentDay {
+      font-size: 1rem;
+    }
+    .card-user #accountTypeDisplay {
+      font-size: 1.2rem;
+    }
+    .slide {
+      width: 94%;
+      margin-left: 3%;
+      margin-right: 3%;
+      padding: 1rem 0.8rem;
+    }
+    .slide-title {
+      font-size: 16px;
+    }
+    .slide-body {
       font-size: 12px;
-      color: rgba(255,255,255,0.82);
-      line-height: 1.65;
-      display: none;
     }
-    .faq-answer.open {
-      display: block;
+    .nav {
+      width: 28px;
+      height: 28px;
+      font-size: 12px;
     }
+    .edu-cat-slider .edu-cat-btn {
+      width: 150px;
+      height: 280px;
+    }
+    .edu-cat-label {
+      font-size: 0.8rem;
+    }
+    .info-grid {
+      gap: 8px;
+    }
+    .disease-nav-card {
+      height: 140px;
+    }
+    .hero-bacteria {
+      width: 140px;
+    }
+    .hero-title {
+      font-size: 28px;
+    }
+    .pill-btn {
+      font-size: 0.7rem !important;
+      padding: 6px 12px;
+    }
+    .btn, .btn-outline {
+      padding: 10px 14px;
+      font-size: 0.85rem;
+    }
+    .record-item {
+      padding-right: 70px;
+    }
+    .record-item > div {
+      top: 8px;
+      right: 8px;
+    }
+    .edit-patient-btn, .delete-patient-btn, .edit-appt-btn, .delete-appt-btn {
+      padding: 2px 8px !important;
+      font-size: 0.7rem;
+    }
+    .notification-bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+    .notification-bar .close-btn {
+      align-self: flex-end;
+    }
+    .low-stock-summary, .emergency-number {
+      padding: 10px;
+    }
+  }
 
-    /* ── Grid card sub‑detail view ── */
-    .sub-detail-view {
-      display: none;
-      margin-top: 10px;
+  /* ---------- EXTRA NARROW (STACK LAYOUT) BELOW 360px ---------- */
+  @media (max-width: 360px) {
+    .home-bento {
+      grid-template-columns: 1fr;
     }
-    .sub-hero {
-      position: relative;
-      border-radius: 20px;
-      overflow: hidden;
-      height: 200px;
-      background-size: cover;
-      background-position: center;
-      margin-bottom: 16px;
+    .card-greeting {
+      grid-column: 1;
+      grid-row: 1;
     }
-    .sub-hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to bottom, rgba(30,0,60,0.1) 0%, rgba(10,0,40,0.9) 100%);
-      border-radius: 20px;
+    .card-user {
+      grid-column: 1;
+      grid-row: 2;
     }
-    .sub-hero-title {
-      position: absolute;
-      bottom: 16px;
-      left: 16px;
-      font-size: 24px;
-      font-weight: 900;
-      color: white;
-      text-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    .card-date {
+      grid-column: 1;
+      grid-row: 3;
     }
-    .sub-content {
-      background: rgba(255,255,255,0.08);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255,255,255,0.18);
-      border-radius: 16px;
-      padding: 16px;
-      font-size: 13px;
-      color: rgba(255,255,255,0.9);
-      line-height: 1.7;
+    .info-grid {
+      grid-template-columns: 1fr;
     }
-
-  </style>
+    .disease-nav-grid {
+      grid-template-columns: 1fr;
+    }
+    .contact-list li {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .contact-list li button {
+      align-self: flex-end;
+    }
+    .rhu-subtab {
+      flex: 1 1 auto;
+      min-width: 120px;
+      white-space: normal;
+    }
+  }
+</style>
 </head>
 <body>
 
@@ -1287,9 +1470,14 @@
 
       <div class="card">
         <h3>What is Abot‑Kamay?</h3>
-        <p>Rural communities in the Philippines face persistent barriers to reliable health information and services due to fragmented healthcare delivery, geographic isolation, transportation challenges, limited manpower, and weak digital infrastructure. These constraints prevent Rural Health Units (RHUs) and Barangay Health Workers (BHWs) from effectively reaching residents, resulting in limited health literacy regarding prenatal care, immunization schedules, nutrition, and chronic disease management—contributing to preventable diseases and poorer health outcomes. To address these gaps, the Abot‑Kamay Health Companion Website was developed as an offline‑first progressive web application (PWA) built specifically for BHWs and community members in rural areas such as Barangay Magsaysay Village, Iloilo City. It functions as a health companion that provides essential tools—patient records, immunization tracking, appointment scheduling, medicine inventory, health education, and emergency contacts—without requiring a constant internet connection. The app runs entirely in the browser as a single HTML file, storing all data in the browser's encrypted localStorage. Optional online features (appointment requests and full‑system backup) are available when connectivity exists but are never required for core workflows.
-The project uses a quasi‑experimental one‑group posttest‑only design with 30 community participants. The intervention consists of a structured seminar and hands‑on demonstration of the PWA, showcasing its key capabilities: offline‑local data caching, automated immunization alerts, encrypted patient records, appointment scheduling, medicine inventory tracking, health education modules, RHU service directories, emergency contacts, and cloud backup capabilities. Usability will be evaluated using the System Usability Scale (SUS) questionnaire administered after the intervention.
-Expected outcomes include improved access to localized health information, enhanced health worker–community communication, strengthened patient follow‑up, and increased health‑seeking behaviors despite low connectivity. Abot‑Kamay supports nursing informatics by enabling systematic data collection, evidence‑based interventions, and continuous community monitoring, ultimately improving patient outcomes in underserved areas.</p>
+        <p>The Abot‑Kamay Health Companion Website is an offline‑first progressive web application (PWA) built specifically for BHWs and community members in rural areas. This is done by enabling systematic data collection, evidence‑based interventions, and continuous community monitoring, ultimately improving patient outcomes in underserved areas.
+
+
+It functions as a health companion that provides essential tools—patient records, immunization tracking,  automated immunization alerts, appointment scheduling, medicine inventory, health education, and emergency contacts, offline‑local data caching, encrypted patient records, RHU service directories, emergency contacts, and cloud backup capabilities. 
+
+Optional online features (appointment requests and full‑system backup) are available when connectivity exists but are never required for core workflows.
+
+The app aims to improve access to localize health information, enhance health worker–community communication, strengthen patient follow‑up, and increase health‑seeking behaviors despite low connectivity. </p>
       </div>
 
       <div id="nextAppointmentCard" class="card" style="display: none; background: #e6f2ed;">
@@ -1436,17 +1624,117 @@ Expected outcomes include improved access to localized health information, enhan
       </div>
     </div>
 
-    <!-- EMERGENCY TAB -->
-    <div id="emergency" class="tab-content">
-      <div class="card">
-        <h2>Emergency Numbers</h2>
-        <div class="emergency-number"><p style="font-size:1.4rem;">911</p></div>
-        <ul class="contact-list">
-          <li>BFP <span>161</span></li>
-          <li>PNP <span>117</span></li>
-        </ul>
-      </div>
+<div id="emergency" class="tab-content">
+  <!-- National 911 Hotline – restyled to match glass theme -->
+  <div class="card" style="background: rgba(31, 0, 58, 0.55); backdrop-filter: blur(5px); border-left: 4px solid #cf90ff;">
+    <h2>Emergency Numbers</h2>
+    <div style="margin-bottom: 12px;">
+      <p style="font-size: 1.8rem; margin-bottom: 0; color: #cf90ff; font-weight: bold;">911</p>
+      <p style="font-size: 0.9rem; opacity: 0.8;">National Emergency Hotline</p>
+      <button class="btn-outline save-contact-btn" data-name="National Emergency Hotline" data-phone="911" data-org="Philippine Government" style="margin-top: 8px; padding: 6px 12px; width: auto;">📇 Save to Contacts</button>
     </div>
+    <ul class="contact-list" style="list-style: none; padding: 0;">
+      <li style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <span><strong>BFP (Bureau of Fire Protection)</strong> : 161</span>
+        <button class="btn-outline save-contact-btn" data-name="BFP Philippines" data-phone="161" data-org="Bureau of Fire Protection" style="padding: 4px 12px; width: auto;">📇 Save</button>
+      </li>
+      <li style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+        <span><strong>PNP (Philippine National Police)</strong> : 117</span>
+        <button class="btn-outline save-contact-btn" data-name="PNP Philippines" data-phone="117" data-org="Philippine National Police" style="padding: 4px 12px; width: auto;">📇 Save</button>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Iloilo City Emergency Operations Center -->
+  <div class="card">
+    <h3>🏥 Iloilo City Emergency Operations Center</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 10px;">
+      <div><strong>CDRRMO ICER/USAR</strong><br>0919 066 1554 / (033) 339 7171<br>(033) 333 2333 / (033) 335 1554</div>
+      <div><strong>Iloilo City Operations Center</strong><br>0919 066 2333</div>
+      <div><strong>BFP Search & Rescue</strong><br>0966 052 0061 / (033) 337 3011</div>
+      <div><strong>Iloilo City Police Office</strong><br>0998 598 6241 / (033) 335 0299</div>
+      <div><strong>Philippine Red Cross Iloilo</strong><br>0917 117 0066</div>
+      <div><strong>FEDFIRE</strong><br>(033) 337 9760</div>
+      <div><strong>ICAG</strong><br>(033) 337 5931</div>
+      <div><strong>ICTTMO</strong><br>(033) 339 1127</div>
+    </div>
+  </div>
+
+  <!-- Hospitals -->
+  <div class="card">
+    <h3>🏥 Hospitals</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
+      <div><strong>WVMC (Provincial)</strong><br>(033) 320 2431</div>
+      <div><strong>WVSUMC (Don Benito)</strong><br>(033) 320 2431</div>
+      <div><strong>St. Paul's Hospital</strong><br>(033) 337 2741 to 49</div>
+      <div><strong>Iloilo Doctor's Hospital</strong><br>(033) 337 7702</div>
+      <div><strong>Metro Iloilo Hospital & Medical Center</strong><br>(033) 327 1527</div>
+      <div><strong>Healthway Qualimed Hospital</strong><br>(033) 500 4000</div>
+      <div><strong>The Medical City</strong><br>(033) 500 4000</div>
+      <div><strong>Iloilo Mission Hospital</strong><br>(033) 339 7340 / 500 1000</div>
+      <div><strong>Asia Pacific Medical Center</strong><br>(033) 320 0315 to 19</div>
+      <div><strong>Medicus Medical Center</strong><br>(033) 339 9991 / (033) 328 7777</div>
+    </div>
+  </div>
+
+  <!-- Police Stations -->
+  <div class="card">
+    <h3>👮 Police Stations (ICPO)</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;">
+      <div><strong>PS2 La Paz</strong><br>0998 598 6244</div>
+      <div><strong>PS3 Ungka</strong><br>0998 598 6246</div>
+      <div><strong>PS4 Molo</strong><br>0998 598 6248</div>
+      <div><strong>PSS Mandurriao</strong><br>0998 598 6250</div>
+      <div><strong>PS6 Arevalo</strong><br>0998 598 6252</div>
+      <div><strong>PS7 Tanza</strong><br>0947 996 6568</div>
+      <div><strong>PS8 Bo. Obrero</strong><br>0908 689 6098</div>
+      <div><strong>PS9 MH Del Pilar</strong><br>0908 322 8457</div>
+      <div><strong>PS10 Icare Gaisano</strong><br>0968 893 2529</div>
+    </div>
+  </div>
+
+  <!-- Fire Stations -->
+  <div class="card">
+    <h3>🔥 Fire Stations (BFP Iloilo)</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+      <div><strong>Arevalo</strong><br>(033) 3211096</div>
+      <div><strong>Sto. Niño Sur</strong><br>(033) 314 7631</div>
+      <div><strong>City Proper</strong><br>(033) 337 3011 / (033) 320 3980</div>
+      <div><strong>Jaro</strong><br>(033) 500 0217</div>
+      <div><strong>La Paz</strong><br>(033) 320 6963</div>
+      <div><strong>Mandurriao</strong><br>(033) 321 0779</div>
+      <div><strong>Calumpang</strong><br>(033) 320 9658</div>
+      <div><strong>Bo. Obrero</strong><br>(033) 335 1965</div>
+      <div><strong>San Isidro</strong><br>(033) 330 1507</div>
+      <div><strong>Alta Tierra</strong><br>(033) 323 5139</div>
+      <div><strong>Molo</strong><br>(033) 336 0639</div>
+      <div><strong>Tagbak</strong><br>(033) 323 6564</div>
+    </div>
+    <small style="display: block; margin-top: 12px; font-size: 0.7rem; opacity: 0.7;">07-2025 V.4</small>
+  </div>
+
+  <!-- Local RHU / Barangay Health Worker (only once) -->
+  <div class="card">
+    <h3>👩‍⚕️ Local RHU / Barangay Health Worker</h3>
+    <p>Idagdag ang inyong barangay health worker para sa mabilis na komunikasyon.</p>
+    <form id="customContactForm" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end;">
+      <div style="flex: 2;">
+        <label style="font-size: 0.8rem;">Pangalan</label>
+        <input type="text" id="contactName" placeholder="e.g., Nurse Maria" style="padding: 8px; margin: 0;">
+      </div>
+      <div style="flex: 2;">
+        <label style="font-size: 0.8rem;">Numero</label>
+        <input type="tel" id="contactPhone" placeholder="0917 123 4567" style="padding: 8px; margin: 0;">
+      </div>
+      <div style="flex: 1;">
+        <button type="button" id="saveCustomContactBtn" class="btn-outline" style="margin-top: 0; padding: 8px;">➕ I-save sa Contacts</button>
+      </div>
+    </form>
+    <small class="info-note" style="display: block; margin-top: 12px; font-size: 0.75rem; opacity: 0.8;">
+      ⓘ Pagkatapos i‑download ang file, buksan ito sa iyong telepono – kusang mag‑a‑add ito sa iyong contacts.
+    </small>
+  </div>
+</div>
 
     <!-- PATIENT RECORDS TAB -->
     <div id="records" class="tab-content">
@@ -1658,7 +1946,33 @@ Expected outcomes include improved access to localized health information, enhan
     <div class="footer-note">Abot-Kamay · Batay sa Reyes et al. (2026)</div>
   </div>
 </div>
-
+  <!-- Terms and Conditions Modal -->
+<div id="termsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center;">
+  <div class="card" style="max-width: 500px; margin: 20px; max-height: 85vh; overflow-y: auto; padding: 20px;">
+    <h2 style="color: #cf90ff; margin-top: 0;">Terms and Conditions</h2>
+    <div style="font-size: 0.9rem; line-height: 1.6; text-align: left;">
+      <p><strong>Last updated:</strong> May 2026</p>
+      <p>Welcome to Abot‑Kamay. By using this application, you agree to the following terms:</p>
+      <ol style="padding-left: 1.2rem;">
+        <li><strong>Purpose:</strong> Abot‑Kamay is a health companion tool for community health workers and residents. It is not a substitute for professional medical advice.</li>
+        <li><strong>Data Privacy:</strong> All personal health data is stored locally on your device and encrypted. No data is shared with third parties without your explicit consent.</li>
+        <li><strong>Offline Use:</strong> The app works offline. Any online features (appointment requests, sync) are optional and require internet.</li>
+        <li><strong>Accuracy:</strong> Information provided is for educational purposes. Always consult a qualified health professional for medical concerns.</li>
+        <li><strong>Responsibility:</strong> You are responsible for keeping your login credentials secure. The developer is not liable for misuse of the app.</li>
+        <li><strong>Updates:</strong> We may update these terms from time to time. Continued use after changes implies acceptance.</li>
+        <li><strong>Emergency:</strong> In case of emergency, call 911 or your local emergency hotline immediately – do not rely solely on the app.</li>
+      </ol>
+      <p>By clicking <strong>“I Accept”</strong>, you confirm that you have read, understood, and agree to be bound by these terms.</p>
+    </div>
+    <div style="display: flex; gap: 12px; margin-top: 20px;">
+      <button id="acceptTermsBtn" class="btn" style="background: #cf90ff; color: #130420; flex:1;">I Accept</button>
+      <button id="declineTermsBtn" class="btn-outline" style="flex:1;">Decline</button>
+    </div>
+    <div id="declineMessage" style="margin-top: 15px; color: #ffc2e8; font-size: 0.85rem; display: none;">
+      ⚠️ You must accept the Terms and Conditions to use this application.
+    </div>
+  </div>
+</div>
 <script>
   (function() {
     // ---------- CONSTANTS ----------
@@ -3142,7 +3456,12 @@ Expected outcomes include improved access to localized health information, enhan
         { key: "tb", title: "Tuberculosis", subtitle: "Bacterial · Nakukuha sa hangin", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/tuberculosis-tb-disease.webp" },
         { key: "dengue", title: "Dengue Fever", subtitle: "Viral · Dala ng lamok", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue.jpg" },
         { key: "influenza", title: "Influenza", subtitle: "Viral · Trangkaso", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenza.jpg" },
-        { key: "covid", title: "COVID-19", subtitle: "Coronavirus · Respiratory", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/covid.jpg" }
+        { key: "covid", title: "COVID-19", subtitle: "Coronavirus · Respiratory", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/covid.jpg" },
+        { key: "pneumonia", title: "Pneumonia", subtitle: "Bacterial/Viral · Impeksyon sa baga", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/pneumonia.jpg" },
+        { key: "malaria", title: "Malaria", subtitle: "Parasitic · Dala ng lamok (Anopheles)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malaria.jpg" },
+        { key: "leptospirosis", title: "Leptospirosis", subtitle: "Bacterial · Mula sa ihi ng hayop (daga)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/leptospirosis.jpg" },
+        { key: "schistosomiasis", title: "Schistosomiasis", subtitle: "Parasitic · Snail fever", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/schistosomiasis.jpg" },
+        { key: "rabies", title: "Rabies", subtitle: "Viral · Nakukuha sa kagat ng infected na hayop", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rabies.jpg" },
       ]
     },
       tb: {
@@ -3166,21 +3485,45 @@ Expected outcomes include improved access to localized health information, enhan
       },
       dengue: {
         title: "DENGUE FEVER",
-        subtitle: "Communicable Disease",
-        description: "Ang Dengue ay isang viral infection na dala ng lamok na Aedes aegypti. Nagdudulot ito ng mataas na lagnat, matinding sakit ng ulo, at pananakit ng kalamnan.",
-        heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malnutrition.jpg",
+        subtitle: "Communicable Disease · Dala ng Lamok",
+        description: "Ang Dengue ay isang viral infection na dala ng lamok na Aedes aegypti. Nagdudulot ito ng mataas na lagnat, matinding sakit ng ulo, pananakit ng kalamnan at kasukasuan, at maaaring mauwi sa severe dengue (dengue hemorrhagic fever) kung hindi agad magamot.",
+        heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue-hero.jpg",
         faqs: [
-          { question: "Ano ang <strong>causative agent?</strong>", answer: "Ang Dengue ay sanhi ng <strong>Dengue virus</strong> (DENV) na may apat na serotypes (DENV-1 hanggang DENV-4)." },
-          { question: "Anu-ano ang <strong>mga sintomas?</strong>", answer: "Biglang mataas na lagnat, matinding sakit ng ulo, sakit sa likod ng mata, pananakit ng kalamnan at kasukasuan, pagduduwal, at pantal." },
-          { question: "Paano <strong>maiwasan</strong> ang Dengue?", answer: "Gamitin ang <strong>4S strategy</strong>: Search & destroy (pukain ang lamok), Self-protection (kumambo), Seek early consultation, at Say no to fogging kung walang outbreak." }
+          { question: "Ano ang <strong>causative agent?</strong>", answer: "Ang Dengue ay sanhi ng <strong>Dengue virus</strong> (DENV) na may apat na serotypes (DENV-1 hanggang DENV-4). Ang pagkakaroon ng isang serotype ay hindi nagbibigay ng immunity sa iba." },
+          { question: "Anu-ano ang <strong>mga sintomas?</strong>", answer: "Biglang mataas na lagnat (40°C/104°F), matinding sakit ng ulo, sakit sa likod ng mata, pananakit ng kalamnan at kasukasuan, pagduduwal, pagsusuka, pamamaga ng mga glandula, at pantal." },
+          { question: "Paano <strong>maiwasan</strong> ang Dengue?", answer: "Gamitin ang <strong>4S strategy</strong>: Search & destroy (pukain ang lamok sa loob at labas ng bahay), Self-protection (gumamit ng mosquito repellent at magsuot ng mahabang damit), Seek early consultation (magpakonsulta agad kapag may lagnat ng 2 araw), at Say no to indiscriminate fogging (fogging lamang kapag may outbreak at sumunod sa tamang oras)." }
         ],
         gridCards: [
-          { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/cough.jpg" },
-          { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malnutrition.jpg" },
-          { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/lung-xray.jpg" },
-          { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.jpg" },
-          { title: "4S Strategy", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg" },
-          { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg" }
+          {
+            title: "Senyales &\nSintomas",
+            image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales%2Csintomas.png",
+            detail: "Ang mga karaniwang sintomas ng Dengue ay biglaang mataas na lagnat (umaabot ng 40°C), matinding sakit ng ulo, pananakit sa likod ng mata, pananakit ng kalamnan at kasukasuan, pagduduwal, pagsusuka, at pamamantal. Sa severe dengue, maaaring magkaroon ng pananakit ng tiyan, pagsusuka ng dugo, pagdurugo ng ilong o gilagid, at pagkahina."
+          },
+          {
+            title: "Epidemiology at\nPrevalence",
+            image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/epidemiology%20at%20prevalance.png",
+            detail: "Ang Dengue ay endemic sa higit 100 bansa, kabilang ang Pilipinas. Ayon sa DOH, libu-libong kaso ang naitatala taun-taon, lalo na sa tag-ulan (Hunyo hanggang Nobyembre). Ang mga urban at peri-urban na lugar ay may mas mataas na insidente dahil sa maraming pag-aanakan ng lamok."
+          },
+          {
+            title: "Incubation\nPeriod",
+            image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation%20period.png",
+            detail: "Ang incubation period ng Dengue virus ay karaniwang 4 hanggang 10 araw pagkatapos makagat ng infected na lamok. Lumilitaw ang mga sintomas sa ika-4 hanggang ika-7 araw. Maaaring magsimula ang lagnat nang biglaan."
+          },
+          {
+            title: "At-Risk\nMga Grupo",
+            image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png",
+            detail: "Ang sinumang nakatira sa dengue-endemic na lugar ay maaaring tamaan, ngunit mas mataas ang panganib sa mga batang 5-9 taong gulang, matatanda, buntis, at mga taong may mahinang immune system. Ang pangalawang impeksyon ng ibang serotype ay mas delikado (maaaring magdulot ng severe dengue)."
+          },
+          {
+            title: "Prevention\n(4S Strategy)",
+            image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg",
+            detail: "Ang pinakaepektibong pag-iwas ay ang pagkontrol sa lamok: takpan ang mga lalagyan ng tubig, maglagay ng awtomatikong pagtatapon ng basura, gumamit ng insect repellent, magsuot ng mahabang damit, at mag-install ng screen sa bintana. Ang Dengvaxia vaccine ay limitado at nangangailangan ng pre-screening."
+          },
+          {
+            title: "Management",
+            image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/managemnt.png",
+            detail: "Walang specific na antiviral treatment para sa dengue. Ang pamamahala ay nakatuon sa pagtugon sa mga sintomas: pahinga, pag-inom ng maraming tubig o oral rehydration solution, paracetamol para sa lagnat (huwag gumamit ng aspirin o ibuprofen dahil maaaring magdulot ng pagdurugo). Kailangan ang agarang pag-ospital kung may senyales ng severe dengue."
+          }
         ]
       },
       influenza: {
@@ -3221,33 +3564,663 @@ Expected outcomes include improved access to localized health information, enhan
           { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg" }
         ]
       },
+      pneumonia: {
+      title: "PNEUMONIA",
+      subtitle: "Communicable Disease · Impeksyon sa Baga",
+      description: "Ang Pneumonia ay isang impeksyon sa baga na maaaring sanhi ng bacteria (Streptococcus pneumoniae), virus (influenza, RSV), o fungi. Nagdudulot ito ng pamamaga ng air sacs (alveoli) na maaaring mapuno ng likido o nana, na nagiging sanhi ng ubo na may plema, lagnat, at hirap sa paghinga.",
+      heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/pneumonia-hero.jpg",
+      faqs: [
+        { question: "Ano ang <strong>causative agent?</strong>", answer: "Ang pinakakaraniwang sanhi ay ang bacterium na <strong>Streptococcus pneumoniae</strong> (pneumococcus). Maaari rin itong maging viral (e.g., respiratory syncytial virus, influenza) o fungal." },
+        { question: "Anu-ano ang <strong>mga sintomas?</strong>", answer: "Ubo na may maberde o madugong plema, lagnat na may panginginig, hirap sa paghinga, mabilis na paghinga, pananakit ng dibdib, pagod, at pagkalito (lalo na sa matatanda)." },
+        { question: "Paano <strong>maiiwasan</strong> ang Pneumonia?", answer: "Magpabakuna (pneumococcal at flu vaccine), maghugas ng kamay, iwasan ang paninigarilyo, panatilihing malinis ang hangin, at palakasin ang immune system sa pamamagitan ng masustansyang pagkain at ehersisyo." }
+      ],
+      gridCards: [
+        { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales%2Csintomas.png", detail: "Ang mga sintomas ng pneumonia ay maaaring biglaan o dahan-dahang lumitaw. Kabilang dito ang: ubo na may plema, lagnat at panginginig, pagpapawis, hirap sa paghinga, mabilis na tibok ng puso, pagduduwal o pagsusuka, at pananakit ng dibdib na lumalala kapag humihinga ng malalim." },
+        { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/epidemiology%20at%20prevalance.png", detail: "Ang pneumonia ay isa sa mga nangungunang sanhi ng kamatayan sa buong mundo, lalo na sa mga batang wala pang 5 taong gulang at matatanda. Sa Pilipinas, libu-libo ang naoospital taun-taon dahil sa pneumonia, partikular sa tag-ulan kung kailan mataas ang kaso ng trangkaso." },
+        { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation%20period.png", detail: "Ang incubation period ay depende sa causative agent: para sa bacterial pneumonia, 1-3 araw; para sa viral pneumonia, 1-4 na araw (maaaring mas maikli kung ang virus ay influenza, 18-72 oras)." },
+        { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png", detail: "Ang mga may mataas na panganib: batang wala pang 2 taon, matatanda (65+), taong may malalang sakit (hika, diabetes, sakit sa puso), naninigarilyo, may mahinang immune system (HIV, chemotherapy), at mga nakaratay sa ospital." },
+        { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg", detail: "May dalawang bakuna laban sa pneumococcal pneumonia: PCV13 at PPSV23. Inirerekomenda ang mga ito para sa mga bata, matatanda, at taong may malalang karamdaman. Mahalaga rin ang taunang flu vaccine dahil ang trangkaso ay maaaring mauwi sa pneumonia." },
+        { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/managemnt.png", detail: "Ang bacterial pneumonia ay ginagamot ng antibiotics (amoxicillin, azithromycin). Ang viral pneumonia ay kadalasang ginagamot ng suportang pangangalaga: pahinga, maraming tubig, gamot sa lagnat (paracetamol). Sa malalang kaso, kailangan ng oxygen therapy o hospitalization." }
+      ]
+    },
+    malaria: {
+      title: "MALARIA",
+      subtitle: "Parasitic Disease · Dala ng Lamok (Anopheles)",
+      description: "Ang Malaria ay isang sakit na dulot ng protozoan parasite ng genus Plasmodium. Naililipat ito sa pamamagitan ng kagat ng babaeng Anopheles na lamok. Karaniwan sa mga tropikal at subtropikal na rehiyon, kabilang ang ilang bahagi ng Pilipinas (Palawan, Mindanao).",
+      heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malaria-hero.jpg",
+      faqs: [
+        { question: "Ano ang <strong>causative agent?</strong>", answer: "Limang species ng Plasmodium: P. falciparum (pinakadelikado), P. vivax, P. ovale, P. malariae, at P. knowlesi." },
+        { question: "Anu-ano ang <strong>mga sintomas?</strong>", answer: "Lagnat na paulit-ulit (every 48 oras), panginginig, pagpapawis, sakit ng ulo, pananakit ng katawan, pagduduwal, at pagsusuka. Sa severe malaria: kombulsyon, delirium, kidney failure." },
+        { question: "Paano <strong>maiiwasan</strong> ang Malaria?", answer: "Gumamit ng insect repellent, maglagay ng bed net (lalo na insecticide-treated nets), magsuot ng mahabang damit sa gabi, at mag-take ng prophylactic kung nasa high-risk area." }
+      ],
+      gridCards: [
+        { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales%2Csintomas.png", detail: "Ang klasikong sintomas ay paroxysms: biglang panginginig (cold stage) → lagnat (hot stage) → pagpapawis (sweating stage), umuulit bawat 48-72 oras depende sa species. Kasama rin ang pananakit ng ulo, pagod, at paglaki ng pali." },
+        { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/epidemiology%20at%20prevalance.png", detail: "Ayon sa WHO, 247 milyong kaso sa buong mundo noong 2021. Sa Pilipinas, endemic sa Palawan, Mindoro, at iba pang rural na lugar. Karamihan ng kaso ay P. falciparum at P. vivax." },
+        { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation%20period.png", detail: "Karaniwang 7-30 araw pagkatapos makagat. Ang P. vivax at P. ovale ay maaaring mag-relapse pagkalipas ng buwan o taon dahil sa dormant liver stage (hypnozoites)." },
+        { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png", detail: "Mga bata, buntis, at taong walang immunity na pumupunta sa endemic areas. Ang mga naninirahan sa tabing-ilog o kabundukan ay mas mataas ang panganib." },
+        { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg", detail: "Walapang malawakang bakuna (RTS,S/AS01 ay limitado). Ang chemoprophylaxis (doxycycline, malarone) ay para sa mga manlalakbay. Pinakamabisa ang vector control: insecticide-treated nets (ITNs) at indoor residual spraying (IRS)." },
+        { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/managemnt.png", detail: "Ang uncomplicated malaria ay ginagamot ng artemisinin-based combination therapies (ACTs). Ang severe malaria ay nangangailangan ng intravenous artesunate at hospitalization. Ang P. vivax ay nangangailangan ng primaquine para maiwasan ang relapse." }
+      ]
+    },
+    leptospirosis: {
+      title: "LEPTOSPIROSIS",
+      subtitle: "Bacterial Disease · Mula sa Ihi ng Hayop",
+      description: "Ang Leptospirosis ay isang bacterial infection na dulot ng Leptospira interrogans. Naililipat ito sa tao sa pamamagitan ng kontaminadong tubig o lupa na may ihi ng infected na hayop (karaniwang daga, baka, baboy). Laganap ito sa mga lugar na may baha.",
+      heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/lepto-bacteria-removebg-preview%201.png",
+      faqs: [
+        { question: "Ano ang <strong>causative agent?</strong>", answer: "Ang bacteria na <strong>Leptospira interrogans</strong> na may maraming serovars." },
+        { question: "Anu-ano ang <strong>mga sintomas?</strong>", answer: "Biglang mataas na lagnat, matinding sakit ng ulo, pananakit ng kalamnan (lalo na sa binti), pamumula ng mata (conjunctival suffusion), pagsusuka, at paninilaw ng balat (jaundice)." },
+        { question: "Paano <strong>maiiwasan</strong> ang Leptospirosis?", answer: "Iwasan ang paglakad sa baha, magsuot ng bota, kontrolin ang daga, at linisin agad ang mga sugat." }
+      ],
+      gridCards: [
+        { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales-lepto.png", detail: "Ang leptospirosis ay may dalawang yugto: unang yugto (septicemic) – lagnat, panginginig, pananakit ng kalamnan (lalo na sa binti), sakit ng ulo. Ikalawang yugto (immune) – maaaring bumalik ang lagnat, meningitis, at pinsala sa atay o bato." },
+        { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/epid%26prev.png", detail: "Endemic sa tropikal na rehiyon, kabilang ang Pilipinas. Karaniwang sumusulpot pagkatapos ng malalakas na bagyo at baha. Ang mga magsasaka, manggagawa sa alkantarilya, at beterinaryo ay nasa mataas na panganib." },
+        { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation-lepto.png", detail: "2-30 araw (karaniwan 5-14 araw)." },
+        { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/atrisk-lepto.png", detail: "Mga taong nalulubog sa baha, magsasaka, manggagawa sa kanal, at mga may sugat sa balat." },
+        { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prevention-lepto.png", detail: "Walang bakuna para sa tao sa Pilipinas. Ang kontrol ay sa pamamagitan ng pagkontrol sa daga, pagsusuot ng proteksiyon (bota, guwantes), at pag-iwas sa paglangoy sa tubig-tabang na maaaring kontaminado." },
+        { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/managent-lepto.png", detail: "Maagap na antibiotic (doxycycline, penicillin) ay epektibo. Sa malalang kaso (Weil's disease) – maaaring mangailangan ng dialysis para sa kidney failure." }
+      ]
+    },
+    schistosomiasis: {
+      title: "SCHISTOSOMIASIS",
+      subtitle: "Parasitic Disease · Snail Fever (Bilharzia)",
+      description: "Ang Schistosomiasis ay dulot ng flatworm (schistosome) na nabubuhay sa freshwater snails. Ang parasite ay pumapasok sa balat ng tao habang lumalangoy o naliligo sa kontaminadong tubig. Pangunahing apektado ang bituka at urinary tract.",
+      heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/schisto-hero.jpg",
+      faqs: [
+        { question: "Ano ang <strong>causative agent?</strong>", answer: "Tatlong pangunahing species: Schistosoma mansoni (bituka), S. haematobium (urinary), at S. japonicum (bituka, laganap sa Asya)." },
+        { question: "Anu-ano ang <strong>mga sintomas?</strong>", answer: "Maagang sintomas: makating pantal (swimmer's itch), lagnat, ubo, pananakit ng kalamnan. Talamak na sintomas: pananakit ng tiyan, pagtatae na may dugo, ihi na may dugo, at paglaki ng atay o pali." },
+        { question: "Paano <strong>maiiwasan</strong> ang Schistosomiasis?", answer: "Iwasan ang paglangoy o paglalaba sa tubig-tabang na alam na kontaminado. Magpatupad ng snail control at mass drug administration sa endemic areas." }
+      ],
+      gridCards: [
+        { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales%2Csintomas.png", detail: "Acute schistosomiasis (Katayama fever): lagnat, ubo, pananakit ng tiyan, pagtatae, at paglaki ng atay/pali. Chronic: depende sa species – S. mansoni → portal hypertension, varices; S. haematobium → hematuria, bladder fibrosis, at risk ng bladder cancer." },
+        { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/epidemiology%20at%20prevalance.png", detail: "Apektado ang 240 milyong tao sa buong mundo. Sa Pilipinas, endemic sa 28 probinsya (Leyte, Samar, Mindoro, Sorsogon, at iba pa). Ang S. japonicum ang predominant species." },
+        { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation%20period.png", detail: "4-6 na linggo pagkatapos ng exposure bago lumitaw ang acute symptoms (Katayama fever)." },
+        { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png", detail: "Mga magsasaka, mangingisda, at batang naliligo sa contaminated na tubig. Ang mga komunidad na malapit sa mga lawa at irigasyon ay may mataas na panganib." },
+        { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg", detail: "Mass drug administration ng praziquantel sa mga endemic area, pagpapabuti ng sanitasyon, at pagkontrol sa snail population (molluscicides)." },
+        { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/managemnt.png", detail: "Ang gamot na praziquantel ay epektibo laban sa lahat ng species. Ibinibigay bilang isang araw na dosis. Para sa malalang komplikasyon (portal hypertension), maaaring kailangan ang operasyon." }
+      ]
+    },
+    rabies: {
+      title: "RABIES",
+      subtitle: "Viral Disease · Nakukuha sa Kagat ng Hayop",
+      description: "Ang Rabies ay isang viral disease na nakakaapekto sa central nervous system. Naililipat ito sa tao sa pamamagitan ng laway ng infected na hayop (karaniwang aso, pusa, paniki). Kapag lumitaw na ang mga sintomas, halos 100% nakamamatay.",
+      heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rabies-hero.jpg",
+      faqs: [
+        { question: "Ano ang <strong>causative agent?</strong>", answer: "Ang Rabies virus (Lyssavirus genus)." },
+        { question: "Anu-ano ang <strong>mga sintomas?</strong>", answer: "Maagang sintomas: lagnat, sakit ng ulo, panghihina, at pangingilig sa sugat. Pagkatapos ay lumalabas ang hydrophobia (takot sa tubig), aerophobia (takot sa hangin), agitation, paralysis, at coma." },
+        { question: "Paano <strong>maiiwasan</strong> ang Rabies?", answer: "Pabakunahan ang mga alagang hayop, iwasan ang ligaw na hayop, at kung makagat, hugasan agad ang sugat ng sabon at tubig nang 15 minuto, at pumunta agad sa doktor para sa post-exposure prophylaxis (PEP)." }
+      ],
+      gridCards: [
+        { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales%2Csintomas.png", detail: "Incubation period: 1-3 buwan (maaaring kasing-ikli ng isang linggo o kasing-tagal ng isang taon). Prodromal: lagnat, pananakit ng ulo, pagod, at paresthesia sa lugar ng kagat. Acute neurologic phase: furious rabies (hyperactivity, hydrophobia) o paralytic rabies (mabagal na paralisis na nagsisimula sa kagat na paa)." },
+        { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/epidemiology%20at%20prevalance.png", detail: "Ayon sa DOH, ang Pilipinas ay isa sa mga bansang may mataas na bilang ng rabies deaths. Karamihan ng kaso ay mula sa kagat ng aso (98%). Ang mga bata ang pinakakaraniwang biktima." },
+        { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation%20period.png", detail: "Karaniwan 20-90 araw ngunit maaaring umabot ng higit isang taon depende sa lalim at lokasyon ng sugat (mas maikli kung malapit sa utak)." },
+        { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png", detail: "Mga batang madalas makipaglaro sa aso, mga manggagawa sa hayop (veterinarian, dog catchers), at mga taong naninirahan sa lugar na walang kontrol sa rabies." },
+        { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg", detail: "Ang pre-exposure prophylaxis (PrEP) ay para sa mga high-risk na tao. Para sa nakagat, ang post-exposure prophylaxis (PEP) ay kinabibilangan ng: paghuhugas ng sugat, rabies immunoglobulin (RIG), at apat na dosis ng bakuna (araw 0, 3, 7, 14)." },
+        { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/managemnt.png", detail: "Kapag lumitaw na ang mga sintomas, walang epektibong lunas. Ang paggamot ay suportang pangangalaga (sedation, mechanical ventilation). Ang tanging paraan ay ang maagap na PEP bago magsimula ang sintomas." }
+      ]
+    },
       noncommunicable: {
-        title: "❤️ Non-Communicable Diseases",
-        hero: "Mga sakit na hindi nakakahawa ngunit dulot ng lifestyle. Alamin ang tungkol sa High Blood, Diabetes, at pangangalaga sa puso.",
-        sections: [
-          { heading: "Hypertension", content: "BP ≥140/90. <strong>Pangangalaga:</strong> Bawasan ang asin, kumain ng gulay, ehersisyo 30 min/araw, uminom ng maintenance meds." },
-          { heading: "Diabetes", content: "Mataas na asukal sa dugo. Iwasan ang matatamis, kumain ng brown rice, maglakad araw-araw, magpa-blood sugar test." },
-          { heading: "Sakit sa Puso at Stroke", content: "Panatilihing normal ang BP at cholesterol. Iwasan ang tabako at stress." }
-        ]
-      },
+  isOverview: true,
+  title: "Non‑Communicable Diseases (NCDs)",
+  tagline: "Mga sakit na hindi nakakahawa",
+  description: "Ang Non‑Communicable Diseases (NCDs) ay mga pangmatagalang karamdamang hindi naipapasa mula sa isang tao patungo sa iba. Kadalasang bunga ito ng kombinasyon ng genetika, pamumuhay, at kapaligiran.",
+  spreadModes: [
+    { icon: "🍔", label: "Hindi malusog\ndiyeta" },
+    { icon: "🚬", label: "Paninigarilyo" },
+    { icon: "🍺", label: "Labis na\nalkohol" },
+    { icon: "🏃", label: "Kakulangan sa\nehersisyo" },
+    { icon: "🧬", label: "Genetic\npredisposition" },
+    { icon: "😟", label: "Stress at\ndepresyon" }
+  ],
+  subTopics: [
+    { key: "hypertension", title: "Hypertension", subtitle: "Mataas na presyon ng dugo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hypertension.jpg" },
+    { key: "diabetes", title: "Diabetes Mellitus", subtitle: "Mataas na asukal sa dugo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/diabetes.jpg" },
+    { key: "obesity", title: "Obesity", subtitle: "Labis na timbang", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/obesity.jpg" },
+    { key: "ckd", title: "Chronic Kidney Disease", subtitle: "Sakit sa bato", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/kidney.jpg" },
+    { key: "asthma", title: "Asthma", subtitle: "Hika", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/asthma.jpg" },
+    { key: "copd", title: "COPD", subtitle: "Panmatagalang sakit sa baga", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/copd.jpg" },
+    { key: "depression", title: "Depression", subtitle: "Matinding kalungkutan", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depression.jpg" }
+  ]
+},
+// ================================
+// NON‑COMMUNICABLE DISEASES (with 6‑card detail)
+// ================================
+
+hypertension: {
+  title: "HYPERTENSION",
+  subtitle: "Mataas na Presyon ng Dugo",
+  description: "Ang hypertension ay isang pangmatagalang kondisyon kung saan ang presyon ng dugo sa arterya ay patuloy na mataas. Madalas itong tawaging 'silent killer' dahil walang sintomas hanggang sa malubha na.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hypertension.jpg",
+  faqs: [
+    { question: "Ano ang normal na presyon ng dugo?", answer: "Ang normal ay 120/80 mmHg. Ang 130/80 o mas mataas ay itinuturing na hypertension." },
+    { question: "Ano ang pangunahing sanhi?", answer: "Kadalasan ay walang iisang sanhi. Kasama ang genetics, mataas na asin sa diyeta, labis na timbang, at stress." }
+  ],
+  gridCards: [
+    { title: "Risk Factors", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hypertension.jpg",
+      detail: "Mga salik na nagpapataas ng panganib: <strong>Edad (45+ lalaki, 65+ babae)</strong>, lahing African o Asyano, family history, obesity, mataas na asin, paninigarilyo, alak, stress, at diabetes." },
+    { title: "Early vs Late Manifestations", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hypertension.jpg",
+      detail: "<strong>Maaga:</strong> Kadalasan walang sintomas. Maaaring may pananakit ng ulo, pagkahilo, o ilongdugo.<br><strong>Huli:</strong> Pagkapos ng hininga, pananakit ng dibdib, abnormal na tibok ng puso, panlalabo ng mata, at pinsala sa bato." },
+    { title: "Lifestyle Changes", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hypertension.jpg",
+      detail: "⬤ Bawasan ang asin (mas mababa sa 1,500mg/araw).<br>⬤ Kumain ng gulay, prutas, at whole grains (DASH diet).<br>⬤ Mag-ehersisyo 30 minuto, 5 beses/linggo.<br>⬤ Itigil ang paninigarilyo at limitahan ang alak.<br>⬤ Bawasan ang stress (meditasyon, sapat na tulog)." },
+    { title: "Screening Procedures", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hypertension.jpg",
+      detail: "Ang screening ay ginagawa sa pamamagitan ng <strong>blood pressure measurement</strong> gamit ang sphygmomanometer. Dapat kunin ang kPa o mmHG sa dalawang magkaibang araw. Maaaring mag-request ang doktor ng urine test, blood test (cholesterol, glucose), at ECG." },
+    { title: "Medical Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hypertension.jpg",
+      detail: "Ang mga karaniwang gamot: <strong>ACE inhibitors</strong> (Enalapril, Lisinopril), <strong>ARBs</strong> (Losartan), <strong>Calcium channel blockers</strong> (Amlodipine), <strong>Diuretics</strong>. Kailangan inumin araw-araw kahit walang sintomas." },
+    { title: "Self‑Management Techniques", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hypertension.jpg",
+      detail: "⬤ Magkaroon ng sariling BP monitor at mag-check araw-araw.<br>⬤ Magtala ng resulta at dalhin sa check-up.<br>⬤ Sundin ang gamutan at diyeta.<br>⬤ Iwasan ang mga trigger gaya ng sobrang trabaho at galit." }
+  ]
+},
+
+diabetes: {
+  title: "DIABETES MELLITUS",
+  subtitle: "Mataas na Asukal sa Dugo",
+  description: "Ang diabetes ay isang malalang sakit kung saan hindi nagagawa o hindi nagagamit ng maayos ang insulin, na nagreresulta sa mataas na glucose sa dugo.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/diabetes.jpg",
+  faqs: [
+    { question: "Ano ang pagkakaiba ng Type 1 at Type 2?", answer: "Type 1 – hindi gumagawa ng insulin (karaniwan sa bata). Type 2 – lumalaban ang katawan sa insulin (mas karaniwan, kadalasan sa matanda o obese)." }
+  ],
+  gridCards: [
+    { title: "Risk Factors", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/diabetes.jpg",
+      detail: "⬤ Sobrang timbang o obesity (lalo na sa tiyan)<br>⬤ Hindi aktibo sa pisikal<br>⬤ Family history ng diabetes<br>⬤ Hypertension o high cholesterol<br>⬤ Gestational diabetes dati<br>⬤ Edad >45 taon" },
+    { title: "Early vs Late Manifestations", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/diabetes.jpg",
+      detail: "<strong>Maaga:</strong> Uhaw na uhaw, madalas umihi, gutom na gutom, pagbaba ng timbang, pagod, malabong paningin.<br><strong>Huli:</strong> Pamamanhid ng kamay/paa (neuropathy), sugat na matagal gumaling, paulit-ulit na impeksyon, sakit sa bato, atake sa puso." },
+    { title: "Lifestyle Changes", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/diabetes.jpg",
+      detail: "⬤ Kumain ng masustansya: iwasan ang matamis, puting bigas, at softdrinks.<br>⬤ Pumili ng brown rice, gulay, isda, at lean meat.<br>⬤ Mag-ehersisyo nang regular (lakad, biking).<br>⬤ Panatilihin ang healthy weight." },
+    { title: "Screening Procedures", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/diabetes.jpg",
+      detail: "⬤ Fasting Blood Sugar (FBS) – normal <100 mg/dL<br>⬤ Oral Glucose Tolerance Test (OGTT)<br>⬤ Hemoglobin A1c – average ng 3 buwan<br>⬤ Random blood sugar – >200 mg/dL sintomas" },
+    { title: "Medical Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/diabetes.jpg",
+      detail: "⬤ Type 1: insulin injection.<br>⬤ Type 2: Metformin, Sulfonylureas, SGLT2 inhibitors, GLP-1 agonists.<br>⬤ Regular monitoring ng blood glucose at follow-up sa doktor." },
+    { title: "Self‑Management Techniques", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/diabetes.jpg",
+      detail: "⬤ Mag-check ng blood sugar araw-araw.<br>⬤ Magtala ng kinakain at ehersisyo.<br>⬤ Alamin ang senyales ng low/high sugar.<br>⬤ Laging magdala ng candy para sa emergency low sugar." }
+  ]
+},
+
+obesity: {
+  title: "OBESITY",
+  subtitle: "Labis na Timbang",
+  description: "Ang obesity ay isang komplikadong sakit na nailalarawan sa sobrang dami ng body fat. Ito ay isang pangunahing risk factor para sa diabetes, hypertension, at sakit sa puso.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/obesity.jpg",
+  faqs: [
+    { question: "Paano masusukat ang obesity?", answer: "Gamit ang Body Mass Index (BMI). Ang BMI ≥30 ay obese. Pwede rin ang sukat ng baywang (>90cm lalaki, >80cm babae)." }
+  ],
+  gridCards: [
+    { title: "Risk Factors", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/obesity.jpg",
+      detail: "⬤ Genetics at family history<br>⬤ Hindi malusog na diyeta (fast food, processed food)<br>⬤ Kakulangan sa ehersisyo<br>⬤ Ilang gamot (steroids, antidepressants)<br>⬤ Kakulangan sa tulog<br>⬤ Stress at emotional eating" },
+    { title: "Early vs Late Manifestations", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/obesity.jpg",
+      detail: "<strong>Maaga:</strong> pagtaas ng timbang, malaking sukat ng baywang, hirap sa paggalaw.<br><strong>Huli:</strong> sleep apnea, osteoarthritis, fatty liver, gallbladder disease, infertility, at iba pang komplikasyon." },
+    { title: "Lifestyle Changes", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/obesity.jpg",
+      detail: "⬤ Bawasan ang calorie intake (1500-1800/araw)<br>⬤ Kumain ng mas maraming gulay, prutas, protina<br>⬤ Mag-ehersisyo 30-60 minuto araw-araw<br>⬤ Matulog ng 7-8 oras<br>⬤ Iwasan ang stress eating" },
+    { title: "Screening Procedures", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/obesity.jpg",
+      detail: "⬤ Body Mass Index (BMI) calculation<br>⬤ Waist circumference<br>⬤ Body fat percentage (caliper o bioelectrical impedance)<br>⬤ Blood tests (glucose, cholesterol, liver function)" },
+    { title: "Medical Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/obesity.jpg",
+      detail: "⬤ Gamot: Orlistat, Phentermine-topiramate, Liraglutide (sa ilalim lamang ng doktor)<br>⬤ Behavioral therapy<br>⬤ Bariatric surgery para sa severe obesity (BMI >40)" },
+    { title: "Self‑Management Techniques", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/obesity.jpg",
+      detail: "⬤ Magtala ng kinakain sa food diary.<br>⬤ Gumamit ng smaller plates.<br>⬤ Maghanap ng support group o kaibigan.<br>⬤ Magtakda ng makatotohanang goal (1-2 lbs/linggo)." }
+  ]
+},
+
+ckd: {
+  title: "CHRONIC KIDNEY DISEASE",
+  subtitle: "Panmatagalang Sakit sa Bato",
+  description: "Ang CKD ay ang unti-unting pagkawala ng function ng bato sa loob ng ilang buwan o taon. Maaaring mauwi sa end-stage renal disease na nangangailangan ng dialysis o transplant.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/kidney.jpg",
+  faqs: [
+    { question: "Ano ang mga pangunahing sanhi ng CKD?", answer: "Ang nangungunang sanhi ay diabetes at hypertension. Iba pa: glomerulonephritis, polycystic kidney disease, at matagal na pag-inom ng NSAIDs." }
+  ],
+  gridCards: [
+    { title: "Risk Factors", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/kidney.jpg",
+      detail: "⬤ Diabetes<br>⬤ Hypertension<br>⬤ Family history ng CKD<br>⬤ Edad >60<br>⬤ Lahing African, Asian, o Hispanic<br>⬤ Matagal na pag-inom ng pain relievers (ibuprofen, naproxen)" },
+    { title: "Early vs Late Manifestations", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/kidney.jpg",
+      detail: "<strong>Maaga:</strong> Kadalasan walang sintomas. Maaari lamang makita sa laboratoryo (creatinine, proteinuria).<br><strong>Huli:</strong> Pamamaga (edema) ng paa, mukha, pagod, makating balat, madalas pag-ihi (lalo na sa gabi), pagkawala ng gana, pagduduwal." },
+    { title: "Lifestyle Changes", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/kidney.jpg",
+      detail: "⬤ Bawasan ang asin (≤2,000mg/araw)<br>⬤ Kontrolin ang protina (ayon sa rekomendasyon ng doktor)<br>⬤ Iwasan ang potassium-rich foods (saging, kamote, spinach) sa late stage<br>⬤ Uminom ng sapat na tubig (huwag labis)<br>⬤ Itigil ang paninigarilyo" },
+    { title: "Screening Procedures", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/kidney.jpg",
+      detail: "⬤ Urinalysis (proteinuria, hematuria)<br>⬤ Blood creatinine at eGFR (estimated Glomerular Filtration Rate)<br>⬤ Blood Urea Nitrogen (BUN)<br>⬤ Ultrasound ng bato<br>⬤ Kidney biopsy para sa tiyak na diagnosis" },
+    { title: "Medical Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/kidney.jpg",
+      detail: "⬤ Kontrolin ang blood pressure (ACE inhibitors, ARBs)<br>⬤ Gamot sa diabetes<br>⬤ Iwasan ang mga gamot na nakakasama sa bato (NSAIDs, ilang antibiotics)<br>⬤ Late stage: dialysis (hemodialysis o peritoneal) at kidney transplant" },
+    { title: "Self‑Management Techniques", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/kidney.jpg",
+      detail: "⬤ Sundin ang renal diet (low sodium, low potassium, low phosphorus)<br>⬤ I-monitor ang BP at blood sugar araw-araw<br>⬤ Uminom ng gamot sa tamang oras<br>⬤ Iwasan ang dehydration at sobrang fluid kung nasa dialysis" }
+  ]
+},
+
+asthma: {
+  title: "ASTHMA",
+  subtitle: "Hika",
+  description: "Ang asthma ay isang kondisyon kung saan namamaga at sumisikip ang daanan ng hangin sa baga, na nagdudulot ng pag-ubo, paghinga, at paninikip ng dibdib.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/asthma.jpg",
+  faqs: [
+    { question: "Ano ang nagti-trigger ng asthma?", answer: "Allergens (alikabok, pollen, amag), usok, mabahong amoy, sipon, malamig na hangin, ehersisyo, at stress." }
+  ],
+  gridCards: [
+    { title: "Risk Factors", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/asthma.jpg",
+      detail: "⬤ Family history ng hika o allergy<br>⬤ Personal na may eczema o allergic rhinitis<br>⬤ Paninigarilyo ng magulang noong pagkabata<br>⬤ Exposure sa air pollution o kemikal<br>⬤ Obesity" },
+    { title: "Early vs Late Manifestations", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/asthma.jpg",
+      detail: "<strong>Early signs:</strong> ubo lalo na sa gabi, paghinga (whistling sound), paninikip ng dibdib.<br><strong>Severe attack:</strong> sobrang hirap huminga, hindi makapagsalita ng buong pangungusap, asul na labi, mabilis na tibok ng puso." },
+    { title: "Lifestyle Changes", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/asthma.jpg",
+      detail: "⬤ Iwasan ang trigger (alikabok, usok, mabangong pabango)<br>⬤ Gumamit ng dust mite-proof bed covers<br>⬤ Panatilihing malinis ang bahay, walang amag<br>⬤ Mag-ehersisyo sa loob kung malamig ang hangin" },
+    { title: "Screening Procedures", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/asthma.jpg",
+      detail: "⬤ Spirometry (breathing test)<br>⬤ Peak flow meter (para sa daily monitoring)<br>⬤ Allergy test (skin prick o blood)<br>⬤ Chest X-ray para i-rule out ang ibang sakit" },
+    { title: "Medical Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/asthma.jpg",
+      detail: "⬤ <strong>Quick-relief (rescue):</strong> Albuterol inhaler (blue) – ginagamit sa atake.<br>⬤ <strong>Long-term control:</strong> Inhaled corticosteroids (e.g., fluticasone), leukotriene modifiers (montelukast).<br>⬤ Biologics para sa severe asthma." },
+    { title: "Self‑Management Techniques", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/asthma.jpg",
+      detail: "⬤ Gumawa ng Asthma Action Plan kasama ang doktor.<br>⬤ Gumamit ng peak flow meter araw-araw.<br>⬤ Matutong gumamit ng inhaler nang tama.<br>⬤ Iwasan ang trigger at uminom ng maintenance gamot kahit walang sintomas." }
+  ]
+},
+
+copd: {
+  title: "CHRONIC OBSTRUCTIVE PULMONARY DISEASE",
+  subtitle: "COPD – Panmatagalang Sagabal sa Baga",
+  description: "Ang COPD ay isang progresibong sakit sa baga na nagdudulot ng hirap sa paghinga dahil sa pagkasira ng daanan ng hangin at air sacs. Pangunahing sanhi ay paninigarilyo.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/copd.jpg",
+  faqs: [
+    { question: "Ano ang pagkakaiba ng COPD at asthma?", answer: "Ang asthma ay kadalasang nababaligtad (reversible) at nagsisimula sa bata. Ang COPD ay permanente, progresibo, at karaniwan sa matatandang naninigarilyo." }
+  ],
+  gridCards: [
+    { title: "Risk Factors", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/copd.jpg",
+      detail: "⬤ Paninigarilyo (pinakamahalaga)<br>⬤ Exposure sa secondhand smoke<br>⬤ Polusyon sa hangin (loob at labas)<br>⬤ Alikabok at kemikal sa trabaho (minahan, konstruksyon)<br>⬤ Genetic disorder (alpha-1 antitrypsin deficiency)" },
+    { title: "Early vs Late Manifestations", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/copd.jpg",
+      detail: "<strong>Maaga:</strong> Talamak na ubo na may plema (lalo na sa umaga), kapos sa paghinga sa ehersisyo.<br><strong>Huli:</strong> Sobrang kapos kahit nagpapahinga, madalas na impeksyon sa baga, pagbaba ng timbang, pamamaga ng paa, at cyanosis (asul na labi)." },
+    { title: "Lifestyle Changes", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/copd.jpg",
+      detail: "⬤ Tumigil sa paninigarilyo (pinakamahalaga)<br>⬤ Iwasan ang usok, alikabok, at kemikal<br>⬤ Magpabakuna laban sa pneumonia at trangkaso<br>⬤ Mag-ehersisyo ng tama (pulmonary rehabilitation)" },
+    { title: "Screening Procedures", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/copd.jpg",
+      detail: "⬤ Spirometry (susi ng diagnosis)<br>⬤ Chest X-ray o CT scan<br>⬤ Arterial blood gas (ABG)<br>⬤ 6-minute walk test" },
+    { title: "Medical Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/copd.jpg",
+      detail: "⬤ Bronchodilators (short-acting at long-acting)<br>⬤ Inhaled corticosteroids<br>⬤ Oxygen therapy para sa severe cases<br>⬤ Pulmonary rehabilitation program<br>⬤ Surgery (lung volume reduction o transplant) sa selected cases." },
+    { title: "Self‑Management Techniques", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/copd.jpg",
+      detail: "⬤ Matuto ng pursed-lip breathing at diaphragmatic breathing.<br>⬤ Magplano ng aktibidad para hindi mapagod.<br>⬤ Iwasan ang mga trigger at manatili sa malinis na hangin.<br>⬤ Uminom ng gamot araw-araw kahit walang sintomas." }
+  ]
+},
+
+depression: {
+  title: "DEPRESSION",
+  subtitle: "Matinding Kalungkutan (Major Depressive Disorder)",
+  description: "Ang depression ay isang mood disorder na nagdudulot ng patuloy na kalungkutan, kawalan ng interes, at pagbaba ng enerhiya, na nakakaapekto sa pang-araw-araw na pamumuhay.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depression.jpg",
+  faqs: [
+    { question: "Ano ang pagkakaiba ng normal na kalungkutan at clinical depression?", answer: "Ang normal na kalungkutan ay lumilipas (dahil sa isang pangyayari) at hindi nakakaapekto nang malala. Ang depression ay tumatagal ng ≥2 linggo at may malaking epekto sa trabaho, relasyon, at pisikal na kalusugan." }
+  ],
+  gridCards: [
+    { title: "Risk Factors", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depression.jpg",
+      detail: "⬤ Genetics (family history)<br>⬤ Traumatic o stressful life events (abuso, pagkawala ng mahal sa buhay)<br>⬤ Mababang self-esteem<br>⬤ Ilang sakit (cancer, Parkinson’s, thyroid disorder)<br>⬤ Ilang gamot (steroids, reserpine)<br>⬤ Pag-abuso sa substance" },
+    { title: "Early vs Late Manifestations", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depression.jpg",
+      detail: "<strong>Maaga:</strong> Patuloy na malungkot, iritable, pagkawala ng interes sa dating kinahihiligan, pagbabago sa gana (sobra o kulang), hirap matulog.<br><strong>Huli:</strong> Pananakit ng katawan na walang makitang medikal na dahilan, pag-iisip ng kamatayan o pagpapakamatay, social isolation." },
+    { title: "Lifestyle Changes", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depression.jpg",
+      detail: "⬤ Regular na ehersisyo (nagpapataas ng endorphins)<br>⬤ Balanseng diyeta (omega-3, B bitamina)<br>⬤ Sapat na tulog<br>⬤ Iwasan ang alak at ipinagbabawal na gamot<br>⬤ Sumali sa support group" },
+    { title: "Screening Procedures", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depression.jpg",
+      detail: "⬤ Patient Health Questionnaire-9 (PHQ-9)<br>⬤ Beck Depression Inventory (BDI)<br>⬤ Hamilton Depression Rating Scale<br>⬤ Physical exam at blood tests para i-rule out ang thyroid o vitamin deficiency" },
+    { title: "Medical Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depression.jpg",
+      detail: "⬤ Selective Serotonin Reuptake Inhibitors (SSRIs) – Fluoxetine, Sertraline, Escitalopram<br>⬤ Serotonin-Norepinephrine Reuptake Inhibitors (SNRIs) – Venlafaxine<br>⬤ Atypical antidepressants – Bupropion<br>⬤ Psychotherapy (Cognitive Behavioral Therapy, Interpersonal Therapy)" },
+    { title: "Self‑Management Techniques", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depression.jpg",
+      detail: "⬤ Magtakda ng maliliit na pang-araw-araw na layunin (bumangon, maligo).<br>⬤ I-journal ang mga saloobin.<br>⬤ Kausapin ang mapagkakatiwalaang kaibigan o pamilya.<br>⬤ Iwasan ang paghihiwalay.<br>⬤ Kung may suicidal thoughts, tumawag sa emergency o mental health hotline agad." }
+  ]
+},
+noncommunicable: {
+  isOverview: true,
+  title: "Non‑Communicable Diseases (NCDs)",
+  tagline: "Mga sakit na hindi nakakahawa",
+  description: "Ang Non‑Communicable Diseases (NCDs) ay mga pangmatagalang karamdamang hindi naipapasa mula sa isang tao patungo sa iba. Kadalasang bunga ito ng kombinasyon ng genetika, pamumuhay, at kapaligiran.",
+  spreadModes: [
+    { icon: "🍔", label: "Hindi malusog\ndiyeta" },
+    { icon: "🚬", label: "Paninigarilyo" },
+    { icon: "🍺", label: "Labis na\nalkohol" },
+    { icon: "🏃", label: "Kakulangan sa\nehersisyo" },
+    { icon: "🧬", label: "Genetic\npredisposition" },
+    { icon: "😟", label: "Stress at\ndepresyon" }
+  ],
+  subTopics: [
+    { key: "hypertension", title: "Hypertension", subtitle: "Mataas na presyon ng dugo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hypertension.jpg" },
+    { key: "diabetes", title: "Diabetes Mellitus", subtitle: "Mataas na asukal sa dugo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/diabetes.jpg" },
+    { key: "obesity", title: "Obesity", subtitle: "Labis na timbang", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/obesity.jpg" },
+    { key: "ckd", title: "Chronic Kidney Disease", subtitle: "Sakit sa bato", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/kidney.jpg" },
+    { key: "asthma", title: "Asthma", subtitle: "Hika", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/asthma.jpg" },
+    { key: "copd", title: "COPD", subtitle: "Panmatagalang sakit sa baga", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/copd.jpg" },
+    { key: "depression", title: "Depression", subtitle: "Matinding kalungkutan", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depression.jpg" }
+  ]
+},
       dohprograms: {
-        title: "🏛️ DOH National Health Programs",
-        hero: "Mga programang pangkalusugan ng gobyerno na makakatulong sa barangay.",
-        sections: [
-          { heading: "National Immunization Program", content: "Libreng bakuna: BCG, Hepatitis B, Polio, Pentavalent, Measles, MMR. Kumpletuhin ang bakuna bago mag-1 taon." },
-          { heading: "TB-DOTS Program", content: "Libreng gamutan para sa Tuberculosis sa lahat ng RHU." },
-          { heading: "Family Planning", content: "Contraceptive options (pills, injectables, IUD, implant) para sa responsableng pagpaplano." }
-        ]
+  isOverview: true,               // tells the system to show as overview (law list)
+  title: "DOH Health Programs",
+  tagline: "Mga Batas at Programang Pangkalusugan",
+  description: "Ang mga sumusunod na Republic Acts ay nagtatag ng mahahalagang programang pangkalusugan sa Pilipinas. Pindutin ang anumang batas upang makita ang detalye nito.",
+  // This is the list of laws that will appear as clickable cards
+  laws: [
+    { key: "ra10767", title: "RA 10767", subtitle: "National Tuberculosis Control Program (NTP)" },
+    { key: "ra11166", title: "RA 11166", subtitle: "HIV/AIDS and STI Prevention Program" },
+    { key: "ra11332", title: "RA 11332", subtitle: "Dengue Prevention and Control Program" },
+    { key: "ra9482",  title: "RA 9482",  subtitle: "Rabies Prevention Program" },
+    { key: "ra9288",  title: "RA 9288",  subtitle: "Newborn Screening Program" },
+    { key: "ra10354", title: "RA 10354", subtitle: "Maternal, Newborn, Child Health, and Nutrition" },
+    { key: "ra10354_fp", title: "RA 10354", subtitle: "Family Planning Program" },
+    { key: "ra11223_adol", title: "RA 11223", subtitle: "Adolescent Health and Development Program" },
+    { key: "ra11036", title: "RA 11036", subtitle: "National Mental Health Program" },
+    { key: "ra11223_uhc", title: "RA 11223", subtitle: "Universal Health Care" },
+    { key: "ra7875",  title: "RA 7875",  subtitle: "National Health Insurance Act of 1995 (PhilHealth)" }
+  ]
       },
+      // ======================================
+// DOH PROGRAM LAWS (with 5 functional cards)
+// ======================================
+
+ra10767: {
+  title: "RA 10767",
+  subtitle: "National Tuberculosis Control Program (NTP)",
+  description: "Nagtatag ng komprehensibong programa upang mapababa ang insidente ng tuberculosis sa bansa sa pamamagitan ng libreng gamutan (DOTS) at pampublikong kamalayan.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/tuberculosis-tb-disease.webp",
+  faqs: [], // not used, but required by structure
+  gridCards: [
+    { title: "Name of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+      detail: "<strong>Republic Act No. 10767</strong><br>Kilala rin bilang <strong>Comprehensive Tuberculosis Elimination Plan Act</strong>." },
+    { title: "Judicial name", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+      detail: "An Act Instituting the Comprehensive Tuberculosis Elimination Plan, Appropriating Funds Therefor, and for Other Purposes." },
+    { title: "Brief definition", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+      detail: "Ito ang batas na nag-uutos sa pamahalaan na magbigay ng libreng serbisyo sa TB diagnosis, gamutan (DOTS), at follow‑up sa lahat ng pasilidad ng kalusugan." },
+    { title: "Coverage of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+      detail: "Sakop nito ang lahat ng mamamayang Pilipino, lalo na ang mga nasa rural areas, kulungan, at mahihirap na komunidad. Kasama ang mandatoryong pag-uulat ng mga kaso at pagtatatag ng TB DOTS clinics." },
+    { title: "Health programs under this law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+      detail: "⬤ National Tuberculosis Control Program (NTP)<br>⬤ DOTS strategy sa lahat ng RHU<br>⬤ Libreng pagsusuri at gamot<br>⬤ TB contact tracing at preventive therapy para sa batang exposed" }
+  ]
+},
+
+ra11166: {
+  title: "RA 11166",
+  subtitle: "HIV/AIDS and STI Prevention Program",
+  description: "Philippine HIV and AIDS Policy Act – nagpapalawak ng access sa HIV testing, treatment, at prevention services.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+  gridCards: [
+    { title: "Name of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hiv.jpg",
+      detail: "<strong>Republic Act No. 11166</strong><br>Philippine HIV and AIDS Policy Act." },
+    { title: "Judicial name", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hiv.jpg",
+      detail: "An Act Strengthening the Philippine Comprehensive Policy on Human Immunodeficiency Virus (HIV) and Acquired Immune Deficiency Syndrome (AIDS) Prevention, Treatment, Care and Support, and for Other Purposes." },
+    { title: "Brief definition", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hiv.jpg",
+      detail: "Pinapayagan ang mga minors na edad 15–17 na magpa‑HIV test nang walang pahintulot ng magulang. Nagtatag ng HIV treatment hubs at nagbibigay ng libreng antiretroviral drugs." },
+    { title: "Coverage of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hiv.jpg",
+      detail: "Sakop nito ang lahat ng tao, lalo na ang mga key populations (MSM, transgender, sex workers, PWID). Obligado ang gobyerno na magbigay ng confidential testing, counseling, at libreng gamot." },
+    { title: "Health programs under this law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hiv.jpg",
+      detail: "⬤ HIV treatment hubs (libreng ARV)<br>⬤ Community‑based HIV screening<br>⬤ Prevention programs (condom distribution, PrEP awareness)<br>⬤ Social hygiene clinics para sa STI" }
+  ]
+},
+
+ra11332: {
+  title: "RA 11332",
+  subtitle: "Dengue Prevention and Control Program",
+  description: "Nagtatag ng mandatory reporting ng notifiable diseases at nagpapatupad ng 4S strategy laban sa dengue.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue.jpg",
+  gridCards: [
+    { title: "Name of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue.jpg",
+      detail: "<strong>Republic Act No. 11332</strong><br>Mandatory Reporting of Notifiable Diseases and Health Events of Public Health Concern Act." },
+    { title: "Judicial name", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue.jpg",
+      detail: "An Act Providing Policies and Prescribing Procedures on Surveillance and Response to Notifiable Diseases, Epidemics, and Health Events of Public Health Concern." },
+    { title: "Brief definition", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue.jpg",
+      detail: "Kinakailangan ang lahat ng healthcare providers na i‑report ang kaso ng dengue at iba pang notifiable diseases sa DOH sa loob ng 24 oras. Ito ay para sa mabilis na outbreak response." },
+    { title: "Coverage of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue.jpg",
+      detail: "Sakop ang lahat ng pampubliko at pribadong ospital, RHU, at laboratories. May parusa sa hindi pag‑uulat." },
+    { title: "Health programs under this law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue.jpg",
+      detail: "⬤ Dengue surveillance system (DOH)<br>⬤ Aksyon Barangay Kontra Dengue (ABKD)<br>⬤ 4S strategy: Search & destroy, Self‑protection, Seek early consultation, Say no to fogging." }
+  ]
+},
+
+ra9482: {
+  title: "RA 9482",
+  subtitle: "Rabies Prevention Program",
+  description: "Anti‑Rabies Act of 2007 – nagtatag ng National Rabies Prevention and Control Program.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rabies.jpg",
+  gridCards: [
+    { title: "Name of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rabies.jpg",
+      detail: "<strong>Republic Act No. 9482</strong><br>Anti‑Rabies Act of 2007." },
+    { title: "Judicial name", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rabies.jpg",
+      detail: "An Act Providing for the Control and Elimination of Human and Animal Rabies, Prescribing Penalties for Violation Thereof, and Appropriating Funds Therefor." },
+    { title: "Brief definition", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rabies.jpg",
+      detail: "Nag-uutos sa lahat ng alagang aso at pusa na mabakunahan laban sa rabies taun‑taon. Nagtatag ng libreng post‑exposure prophylaxis (PEP) sa mga animal bite centers." },
+    { title: "Coverage of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rabies.jpg",
+      detail: "Sakop ang lahat ng pet owners, barangay, at lokal na gobyerno. Mayroong compulsory registration at vaccination ng aso. Ang mga nakagat ay may karapatan sa libreng PEP." },
+    { title: "Health programs under this law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rabies.jpg",
+      detail: "⬤ National Rabies Prevention and Control Program (NRPCP)<br>⬤ Animal bite treatment centers (ABTC)<br>⬤ Libreng rabies vaccine para sa mga nakagat<br>⬤ Mass dog vaccination campaigns" }
+  ]
+},
+
+ra9288: {
+  title: "RA 9288",
+  subtitle: "Newborn Screening Program",
+  description: "Newborn Screening Act of 2004 – nag-uutos sa lahat ng sanggol na sumailalim sa newborn screening.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg",
+  gridCards: [
+    { title: "Name of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg",
+      detail: "<strong>Republic Act No. 9288</strong><br>Newborn Screening Act of 2004." },
+    { title: "Judicial name", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg",
+      detail: "An Act Promulgating a Comprehensive Policy and a National System for Newborn Screening." },
+    { title: "Brief definition", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg",
+      detail: "Kinakailangan ang newborn screening sa lahat ng sanggol sa loob ng 48 oras pagkapanganak upang matukoy ang mga congenital disorder gaya ng CH, CAH, at G6PD deficiency." },
+    { title: "Coverage of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg",
+      detail: "Sakop ang lahat ng pampubliko at pribadong ospital, lying‑in, at mga tahanan. Ang PhilHealth ay sumasagot sa halaga ng screening sa mga miyembro." },
+    { title: "Health programs under this law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg",
+      detail: "⬤ National Newborn Screening Program (NBS)<br>⬤ Newborn Screening Reference Centers (NSRC)<br>⬤ Follow‑up at treatment para sa positive cases<br>⬤ Information campaign sa mga magulang" }
+  ]
+},
+
+ra10354: {
+  title: "RA 10354",
+  subtitle: "Maternal, Newborn, Child Health, and Nutrition",
+  description: "Responsible Parenthood and Reproductive Health Act of 2012 – bahagi nito ang kalusugan ng ina at bata.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg",
+  gridCards: [
+    { title: "Name of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg",
+      detail: "<strong>Republic Act No. 10354</strong><br>The Responsible Parenthood and Reproductive Health Act of 2012 (RH Law)." },
+    { title: "Judicial name", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg",
+      detail: "An Act Providing for a National Policy on Responsible Parenthood and Reproductive Health." },
+    { title: "Brief definition", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg",
+      detail: "Nagbibigay ng access sa family planning, maternal care, at adolescent health. Obligado ang gobyerno na magbigay ng libreng contraceptives at prenatal services." },
+    { title: "Coverage of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg",
+      detail: "Sakop ang lahat ng kababaihan ng reproductive age, lalo na ang mga buntis at nagpapasuso. Kasama ang mandatoryong age‑appropriate sex education sa paaralan." },
+    { title: "Health programs under this law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg",
+      detail: "⬤ Maternal, Newborn, Child Health and Nutrition (MNCHN)<br>⬤ Family planning clinics<br>⬤ Adolescent health and development program<br>⬤ Garantisadong Pambata" }
+  ]
+},
+
+ra10354_fp: {
+  title: "RA 10354",
+  subtitle: "Family Planning Program",
+  description: "Ang Family Planning Program ay isa sa mga pangunahing bahagi ng RH Law – nagbibigay ng libreng contraceptives at reproductive health services.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+  gridCards: [
+    { title: "Name of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+      detail: "<strong>Republic Act No. 10354 (Family Planning provisions)</strong>" },
+    { title: "Judicial name", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+      detail: "Responsible Parenthood and Reproductive Health Act of 2012 – Title on Family Planning." },
+    { title: "Brief definition", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+      detail: "Nagbibigay‑daan sa access sa modernong family planning methods (pills, injectables, IUD, implant, condoms) nang libre sa lahat ng RHU." },
+    { title: "Coverage of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+      detail: "Sakop ang lahat ng sexually active individuals at couples na nagnanais magplano ng pamilya. Mayroong karapatan sa impormasyon at serbisyo kahit walang pahintulot ng asawa." },
+    { title: "Health programs under this law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg",
+      detail: "⬤ National Family Planning Program (NFPP)<br>⬤ Community‑based distribution ng contraceptives<br>⬤ Post‑partum family planning<br>⬤ Teen pregnancy prevention campaign" }
+  ]
+},
+
+ra11223_adol: {
+  title: "RA 11223",
+  subtitle: "Adolescent Health and Development Program",
+  description: "Universal Health Care Act – tinitiyak na may access ang mga kabataan sa health services na angkop sa kanilang edad.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/adolescent.jpg",
+  gridCards: [
+    { title: "Name of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/adolescent.jpg",
+      detail: "<strong>Republic Act No. 11223</strong><br>Universal Health Care Act (UHC) – Adolescent Health component." },
+    { title: "Judicial name", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/adolescent.jpg",
+      detail: "An Act Instituting Universal Health Care for All Filipinos." },
+    { title: "Brief definition", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/adolescent.jpg",
+      detail: "Bahagi ng UHC ang pagtatag ng <strong>Adolescent Friendly Health Facilities</strong> kung saan makakakuha ng confidential at libreng serbisyo ang mga edad 10‑19." },
+    { title: "Coverage of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/adolescent.jpg",
+      detail: "Sakop ang lahat ng nasa edad 10‑19, kabilang ang mga out‑of‑school youth, LGBT+, at may kapansanan." },
+    { title: "Health programs under this law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/adolescent.jpg",
+      detail: "⬤ Adolescent Health and Development Program (AHDP)<br>⬤ Teen centers sa RHU<br>⬤ Peer education on HIV, early pregnancy, mental health<br>⬤ Mental health first aid sa paaralan" }
+  ]
+},
+
+ra11036: {
+  title: "RA 11036",
+  subtitle: "National Mental Health Program",
+  description: "Mental Health Act – nagtatag ng komprehensibong serbisyo sa kalusugang pangkaisipan sa bansa.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/mental-health.jpg",
+  gridCards: [
+    { title: "Name of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/mental-health.jpg",
+      detail: "<strong>Republic Act No. 11036</strong><br>Philippine Mental Health Act." },
+    { title: "Judicial name", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/mental-health.jpg",
+      detail: "An Act Establishing a National Mental Health Policy for the Purpose of Enhancing the Delivery of Integrated Mental Health Services." },
+    { title: "Brief definition", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/mental-health.jpg",
+      detail: "Nagbibigay ng karapatan sa lahat ng mamamayan na makatanggap ng accessible at affordable na mental health care. Ipinagbabawal ang diskriminasyon laban sa may sakit sa pag‑iisip." },
+    { title: "Coverage of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/mental-health.jpg",
+      detail: "Sakop ang lahat ng Pilipino, lalo na ang mga bata, matatanda, at nasa conflict areas. Mayroong mental health services sa bawat RHU at ospital." },
+    { title: "Health programs under this law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/mental-health.jpg",
+      detail: "⬤ National Mental Health Program (NMHP)<br>⬤ Community‑based mental health services<br>⬤ Suicide prevention hotline (Hopeline)<br>⬤ Mental health first aid training para sa BHWs" }
+  ]
+},
+
+ra11223_uhc: {
+  title: "RA 11223",
+  subtitle: "Universal Health Care",
+  description: "Universal Health Care Act – lahat ng Pilipino ay automatic nang miyembro ng PhilHealth at may access sa health services nang walang financial hardship.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/uhc.jpg",
+  gridCards: [
+    { title: "Name of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/uhc.jpg",
+      detail: "<strong>Republic Act No. 11223</strong><br>Universal Health Care Act (UHC)." },
+    { title: "Judicial name", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/uhc.jpg",
+      detail: "An Act Instituting Universal Health Care for All Filipinos, Prescribing Reforms in the Health Care System, and Appropriating Funds Therefor." },
+    { title: "Brief definition", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/uhc.jpg",
+      detail: "Layunin nitong tiyakin na ang bawat Pilipino ay makakuha ng kalidad at abot‑kayang serbisyong pangkalusugan nang hindi nababaon sa utang." },
+    { title: "Coverage of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/uhc.jpg",
+      detail: "Sakop ang lahat ng mamamayang Pilipino – automatic na miyembro ng PhilHealth. Mayroong Health Facilities Enhancement Program (HFEP) para sa mga RHU." },
+    { title: "Health programs under this law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/uhc.jpg",
+      detail: "⬤ PhilHealth Konsulta package (outpatient services)<br>⬤ Zero co‑payment para sa mahihirap<br>⬤ Provincial Health Boards at City Health Offices strengthen<br>⬤ Primary care networks (PCN)" }
+  ]
+},
+
+ra7875: {
+  title: "RA 7875",
+  subtitle: "National Health Insurance Act of 1995",
+  description: "Ito ang batas na lumikha ng Philippine Health Insurance Corporation (PhilHealth) upang magbigay ng universal coverage.",
+  heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/philhealth.jpg",
+  gridCards: [
+    { title: "Name of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/philhealth.jpg",
+      detail: "<strong>Republic Act No. 7875</strong><br>National Health Insurance Act of 1995." },
+    { title: "Judicial name", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/philhealth.jpg",
+      detail: "An Act Instituting a National Health Insurance Program for All Filipinos and Establishing the Philippine Health Insurance Corporation." },
+    { title: "Brief definition", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/philhealth.jpg",
+      detail: "Ito ang batayang legal ng PhilHealth. Naglalayong protektahan ang bawat pamilya mula sa pinansiyal na epekto ng pagkakasakit." },
+    { title: "Coverage of the law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/philhealth.jpg",
+      detail: "Sakop ang lahat ng mamamayang Pilipino – empleyado, self‑employed, at indigent. Mayroong premium subsidy para sa mahihirap mula sa national government." },
+    { title: "Health programs under this law", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/philhealth.jpg",
+      detail: "⬤ Inpatient benefit packages<br>⬤ Outpatient (Konsulta) package<br>⬤ Z benefit packages for catastrophic illnesses (cancer, kidney transplant)<br>⬤ Case rate payment system" }
+  ]
+},
       prepartum: {
-        title: "🤰 Prepartum Care (Pangangalaga sa Buntis)",
-        hero: "Mahalaga ang regular na check-up upang mapanatiling ligtas ang ina at sanggol.",
-        sections: [
-          { heading: "Antenatal Checkups", content: "Hindi bababa sa 8 beses na ANC. Kasama ang timbang, BP, ihi, dugo, at tetanus toxoid." },
-          { heading: "Nutrisyon at Supplement", content: "Uminom ng Iron + Folic Acid araw-araw. Kumain ng itlog, karne, prutas, gulay." },
-          { heading: "Warning Signs", content: "Pagdurugo, malakas na sakit ng ulo, malabong paningin – magpatingin agad." }
-        ]
+  isOverview: true,
+  title: "Prepartum Care",
+  tagline: "Pangangalaga sa Buntis Bago Manganak",
+  description: "Ang prepartum o antenatal care ay ang komprehensibong pangangalaga sa isang buntis mula sa pagbubuntis hanggang sa panganganak. Kasama rito ang regular na check‑up, nutrisyon, immunisasyon, at paghahanda para sa ligtas na panganganak.",
+  spreadModes: [  // we reuse this as "important reminders"
+    { icon: "📋", label: "8 o higit pang\nANC visits" },
+    { icon: "💊", label: "Iron + Folic acid\naraw‑araw" },
+    { icon: "💉", label: "Tetanus toxoid\n(2 doses)" },
+    { icon: "🥗", label: "Masustansyang\ndiyeta" },
+    { icon: "⚠️", label: "Alamin ang\ndanger signs" },
+    { icon: "🏥", label: "Birth preparedness\n& emergency plan" }
+  ],
+  subTopics: [
+    { key: "prepartum_maternal", title: "Maternal Changes throughout the Weeks", subtitle: "Ano ang nagbabago sa katawan ng ina?", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg" },
+    { key: "prepartum_fetal", title: "Fetal Changes throughout the Weeks", subtitle: "Pag‑unlad ng sanggol sa sinapupunan", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg" },
+    { key: "prepartum_nutrition", title: "Nutrition", subtitle: "Mga dapat kainin ng buntis", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg" },
+    { key: "prepartum_foods_avoid", title: "Foods to Avoid", subtitle: "Mga pagkaing dapat iwasan sa pagbubuntis", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg" },
+    { key: "prepartum_prenatal_care", title: "Routine Prenatal Care", subtitle: "Mga regular na check‑up at tests", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg" },
+    { key: "prepartum_disorders", title: "Common Disorders and Self‑Management Techniques", subtitle: "Paano haharapin ang morning sickness, back pain, atbp.", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg" },
+    { key: "prepartum_danger_signs", title: "Danger Signs of Pregnancy", subtitle: "Kailan dapat pumunta agad sa doktor", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg" },
+    { key: "prepartum_immunizations", title: "Immunizations (scheduling)", subtitle: "Mga bakuna para sa buntis at iskedyul", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg" },
+    { key: "prepartum_birth_preparedness", title: "Techniques for Birth Preparedness", subtitle: "Paano maghanda para sa panganganak", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg" }
+  ]
       },
+      // ========== PREPARTUM DETAIL PAGES ==========
+prepartum_maternal: {
+  title: "Maternal Changes throughout the Weeks",
+  intro: "Ang katawan ng isang buntis ay patuloy na nagbabago kada linggo dahil sa paglaki ng sanggol at mga hormone.",
+  sections: [
+    { heading: "Unang Trimester (Weeks 1‑12)", content: "Pagkapagod, paglaki ng dibdib, pagduduwal (morning sickness), madalas na pag-ihi. Ang matris ay lumalaki mula sa laki ng peras hanggang sa laki ng kahel." },
+    { heading: "Ikalawang Trimester (Weeks 13‑27)", content: "Lumilitaw ang baby bump, maaaring makaramdam ng paggalaw ng sanggol (quickening). Bumababa ang morning sickness. Maaaring magkaroon ng stretch marks, pananakit ng likod, at heartburn." },
+    { heading: "Ikatlong Trimester (Weeks 28‑40)", content: "Hirap sa paghinga (presyon ng matris sa dayapragm), madalas na pag-ihi, pamamaga ng paa at kamay (edema), pananakit ng pelvic area, at Braxton Hicks contractions." }
+  ]
+},
+prepartum_fetal: {
+  title: "Fetal Changes throughout the Weeks",
+  intro: "Ang sanggol ay mabilis na lumalaki at umuunlad sa bawat linggo ng pagbubuntis.",
+  sections: [
+    { heading: "Unang Trimester (1‑12 weeks)", content: "Linggo 4‑5: Nabubuo ang puso at utak. Linggo 8: Lahat ng pangunahing organ ay nabuo na. Linggo 12: Ang sanggol ay may sukat na 5‑6 cm, kaya nang sumipsip at lumunok." },
+    { heading: "Ikalawang Trimester (13‑27 weeks)", content: "Linggo 16: Nakakarinig na ang sanggol. Linggo 20: Natatakpan ng lanugo (pinong buhok) at vernix caseosa. Linggo 24: Nabubuo ang alveoli sa baga – may posibilidad na mabuhay sa labas ng sinapupunan." },
+    { heading: "Ikatlong Trimester (28‑40 weeks)", content: "Linggo 32: Maaaring mag‑rotate sa head‑down position. Linggo 36: Puno na ang baga. Linggo 40: Average na timbang 2.7‑4 kg, haba 48‑53 cm." }
+  ]
+},
+prepartum_nutrition: {
+  title: "Nutrition for Pregnant Women",
+  intro: "Ang tamang nutrisyon ay mahalaga para sa kalusugan ng ina at sanggol.",
+  sections: [
+    { heading: "Mga Dapat Kainin", content: "Folate (para maiwasan ang neural tube defects) – madahong gulay, beans. Iron (para sa hemoglobin) – karne, isda, itlog, atay. Calcium – gatas, keso, tokwa, sardinas. Iodine – isda, seaweed, iodized salt. Protina – manok, itlog, munggo. Omega‑3 – isda (limitado sa 2x/linggo)." },
+    { heading: "Dagdag na Calorie", content: "Kailangan ng +300 calories/araw sa ikalawa at ikatlong trimester." },
+    { heading: "Supplements", content: "Uminom ng iron + folic acid (60 mg elemental iron + 400 mcg folic acid) araw‑araw mula sa unang trimester hanggang 1 buwan pagkatapos manganak. Ang calcium (500 mg/araw) ay inirerekomenda lalo na sa mga hindi umiinom ng gatas." }
+  ]
+},
+prepartum_foods_avoid: {
+  title: "Foods to Avoid During Pregnancy",
+  intro: "Iwasan ang mga pagkaing maaaring magdulot ng impeksyon o makasama sa sanggol.",
+  sections: [
+    { heading: "Raw o Under‑cooked Foods", content: "Iwasan ang raw seafood (sushi, oysters), raw eggs (mousse, homemade mayo), at under‑cooked meat/poultry (maaaring may Salmonella, Toxoplasma, o Listeria)." },
+    { heading: "High‑mercury Fish", content: "Iwasan ang shark, swordfish, king mackerel, at tuna (maliban sa de‑latang light tuna). Pumili ng sardinas, salmon, tilapia." },
+    { heading: "Unpasteurized Products", content: "Huwag uminom ng unpasteurized milk at keso (feta, brie, blue cheese)." },
+    { heading: "Iba Pa", content: "Caffeine (≤200 mg/araw – hal. isang tasa ng kape). Alak – walang ligtas na dami. Processed meat (deli meat, hotdog) – initin nang mabuti bago kainin." }
+  ]
+},
+prepartum_prenatal_care: {
+  title: "Routine Prenatal Care",
+  intro: "Ang regular na check‑up ay nakakabawas ng panganib ng komplikasyon sa ina at sanggol.",
+  sections: [
+    { heading: "Dalas ng Pagbisita", content: "WHO at DOH ay nagrerekomenda ng hindi bababa sa 8 na pagbisita: Una – bago mag‑12 linggo; Ikalawa – 12‑16 linggo; Ikatlo – 20‑24 linggo; Ika‑apat – 28‑32 linggo; Ikalima – 32‑36 linggo; anim hanggang walo – 36‑40 linggo." },
+    { heading: "Mga Routine Tests", content: "Unang visit: blood type, hemoglobin, urine test (protein, glucose), HIV/syphilis screening, ultrasound (kumpirmahin ang pagbubuntis). Sa 24‑28 linggo: oral glucose tolerance test (para sa gestational diabetes). Sa 26‑30 linggo: anti‑D sa Rh‑negative mothers." },
+    { heading: "Mga Dapat Bantayan", content: "Blood pressure, timbang, sukat ng tiyan (fundal height), heart rate ng sanggol, at posisyon ng sanggol." }
+  ]
+},
+prepartum_disorders: {
+  title: "Common Disorders and Self‑Management",
+  intro: "Maraming karaniwang karamdaman sa pagbubuntis ay kayang pamahalaan sa bahay.",
+  sections: [
+    { heading: "Morning Sickness", content: "Kumain ng crackers bago bumangon, iwasan ang maaanghang o matatabang pagkain, uminom ng ginger tea o candy, kumain ng paunti‑unti sa buong araw." },
+    { heading: "Heartburn / Acid Reflux", content: "Iwasan ang maaanghang, mataba, at maasim na pagkain; huwag humiga kaagad pagkatapos kumain; uminom ng gatas na walang taba." },
+    { heading: "Constipation / Hemorrhoids", content: "Dagdagan ang fiber (gulay, prutas, whole grains), uminom ng maraming tubig (8‑10 baso), mag‑ehersisyo (paglalakad)." },
+    { heading: "Back Pain", content: "Panatilihin ang magandang tindig, magsuot ng low‑heeled shoes, matulog sa gilid (left side) na may unan sa pagitan ng tuhod." },
+    { heading: "Leg Cramps", content: "Mag‑stretch ng binti bago matulog, uminom ng sapat na tubig, kumain ng pagkaing may calcium at magnesium (saging, gatas)." }
+  ]
+},
+prepartum_danger_signs: {
+  title: "Danger Signs of Pregnancy",
+  intro: "Kung makaranas ng alinman sa mga sumusunod, dapat pumunta agad sa ospital o RHU.",
+  sections: [
+    { heading: "Mga Dapat Bantayan", content: "⬤ Pagdurugo (vaginal bleeding) sa anumang trimester<br>⬤ Matinding sakit ng ulo na hindi nawawala<br>⬤ Malabong paningin o double vision<br>⬤ Pamamaga ng mukha at kamay<br>⬤ Sakit o pagkirot sa ibabang bahagi ng tiyan<br>⬤ Lagnat na may panginginig<br>⬤ Nabawasan ang paggalaw ng sanggol (after 28 weeks)<br>⬤ Pagkasira ng tubig (rupture of membranes) bago ang 37 linggo<br>⬤ Pagsusuka na hindi mapigilan" }
+  ]
+},
+prepartum_immunizations: {
+  title: "Immunizations for Pregnant Women",
+  intro: "Ang ilang bakuna ay ligtas at inirerekomenda sa panahon ng pagbubuntis upang protektahan ang ina at sanggol.",
+  sections: [
+    { heading: "Tetanus Toxoid (TT) o Tdap", content: "Bawat buntis ay dapat makatanggap ng 2 doses ng TT. Unang dose – sa unang pagbisita; pangalawang dose – 4 na linggo pagkatapos. Ang Tdap (kasama ang pertussis) ay inirerekomenda sa 27‑36 na linggo para sa bawat pagbubuntis." },
+    { heading: "Influenza (Flu) Vaccine", content: "Ligtas at inirerekomenda sa anumang trimester, lalo na sa tag‑ulan. Pinoprotektahan ang ina at ang sanggol hanggang 6 na buwan." },
+    { heading: "COVID‑19 Vaccine", content: "Inirerekomenda para sa mga buntis dahil mas mataas ang panganib ng severe COVID sa panahon ng pagbubuntis." },
+    { heading: "Hindi Dapat", content: "Live vaccines tulad ng MMR, varicella, at BCG ay **hindi** dapat ibigay sa panahon ng pagbubuntis." }
+  ]
+},
+prepartum_birth_preparedness: {
+  title: "Techniques for Birth Preparedness",
+  intro: "Ang paghahanda bago manganak ay nakakatulong na maging maayos at ligtas ang panganganak.",
+  sections: [
+    { heading: "Magplano ng Lugar ng Panganganak", content: "Pumili kung saan manganganak (RHU, lying‑in, hospital). Siguraduhing malapit at may 24/7 emergency service." },
+    { heading: "Ihanda ang Birth Plan", content: "Sumulat ng birth plan: sino ang sasama, gusto mo bang magpa‑epidural, sinong gagamot sa sanggol, anong gagawin kung may emergency." },
+    { heading: "Ihanda ang mga Kagamitan", content: "Bag ng ina (baby clothes, lampin, kumot, damit para sa ina, toiletries, breast pads). Dokumento: PhilHealth ID, blood test results, ultrasound." },
+    { heading: "Alamin ang Emergency Transport", content: "Mag‑arrange ng sasakyan o tawagan ng tricycle/ambulance. Magtabi ng emergency number ng RHU at ospital." },
+    { heading: "Mag‑enroll sa Childbirth Class", content: "Alamin ang breathing techniques, pain management, newborn care, at breastfeeding. Maraming libreng klase sa RHU o online." }
+  ]
+},
       postpartum: {
         title: "👩 Postpartum Care",
         hero: "Unang 6 na linggo pagkatapos manganak kritikal para sa kalusugan ng ina.",
@@ -3282,252 +4255,264 @@ Expected outcomes include improved access to localized health information, enhan
     const catSlider = document.getElementById('eduCatSlider');
 
       function showDetailedTopic(categoryKey, parentKey, imageUrl) {
-      const topic = detailedData[categoryKey];
-      if (!topic) return;
+  const topic = detailedData[categoryKey];
+  if (!topic) return;
 
-      // Update recently viewed card
-      lastVisitedModule = categoryKey;
-      updateRecentlyViewed(categoryKey, imageUrl);
+  lastVisitedModule = categoryKey;
+  updateRecentlyViewed(categoryKey, imageUrl);
 
-      // ── OVERVIEW LAYOUT (e.g. Communicable Diseases index page) ──
-      if (topic.isOverview) {
-        const spreadHtml = `
-          <ul style="list-style: none; padding: 0; margin: 0 0 24px 0;">
-            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-weight: 600; font-size: 1.05rem;">💨 Hangin (Airborne Transmission)</li>
-            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-weight: 600; font-size: 1.05rem;">🤝 Direktang Kontak (Direct Contact)</li>
-            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-weight: 600; font-size: 1.05rem;">🦟 Insektong Tagapagsalat (Vector-borne)</li>
-            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-weight: 600; font-size: 1.05rem;">💧 Tubig at Pagkain (Water and Food)</li>
-            <li style="padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.15); font-weight: 600; font-size: 1.05rem;">🩸 Dugo at Body Fluids (Blood and Body Fluids)</li>
-            <li style="padding: 12px 0; font-weight: 600; font-size: 1.05rem;">🐾 Hayop (Zoonotic)</li>
-          </ul>
-        `;
-
-        const diseaseCardsHtml = topic.diseases.map(d => `
-          <div class="disease-nav-card" 
-              style="background-image: url('${d.image}'); height: 178px;" 
-              data-disease-key="${d.key}">
-            <div class="disease-nav-card-body">
-              <div class="d-title">${d.title}</div>
-              <div class="d-sub">${d.subtitle}</div>
-              <button class="pill-btn mini">
-                Basahin <span class="arrow-icon">→</span>
-              </button>
-            </div>
-          </div>`).join('');
-
-        const detailHtml = `
-          <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
-          
-          <div class="card" style="display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; padding: 26px;">
+  // ----- OVERVIEW LAYOUT (generic) -----
+  if (topic.isOverview) {
+    // Build spread/risk factors list from topic.spreadModes
+    let spreadHtml = '';
+    if (topic.spreadModes && topic.spreadModes.length) {
+      spreadHtml = `<ul class="spread-list" style="list-style:none; display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; margin:20px 0;">`;
+      topic.spreadModes.forEach(mode => {
+        spreadHtml += `<li style="background:rgba(255,255,255,0.08); border-radius:16px; padding:12px; text-align:center;">
+          <div style="font-size:2rem;">${mode.icon}</div>
+          <div style="white-space:pre-line;">${mode.label}</div>
+        </li>`;
+      });
+      spreadHtml += `</ul>`;
+    }
+// NEW: for DOH Programs overview (laws list)
+if (topic.isOverview && topic.laws) {
+    let lawsHtml = `
+        <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
+        <div class="card" style="display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; padding: 26px;">
             <div style="flex: 1.15; min-width: 240px; max-width: 400px;">
-              <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/communicable.jpg" 
-                  alt="Communicable Diseases" 
-                  style="width: 100%; height: 340px; object-fit: cover; object-position: center top; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.45);">
+                <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg" 
+                     alt="${topic.title}" 
+                     style="width: 100%; height: 340px; object-fit: cover; border-radius: 16px;">
             </div>
             <div style="flex: 1.85; min-width: 300px;">
-              <div class="hero-tag">${topic.tagline}</div>
-              <h1 style="margin: 12px 0 18px 0; font-size: 2.1rem;">${topic.title}</h1>
-              <p style="font-size: 1.08rem; line-height: 1.78; color: rgba(255,255,255,0.95);">${topic.description}</p>
+                <div class="hero-tag">${topic.tagline || ''}</div>
+                <h1 style="margin: 12px 0 18px 0; font-size: 2.1rem;">${topic.title}</h1>
+                <p style="font-size: 1.08rem; line-height: 1.78;">${topic.description}</p>
             </div>
-          </div>
-          <p class="section-label-left">Paraan ng Pagkalat</p>
-          ${spreadHtml}
-          <p class="section-label-left">Mga Sakit</p>
-          <div class="disease-nav-grid">${diseaseCardsHtml}</div>
-          <div class="tip-box">💡 <strong>Tandaan:</strong> Kumonsulta sa inyong RHU o Barangay Health Worker para sa libreng pagsusuri at paggamot.</div>
-        `;
-
-        detailView.innerHTML = detailHtml;
-        mainView.classList.add('hidden-view');
-        detailView.style.display = 'block';
-
-        document.getElementById('backToMainBtn').addEventListener('click', () => {
-          mainView.classList.remove('hidden-view');
-          detailView.style.display = 'none';
-        });
-
-        detailView.querySelectorAll('.disease-nav-card').forEach(card => {
-          card.addEventListener('click', () => {
-            const diseaseKey = card.getAttribute('data-disease-key');
-            const bgStyle = card.style.backgroundImage;
-            const cardImgUrl = bgStyle ? bgStyle.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '') : '';
-            showDetailedTopic(diseaseKey, categoryKey, cardImgUrl);
-          });
-        });
-        return;
-      }
-
-      // ── DISEASE DETAIL LAYOUT (hero image + FAQ + info grid) ──
-      if (topic.heroImage && topic.gridCards) {
-        // Build FAQ rows with hidden answers
-        let faqHtml = '';
-        topic.faqs.forEach((q, idx) => {
-          faqHtml += `
-            <div class="faq-row glass-card">
-              <div class="faq-top-row">
-                <span class="faq-question">${q.question}</span>
-                <button class="pill-btn faq-toggle-btn" data-faq-index="${idx}">
-                  See more.
-                  <span class="arrow-icon">→</span>
-                </button>
-              </div>
-              <div class="faq-answer" id="faqAnswer${idx}">
-                ${q.answer ? `<p>${q.answer}</p>` : '<p>Mahalagang impormasyon tungkol sa tanong na ito.</p>'}
-              </div>
-            </div>`;
-        });
-
-        // Build the 6‑card grid
-        let gridHtml = '<div class="info-grid">';
-        topic.gridCards.forEach((card, idx) => {
-          gridHtml += `
-            <div class="grid-card" style="background-image:url('${card.image}');" data-card-index="${idx}">
-              <div class="grid-card-overlay"></div>
-              <div class="grid-card-body">
-                <h3 class="grid-card-title">${card.title.replace(/\n/g, '<br>')}</h3>
-                <button class="pill-btn mini">
-                  See more.
-                  <span class="arrow-icon">→</span>
-                </button>
-              </div>
-            </div>`;
-        });
-        gridHtml += '</div>';
-
-        const detailHtml = `
-          <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
-
-          <!-- HERO SECTION -->
-          <div class="detail-hero">
-            <img src="${topic.heroImage}" class="hero-bacteria" alt="${topic.title} bacteria">
-            <div class="hero-text">
-              <h1 class="hero-title">${topic.title}</h1>
-              <p class="hero-subtitle">${topic.subtitle || ''}</p>
-              <button class="pill-btn" id="descriptionToggleBtn">
-                Description
-                <span class="arrow-icon">→</span>
-              </button>
+        </div>
+        <p class="section-label-left">MGA BATAS AT PROGRAMA</p>
+        <div class="disease-nav-grid" style="grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));">
+    `;
+    topic.laws.forEach(law => {
+        lawsHtml += `
+            <div class="disease-nav-card" 
+                 style="background-image: url('${law.image || 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg'}'); height: 160px;" 
+                 data-disease-key="${law.key}">
+                <div class="disease-nav-card-body">
+                    <div class="d-title">${law.title}</div>
+                    <div class="d-sub">${law.subtitle}</div>
+                    <button class="pill-btn mini">Basahin <span class="arrow-icon">→</span></button>
+                </div>
             </div>
-          </div>
-
-          <!-- Description card (hidden initially, shows topic.description) -->
-          <div class="description-card" id="descriptionCard">
-            ${topic.description || 'Walang deskripsyon para sa sakit na ito.'}
-          </div>
-
-          <!-- FAQ SECTION -->
-          <div class="faq-section">
-            <h2 class="faq-heading" style="font-size:17px; font-weight:700; color:white; margin-bottom:12px;">FAQ.</h2>
-            ${faqHtml}
-          </div>
-
-          <!-- IMPORMASYON GRID SECTION -->
-          <div class="info-section">
-            <p class="info-label">IMPORMASYON</p>
-            ${gridHtml}
-          </div>
-
-          <!-- Sub‑detail view (hidden) -->
-          <div class="sub-detail-view" id="subDetailView"></div>
         `;
-
-        detailView.innerHTML = detailHtml;
-        mainView.classList.add('hidden-view');
-        detailView.style.display = 'block';
-
-        // Back button
-        document.getElementById('backToMainBtn').addEventListener('click', () => {
-          if (parentKey) {
-            showDetailedTopic(parentKey);
-          } else {
-            mainView.classList.remove('hidden-view');
-            detailView.style.display = 'none';
-            if (categoryContentDiv) categoryContentDiv.style.display = 'block';
-          }
+    });
+    lawsHtml += `</div><div class="tip-box">💡 <strong>Tandaan:</strong> Ang mga batas na ito ay pundasyon ng mga libreng serbisyong pangkalusugan sa inyong RHU.</div>`;
+    detailView.innerHTML = lawsHtml;
+    mainView.classList.add('hidden-view');
+    detailView.style.display = 'block';
+    
+    document.getElementById('backToMainBtn').addEventListener('click', () => {
+        mainView.classList.remove('hidden-view');
+        detailView.style.display = 'none';
+    });
+    
+    detailView.querySelectorAll('.disease-nav-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const lawKey = card.getAttribute('data-disease-key');
+            showDetailedTopic(lawKey, 'dohprograms', null);
         });
+    });
+    return;
+}
+    // Determine which card array to use (diseases or subTopics)
+    const cardArray = topic.diseases || topic.subTopics;
+    if (!cardArray) return;
 
-        // Description toggle
-        const descCard = document.getElementById('descriptionCard');
-        const descToggle = document.getElementById('descriptionToggleBtn');
-        if (descToggle && descCard) {
-          descToggle.addEventListener('click', () => {
-            descCard.style.display = descCard.style.display === 'block' ? 'none' : 'block';
-          });
-        }
+    const cardsHtml = cardArray.map(card => `
+      <div class="disease-nav-card" 
+          style="background-image: url('${card.image}'); height: 178px;" 
+          data-disease-key="${card.key}">
+        <div class="disease-nav-card-body">
+          <div class="d-title">${card.title}</div>
+          <div class="d-sub">${card.subtitle || ''}</div>
+          <button class="pill-btn mini">Basahin <span class="arrow-icon">→</span></button>
+        </div>
+      </div>
+    `).join('');
 
-        // FAQ accordion
-        document.querySelectorAll('.faq-toggle-btn').forEach(btn => {
-          btn.addEventListener('click', () => {
-            const index = btn.getAttribute('data-faq-index');
-            const answer = document.getElementById('faqAnswer' + index);
-            const arrow = btn.querySelector('.arrow-icon');
-            if (answer.classList.contains('open')) {
-              answer.classList.remove('open');
-              arrow.textContent = '→';
-            } else {
-              answer.classList.add('open');
-              arrow.textContent = '↑';
-            }
-          });
-        });
+    const detailHtml = `
+      <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
+      <div class="card" style="display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; padding: 26px;">
+        <div style="flex: 1.15; min-width: 240px; max-width: 400px;">
+          <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/communicable.jpg" 
+              alt="${topic.title}" 
+              style="width: 100%; height: 340px; object-fit: cover; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.45);">
+        </div>
+        <div style="flex: 1.85; min-width: 300px;">
+          <div class="hero-tag">${topic.tagline || ''}</div>
+          <h1 style="margin: 12px 0 18px 0; font-size: 2.1rem;">${topic.title}</h1>
+          <p style="font-size: 1.08rem; line-height: 1.78;">${topic.description}</p>
+        </div>
+      </div>
+      <p class="section-label-left">${topic.spreadModes ? 'Pangunahing Salik' : 'Paraan ng Pagkalat'}</p>
+      ${spreadHtml}
+      <p class="section-label-left">Mga Sakit</p>
+      <div class="disease-nav-grid">${cardsHtml}</div>
+      <div class="tip-box">💡 <strong>Tandaan:</strong> Kumonsulta sa inyong RHU o Barangay Health Worker para sa libreng serbisyo.</div>
+    `;
 
-        // Grid card click → sub‑detail view
-        document.querySelectorAll('.grid-card').forEach(card => {
-          card.addEventListener('click', () => {
-            const idx = card.getAttribute('data-card-index');
-            const gridCardData = topic.gridCards[idx];
+    detailView.innerHTML = detailHtml;
+    mainView.classList.add('hidden-view');
+    detailView.style.display = 'block';
 
-            const subDetail = document.getElementById('subDetailView');
-            subDetail.innerHTML = `
-              <button class="back-button" id="subBackBtn">← Bumalik</button>
-              <div class="sub-hero" style="background-image:url('${gridCardData.image}')">
-                <div class="sub-hero-overlay"></div>
-                <h1 class="sub-hero-title">${gridCardData.title.replace(/\n/g, '<br>')}</h1>
-              </div>
-              <div class="sub-content">
-                ${gridCardData.detail || `<p>Karagdagang impormasyon tungkol sa <strong>${gridCardData.title.replace(/\n/g, ' ')}</strong>.</p>`}
-              </div>
-            `;
-            subDetail.style.display = 'block';
-            document.querySelector('.detail-hero').style.display = 'none';
-            document.querySelector('.faq-section').style.display = 'none';
-            document.querySelector('.info-section').style.display = 'none';
-            document.getElementById('descriptionCard').style.display = 'none';
-            document.getElementById('subBackBtn').addEventListener('click', () => {
-              subDetail.style.display = 'none';
-              document.querySelector('.detail-hero').style.display = '';
-              document.querySelector('.faq-section').style.display = '';
-              document.querySelector('.info-section').style.display = '';
-            });
-          });
-        });
+    document.getElementById('backToMainBtn').addEventListener('click', () => {
+      mainView.classList.remove('hidden-view');
+      detailView.style.display = 'none';
+    });
 
-      } else {
-        // Fallback to plain text sections
-        let sectionsHtml = '';
-        topic.sections.forEach(s => {
-          sectionsHtml += `<div class="detail-section"><h4>${s.heading}</h4><div>${s.content}</div></div>`;
-        });
+    detailView.querySelectorAll('.disease-nav-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const childKey = card.getAttribute('data-disease-key');
+        const bgStyle = card.style.backgroundImage;
+        const cardImgUrl = bgStyle ? bgStyle.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '') : '';
+        showDetailedTopic(childKey, categoryKey, cardImgUrl);
+      });
+    });
+    return;
+  }
 
-        const detailHtml = `
-          <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
-          <h2 style="color:#cf90ff; font-size:1.8rem;">${topic.title}</h2>
-          <div class="info-card">${topic.intro || ''}</div>
-          ${sectionsHtml}
-          <div style="margin-top:20px; padding:12px; background:rgba(129,77,170,0.4); border-radius:20px;"><strong>💡 Tandaan:</strong> Kumonsulta sa inyong RHU o Barangay Health Worker para sa libreng serbisyo.</div>
-        `;
-
-        detailView.innerHTML = detailHtml;
-        mainView.classList.add('hidden-view');
-        detailView.style.display = 'block';
-
-        document.getElementById('backToMainBtn').addEventListener('click', () => {
-          mainView.classList.remove('hidden-view');
-          detailView.style.display = 'none';
-          if (categoryContentDiv) categoryContentDiv.style.display = 'block';
-        });
-      }
+  // ----- DETAIL LAYOUT (rich with heroImage & gridCards) -----
+  if (topic.heroImage && topic.gridCards) {
+    // Build FAQ rows
+    let faqHtml = '';
+    if (topic.faqs) {
+      topic.faqs.forEach((q, idx) => {
+        faqHtml += `
+          <div class="faq-row glass-card">
+            <div class="faq-top-row">
+              <span class="faq-question">${q.question}</span>
+              <button class="pill-btn faq-toggle-btn" data-faq-index="${idx}">See more. <span class="arrow-icon">→</span></button>
+            </div>
+            <div class="faq-answer" id="faqAnswer${idx}">${q.answer ? `<p>${q.answer}</p>` : '<p>Mahalagang impormasyon.</p>'}</div>
+          </div>`;
+      });
     }
+
+    // Build 6‑card grid
+    let gridHtml = '<div class="info-grid">';
+    topic.gridCards.forEach((card, idx) => {
+      gridHtml += `
+        <div class="grid-card" style="background-image:url('${card.image}');" data-card-index="${idx}">
+          <div class="grid-card-body">
+            <h3 class="grid-card-title">${card.title.replace(/\n/g, '<br>')}</h3>
+            <button class="pill-btn mini">See more. <span class="arrow-icon">→</span></button>
+          </div>
+        </div>`;
+    });
+    gridHtml += '</div>';
+
+    const detailHtml = `
+      <button class="back-button" id="backToMainBtn">← Bumalik</button>
+      <div class="detail-hero">
+        <img src="${topic.heroImage}" class="hero-bacteria" alt="${topic.title}">
+        <div class="hero-text">
+          <h1 class="hero-title">${topic.title}</h1>
+          <p class="hero-subtitle">${topic.subtitle || ''}</p>
+          <button class="pill-btn" id="descriptionToggleBtn">Description <span class="arrow-icon">→</span></button>
+        </div>
+      </div>
+      <div class="description-card" id="descriptionCard">${topic.description || ''}</div>
+      <div class="faq-section"><h2 class="faq-heading">FAQ.</h2>${faqHtml}</div>
+      <div class="info-section"><p class="info-label">IMPORMASYON</p>${gridHtml}</div>
+      <div class="sub-detail-view" id="subDetailView"></div>
+    `;
+
+    detailView.innerHTML = detailHtml;
+    mainView.classList.add('hidden-view');
+    detailView.style.display = 'block';
+
+    // Back button
+    document.getElementById('backToMainBtn').addEventListener('click', () => {
+      if (parentKey) showDetailedTopic(parentKey);
+      else { mainView.classList.remove('hidden-view'); detailView.style.display = 'none'; }
+    });
+
+    // Description toggle
+    const descCard = document.getElementById('descriptionCard');
+    const descToggle = document.getElementById('descriptionToggleBtn');
+    if (descToggle && descCard) descToggle.addEventListener('click', () => {
+      descCard.style.display = descCard.style.display === 'block' ? 'none' : 'block';
+    });
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = btn.getAttribute('data-faq-index');
+        const ans = document.getElementById(`faqAnswer${idx}`);
+        const arrow = btn.querySelector('.arrow-icon');
+        if (ans.classList.contains('open')) {
+          ans.classList.remove('open');
+          arrow.textContent = '→';
+        } else {
+          ans.classList.add('open');
+          arrow.textContent = '↑';
+        }
+      });
+    });
+
+    // Grid card click → sub‑detail view
+    document.querySelectorAll('.grid-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const idx = card.getAttribute('data-card-index');
+        const data = topic.gridCards[idx];
+        const subDetail = document.getElementById('subDetailView');
+        subDetail.innerHTML = `
+          <button class="back-button" id="subBackBtn">← Bumalik</button>
+          <div class="sub-hero" style="background-image:url('${data.image}');">
+            <div class="sub-hero-overlay"></div>
+            <h1 class="sub-hero-title">${data.title.replace(/\n/g, '<br>')}</h1>
+          </div>
+          <div class="sub-content">${data.detail || `<p>Karagdagang impormasyon tungkol sa ${data.title.replace(/\n/g, ' ')}.</p>`}</div>
+        `;
+        subDetail.style.display = 'block';
+        document.querySelector('.detail-hero').style.display = 'none';
+        document.querySelector('.faq-section').style.display = 'none';
+        document.querySelector('.info-section').style.display = 'none';
+        document.getElementById('descriptionCard').style.display = 'none';
+        document.getElementById('subBackBtn').addEventListener('click', () => {
+          subDetail.style.display = 'none';
+          document.querySelector('.detail-hero').style.display = '';
+          document.querySelector('.faq-section').style.display = '';
+          document.querySelector('.info-section').style.display = '';
+        });
+      });
+    });
+    return;
+  }
+
+  // Fallback to simple sections
+  let sectionsHtml = '';
+  if (topic.sections) {
+    topic.sections.forEach(s => {
+      sectionsHtml += `<div class="detail-section"><h4>${s.heading}</h4><div>${s.content}</div></div>`;
+    });
+  }
+  const fallbackHtml = `
+    <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
+    <h2 style="color:#cf90ff; font-size:1.8rem;">${topic.title}</h2>
+    <div class="info-card">${topic.intro || ''}</div>
+    ${sectionsHtml}
+    <div class="tip-box">💡 <strong>Tandaan:</strong> Kumonsulta sa inyong RHU.</div>
+  `;
+  detailView.innerHTML = fallbackHtml;
+  mainView.classList.add('hidden-view');
+  detailView.style.display = 'block';
+  document.getElementById('backToMainBtn').addEventListener('click', () => {
+    mainView.classList.remove('hidden-view');
+    detailView.style.display = 'none';
+  });
+}
 
     function attachCategoryEvents() {
       document.querySelectorAll('#eduCatSlider .edu-cat-btn').forEach(btn => {
@@ -3857,7 +4842,125 @@ Expected outcomes include improved access to localized health information, enhan
       if (dateEl) dateEl.textContent = today.toLocaleDateString('tl-PH', { year: 'numeric', month: 'long', day: 'numeric' }).replace('  ', ' ');
       if (dayEl) dayEl.textContent = today.toLocaleDateString('tl-PH', { weekday: 'long' });
     })();
+      // ---------- vCard Generator for Emergency Contacts ----------
+    function downloadVCard(name, phone, organization) {
+      let cleanPhone = phone.replace(/[^0-9+]/g, '');
+      if (!cleanPhone.startsWith('+') && !cleanPhone.startsWith('0')) {
+        cleanPhone = '+63' + cleanPhone.replace(/^0+/, '');
+      }
+      const vCardData = [
+        'BEGIN:VCARD',
+        'VERSION:3.0',
+        `FN:${name}`,
+        `TEL;TYPE=voice,cell:${cleanPhone}`,
+        `ORG:${organization}`,
+        'REV:' + new Date().toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z',
+        'END:VCARD'
+      ].join('\n');
+      const blob = new Blob([vCardData], { type: 'text/vcard' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${name.replace(/\s/g, '_')}.vcf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+        // Attach save contact functionality for emergency numbers
+    document.querySelectorAll('.save-contact-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const name = btn.getAttribute('data-name');
+        const phone = btn.getAttribute('data-phone');
+        const org = btn.getAttribute('data-org') || 'Emergency Service';
+        downloadVCard(name, phone, org);
+      });
+    });
+
+    const saveCustomBtn = document.getElementById('saveCustomContactBtn');
+    if (saveCustomBtn) {
+      saveCustomBtn.addEventListener('click', () => {
+        const name = document.getElementById('contactName').value.trim();
+        const phone = document.getElementById('contactPhone').value.trim();
+        if (!name || !phone) {
+          alert('Pakilagay ang pangalan at numero ng contact.');
+          return;
+        }
+        downloadVCard(name, phone, 'Barangay Health Worker / RHU');
+        document.getElementById('contactName').value = '';
+        document.getElementById('contactPhone').value = '';
+      });
+    }
+      // ---------- Terms and Conditions (48-hour acceptance) ----------
+      const TERMS_ACCEPTED_KEY = 'abotKamayTermsAcceptedTimestamp';
+      const TERMS_ACCEPTED_VERSION_KEY = 'abotKamayTermsAcceptedVersion';
+      const TERMS_VERSION = 'v1.0';  // change this if terms change
+
+      function showTermsModal() {
+        const modal = document.getElementById('termsModal');
+        if (modal) modal.style.display = 'flex';
+        // Disable all interactive elements EXCEPT those inside the modal
+        document.querySelectorAll('.tab-btn, .btn, .btn-outline, .btn-pill, .logout-btn, .rhu-subtab, .save-contact-btn, #saveCustomContactBtn, .edu-cat-btn, .back-button, .pill-btn, .nav, .toggle-btn, #submitOnlineAppointmentBtn, #fetchOnlineRequestsBtn, #syncNowBtn, #restoreFromServerBtn, #editInventoryDateBtn, .stock-select, .delete-patient-btn, .edit-patient-btn, .delete-appt-btn, .edit-appt-btn, .faq-toggle-btn, .grid-card, .disease-nav-card').forEach(el => {
+          if (el && !modal?.contains(el)) {
+            el.style.pointerEvents = 'none';
+          }
+        });
+        // Ensure modal and its buttons remain clickable
+        if (modal) {
+          modal.style.pointerEvents = 'auto';
+          modal.querySelectorAll('button, .btn, .btn-outline').forEach(btn => {
+            btn.style.pointerEvents = 'auto';
+          });
+        }
+      }
+
+      function hideTermsModal() {
+        const modal = document.getElementById('termsModal');
+        if (modal) modal.style.display = 'none';
+        // Re-enable all interactions
+        document.querySelectorAll('.tab-btn, .btn, .btn-outline, .btn-pill, .logout-btn, .rhu-subtab, .save-contact-btn, #saveCustomContactBtn, .edu-cat-btn, .back-button, .pill-btn, .nav, .toggle-btn, #submitOnlineAppointmentBtn, #fetchOnlineRequestsBtn, #syncNowBtn, #restoreFromServerBtn, #editInventoryDateBtn, .stock-select, .delete-patient-btn, .edit-patient-btn, .delete-appt-btn, .edit-appt-btn, .faq-toggle-btn, .grid-card, .disease-nav-card').forEach(el => {
+          if (el) el.style.pointerEvents = '';
+        });
+      }
+
+      function checkTermsAcceptance() {
+        const acceptedTimestamp = localStorage.getItem(TERMS_ACCEPTED_KEY);
+        const acceptedVersion = localStorage.getItem(TERMS_ACCEPTED_VERSION_KEY);
+        if (acceptedTimestamp && acceptedVersion === TERMS_VERSION) {
+          const now = Date.now();
+          const hoursSince = (now - parseInt(acceptedTimestamp)) / (1000 * 60 * 60);
+          if (hoursSince < 48) {
+            return; // still valid
+          }
+        }
+        showTermsModal();
+      }
+
+      // Accept button
+      const acceptBtn = document.getElementById('acceptTermsBtn');
+      if (acceptBtn) {
+        acceptBtn.addEventListener('click', () => {
+          localStorage.setItem(TERMS_ACCEPTED_KEY, Date.now().toString());
+          localStorage.setItem(TERMS_ACCEPTED_VERSION_KEY, TERMS_VERSION);
+          hideTermsModal();
+        });
+      }
+
+      // Decline button – show error message and keep modal open
+      const declineBtn = document.getElementById('declineTermsBtn');
+      if (declineBtn) {
+        declineBtn.addEventListener('click', () => {
+          const declineMsg = document.getElementById('declineMessage');
+          if (declineMsg) declineMsg.style.display = 'block';
+        });
+      }
+
+      // Call check on app load
+      window.addEventListener('DOMContentLoaded', () => {
+        checkTermsAcceptance();
+      });
   })();
+
 </script>
 </body>
 </html>

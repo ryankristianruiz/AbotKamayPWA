@@ -1030,92 +1030,296 @@
   /* ====================================================
      PORTRAIT PHONE (max-width: 480px) – optimized proportions
      ==================================================== */
-  @media (max-width: 480px) {
-    body { font-size: 15px; }
-    .app-header { flex-direction: row; align-items: center; padding: 8px 12px; gap: 6px; }
-    .app-header h1 { font-size: 1.1rem; gap: 5px; }
-    .app-header h1 img { height: 32px !important; }
-    .app-header > div { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+@media (max-width: 480px) {
+    body { font-size: 14px; }
+    .app-header { flex-direction: row; align-items: center; padding: 6px 10px; gap: 4px; }
+    .app-header h1 { font-size: 1rem; gap: 4px; }
+    .app-header h1 img { height: 28px !important; }
+    .app-header > div { display: flex; align-items: center; gap: 4px; flex-shrink: 0; }
     .app-header > div > span { display: none; }
-    .logout-btn { font-size: 0.68rem; padding: 4px 8px; align-self: auto; }
+    .logout-btn { font-size: 0.65rem; padding: 3px 7px; align-self: auto; }
     .tab-bar { overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
-    .tab-bar button { font-size: 0.72rem; padding: 8px 10px; }
-    .container { padding: 10px 10px; }
-    .card { padding: 12px 10px; border-radius: 16px; }
-    .home-bento { gap: 10px; margin-bottom: 10px; }
-    .card-greeting h2 { font-size: 1.5rem; line-height: 1.15; }
-    .card-greeting p { font-size: 0.9rem; }
-    .card-greeting p:last-of-type { font-size: 0.8rem; }
-    .card-date #currentDate { font-size: 1.8rem; line-height: 1.1; }
-    .card-date #currentDay { font-size: 0.9rem; margin-top: 4px; }
-    .card-user #accountTypeDisplay { font-size: 1.1rem; }
-    .card-user > div:last-child { font-size: 0.75rem; }
-    .btn-pill { font-size: 0.75rem; padding: 7px 12px; gap: 6px; }
-    .carousel-wrapper { margin-top: 10px; margin-bottom: 10px; }
-    .slide { width: 92%; margin-left: 4%; margin-right: 4%; padding: 0.85rem 0.75rem 0.75rem; gap: 6px; }
-    .slide-title { font-size: 14px; }
-    .slide-body { font-size: 11px; }
-    .slide-image img { object-fit: contain; height: auto; max-height: 130px; }
-    .nav { width: 26px; height: 26px; font-size: 11px; }
-    .slide-cta { font-size: 11px; padding: 5px 11px; }
-    .controls-label, .toggle-btn { font-size: 11px; }
-    .pill-btn { font-size: 0.7rem !important; padding: 5px 10px; gap: 5px; }
-    .arrow-icon { width: 17px; height: 17px; font-size: 9px; }
-    .btn, .btn-outline { padding: 10px 14px; font-size: 0.85rem; }
-    .back-button { font-size: 0.85rem; padding: 7px 16px; margin-bottom: 14px; }
-    .auth-form input, .auth-form button { font-size: 0.88rem; padding: 10px 12px; }
-    input, select, textarea { font-size: 0.9rem; padding: 11px 13px; }
-    label { font-size: 0.88rem; }
-    .record-item { padding-right: 68px; padding: 11px; padding-right: 72px; }
-    .record-item > div { top: 8px; right: 8px; }
-    .edit-patient-btn, .delete-patient-btn, .edit-appt-btn, .delete-appt-btn { padding: 2px 7px !important; font-size: 0.68rem; }
-    .notification-bar { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 12px; }
+    .tab-bar button { font-size: 0.68rem; padding: 6px 8px; }
+    .container { padding: 8px 8px; }
+    .card { padding: 10px 8px; border-radius: 14px; margin-bottom: 12px; }
+    .home-bento { gap: 8px; margin-bottom: 8px; }
+
+    /* HOME PAGE – SMALLER FONTS & ADJUSTED CARD SIZES */
+    .card-greeting h2 {
+        font-size: 1.1rem !important;
+        line-height: 1.2;
+        margin-bottom: 4px;
+    }
+    .card-greeting p {
+        font-size: 0.7rem !important;
+        margin-bottom: 4px;
+    }
+    .card-greeting p:last-of-type {
+        font-size: 0.65rem !important;
+    }
+    .card-date #currentDate {
+        font-size: 1.3rem !important;
+        line-height: 1.1;
+    }
+    .card-date #currentDay {
+        font-size: 0.7rem !important;
+        margin-top: 2px;
+    }
+    .card-user #accountTypeDisplay {
+        font-size: 0.85rem !important;
+    }
+    .card-user > div:last-child {
+        font-size: 0.6rem !important;
+    }
+    .btn-pill {
+        font-size: 0.65rem;
+        padding: 5px 8px;
+        gap: 4px;
+    }
+    .card-greeting, .card-user, .card-date {
+        padding: 10px 8px !important;
+    }
+
+    /* WHAT IS ABOT-KAMAY & UPCOMING SERVICES – SMALLER FONTS */
+    .card h3 {
+        font-size: 1rem !important;
+        margin-bottom: 6px;
+    }
+    .card p {
+        font-size: 0.75rem !important;
+        line-height: 1.4;
+    }
+    #upcomingServicesList li {
+        font-size: 0.7rem !important;
+        padding: 6px 0;
+    }
+
+    .carousel-wrapper { margin-top: 8px; margin-bottom: 8px; }
+    .slide { width: 92%; margin-left: 4%; margin-right: 4%; padding: 0.7rem 0.6rem 0.6rem; gap: 5px; }
+    .slide-title { font-size: 13px; }
+    .slide-body { font-size: 10px; }
+    .slide-image img { object-fit: contain; height: auto; max-height: 110px; }
+    .nav { width: 24px; height: 24px; font-size: 10px; }
+    .slide-cta { font-size: 10px; padding: 4px 10px; }
+    .controls-label, .toggle-btn { font-size: 10px; }
+    .pill-btn { font-size: 0.65rem !important; padding: 4px 8px; gap: 4px; }
+    .arrow-icon { width: 15px; height: 15px; font-size: 8px; }
+    .btn, .btn-outline { padding: 8px 12px; font-size: 0.8rem; }
+    .back-button { font-size: 0.8rem; padding: 6px 14px; margin-bottom: 12px; }
+    .auth-form input, .auth-form button { font-size: 0.85rem; padding: 8px 10px; }
+    input, select, textarea { font-size: 0.85rem; padding: 9px 11px; }
+    label { font-size: 0.85rem; }
+    .record-item { padding-right: 60px; padding: 9px; padding-right: 64px; }
+    .record-item > div { top: 6px; right: 6px; }
+    .edit-patient-btn, .delete-patient-btn, .edit-appt-btn, .delete-appt-btn { padding: 2px 6px !important; font-size: 0.6rem; }
+    .notification-bar { flex-direction: column; align-items: flex-start; gap: 4px; padding: 8px 10px; }
     .notification-bar .close-btn { align-self: flex-end; }
-    .low-stock-summary, .emergency-number { padding: 10px; }
-    .edu-cat-slider .edu-cat-btn { flex: 0 0 140px; height: 260px; }
-    .edu-cat-label { font-size: 0.78rem; }
-    .health-ed-detail { padding: 12px 10px; border-radius: 18px; }
-    /* Stack overview card in health ed detail */
-    #eduDetailView .card > div[style*="min-width"],
-    #eduDetailView .card > div[style*="flex:"],
-    #eduDetailView .card > div[style*="flex: "] {
-      min-width: 0 !important;
-      width: 100% !important;
-      max-width: 100% !important;
+    .low-stock-summary, .emergency-number { padding: 8px; }
+    .edu-cat-slider .edu-cat-btn { flex: 0 0 130px; height: 240px; }
+    .edu-cat-label { font-size: 0.7rem; }
+    .health-ed-detail { padding: 10px 8px; border-radius: 16px; }
+
+    /* ========== MAIN DISEASE OVERVIEW PAGES – REDUCED SIZING ========== */
+    #eduDetailView .hero-tag {
+        font-size: 0.55rem !important;
+        margin-bottom: 8px;
+    }
+    #eduDetailView h1 {
+        font-size: 1.1rem !important;
+        margin-bottom: 8px;
+    }
+    #eduDetailView p {
+        font-size: 0.65rem !important;
+        line-height: 1.4;
+    }
+    #eduDetailView .tip-box {
+        font-size: 0.6rem !important;
+        padding: 6px;
+    }
+    .disease-nav-card {
+        height: 85px !important;
+    }
+    .disease-nav-card-body .d-title {
+        font-size: 9px !important;
+    }
+    .disease-nav-card-body .d-sub {
+        font-size: 7px !important;
+    }
+    .pill-btn.mini {
+        font-size: 0.5rem !important;
+        padding: 2px 5px;
+    }
+    .spread-list {
+        gap: 6px !important;
+    }
+    .spread-list li {
+        padding: 4px 2px !important;
+        font-size: 0.55rem !important;
+    }
+    .spread-list li > div:first-child {
+        font-size: 0.9rem !important;
+    }
+    #eduDetailView .card[style*="display: flex"] {
+        gap: 10px !important;
     }
     #eduDetailView .card > div[style*="min-width"] img,
     #eduDetailView .card img[style*="height: 340px"] {
-      height: 180px !important;
-      width: 100% !important;
-      object-fit: cover;
+        height: 120px !important;
     }
-    #eduDetailView .card[style*="display: flex"] { flex-direction: column !important; gap: 14px !important; }
-    .disease-nav-card { height: 120px; }
-    .disease-nav-card-body .d-title { font-size: 12px; }
-    .disease-nav-card-body .d-sub { font-size: 9px; }
-    .info-grid { gap: 8px; }
-    .grid-card { height: 160px; }
-    .grid-card-title { font-size: 12px; }
-    .grid-card-body { padding: 8px 9px; gap: 4px; }
-    .detail-hero { height: auto; padding: 14px 12px; gap: 12px; }
-    .hero-bacteria { width: 100px; }
-    .hero-title { font-size: 24px; }
-    .hero-subtitle { font-size: 11px; margin-bottom: 10px; }
-    .faq-question, .faq-answer { font-size: 0.9rem !important; line-height: 1.5; }
-    .faq-row { padding: 10px 11px; }
-    .faq-section h2 { font-size: 1.1rem; }
-    .faq-answer [style*="display: flex"] { flex-direction: column !important; gap: 10px !important; }
-    .faq-answer img[style*="width: 180px"], .faq-answer img { width: 100% !important; max-width: 100% !important; height: auto !important; border-radius: 10px; }
-    .sub-content { font-size: 0.9rem !important; padding: 12px; }
-    .description-card { font-size: 0.9rem !important; padding: 11px; }
-    .spread-list { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
-    .spread-list li { padding: 8px 6px !important; font-size: 0.72rem; }
-    .spread-list li > div:first-child { font-size: 1.5rem; }
-    .tip-box { font-size: 11px; padding: 11px; }
+
+    /* ========== DISEASE DETAIL HERO – BIGGER, FILLS CARD ========== */
+    .detail-hero {
+        flex-direction: row !important;
+        justify-content: flex-start !important;
+        align-items: center !important;
+        gap: 16px !important;
+        padding: 16px !important;
+        width: 100% !important;
+        background: rgba(255, 255, 255, 0.08) !important;
+        backdrop-filter: blur(14px) !important;
+        border-radius: 20px !important;
+        margin-bottom: 16px !important;
+    }
+    .hero-bacteria {
+        width: 120px !important;
+        height: auto !important;
+        flex-shrink: 0;
+    }
+    .hero-text {
+        text-align: left !important;
+        flex: 1;
+    }
+    .hero-title {
+        font-size: 1.6rem !important;
+        font-weight: 900 !important;
+        margin-bottom: 6px;
+        line-height: 1.2;
+    }
+    .hero-subtitle {
+        font-size: 0.75rem !important;
+        margin-bottom: 8px;
+    }
+    .pill-btn#descriptionToggleBtn {
+        font-size: 0.7rem !important;
+        padding: 5px 10px;
+    }
+
+    /* ========== FAQ – IMAGES LEFT, TEXT RIGHT (SIDE BY SIDE) ========== */
+    /* Target ONLY the inner flex containers (those with align-items: center) – they hold image + text */
+    .faq-answer [style*="display: flex"][style*="align-items: center"] {
+        flex-direction: row !important;
+        gap: 12px !important;
+        flex-wrap: wrap !important;
+    }
+    /* Ensure the outer container (flex-direction: column) remains column */
+    .faq-answer > div[style*="flex-direction: column"] {
+        flex-direction: column !important;
+    }
+    /* Images inside the inner containers */
+    .faq-answer [style*="align-items: center"] img {
+        max-width: 80px !important;
+        width: auto !important;
+        height: auto !important;
+        flex-shrink: 0;
+        margin: 0 !important;
+    }
+    /* Text container inside inner flex */
+    .faq-answer [style*="align-items: center"] > div {
+        flex: 1;
+    }
+
+    /* Stack overview card in health ed detail (if needed) */
+    #eduDetailView .card > div[style*="min-width"],
+    #eduDetailView .card > div[style*="flex:"],
+    #eduDetailView .card > div[style*="flex: "] {
+        min-width: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+    #eduDetailView .card > div[style*="min-width"] img,
+    #eduDetailView .card img[style*="height: 340px"] {
+        height: 150px !important;
+        width: 100% !important;
+        object-fit: cover;
+    }
+    #eduDetailView .card[style*="display: flex"] {
+        flex-direction: column !important;
+        gap: 10px !important;
+    }
+
+    /* Additional responsive overrides */
+    .disease-nav-card { height: 110px; }
+    .disease-nav-card-body .d-title { font-size: 11px; }
+    .disease-nav-card-body .d-sub { font-size: 8px; }
+    .info-grid { gap: 6px; }
+    .grid-card { height: 140px; }
+    .grid-card-title { font-size: 10px; }
+    .grid-card-body { padding: 6px 7px; gap: 3px; }
+    .faq-question, .faq-answer { font-size: 0.8rem !important; line-height: 1.4; }
+    .faq-row { padding: 8px 9px; }
+    .faq-section h2 { font-size: 1rem; }
+    .faq-answer img[style*="width: 180px"], .faq-answer img {
+        max-width: 100px !important;
+        width: auto !important;
+        height: auto !important;
+        border-radius: 8px;
+    }
+    .sub-content { font-size: 0.8rem !important; padding: 10px; }
+    .description-card { font-size: 0.8rem !important; padding: 9px; }
+    .spread-list { grid-template-columns: repeat(3, 1fr) !important; gap: 6px !important; }
+    .spread-list li { padding: 6px 4px !important; font-size: 0.65rem; }
+    .spread-list li > div:first-child { font-size: 1.2rem; }
+    .tip-box { font-size: 10px; padding: 9px; }
     #emergency .card > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
-    .rhu-subtab { font-size: 0.68rem; padding: 5px 7px; }
-    .footer-note { font-size: 0.68rem; margin-top: 18px; }
-  }
+    .rhu-subtab { font-size: 0.6rem; padding: 4px 6px; }
+    .footer-note { font-size: 0.6rem; margin-top: 14px; }
+
+    /* ---------- HEALTH EDUCATION MAIN PAGE – MODULE BUTTONS (unchanged) ---------- */
+    #healthSearch {
+        font-size: 0.6rem !important;
+        padding: 4px 6px !important;
+    }
+    #recentTitle {
+        font-size: 0.7rem !important;
+    }
+    #recentContinueBtn {
+        font-size: 0.55rem !important;
+        padding: 3px 6px !important;
+    }
+    #recentlyViewedCard div[style*="font-size:0.7rem"] {
+        font-size: 0.5rem !important;
+    }
+    .read-more-label {
+        font-size: 0.65rem !important;
+    }
+    .rm-card .rm-title {
+        font-size: 0.55rem !important;
+    }
+    .rm-card .rm-desc {
+        font-size: 0.5rem !important;
+    }
+    .scroll-ctrl span {
+        font-size: 0.55rem !important;
+    }
+    .scroll-btn {
+        width: 20px !important;
+        height: 20px !important;
+        font-size: 9px !important;
+    }
+    .edu-cat-slider .edu-cat-btn {
+        flex: 0 0 115px !important;
+        height: 200px !important;
+    }
+    .edu-cat-label {
+        font-size: 0.55rem !important;
+    }
+    #eduCategoryContent p {
+        font-size: 0.65rem !important;
+    }
+    #eduLastUpdated {
+        font-size: 0.55rem !important;
+    }
+}
 
   /* ====================================================
      EXTRA NARROW (max-width: 360px) – stack full layout

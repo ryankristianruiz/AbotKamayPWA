@@ -3554,11 +3554,134 @@ The app aims to improve access to localize health information, enhance health wo
                 </div>
               </div>`
               },
-          { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/epidemiology%20at%20prevalance.png", detail: "Ang TB ay isa sa mga nangungunang sanhi ng kamatayan mula sa nakakahawang sakit sa buong mundo. Sa Pilipinas, may mataas na bilang ng kaso taun-taon." },
-          { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation%20period.png", detail: "Ang panahon ng inkubasyon ng TB ay maaaring tumagal ng ilang linggo hanggang buwan bago lumitaw ang mga sintomas." },
-          { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png", detail: "Mas mataas ang panganib sa mga taong may mahinang immune system tulad ng may HIV, malnutrisyon, diabetes, at mga bata." },
-          { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prevention.png", detail: "Ang BCG vaccine ay nagbibigay ng proteksyon laban sa malalang anyo ng TB lalo na sa mga bata. Karaniwan itong ibinibigay sa mga sanggol." },
-          { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/managemnt.png", detail: "Ang gamutan para sa TB ay kinabibilangan ng DOTS strategy na naglalaman ng kombinasyon ng antibiotics na kailangang inumin ng 6-9 na buwan." }
+          { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/epidemiology%20at%20prevalance.png", 
+          detail: `<div style="display: flex; flex-direction: column; gap: 25px;">
+  <!-- First row: image left, text right -->
+  <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+    <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/ep%26dem1.png" style="width: 45%; max-width: 300px; border-radius: 12px; flex-shrink: 0;">
+    <div style="flex: 1;">
+      <p><strong>10.7 million</strong> ka tawo ang gin estimate nga nagka TB sang 2024 ayon sa World Health Organization (WHO).</p>
+      <p>Approximately <strong>1.23 million</strong> people died from TB in 2024, including 150,000 deaths among people living with HIV.</p>
+      <p>The burden is highest among <strong>men (5.8 million)</strong>, followed by <strong>women (3.7 million)</strong> and <strong>children (1.2 million)</strong>.</p>
+    </div>
+  </div>
+  <!-- Second row: image right, text left -->
+  <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; flex-direction: row-reverse;">
+    <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/ep%26dem2.png" style="width: 45%; max-width: 300px; border-radius: 12px; flex-shrink: 0;">
+    <div style="flex: 1;">
+      <p><strong>100,000 cases</strong> sang TB ang gina report kada tuig diri sa Pilipinas ayon sa Department of Health (DOH).</p>
+      <p>The Philippines currently ranks <strong>third worldwide</strong> in terms of total TB cases as of 2025. It accounts for <strong>6.8%</strong> of the global TB burden, making it one of the eight countries that together contribute to two‑thirds of all cases globally.</p>
+    </div>
+  </div>
+  <!-- Third row: larger font summary with bullet points -->
+  <div style="margin-top: 10px; padding: 16px; background: rgba(255,255,255,0.05); border-radius: 16px; font-size: 1.2rem; line-height: 1.5;">
+    <p style="font-weight: bold; margin-bottom: 12px;">From January 1 to March 30, 2025 data reveals mixed trends in TB program indicators compared to the same period last year.</p>
+    <ul style="margin: 0 0 0 20px; padding-left: 0;">
+      <li>Declines were observed in chest x‑ray TB screenings (56%) and initiation of new drug‑susceptible TB (DSTB) treatment (3%).</li>
+      <li>However, positive developments were observed for TB Preventive Treatment (TPT) enrollment, which increased by 45%, and rapid TB diagnostics, almost matching last year's count (up 2%).</li>
+      <li>Incidence of TB cases decreased by 5%, reporting an overall TB incidence rate of 121.38.</li>
+    </ul>
+  </div>
+</div>`},
+          { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation%20period.png",detail: `<p>After infection, active TB can develop:</p>
+<ul style="margin: 8px 0 8px 20px;">
+  <li>Within weeks to 2 years (highest risk in the first 2–3 years).</li>
+  <li>Or remain latent for many years, with reactivation later if immunity declines.</li>
+</ul>
+<p>Pero, many people with latent TB never develop active disease.</p>` },
+          { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png", 
+          detail: `<div style="display: flex; flex-direction: column; gap: 15px;">
+          <div style="display: flex; gap: 15px; align-items: center;">
+            <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Ellipse%2011.png" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+            <div>Persons with HIV infection.</div>
+          </div>
+          <div style="display: flex; gap: 15px; align-items: center;">
+            <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Ellipse%2012.png" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+            <div>People with weakened immune systems (e.g., diabetes mellitus, chronic kidney disease, silicosis, cancer, long‑term corticosteroid use).</div>
+          </div>
+          <div style="display: flex; gap: 15px; align-items: center;">
+            <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Ellipse%2013.png" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+            <div>Household and close contacts of people with active pulmonary TB.</div>
+          </div>
+          <div style="display: flex; gap: 15px; align-items: center;">
+            <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Ellipse%2014.png" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+            <div>Health‑care workers exposed to TB patients.</div>
+          </div>
+          <div style="display: flex; gap: 15px; align-items: center;">
+            <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Ellipse%2015.png" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+            <div>Malnourished individuals or those living in overcrowded, poorly ventilated conditions.</div>
+          </div>
+          <div style="display: flex; gap: 15px; align-items: center;">
+            <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Ellipse%2016.png" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+            <div>Smokers and people who use alcohol or drugs heavily.</div>
+          </div>
+          <div style="display: flex; gap: 15px; align-items: center;">
+            <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Ellipse%2017.png" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+            <div>Children under 5 years (higher risk of severe and disseminated forms).</div>
+          </div>
+        </div>` },
+          { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prevention.png", 
+          detail: `<div style="display: flex; flex-direction: column; gap: 25px;">
+  <!-- First row: image left, text right -->
+  <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+    <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Ellipse%204%20(1).png" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+    <div style="flex: 1;">
+      <p><strong>Bacille Calmette-Guérin (BCG)</strong> is used against TB in many high‑burden countries.</p>
+      <p>BCG reduces the risk of severe forms of TB (e.g., meningitis and miliary TB) in children but has variable efficacy against adult pulmonary TB.</p>
+    </div>
+  </div>
+  <!-- Second row: administration details and DOH guidelines -->
+  <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 16px;">
+    <p style="font-weight: bold; margin-bottom: 10px;">Specific Administration Details</p>
+    <p>The WHO and DOH (2026) mandate strict protocols for BCG administration:</p>
+    <ul style="margin: 8px 0 16px 20px;">
+      <li><strong>Timing:</strong> A single dose given at birth or as soon as possible after birth.</li>
+      <li><strong>Method:</strong> Administered intradermally (into the skin), typically over the deltoid muscle.</li>
+      <li><strong>Dosage:</strong> 0.05 mL for infants under 12 months; 0.10 mL for children 12 months and older.</li>
+      <li>For missed doses, catch‑up vaccination is recommended within the first 2 months of life.</li>
+    </ul>
+    <p style="font-weight: bold; margin-bottom: 10px;">DOH Vaccination Guidelines (2026)</p>
+    <ul style="margin: 8px 0 0 20px;">
+      <li>Vaccinations are provided free at government health centers under the National Immunization Program (NIP).</li>
+      <li>Children older than 2 months with TB exposure or symptoms require a Tuberculin Skin Test (TST) before vaccination.</li>
+      <li>As a live‑attenuated vaccine, BCG is withheld from infants with HIV to avoid "disseminated BCG disease," unless they are clinically stable on antiretroviral therapy (ART).</li>
+    </ul>
+  </div>
+</div>`},
+          { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/managemnt.png", 
+          detail: `<div style="display: flex; flex-direction: column; gap: 25px;">
+  <!-- First row: image left, text right -->
+  <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+    <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Ellipse%201%20(1).png" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; flex-shrink: 0;">
+    <div style="flex: 1;">
+      <p><strong>Standard Treatment for Drug-Susceptible TB (DS-TB):</strong><br>
+      For most patients where the bacteria are sensitive to standard medicines, the goal is a 100% cure rate using a combination of "first-line" drugs: <strong>Isoniazid (H), Rifampicin (R), Pyrazinamide (Z), and Ethambutol (E)</strong>.</p>
+    </div>
+  </div>
+  <!-- Second row: detailed management guidelines -->
+  <div style="background: rgba(255,255,255,0.05); border-radius: 16px; padding: 16px;">
+    <p style="font-weight: bold; margin-bottom: 10px;">Treatment Regimens</p>
+    <ul style="margin: 8px 0 16px 20px;">
+      <li><strong>Adults:</strong> The standard regimen usually lasts 6 months, consisting of a 2-month intensive phase (HRZE) followed by a 4-month continuation phase (HR).</li>
+      <li><strong>Children (3 months to 16 years):</strong> As of the latest 2024–2025 updates, a shorter 4-month regimen is now recommended for children with non-severe TB (2HRZE/2HR).</li>
+      <li><strong>Adolescents (12+ years):</strong> A newer 4-month intensive regimen (using Rifapentine and Moxifloxacin) may be used in specific cases to shorten treatment time.</li>
+    </ul>
+    <p style="font-weight: bold; margin-bottom: 10px;">Hygiene Practices</p>
+    <ul style="margin: 8px 0 16px 20px;">
+      <li><strong>Respiratory Etiquette:</strong> Cover your mouth and nose with a tissue or your elbow when coughing or sneezing.</li>
+      <li><strong>Safe Disposal:</strong> Dispose of sputum and used tissues in sealed bags or containers with disinfectant.</li>
+      <li><strong>Hand Hygiene:</strong> Wash hands frequently with soap and water, especially after contact with respiratory secretions.</li>
+      <li><strong>Limit Contact:</strong> Avoid close, prolonged contact with others until no longer infectious (usually after several weeks of treatment).</li>
+      <li><strong>Masking:</strong> Patients with a cough should wear a mask in indoor or crowded settings until sputum tests are negative.</li>
+    </ul>
+    <p style="font-weight: bold; margin-bottom: 10px;">Environmental Practices</p>
+    <ul style="margin: 8px 0 0 20px;">
+      <li><strong>Ventilation:</strong> Improve airflow in homes and workplaces by opening windows, using fans, and reducing overcrowding.</li>
+      <li><strong>Medical Controls:</strong> Utilize airborne infection isolation rooms, HEPA filters, or UV germicidal irradiation in healthcare facilities.</li>
+      <li><strong>Crowd Avoidance:</strong> Minimize time spent in poorly ventilated indoor spaces like crowded dormitories or public transport.</li>
+    </ul>
+  </div>
+</div>`}
         ]
       },
       dengue: {

@@ -42,11 +42,7 @@
     -webkit-backdrop-filter: blur(72px) saturate(180%);
     background: rgba(31, 0, 58, 0.55);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.1), inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
     color: #ffffff;
     padding: 16px 18px;
     display: flex;
@@ -73,17 +69,12 @@
     height: 100%;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent, rgba(255, 255, 255, 0.3));
   }
-  .app-header h1 {
-    font-family: 'Futura', 'Trebuchet MS', 'Segoe UI', Arial, sans-serif;
-    font-weight: bold;
-    font-size: 2.2rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+  .app-header h1 img { height: 60px; width: auto; transition: height 0.2s; }
+  .app-header h1 { display: flex; align-items: center; gap: 8px; }
   .offline-badge {
-    background: #8deeff;
-    color: #130420;
+    background: rgba(141, 238, 255, 0.15);
+    border: 1px solid rgba(141, 238, 255, 0.45);
+    color: #8deeff;
     font-size: 0.7rem;
     font-weight: bold;
     padding: 4px 10px;
@@ -108,17 +99,13 @@
     -webkit-backdrop-filter: blur(64px) saturate(160%);
     background: rgba(31, 0, 58, 0.55);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow:
-      0 8px 20px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.1), inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
     padding: 0 8px;
     overflow-x: auto;
+    overflow-y: visible;
     white-space: nowrap;
     scrollbar-width: none;
     position: relative;
-    overflow: hidden;
   }
   .tab-bar::before {
     content: '';
@@ -174,15 +161,11 @@
   /* ---------- CARDS (glass) ---------- */
   .card {
     background: rgba(31, 0, 58, 0.55);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.1), inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
     padding: 18px 16px;
     margin-bottom: 18px;
     color: #ffffff;
@@ -204,9 +187,15 @@
     height: 100%;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent, rgba(255, 255, 255, 0.3));
   }
+  .faq-row.purple-glass {
+    background: rgba(155, 48, 255, 0.25) !important;
+    backdrop-filter: blur(16px) !important;
+    border: 1px solid rgba(155, 48, 255, 0.6) !important;
+    box-shadow: 0 0 12px rgba(155, 48, 255, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.3) !important;
+  }
 
   h2, h3, h4 {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
     color: #ffffff;
     margin-bottom: 12px;
@@ -223,20 +212,25 @@
     color: #ffffff;
   }
   .badge {
-    background: #8deeff;
-    color: #130420;
+    background: rgba(141, 238, 255, 0.18);
+    border: 1px solid rgba(141, 238, 255, 0.45);
+    color: #8deeff;
     padding: 4px 10px;
     border-radius: 40px;
     font-size: 0.75rem;
     font-weight: 600;
   }
   .emergency-number {
-    background: #ffc2e8;
+    background: rgba(207, 144, 255, 0.12);
+    border-left: 4px solid #cf90ff;
+    border: 1px solid rgba(207, 144, 255, 0.35);
     border-left: 4px solid #cf90ff;
     padding: 12px;
     border-radius: 12px;
     margin-bottom: 12px;
-    color: #130420;
+    color: #ffffff;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
   .btn {
     background: #cf90ff;
@@ -297,12 +291,16 @@
     color: #ffffff;
   }
   .reminder-alert {
-    background: #8deeff;
+    background: rgba(141, 238, 255, 0.10);
     border-radius: 16px;
     padding: 12px;
     margin: 15px 0;
-    border-left: 4px solid #cf90ff;
-    color: #130420;
+    border-left: 4px solid #8deeff;
+    border: 1px solid rgba(141, 238, 255, 0.3);
+    border-left: 4px solid #8deeff;
+    color: #ffffff;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
   .footer-note {
     text-align: center;
@@ -316,7 +314,7 @@
     padding: 14px 16px;
     margin: 10px 0;
     border: 1.5px solid #814daa;
-    border-radius: 30px;
+    border-radius: 20px;
     font-size: 1rem;
     background: #200548;
     color: #ffffff;
@@ -339,15 +337,17 @@
   .service-category { margin-bottom: 16px; }
   .service-description { padding-left: 8px; margin-bottom: 6px; color: #ffffff; }
   .notification-bar {
-    background: #8deeff;
-    border: 1px solid #cf90ff;
+    background: rgba(141, 238, 255, 0.12);
+    border: 1px solid rgba(141, 238, 255, 0.4);
     border-radius: 20px;
     padding: 14px 16px;
     margin: 0 0 18px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #130420;
+    color: #ffffff;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
   .notification-bar p { margin: 0; }
   .notification-bar .close-btn {
@@ -355,19 +355,24 @@
     border: none;
     font-size: 1.2rem;
     cursor: pointer;
-    color: #130420;
+    color: #ffffff;
   }
   .low-stock-summary {
-    background: #ffc2e8;
-    border-left: 4px solid #cf90ff;
+    background: rgba(255, 140, 100, 0.15);
+    border-left: 4px solid #ff8c64;
+    border: 1px solid rgba(255, 140, 100, 0.4);
+    border-left: 4px solid rgba(255, 140, 100, 0.8);
     padding: 12px;
     border-radius: 12px;
     margin-bottom: 16px;
-    color: #130420;
+    color: rgba(255, 200, 170, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
   .vaccine-badge {
-    background: #8deeff;
-    color: #130420;
+    background: rgba(141, 238, 255, 0.15);
+    border: 1px solid rgba(141, 238, 255, 0.4);
+    color: #8deeff;
     padding: 2px 10px;
     border-radius: 20px;
     font-size: 0.75rem;
@@ -376,12 +381,15 @@
     display: inline-block;
   }
   .user-stats {
-    background: #ffc2e8;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
     padding: 12px;
     border-radius: 12px;
     margin-bottom: 15px;
     font-size: 0.9rem;
-    color: #130420;
+    color: rgba(255,255,255,0.9);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
   .sync-status { font-size: 0.9rem; margin: 8px 0; }
   .sync-success { color: #8deeff; }
@@ -397,11 +405,7 @@
     border-radius: 16px;
     background: rgba(31, 0, 58, 0.55);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow:
-      0 8px 32px rgba(0, 0, 0, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.5),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-      inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.1), inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
   }
   .track {
     display: flex;
@@ -443,7 +447,7 @@
     width: fit-content;
   }
   .slide-title { font-size: 18px; font-weight: 600; color: #ffffff; line-height: 1.3; }
-  .slide-body { font-size: 13px; color: #cf90ff; line-height: 1.65; }
+  .slide-body { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.65; }
   .slide-cta {
     margin-top: 4px;
     font-size: 12px;
@@ -502,9 +506,7 @@
     gap: 14px;
     margin-bottom: 14px;
   }
-  .home-bento .card {
-    margin-bottom: 0;
-  }
+  .home-bento .card { margin-bottom: 0; }
   .card-greeting {
     grid-column: 1 / 2;
     grid-row: 1 / 3;
@@ -524,30 +526,13 @@
     grid-row: 2 / 3;
   }
   /* HOME PAGE FONT SIZES (default for larger screens) */
-  .card-greeting h2 {
-    font-size: 2.8rem;
-    line-height: 1.1;
-  }
-  .card-greeting p {
-    font-size: 1.4rem;
-  }
-  .card-user #accountTypeDisplay {
-    font-size: 2.2rem;
-  }
-  .card-user > div:last-child {
-    font-size: 1.3rem;
-  }
-  .card-date #currentDate {
-    font-size: 4rem;
-    line-height: 1.1;
-  }
-  .card-date #currentDay {
-    font-size: 1.6rem;
-    margin-top: 6px;
-  }
-  .card-greeting p:last-of-type {
-    font-size: 1.15rem;
-  }
+  .card-greeting h2 { font-size: 2.8rem; line-height: 1.1; }
+  .card-greeting p { font-size: 1.4rem; }
+  .card-user #accountTypeDisplay { font-size: 2.2rem; }
+  .card-user > div:last-child { font-size: 1.3rem; }
+  .card-date #currentDate { font-size: 4rem; line-height: 1.1; }
+  .card-date #currentDay { font-size: 1.6rem; margin-top: 6px; }
+  .card-greeting p:last-of-type { font-size: 1.15rem; }
 
   /* ---------- HEALTH ED – HORIZONTAL SCROLL & HERO CARD ---------- */
   #readMoreRow .mini-card {
@@ -573,53 +558,18 @@
     background: linear-gradient(transparent 40%, rgba(0,0,0,0.6) 100%);
     pointer-events: none;
   }
-  #readMoreRow .mini-card .title {
-    position: relative;
-    z-index: 1;
-    font-weight: bold;
-    font-size: 1.1rem;
-  }
-  #readMoreRow .mini-card .desc {
-    position: relative;
-    z-index: 1;
-    font-size: 1.1rem;
-    opacity: 0.8;
-  }
+  #readMoreRow .mini-card .title { position: relative; z-index: 1; font-weight: bold; font-size: 1.1rem; }
+  #readMoreRow .mini-card .desc { position: relative; z-index: 1; font-size: 1.1rem; opacity: 0.8; }
   /* HEALTH ED TAB – WHITE & LARGER TEXT */
-  #education .card h3,
-  #education .card h4,
-  #education .card p,
-  #education .card span,
-  #education .card button,
-  #education .card input,
-  #education .card div {
-    color: #ffffff !important;
-  }
-  #education .card h3 {
-    font-size: 1.6rem !important;
-  }
-  #education .card h4 {
-    font-size: 1.2rem !important;
-  }
-  #education .card p,
-  #education .card button {
-    font-size: 1.05rem !important;
-  }
-  #education .edu-cat-btn {
-    color: #ffffff !important;
-    border-color: rgba(255,255,255,0.5) !important;
-  }
-  #education .edu-cat-btn.active {
-    background: #cf90ff;
-    color: #130420 !important;
-  }
-  #education #healthSearch {
-    color: #ffffff !important;
-    font-size: 1.05rem !important;
-  }
-  #education #healthSearch::placeholder {
-    color: rgba(255,255,255,0.7) !important;
-  }
+  #education .card h3, #education .card h4, #education .card p, #education .card span,
+  #education .card button, #education .card input, #education .card div { color: #ffffff !important; }
+  #education .card h3 { font-size: 1.6rem !important; }
+  #education .card h4 { font-size: 1.2rem !important; }
+  #education .card p, #education .card button { font-size: 1.05rem !important; }
+  #education .edu-cat-btn { color: #ffffff !important; border-color: rgba(255,255,255,0.5) !important; }
+  #education .edu-cat-btn.active { background: #cf90ff; color: #130420 !important; }
+  #education #healthSearch { color: #ffffff !important; font-size: 1.05rem !important; }
+  #education #healthSearch::placeholder { color: rgba(255,255,255,0.7) !important; }
   /* HEALTH EDUCATION – IMAGE CATEGORY GRID */
   .edu-cat-slider {
     display: flex;
@@ -659,12 +609,8 @@
     align-items: flex-end;
     padding: 10px;
   }
-  .edu-cat-btn:hover {
-    transform: scale(1.03);
-  }
-  .edu-cat-btn.active {
-    border-color: #cf90ff;
-  }
+  .edu-cat-btn:hover { transform: scale(1.03); }
+  .edu-cat-btn.active { border-color: #cf90ff; }
   .edu-cat-btn::after {
     content: '';
     position: absolute;
@@ -683,10 +629,7 @@
     text-align: left;
     white-space: normal;
   }
-  .edu-cat-btn {
-    background: none;
-    color: inherit;
-  }
+  .edu-cat-btn { background: none; color: inherit; }
   .health-ed-detail {
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(16px);
@@ -715,7 +658,7 @@
 
   /* FAQ rows */
   .faq-section { padding: 16px 0; }
-  .faq-section h2 { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: white; }
+  .faq-section h2 { font-size: 1.35rem; font-weight: 700; margin-bottom: 12px; color: white; }
   .faq-row {
     display: flex;
     align-items: center;
@@ -790,11 +733,7 @@
     font-size: 10px;
     padding: 5px 10px 5px 12px;
   }
-  .pill-btn.mini .arrow-circle {
-    width: 18px;
-    height: 18px;
-    font-size: 10px;
-  }
+  .pill-btn.mini .arrow-circle { width: 18px; height: 18px; font-size: 10px; }
 
   /* Glass card (reuse) */
   .glass-card {
@@ -803,6 +742,7 @@
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(255,255,255,0.18);
     color: white;
+    border-radius: 20px;
   }
 
   /* Pill button & arrow icon */
@@ -830,7 +770,6 @@
     font-size: 12px;
     font-weight: bold;
   }
-
   .back-button {
     background: var(--color-accent);
     color: white;
@@ -854,21 +793,8 @@
     position: relative;
     overflow: hidden;
   }
-  .comm-overview-hero::before {
-    content: '🦠';
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 72px;
-    opacity: 0.18;
-  }
-  .comm-overview-hero h1 {
-    font-size: 22px;
-    font-weight: 900;
-    color: white;
-    margin-bottom: 4px;
-  }
+  .comm-overview-hero::before { content: '🦠'; position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font-size: 72px; opacity: 0.18; }
+  .comm-overview-hero h1 { font-size: 22px; font-weight: 900; color: white; margin-bottom: 4px; }
   .comm-overview-hero .hero-tag {
     display: inline-block;
     background: rgba(255,255,255,0.2);
@@ -895,12 +821,7 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
-  .comm-overview-hero p {
-    font-size: 13px;
-    color: rgba(255,255,255,0.82);
-    line-height: 1.6;
-    max-width: 280px;
-  }
+  .comm-overview-hero p { font-size: 13px; color: rgba(255,255,255,0.82); line-height: 1.6; max-width: 280px; }
   .spread-row {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -914,18 +835,8 @@
     padding: 12px 8px;
     text-align: center;
   }
-  .spread-item .spread-icon {
-    font-size: 22px;
-    display: block;
-    margin-bottom: 5px;
-  }
-  .spread-item span:last-child {
-    font-size: 10px;
-    color: rgba(255,255,255,0.75);
-    font-weight: 600;
-    line-height: 1.3;
-    display: block;
-  }
+  .spread-item .spread-icon { font-size: 22px; display: block; margin-bottom: 5px; }
+  .spread-item span:last-child { font-size: 10px; color: rgba(255,255,255,0.75); font-weight: 600; line-height: 1.3; display: block; }
   .section-label-left {
     font-size: 11px;
     letter-spacing: 2px;
@@ -1007,33 +918,10 @@
     border-radius: 20px;
     margin-bottom: 16px;
   }
-  .hero-bacteria {
-    width: 250px;
-    height: auto;
-    object-fit: contain;
-    filter: drop-shadow(0 8px 24px rgba(0,0,0,0.55));
-    flex-shrink: 0;
-    margin-left: 0;
-  }
-  .hero-text {
-    text-align: left;
-    z-index: 3;
-  }
-  .hero-title {
-    font-size: 60px;
-    font-weight: 900;
-    color: white;
-    letter-spacing: -0.5px;
-    line-height: 1;
-    margin-bottom: 4px;
-    text-shadow: 0 2px 12px rgba(0,0,0,0.3);
-  }
-  .hero-subtitle {
-    font-size: 13px;
-    color: rgba(255,255,255,0.72);
-    font-weight: 400;
-    margin-bottom: 14px;
-  }
+  .hero-bacteria { width: 250px; height: auto; object-fit: contain; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.55)); flex-shrink: 0; margin-left: 0; }
+  .hero-text { text-align: left; z-index: 3; }
+  .hero-title { font-size: 60px; font-weight: 900; color: white; letter-spacing: -0.5px; line-height: 1; margin-bottom: 4px; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  .hero-subtitle { font-size: 13px; color: rgba(255,255,255,0.72); font-weight: 400; margin-bottom: 14px; }
   .description-card {
     margin-top: 12px;
     padding: 14px;
@@ -1068,15 +956,10 @@
     line-height: 1.65;
     display: none;
   }
-  .faq-answer.open {
-    display: block;
-  }
+  .faq-answer.open { display: block; }
 
   /* Grid card sub‑detail view */
-  .sub-detail-view {
-    display: none;
-    margin-top: 10px;
-  }
+  .sub-detail-view { display: none; margin-top: 10px; }
   .sub-hero {
     position: relative;
     border-radius: 20px;
@@ -1107,255 +990,205 @@
     border: 1px solid rgba(255,255,255,0.18);
     border-radius: 16px;
     padding: 16px;
-    font-size: 13px;
+    font-size: 1rem;
     color: rgba(255,255,255,0.9);
-    line-height: 1.7;
+    line-height: 1.6;
   }
 
   /* Increase FAQ font size */
-  .faq-question {
-    font-size: 1rem !important;
-    line-height: 1.5;
-  }
-  .faq-answer {
-    font-size: 1rem !important;
-    line-height: 1.6;
-  }
-  .pill-btn {
-    font-size: 0.85rem !important;
-  }
+  .faq-question, .faq-answer { font-size: 1.3rem !important; line-height: 1.5; }
+  .description-card { font-size: 1.3rem !important; line-height: 1.6; }
+  .pill-btn { font-size: 0.85rem !important; }
 
-  /* ========== RESPONSIVE ADDITIONS (modified) ========== */
-
+  /* ========== RESPONSIVE ADDITIONS ========== */
   /* For tablets and smaller desktops (max-width: 1024px) */
   @media (max-width: 1024px) {
-    .app-header h1 {
-      font-size: 1.6rem;
-    }
-    .app-header > div > span {
-      font-size: 1.2rem !important;
-    }
-    .slide {
-      width: 85%;
-      margin-left: 7.5%;
-      margin-right: 7.5%;
-    }
-    .edu-cat-slider .edu-cat-btn {
-      width: 200px;
-      height: 350px;
-    }
+    .app-header h1 { font-size: 1.6rem; }
+    .app-header > div > span { font-size: 1.2rem !important; }
+    .slide { width: 85%; margin-left: 7.5%; margin-right: 7.5%; }
+    .edu-cat-slider .edu-cat-btn { width: 200px; height: 350px; }
   }
 
   /* For large phones / small tablets (max-width: 768px) */
   @media (max-width: 768px) {
-    .tab-bar button {
-      padding: 10px 12px;
-      font-size: 0.85rem;
-    }
-    .card {
-      padding: 14px 12px;
-    }
-    .card-greeting h2 {
-      font-size: 2rem;
-    }
-    .card-greeting p {
-      font-size: 1.2rem;
-    }
-    .card-date #currentDate {
-      font-size: 2.5rem;
-    }
-    .card-date #currentDay {
-      font-size: 1.2rem;
-    }
-    .card-user #accountTypeDisplay {
-      font-size: 1.5rem;
-    }
-    .card-user > div:last-child {
-      font-size: 1rem;
-    }
-    .disease-nav-grid {
-      grid-template-columns: repeat(2, 1fr); /* keep 2 columns */
-    }
-    .edu-cat-slider .edu-cat-btn {
-      width: 180px;
-      height: 320px;
-    }
-    .detail-hero {
-      flex-direction: column;
-      height: auto;
-      text-align: center;
-      padding: 20px;
-    }
-    .hero-bacteria {
-      width: 180px;
-      margin-top: 10px;
-    }
-    .hero-title {
-      font-size: 36px;
-    }
-    .rhu-subtab {
-      font-size: 0.75rem;
-      padding: 6px 10px;
-    }
+    .tab-bar button { padding: 10px 12px; font-size: 0.85rem; }
+    .card { padding: 14px 12px; }
+    .card-greeting h2 { font-size: 2rem; }
+    .card-greeting p { font-size: 1.2rem; }
+    .card-date #currentDate { font-size: 2.5rem; }
+    .card-date #currentDay { font-size: 1.2rem; }
+    .card-user #accountTypeDisplay { font-size: 1.5rem; }
+    .card-user > div:last-child { font-size: 1rem; }
+    .disease-nav-grid { grid-template-columns: repeat(2, 1fr); }
+    .edu-cat-slider .edu-cat-btn { width: 180px; height: 320px; }
+    .detail-hero { flex-direction: column; height: auto; text-align: center; padding: 20px; }
+    .hero-bacteria { width: 180px; margin-top: 10px; }
+    .hero-title { font-size: 36px; }
+    .rhu-subtab { font-size: 0.75rem; padding: 6px 10px; }
   }
 
-  /* For mobile phones (max-width: 480px) - ONLY FONT & COSMETIC, NO LAYOUT STACKING */
+  /* ====================================================
+     PORTRAIT PHONE (max-width: 480px) – optimized proportions
+     ==================================================== */
   @media (max-width: 480px) {
-    .slide-image img {
-      object-fit: contain;
-      height: auto;
-      max-height: 150px;
+    body { font-size: 15px; }
+    .app-header { flex-direction: row; align-items: center; padding: 8px 12px; gap: 6px; }
+    .app-header h1 { font-size: 1.1rem; gap: 5px; }
+    .app-header h1 img { height: 32px !important; }
+    .app-header > div { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+    .app-header > div > span { display: none; }
+    .logout-btn { font-size: 0.68rem; padding: 4px 8px; align-self: auto; }
+    .tab-bar { overflow-x: auto; -webkit-overflow-scrolling: touch; white-space: nowrap; }
+    .tab-bar button { font-size: 0.72rem; padding: 8px 10px; }
+    .container { padding: 10px 10px; }
+    .card { padding: 12px 10px; border-radius: 16px; }
+    .home-bento { gap: 10px; margin-bottom: 10px; }
+    .card-greeting h2 { font-size: 1.5rem; line-height: 1.15; }
+    .card-greeting p { font-size: 0.9rem; }
+    .card-greeting p:last-of-type { font-size: 0.8rem; }
+    .card-date #currentDate { font-size: 1.8rem; line-height: 1.1; }
+    .card-date #currentDay { font-size: 0.9rem; margin-top: 4px; }
+    .card-user #accountTypeDisplay { font-size: 1.1rem; }
+    .card-user > div:last-child { font-size: 0.75rem; }
+    .btn-pill { font-size: 0.75rem; padding: 7px 12px; gap: 6px; }
+    .carousel-wrapper { margin-top: 10px; margin-bottom: 10px; }
+    .slide { width: 92%; margin-left: 4%; margin-right: 4%; padding: 0.85rem 0.75rem 0.75rem; gap: 6px; }
+    .slide-title { font-size: 14px; }
+    .slide-body { font-size: 11px; }
+    .slide-image img { object-fit: contain; height: auto; max-height: 130px; }
+    .nav { width: 26px; height: 26px; font-size: 11px; }
+    .slide-cta { font-size: 11px; padding: 5px 11px; }
+    .controls-label, .toggle-btn { font-size: 11px; }
+    .pill-btn { font-size: 0.7rem !important; padding: 5px 10px; gap: 5px; }
+    .arrow-icon { width: 17px; height: 17px; font-size: 9px; }
+    .btn, .btn-outline { padding: 10px 14px; font-size: 0.85rem; }
+    .back-button { font-size: 0.85rem; padding: 7px 16px; margin-bottom: 14px; }
+    .auth-form input, .auth-form button { font-size: 0.88rem; padding: 10px 12px; }
+    input, select, textarea { font-size: 0.9rem; padding: 11px 13px; }
+    label { font-size: 0.88rem; }
+    .record-item { padding-right: 68px; padding: 11px; padding-right: 72px; }
+    .record-item > div { top: 8px; right: 8px; }
+    .edit-patient-btn, .delete-patient-btn, .edit-appt-btn, .delete-appt-btn { padding: 2px 7px !important; font-size: 0.68rem; }
+    .notification-bar { flex-direction: column; align-items: flex-start; gap: 6px; padding: 10px 12px; }
+    .notification-bar .close-btn { align-self: flex-end; }
+    .low-stock-summary, .emergency-number { padding: 10px; }
+    .edu-cat-slider .edu-cat-btn { flex: 0 0 140px; height: 260px; }
+    .edu-cat-label { font-size: 0.78rem; }
+    .health-ed-detail { padding: 12px 10px; border-radius: 18px; }
+    /* Stack overview card in health ed detail */
+    #eduDetailView .card > div[style*="min-width"],
+    #eduDetailView .card > div[style*="flex:"],
+    #eduDetailView .card > div[style*="flex: "] {
+      min-width: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
     }
-    .auth-form input,
-    .auth-form button {
-      font-size: 0.9rem;
-      padding: 10px 12px;
+    #eduDetailView .card > div[style*="min-width"] img,
+    #eduDetailView .card img[style*="height: 340px"] {
+      height: 180px !important;
+      width: 100% !important;
+      object-fit: cover;
     }
-    .app-header {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .app-header h1 {
-      font-size: 1.4rem;
-    }
-    .app-header > div > span {
-      display: none;
-    }
-    .logout-btn {
-      align-self: flex-end;
-    }
-    .tab-bar {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      white-space: nowrap;
-    }
-    .tab-bar button {
-      font-size: 0.75rem;
-      padding: 8px 12px;
-    }
-    .container {
-      padding: 12px 12px;
-    }
-    .card-greeting h2 {
-      font-size: 1.5rem;
-    }
-    .card-greeting p {
-      font-size: 1rem;
-    }
-    .card-date #currentDate {
-      font-size: 2rem;
-    }
-    .card-date #currentDay {
-      font-size: 1rem;
-    }
-    .card-user #accountTypeDisplay {
-      font-size: 1.2rem;
-    }
-    .slide {
-      width: 94%;
-      margin-left: 3%;
-      margin-right: 3%;
-      padding: 1rem 0.8rem;
-    }
-    .slide-title {
-      font-size: 16px;
-    }
-    .slide-body {
-      font-size: 12px;
-    }
-    .nav {
-      width: 28px;
-      height: 28px;
-      font-size: 12px;
-    }
-    .edu-cat-slider .edu-cat-btn {
-      width: 150px;
-      height: 280px;
-    }
-    .edu-cat-label {
-      font-size: 0.8rem;
-    }
-    .info-grid {
-      gap: 8px;
-    }
-    .disease-nav-card {
-      height: 140px;
-    }
-    .hero-bacteria {
-      width: 140px;
-    }
-    .hero-title {
-      font-size: 28px;
-    }
-    .pill-btn {
-      font-size: 0.7rem !important;
-      padding: 6px 12px;
-    }
-    .btn, .btn-outline {
-      padding: 10px 14px;
-      font-size: 0.85rem;
-    }
-    .record-item {
-      padding-right: 70px;
-    }
-    .record-item > div {
-      top: 8px;
-      right: 8px;
-    }
-    .edit-patient-btn, .delete-patient-btn, .edit-appt-btn, .delete-appt-btn {
-      padding: 2px 8px !important;
-      font-size: 0.7rem;
-    }
-    .notification-bar {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-    }
-    .notification-bar .close-btn {
-      align-self: flex-end;
-    }
-    .low-stock-summary, .emergency-number {
-      padding: 10px;
-    }
+    #eduDetailView .card[style*="display: flex"] { flex-direction: column !important; gap: 14px !important; }
+    .disease-nav-card { height: 120px; }
+    .disease-nav-card-body .d-title { font-size: 12px; }
+    .disease-nav-card-body .d-sub { font-size: 9px; }
+    .info-grid { gap: 8px; }
+    .grid-card { height: 160px; }
+    .grid-card-title { font-size: 12px; }
+    .grid-card-body { padding: 8px 9px; gap: 4px; }
+    .detail-hero { height: auto; padding: 14px 12px; gap: 12px; }
+    .hero-bacteria { width: 100px; }
+    .hero-title { font-size: 24px; }
+    .hero-subtitle { font-size: 11px; margin-bottom: 10px; }
+    .faq-question, .faq-answer { font-size: 0.9rem !important; line-height: 1.5; }
+    .faq-row { padding: 10px 11px; }
+    .faq-section h2 { font-size: 1.1rem; }
+    .faq-answer [style*="display: flex"] { flex-direction: column !important; gap: 10px !important; }
+    .faq-answer img[style*="width: 180px"], .faq-answer img { width: 100% !important; max-width: 100% !important; height: auto !important; border-radius: 10px; }
+    .sub-content { font-size: 0.9rem !important; padding: 12px; }
+    .description-card { font-size: 0.9rem !important; padding: 11px; }
+    .spread-list { grid-template-columns: repeat(3, 1fr) !important; gap: 8px !important; }
+    .spread-list li { padding: 8px 6px !important; font-size: 0.72rem; }
+    .spread-list li > div:first-child { font-size: 1.5rem; }
+    .tip-box { font-size: 11px; padding: 11px; }
+    #emergency .card > div[style*="grid-template-columns"] { grid-template-columns: 1fr !important; }
+    .rhu-subtab { font-size: 0.68rem; padding: 5px 7px; }
+    .footer-note { font-size: 0.68rem; margin-top: 18px; }
   }
 
-  /* ---------- EXTRA NARROW (STACK LAYOUT) BELOW 360px ---------- */
+  /* ====================================================
+     EXTRA NARROW (max-width: 360px) – stack full layout
+     ==================================================== */
   @media (max-width: 360px) {
-    .home-bento {
-      grid-template-columns: 1fr;
-    }
-    .card-greeting {
-      grid-column: 1;
-      grid-row: 1;
-    }
-    .card-user {
-      grid-column: 1;
-      grid-row: 2;
-    }
-    .card-date {
-      grid-column: 1;
-      grid-row: 3;
-    }
-    .info-grid {
-      grid-template-columns: 1fr;
-    }
-    .disease-nav-grid {
-      grid-template-columns: 1fr;
-    }
-    .contact-list li {
-      flex-direction: column;
-      align-items: flex-start;
-    }
-    .contact-list li button {
-      align-self: flex-end;
-    }
-    .rhu-subtab {
-      flex: 1 1 auto;
-      min-width: 120px;
-      white-space: normal;
+    .app-header h1 { font-size: 1rem; }
+    .app-header h1 img { height: 26px !important; }
+    .home-bento { grid-template-columns: 1fr; }
+    .card-greeting { grid-column: 1; grid-row: 1; }
+    .card-user { grid-column: 1; grid-row: 2; }
+    .card-date { grid-column: 1; grid-row: 3; }
+    .card-date #currentDate { font-size: 2.2rem; }
+    .card-date #currentDay { font-size: 1rem; }
+    .card-user #accountTypeDisplay { font-size: 1.3rem; }
+    .card-greeting h2 { font-size: 1.5rem; }
+    .card-greeting p { font-size: 0.95rem; }
+    .info-grid { grid-template-columns: 1fr; }
+    .grid-card { height: 180px; }
+    .disease-nav-grid { grid-template-columns: 1fr; }
+    .disease-nav-card { height: 140px; }
+    .contact-list li { flex-direction: column; align-items: flex-start; }
+    .contact-list li button { align-self: flex-end; }
+    .rhu-subtab { flex: 1 1 auto; min-width: 100px; white-space: normal; text-align: center; }
+    .custom-glass-answer {
+      background: radial-gradient(ellipse at center, rgba(221, 72, 239, 0.50) 0%, rgba(82, 50, 114, 0.50) 100%) !important;
+      border-top: 1px solid rgba(221, 73, 240, 0.99) !important;
+      border-left: 1px solid rgba(112, 56, 141, 0.50) !important;
+      border-right: 1px solid rgba(112, 56, 141, 0.50) !important;
+      border-bottom: 1px solid rgba(82, 52, 114, 0.50) !important;
+      backdrop-filter: blur(12px) !important;
+      -webkit-backdrop-filter: blur(12px) !important;
+      border-radius: 12px !important;
+      margin-top: 8px;
+      padding: 11px;
     }
   }
+  /* Horizontal scrollable container for RHU subtabs */
+.rhu-scrollable {
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  padding-bottom: 8px;
+}
+.rhu-scrollable .rhu-subtab {
+  flex: 0 0 auto;
+  white-space: normal;
+  min-width: min-content;
+  margin: 0;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+  background: transparent;
+  border: 1.5px solid #814daa;
+  border-radius: 40px;
+  color: #cf90ff;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.rhu-scrollable .rhu-subtab.active {
+  background: #cf90ff;
+  color: #130420;
+  border-color: #cf90ff;
+}
+.rhu-scrollable {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.rhu-scrollable::-webkit-scrollbar {
+  display: none;
+}
 </style>
 </head>
 <body>
@@ -1378,7 +1211,7 @@
     <div id="appContainer">
       <header class="app-header">
         <h1>
-          <img src="logo.png" alt="Logo" style="height: 60px; width: auto; vertical-align: middle; margin-right: 4px;">
+          <img src="logo.png" alt="Logo" class="header-logo" style="vertical-align: middle; margin-right: 4px;">
           Abot-Kamay
         </h1>
         <div style="display: flex; gap: 8px; align-items: center;">
@@ -1480,7 +1313,7 @@ Optional online features (appointment requests and full‑system backup) are ava
 The app aims to improve access to localize health information, enhance health worker–community communication, strengthen patient follow‑up, and increase health‑seeking behaviors despite low connectivity. </p>
       </div>
 
-      <div id="nextAppointmentCard" class="card" style="display: none; background: #e6f2ed;">
+      <div id="nextAppointmentCard" class="card" style="display: none; border-left: 3px solid #cf90ff;">
         <h3>Susunod na Appointment</h3>
         <p id="nextAppointmentText"></p>
       </div>
@@ -1496,11 +1329,11 @@ The app aims to improve access to localize health information, enhance health wo
         <h3>Mabilisang Impormasyon</h3>
         <div style="display: flex; justify-content: space-around; text-align: center;">
           <div>
-            <div style="font-size: 2rem; font-weight: 700; color: #0b5e42;" id="totalPatientsStat">0</div>
+            <div style="font-size: 2rem; font-weight: 700; color: #cf90ff;" id="totalPatientsStat">0</div>
             <div style="font-size: 0.9rem;">Mga Pasyente</div>
           </div>
           <div>
-            <div style="font-size: 2rem; font-weight: 700; color: #0b5e42;" id="upcomingVaccinesStat">0</div>
+            <div style="font-size: 2rem; font-weight: 700; color: #cf90ff;" id="upcomingVaccinesStat">0</div>
             <div style="font-size: 0.9rem;">Paparatíng na Bakuna</div>
           </div>
         </div>
@@ -1573,8 +1406,8 @@ The app aims to improve access to localize health information, enhance health wo
         </div>
 
         <!-- Last updated card (kept) -->
-        <div class="card" style="background: #e6f2ed;">
-          <p style="font-style:italic; color: #000000;" id="eduLastUpdated"></p>
+        <div class="card" style="border-left: 3px solid rgba(207,144,255,0.6);">
+          <p style="font-style:italic; color: rgba(255,255,255,0.75);" id="eduLastUpdated"></p>
         </div>
       </div>
 
@@ -1590,7 +1423,7 @@ The app aims to improve access to localize health information, enhance health wo
       </div>
 
       <div class="card" style="padding: 8px;">
-        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <div class="rhu-scrollable">
           <button class="btn-outline rhu-subtab active" data-rhu-tab="maternal">Maternal &amp; Child</button>
           <button class="btn-outline rhu-subtab" data-rhu-tab="reproductive">Reproductive Health</button>
           <button class="btn-outline rhu-subtab" data-rhu-tab="lab">Lab &amp; Diagnostics</button>
@@ -1605,9 +1438,9 @@ The app aims to improve access to localize health information, enhance health wo
       <div id="rhu-dynamic" class="rhu-pane" style="display:block;"></div>
 
       <div id="rhu-medicine" class="rhu-pane" style="display:none;">
-        <div id="inventoryWarningCard" class="card" style="display: none; background: #ffeaea; border: 2px solid #cc0000;">
-          <h3 style="color: #cc0000; margin-top:0;">Babala: Hindi pa na-update ang imbentaryo!</h3>
-          <p style="color: #cc0000; font-weight: bold;">Ang listahan ng gamot ay mahigit 30 araw nang hindi nai-edit. Mangyaring i-check at i-update agad ang stock.</p>
+        <div id="inventoryWarningCard" class="card" style="display: none; background: rgba(204,0,0,0.18); border: 1.5px solid rgba(255,80,80,0.55); backdrop-filter: blur(16px);">
+          <h3 style="color: #ff8080; margin-top:0;">⚠️ Babala: Hindi pa na-update ang imbentaryo!</h3>
+          <p style="color: rgba(255,180,180,0.9); font-weight: bold;">Ang listahan ng gamot ay mahigit 30 araw nang hindi nai-edit. Mangyaring i-check at i-update agad ang stock.</p>
         </div>
 
         <div id="lowStockSummary" class="low-stock-summary" style="display: none;"></div>
@@ -3467,15 +3300,56 @@ The app aims to improve access to localize health information, enhance health wo
       tb: {
         title: "TUBERCULOSIS",
         subtitle: "Communicable Disease",
-        description: "Ang Tuberculosis (TB) ay isang nakakahawang sakit na dulot ng bakteryang Mycobacterium tuberculosis. Karaniwang umaatake ito sa baga ngunit maaari ring kumalat sa ibang bahagi ng katawan. Ang sakit ay nakukuha sa pamamagitan ng hangin kapag ang isang taong may aktibong TB ay umuubo o bumabahing.",
+       description: "<strong>Ano ang Tuberculosis (TB)?</strong><br>Ang TB ukon Tuberculosis (nga mas kilala sa tawag nga \"tisis\") isa ka balatian nga dala sang bacteria nga masami naga-atake sa baga, apang pwede man mag-atake sa iban nga parte sang aton lawas subong sang tul-an ukon utok (DOH, 2025).",
         heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/image%206.png",
         faqs: [
-          { question: "Ano ang <strong>causative agent?</strong>", answer: "Ang sanhi ng TB ay ang bakteryang <strong>Mycobacterium tuberculosis</strong>. Ito ay isang mabagal na lumalagong bacteria na karaniwang umaatake sa baga." },
-          { question: "Ano ang mga <strong>types?</strong>", answer: "May dalawang pangunahing uri: <strong>Latent TB</strong> (walang sintomas, hindi nakakahawa) at <strong>Active TB</strong> (may sintomas at nakakahawa)." },
-          { question: "Paano <strong>mag-transmit</strong> ang TB?", answer: "Nakukuha ito sa hangin sa pamamagitan ng maliliit na droplets mula sa pag-ubo o pagbahing ng taong may aktibong TB." }
+         { question: "Ano ang <strong>causative agent?</strong>", answer: `<div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap; margin-top: 10px;"><img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/mycobacteriumtb.png" style="width: 180px; border-radius: 12px; flex-shrink: 0;"><div><p><strong>Mycobacterium tuberculosis</strong></h3><p style="margin-bottom: 20px;">Pinaka-common nga kagaw nga sanhi sang TB.</p>
+            <p><strong>Iban nga mga causative agent:</strong><br>Mycobacterium bovis kag iban pa nga mga kagaw sa M. tuberculosis complex.</p></div></div>` },
+          { question: "Ano ang mga <strong>sari?</strong>",  
+          answer: `<div style="display: flex; flex-direction: column; gap: 20px;">
+              <div style="display: flex; gap: 20px; align-items: center;">
+                <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/latentTB.png" style="width: 180px; border-radius: 12px;">
+                <div style="flex: 1;"><strong>Latent TB infection (LTBI)</strong><br>Infection without active disease; no symptoms, but can progress to active TB later.</div>
+              </div>
+              <div style="display: flex; gap: 20px; align-items: center;">
+                <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/pulmonaryTB.png" style="width: 180px; border-radius: 12px;">
+                <div style="flex: 1;"><strong>Pulmonary TB</strong><br>TB limited to the lungs</div>
+              </div>
+              <div style="display: flex; gap: 20px; align-items: center;">
+                <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/extrapulmonarytb.png" style="width: 180px; border-radius: 12px;">
+                <div style="flex: 1;"><strong>Extrapulmonary TB</strong><br>TB in organs outside the lungs (e.g., lymph nodes, pleura, genitourinary tract, bones and joints, meninges, disseminated "miliary" TB).</div>
+              </div>
+              <div style="display: flex; gap: 20px; align-items: center;">
+                <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/drug%20resistant%20TB%20forms.png" style="width: 180px; border-radius: 12px;">
+                <div style="flex: 1;"><strong>Drug‑resistant TB forms</strong><br>a. Multidrug‑resistant TB (MDR‑TB)<br>b. Rifampicin‑resistant TB (RR‑TB)<br>c. Extensively drug‑resistant TB (XDR‑TB)</div>
+              </div>
+            </div>`
+          },
+          { question: "Paano <strong>mag-transmit</strong> ang TB?", 
+            answer: `<ol style="margin: 0; padding-left: 1.2rem;">
+              <li>TB spreads through the air when a person with pulmonary or laryngeal TB coughs, sneezes, speaks, or sings, releasing infectious droplet nuclei.</li>
+              <li>Inhalation of these droplet nuclei by nearby people can lead to infection.</li>
+              <li>TB is not spread by shaking hands, sharing food, or touching surfaces.</li>
+            </ol>`
+          }
         ],
         gridCards: [
-          { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales%2Csintomas.png", detail: "Ang pangunahing sintomas ng TB ay ubo na tumatagal ng higit sa 2 linggo, lagnat sa hapon, pagpapawis sa gabi, pagbaba ng timbang, at pananakit ng dibdib." },
+          { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales%2Csintomas.png", 
+              detail: `<div style="display: flex; flex-direction: column; gap: 25px;">
+                <div style="display: flex; gap: 25px; align-items: center;">
+                  <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/ubo.png" style="width: 180px; height: 180px; object-fit: cover; border-radius: 12px;">
+                  <div><strong>Ubo</strong><br>nga mas naga lawig sa 3 ka semana</div>
+                </div>
+                <div style="display: flex; gap: 25px; align-items: center;">
+                  <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/nagabuhintimbang.png" style="width: 180px; height: 180px; object-fit: cover; border-radius: 12px;">
+                  <div><strong>Nagabuhin nga timbang</strong><br>nga dawdawdaw</div>
+                </div>
+                <div style="display: flex; gap: 25px; align-items: center;">
+                  <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/mataasngatemp.jpg" style="width: 180px; height: 180px; object-fit: cover; border-radius: 12px;">
+                  <div><strong>Mataas nga temperatura</strong><br>upod sa grabe nga pagbalhas kada gab‑i</div>
+                </div>
+              </div>`
+              },
           { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/epidemiology%20at%20prevalance.png", detail: "Ang TB ay isa sa mga nangungunang sanhi ng kamatayan mula sa nakakahawang sakit sa buong mundo. Sa Pilipinas, may mataas na bilang ng kaso taun-taon." },
           { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation%20period.png", detail: "Ang panahon ng inkubasyon ng TB ay maaaring tumagal ng ilang linggo hanggang buwan bago lumitaw ang mga sintomas." },
           { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png", detail: "Mas mataas ang panganib sa mga taong may mahinang immune system tulad ng may HIV, malnutrisyon, diabetes, at mga bata." },
@@ -4110,7 +3984,7 @@ ra7875: {
       detail: "⬤ Inpatient benefit packages<br>⬤ Outpatient (Konsulta) package<br>⬤ Z benefit packages for catastrophic illnesses (cancer, kidney transplant)<br>⬤ Case rate payment system" }
   ]
 },
-      prepartum: {
+       prepartum: {
   isOverview: true,
   title: "Prepartum Care",
   tagline: "Pangangalaga sa Buntis Bago Manganak",
@@ -4388,13 +4262,14 @@ if (topic.isOverview && topic.laws) {
     let faqHtml = '';
     if (topic.faqs) {
       topic.faqs.forEach((q, idx) => {
+        const answerClass = (idx === 2) ? 'faq-answer custom-glass-answer' : 'faq-answer';
         faqHtml += `
           <div class="faq-row glass-card">
             <div class="faq-top-row">
               <span class="faq-question">${q.question}</span>
               <button class="pill-btn faq-toggle-btn" data-faq-index="${idx}">See more. <span class="arrow-icon">→</span></button>
             </div>
-            <div class="faq-answer" id="faqAnswer${idx}">${q.answer ? `<p>${q.answer}</p>` : '<p>Mahalagang impormasyon.</p>'}</div>
+            <div class="${answerClass}" id="faqAnswer${idx}">${q.answer ? `<p>${q.answer}</p>` : '<p>Mahalagang impormasyon.</p>'}</div>
           </div>`;
       });
     }
@@ -4469,20 +4344,16 @@ if (topic.isOverview && topic.laws) {
         const subDetail = document.getElementById('subDetailView');
         subDetail.innerHTML = `
           <button class="back-button" id="subBackBtn">← Bumalik</button>
-          <div class="sub-hero" style="background-image:url('${data.image}');">
-            <div class="sub-hero-overlay"></div>
-            <h1 class="sub-hero-title">${data.title.replace(/\n/g, '<br>')}</h1>
+          <div class="glass-card" style="text-align: left; padding: 18px 16px; border-radius: 20px;">
+            <h2 style="font-size: 2rem; font-weight: bold; margin: 0; color: #ffffff;">${data.title.replace(/\n/g, '<br>')}</h2>
           </div>
-          <div class="sub-content">${data.detail || `<p>Karagdagang impormasyon tungkol sa ${data.title.replace(/\n/g, ' ')}.</p>`}</div>
+          <div class="sub-content">${data.detail || `<p>Karagdagang impormasyon...</p>`}</div>
         `;
         subDetail.style.display = 'block';
-        document.querySelector('.detail-hero').style.display = 'none';
         document.querySelector('.faq-section').style.display = 'none';
         document.querySelector('.info-section').style.display = 'none';
-        document.getElementById('descriptionCard').style.display = 'none';
         document.getElementById('subBackBtn').addEventListener('click', () => {
           subDetail.style.display = 'none';
-          document.querySelector('.detail-hero').style.display = '';
           document.querySelector('.faq-section').style.display = '';
           document.querySelector('.info-section').style.display = '';
         });

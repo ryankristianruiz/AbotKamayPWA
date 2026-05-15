@@ -35,6 +35,7 @@
     z-index: 2;
   }
   #appContainer { display: block; }
+  
 
   /* ---------- HEADER (premium glass) ---------- */
   .app-header {
@@ -53,6 +54,11 @@
     z-index: 10;
     border-bottom: 1px solid rgba(255, 255, 255, 0.3);
     overflow: hidden;
+      box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 4px rgba(255, 255, 255, 0.4); /* add this line */
   }
   .app-header::before {
     content: '';
@@ -106,6 +112,11 @@
     white-space: nowrap;
     scrollbar-width: none;
     position: relative;
+      box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
   }
   .tab-bar::before {
     content: '';
@@ -1320,7 +1331,133 @@
         font-size: 0.55rem !important;
     }
 }
+/* Mobile: show bottom nav, hide top tab-bar */
+@media (max-width: 600px) {
+  .tab-bar {
+    display: none;
+  }
+  .bottom-nav {
+    display: block;
+  }
+  body {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  }
+}
+/* ---------- BOTTOM NAVIGATION (default hidden) ---------- */
+.bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  height: 70px;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  backdrop-filter: blur(64px) saturate(180%);
+  background: rgba(31, 0, 58, 0.80);
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
 
+/* ---------- BOTTOM NAV INNER LAYOUT ---------- */
+.bottom-nav-inner {
+  display: flex;
+  align-items: stretch;
+  height: 100%;
+}
+
+.bottom-nav-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.6rem;
+  font-weight: 500;
+  gap: 3px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+}
+
+.bottom-nav-btn svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2;
+}
+
+.bottom-nav-btn.active {
+  color: #ffffff;
+}
+
+.bottom-nav-btn.active svg {
+  stroke: #cf90ff;
+  filter: drop-shadow(0 0 6px rgba(207, 144, 255, 0.6));
+}
+
+.bottom-nav-center {
+  flex: 0 0 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: -22px;
+}
+
+.bottom-nav-center-btn {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #9B30FF 0%, #6A0DAD 100%);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 20px rgba(155, 48, 255, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 0.55rem;
+  font-weight: 700;
+  gap: 2px;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+}
+
+.bottom-nav-center-btn svg {
+  width: 24px;
+  height: 24px;
+  fill: white;
+  stroke: none;
+}
+
+.bottom-nav-center-btn span {
+  font-size: 0.55rem;
+  font-weight: 700;
+}
+
+.bottom-nav-center-btn.active {
+  box-shadow: 0 4px 28px rgba(207, 144, 255, 0.8), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ==================================================
+   MOBILE – show bottom nav, hide top tab-bar
+   (must come AFTER the general .bottom-nav rule)
+   ================================================== */
+@media (max-width: 600px) {
+  .tab-bar {
+    display: none;
+  }
+  .bottom-nav {
+    display: block;
+  }
+  body {
+    padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px));
+  }
+}
   /* ====================================================
      EXTRA NARROW (max-width: 360px) – stack full layout
      ==================================================== */
@@ -1393,12 +1530,164 @@
 .rhu-scrollable::-webkit-scrollbar {
   display: none;
 }
+/* Purple glass effect for all pill buttons in disease detail pages */
+.pill-btn,
+.pill-btn.mini {
+  background: rgba(155, 48, 255, 0.25) !important;
+  backdrop-filter: blur(16px) !important;
+  border: 1px solid rgba(155, 48, 255, 0.6) !important;
+  box-shadow: 0 0 8px rgba(155, 48, 255, 0.3) !important;
+  transition: all 0.2s ease;
+}
+.pill-btn:hover,
+.pill-btn.mini:hover {
+  background: rgba(155, 48, 255, 0.4) !important;
+  border-color: rgba(200, 100, 255, 0.8) !important;
+  box-shadow: 0 0 12px rgba(155, 48, 255, 0.5) !important;
+}
+/* RHU Services redesign */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(31, 0, 58, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 30px;
+  padding: 10px 16px;
+}
+.search-bar input {
+  background: none;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 0.9rem;
+  width: 100%;
+}
+.search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.rhu-hero-banner {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-bottom: 16px;
+  min-height: 140px;
+  background: linear-gradient(135deg, #5c0fa0 0%, #8b2be2 100%);
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  gap: 16px;
+}
+.rhu-hero-icon {
+  flex-shrink: 0;
+}
+.rhu-hero-text h2 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: 2px;
+}
+.rhu-location {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.85);
+}
+.rhu-nearest {
+  font-size: 0.7rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.7);
+}
+.toggle-switch {
+  width: 40px;
+  height: 20px;
+  background: rgba(255,255,255,0.3);
+  border-radius: 999px;
+  position: relative;
+  cursor: pointer;
+  border: 1px solid rgba(255,255,255,0.4);
+}
+.toggle-switch .toggle-knob {
+  width: 16px;
+  height: 16px;
+  background: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 2px;
+  transition: left 0.2s;
+}
+.toggle-switch.active .toggle-knob {
+  left: 22px;
+}
+.toggle-switch.active {
+  background: #cf90ff;
+}
+.rhu-section-label {
+  text-align: right;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  margin-bottom: 10px;
+}
+.rhu-services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.rhu-service-card {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  aspect-ratio: 1 / 1.05;
+  background-size: cover;
+  background-position: center;
+  cursor: pointer;
+  background: linear-gradient(135deg, #4B0082, #9B30FF); /* fallback */
+}
+.rhu-service-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(20,0,50,0.1) 0%, rgba(20,0,50,0.65) 100%);
+  pointer-events: none;
+}
+.rhu-service-card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px 12px 14px;
+  z-index: 2;
+}
+.rhu-service-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: white;
+  line-height: 1.2;
+  text-shadow: 0 1px 6px rgba(0,0,0,0.7);
+  margin-bottom: 8px;
+}
+.rhu-see-more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 999px;
+  padding: 4px 10px 4px 12px;
+  font-size: 0.7rem;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
 </style>
 </head>
 <body>
 
     <!-- Background image -->
-    <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/landscape.jpg"
+    <img src= "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/new%20bg.png"
         style="position:fixed;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:0;"
         alt="" />
 
@@ -1563,19 +1852,20 @@ The app aims to improve access to localize health information, enhance health wo
         </div>
 
         <!-- Recently Viewed Card -->
-        <div id="recentlyViewedCard" class="card" style="display:none; padding:10px 14px; overflow:hidden; position:relative; margin-bottom: 18px;">
-          <div style="position:relative; z-index:1; display:flex; align-items:center; gap:12px;">
-            <!-- Thumbnail image on the left -->
-            <img id="recentThumbImg" src="" style="width:48px; height:48px; border-radius:12px; object-fit:cover; flex-shrink:0;">
-
-            <!-- Text + button column -->
-            <div style="flex:1; min-width:0;">
-              <div style="font-size:0.7rem; color:rgba(255,255,255,0.55); text-transform:uppercase; letter-spacing:1px; margin-bottom:2px;">Kamakailang Tiningnan</div>
-              <div id="recentTitle" style="font-weight:700; font-size:1.3rem; line-height:1.3; margin-bottom:6px; word-break:break-word;"></div>
-              <button id="recentContinueBtn" class="pill-btn" style="font-size:0.8rem; align-self:flex-start;">Ipagpatuloy <span class="arrow-icon">→</span></button>
-            </div>
-          </div>
-        </div>
+<!-- Recently Viewed – Hero Card (full width) -->
+<div id="recentlyViewedCard" style="display: none; margin-bottom: 18px;">
+  <div class="rv-label" style="font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.85); margin-bottom: 8px; letter-spacing: 0.5px;">Kamakailang Tiningnan</div>
+  <div class="card" style="padding: 0; overflow: hidden; position: relative;">
+    <img id="recentThumbImg" src="" style="width: 100%; height: 200px; object-fit: cover; display: block;">
+    <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(31, 0, 58, 0.7); backdrop-filter: blur(10px); padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
+      <div style="flex: 1;">
+        <div id="recentTitle" style="font-weight: 700; font-size: 1rem; color: white; margin-bottom: 2px;"></div>
+        <div style="font-size: 0.75rem; color: rgba(255,255,255,0.65);">1-sentence description</div>
+      </div>
+      <button id="recentContinueBtn" class="pill-btn" style="font-size: 0.75rem; white-space: nowrap; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 6px 12px 6px 14px;">Ipagpatuloy <span class="arrow-icon">→</span></button>
+    </div>
+  </div>
+</div>
 
         <!-- Category slider (big buttons) — make sure overflow: visible on the card -->
         <div class="card" style="padding:12px; overflow: visible;">
@@ -1620,155 +1910,353 @@ The app aims to improve access to localize health information, enhance health wo
     </div>
 
     <!-- RHU SERVICES TAB -->
-    <div id="rhu" class="tab-content">
+<div id="rhu" class="tab-content">
+  <!-- Search Bar (pill-shaped) -->
+  <div class="search-bar" style="margin-bottom: 16px;">
+    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" placeholder="Search Your RHU" id="rhuSearchInput">
+  </div>
+
+  <!-- Hero Banner (gradient) -->
+  <div class="rhu-hero-banner">
+    <div class="rhu-hero-icon">
+      <img src="logo.png" alt="Logo" style="width: 90px; height: auto; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.4));">
+    </div>
+    <div class="rhu-hero-text">
+      <h2>RHU Services</h2>
+      <div class="rhu-location">Barangay Magsaysay, Iloilo City</div>
+      <div class="rhu-nearest">Nearest near me</div>
+    </div>
+  </div>
+
+  <!-- Description Toggle (pill with switch) -->
+  <div class="rhu-desc-toggle" style="display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin-bottom: 16px;">
+    <span>Description</span>
+    <div class="toggle-switch" id="descToggle">
+      <div class="toggle-knob"></div>
+    </div>
+  </div>
+  <div id="rhuDescriptionCard" class="card" style="display: none;">
+    <p>Ang mga serbisyong pangkalusugan na maaaring makuha sa Rural Health Unit (RHU) ay sumasaklaw sa iba't ibang pangangailangan ng komunidad.</p>
+  </div>
+
+  <!-- "MGA SERBISYO" label -->
+  <div class="rhu-section-label">MGA SERBISYO</div>
+
+  <!-- Services Grid (2 columns, 8 cards) -->
+  <div class="rhu-services-grid" id="rhuServicesGrid">
+    <!-- 8 cards will be generated dynamically by JS to keep URLs consistent -->
+    <!-- But we'll build them statically for simplicity – then hide/show grid vs detail -->
+    <div class="rhu-service-card" data-service="maternal">
+      <div class="rhu-service-card-body">
+        <div class="rhu-service-title">Maternal &amp; Child</div>
+        <button class="rhu-see-more-btn">See more. <span class="arrow-icon">→</span></button>
+      </div>
+    </div>
+    <div class="rhu-service-card" data-service="reproductive">
+      <div class="rhu-service-card-body">
+        <div class="rhu-service-title">Reproductive Health</div>
+        <button class="rhu-see-more-btn">See more. <span class="arrow-icon">→</span></button>
+      </div>
+    </div>
+    <div class="rhu-service-card" data-service="lab">
+      <div class="rhu-service-card-body">
+        <div class="rhu-service-title">Laboratory &amp; Diagnostics</div>
+        <button class="rhu-see-more-btn">See more. <span class="arrow-icon">→</span></button>
+      </div>
+    </div>
+    <div class="rhu-service-card" data-service="disease">
+      <div class="rhu-service-card-body">
+        <div class="rhu-service-title">NCD/CD Control</div>
+        <button class="rhu-see-more-btn">See more. <span class="arrow-icon">→</span></button>
+      </div>
+    </div>
+    <div class="rhu-service-card" data-service="environment">
+      <div class="rhu-service-card-body">
+        <div class="rhu-service-title">EHS</div>
+        <button class="rhu-see-more-btn">See more. <span class="arrow-icon">→</span></button>
+      </div>
+    </div>
+    <div class="rhu-service-card" data-service="dental">
+      <div class="rhu-service-card-body">
+        <div class="rhu-service-title">Dental</div>
+        <button class="rhu-see-more-btn">See more. <span class="arrow-icon">→</span></button>
+      </div>
+    </div>
+    <div class="rhu-service-card" data-service="other">
+      <div class="rhu-service-card-body">
+        <div class="rhu-service-title">ATBP</div>
+        <button class="rhu-see-more-btn">See more. <span class="arrow-icon">→</span></button>
+      </div>
+    </div>
+    <div class="rhu-service-card" data-service="medicine">
+      <div class="rhu-service-card-body">
+        <div class="rhu-service-title">Medicine Inventory</div>
+        <button class="rhu-see-more-btn">See more. <span class="arrow-icon">→</span></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail Panel (hidden initially) -->
+  <div id="rhuDetailPanel" style="display: none;">
+    <button class="back-button" id="rhuBackBtn">← Bumalik</button>
+    <div class="card" style="padding: 8px;">
+      <div class="rhu-scrollable">
+        <button class="btn-outline rhu-subtab active" data-rhu-tab="maternal">Maternal &amp; Child</button>
+        <button class="btn-outline rhu-subtab" data-rhu-tab="reproductive">Reproductive Health</button>
+        <button class="btn-outline rhu-subtab" data-rhu-tab="lab">Lab &amp; Diagnostics</button>
+        <button class="btn-outline rhu-subtab" data-rhu-tab="disease">Disease Control</button>
+        <button class="btn-outline rhu-subtab" data-rhu-tab="environment">Environment &amp; Sanitation</button>
+        <button class="btn-outline rhu-subtab" data-rhu-tab="dental">Dental</button>
+        <button class="btn-outline rhu-subtab" data-rhu-tab="other">Iba Pang Serbisyo</button>
+        <button class="btn-outline rhu-subtab" data-rhu-tab="medicine">Medicine Inventory</button>
+      </div>
+    </div>
+    <div id="rhu-dynamic" class="rhu-pane" style="display:block;"></div>
+    <div id="rhu-medicine" class="rhu-pane" style="display:none;">
+      <div id="inventoryWarningCard" class="card" style="display: none; background: rgba(204,0,0,0.18); border: 1.5px solid rgba(255,80,80,0.55); backdrop-filter: blur(16px);">
+        <h3 style="color: #ff8080; margin-top:0;">⚠️ Babala: Hindi pa na-update ang imbentaryo!</h3>
+        <p style="color: rgba(255,180,180,0.9); font-weight: bold;">Ang listahan ng gamot ay mahigit 30 araw nang hindi nai-edit. Mangyaring i-check at i-update agad ang stock.</p>
+      </div>
+      <div id="lowStockSummary" class="low-stock-summary" style="display: none;"></div>
       <div class="card">
-        <h2>Barangay RHU Services</h2>
-        <p>Ang mga serbisyong pangkalusugan na maaaring makuha sa Rural Health Unit (RHU) ay sumasaklaw sa iba't ibang pangangailangan ng komunidad.</p>
-      </div>
-
-      <div class="card" style="padding: 8px;">
-        <div class="rhu-scrollable">
-          <button class="btn-outline rhu-subtab active" data-rhu-tab="maternal">Maternal &amp; Child</button>
-          <button class="btn-outline rhu-subtab" data-rhu-tab="reproductive">Reproductive Health</button>
-          <button class="btn-outline rhu-subtab" data-rhu-tab="lab">Lab &amp; Diagnostics</button>
-          <button class="btn-outline rhu-subtab" data-rhu-tab="disease">Disease Control</button>
-          <button class="btn-outline rhu-subtab" data-rhu-tab="environment">Environment &amp; Sanitation</button>
-          <button class="btn-outline rhu-subtab" data-rhu-tab="dental">Dental</button>
-          <button class="btn-outline rhu-subtab" data-rhu-tab="other">Iba Pang Serbisyo</button>
-          <button class="btn-outline rhu-subtab" data-rhu-tab="medicine">Medicine Inventory</button>
-        </div>
-      </div>
-
-      <div id="rhu-dynamic" class="rhu-pane" style="display:block;"></div>
-
-      <div id="rhu-medicine" class="rhu-pane" style="display:none;">
-        <div id="inventoryWarningCard" class="card" style="display: none; background: rgba(204,0,0,0.18); border: 1.5px solid rgba(255,80,80,0.55); backdrop-filter: blur(16px);">
-          <h3 style="color: #ff8080; margin-top:0;">⚠️ Babala: Hindi pa na-update ang imbentaryo!</h3>
-          <p style="color: rgba(255,180,180,0.9); font-weight: bold;">Ang listahan ng gamot ay mahigit 30 araw nang hindi nai-edit. Mangyaring i-check at i-update agad ang stock.</p>
-        </div>
-
-        <div id="lowStockSummary" class="low-stock-summary" style="display: none;"></div>
-
-        <div class="card">
-          <h3>Medicine Inventory</h3>
-          <div id="medicineContainer"><p>Loading inventory...</p></div>
-          <div style="margin-top:12px; display: flex; align-items: center; gap: 8px;">
-            <span style="font-size:0.8rem;" id="inventoryUpdatedLabel">Huling update:</span>
-            <span style="font-size:0.8rem; font-weight:500;" id="inventoryUpdatedDate"></span>
-            <button class="btn-outline" id="editInventoryDateBtn" style="display: none; padding: 4px 10px; width: auto; font-size:0.75rem;">Edit</button>
-          </div>
+        <h3>Medicine Inventory</h3>
+        <div id="medicineContainer"><p>Loading inventory...</p></div>
+        <div style="margin-top:12px; display: flex; align-items: center; gap: 8px;">
+          <span style="font-size:0.8rem;" id="inventoryUpdatedLabel">Huling update:</span>
+          <span style="font-size:0.8rem; font-weight:500;" id="inventoryUpdatedDate"></span>
+          <button class="btn-outline" id="editInventoryDateBtn" style="display: none; padding: 4px 10px; width: auto; font-size:0.75rem;">Edit</button>
         </div>
       </div>
     </div>
+  </div>
+</div>
 
 <div id="emergency" class="tab-content">
-  <!-- National 911 Hotline – restyled to match glass theme -->
-  <div class="card" style="background: rgba(31, 0, 58, 0.55); backdrop-filter: blur(5px); border-left: 4px solid #cf90ff;">
-    <h2>Emergency Numbers</h2>
+  <!-- National 911 Hotline -->
+  <div class="card" style="background: rgba(31, 0, 58, 0.55); backdrop-filter: blur(5px); border-left: 4px solid #cf90ff; font-size: 0.85rem;">
+    <h2 style="font-size:1.1rem;">Emergency Numbers</h2>
     <div style="margin-bottom: 12px;">
-      <p style="font-size: 1.8rem; margin-bottom: 0; color: #cf90ff; font-weight: bold;">911</p>
-      <p style="font-size: 0.9rem; opacity: 0.8;">National Emergency Hotline</p>
-      <button class="btn-outline save-contact-btn" data-name="National Emergency Hotline" data-phone="911" data-org="Philippine Government" style="margin-top: 8px; padding: 6px 12px; width: auto;">📇 Save to Contacts</button>
+      <p style="font-size: 1.4rem; margin-bottom: 0; color: #cf90ff; font-weight: bold;">911</p>
+      <p style="font-size: 0.8rem; opacity: 0.8;">National Emergency Hotline</p>
+      <button class="btn-outline save-contact-btn" data-name="National Emergency Hotline" data-phone="911" data-org="Philippine Government" style="margin-top: 8px; padding: 4px 10px; width: auto; font-size: 0.75rem;">Save to Contacts</button>
     </div>
-    <ul class="contact-list" style="list-style: none; padding: 0;">
+    <ul class="contact-list" style="list-style: none; padding: 0; font-size: 0.85rem;">
       <li style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
         <span><strong>BFP (Bureau of Fire Protection)</strong> : 161</span>
-        <button class="btn-outline save-contact-btn" data-name="BFP Philippines" data-phone="161" data-org="Bureau of Fire Protection" style="padding: 4px 12px; width: auto;">📇 Save</button>
+        <button class="btn-outline save-contact-btn" data-name="BFP Philippines" data-phone="161" data-org="Bureau of Fire Protection" style="padding: 3px 8px; width: auto; font-size: 0.7rem;">Save</button>
       </li>
       <li style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
         <span><strong>PNP (Philippine National Police)</strong> : 117</span>
-        <button class="btn-outline save-contact-btn" data-name="PNP Philippines" data-phone="117" data-org="Philippine National Police" style="padding: 4px 12px; width: auto;">📇 Save</button>
+        <button class="btn-outline save-contact-btn" data-name="PNP Philippines" data-phone="117" data-org="Philippine National Police" style="padding: 3px 8px; width: auto; font-size: 0.7rem;">Save</button>
       </li>
     </ul>
   </div>
 
   <!-- Iloilo City Emergency Operations Center -->
-  <div class="card">
-    <h3>🏥 Iloilo City Emergency Operations Center</h3>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 10px;">
-      <div><strong>CDRRMO ICER/USAR</strong><br>0919 066 1554 / (033) 339 7171<br>(033) 333 2333 / (033) 335 1554</div>
-      <div><strong>Iloilo City Operations Center</strong><br>0919 066 2333</div>
-      <div><strong>BFP Search & Rescue</strong><br>0966 052 0061 / (033) 337 3011</div>
-      <div><strong>Iloilo City Police Office</strong><br>0998 598 6241 / (033) 335 0299</div>
-      <div><strong>Philippine Red Cross Iloilo</strong><br>0917 117 0066</div>
-      <div><strong>FEDFIRE</strong><br>(033) 337 9760</div>
-      <div><strong>ICAG</strong><br>(033) 337 5931</div>
-      <div><strong>ICTTMO</strong><br>(033) 339 1127</div>
+  <div class="card" style="font-size: 0.85rem;">
+    <h3 style="font-size:1rem;">Iloilo City Emergency Operations Center</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px; margin-top: 8px;">
+      <div>
+        <strong>CDRRMO ICER/USAR</strong><br>0919 066 1554 / (033) 339 7171<br>(033) 333 2333 / (033) 335 1554
+        <br><button class="btn-outline save-contact-btn" data-name="CDRRMO ICER/USAR" data-phone="0919 066 1554" data-org="Iloilo City Emergency Operations Center" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Iloilo City Operations Center</strong><br>0919 066 2333
+        <br><button class="btn-outline save-contact-btn" data-name="Iloilo City Operations Center" data-phone="0919 066 2333" data-org="Iloilo City Emergency Operations Center" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>BFP Search & Rescue</strong><br>0966 052 0061 / (033) 337 3011
+        <br><button class="btn-outline save-contact-btn" data-name="BFP Search & Rescue" data-phone="0966 052 0061" data-org="BFP Iloilo City" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Iloilo City Police Office</strong><br>0998 598 6241 / (033) 335 0299
+        <br><button class="btn-outline save-contact-btn" data-name="Iloilo City Police Office" data-phone="0998 598 6241" data-org="ICPO" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Philippine Red Cross Iloilo</strong><br>0917 117 0066
+        <br><button class="btn-outline save-contact-btn" data-name="Philippine Red Cross Iloilo" data-phone="0917 117 0066" data-org="Philippine Red Cross" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>FEDFIRE</strong><br>(033) 337 9760
+        <br><button class="btn-outline save-contact-btn" data-name="FEDFIRE" data-phone="(033) 337 9760" data-org="FEDFIRE Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>ICAG</strong><br>(033) 337 5931
+        <br><button class="btn-outline save-contact-btn" data-name="ICAG" data-phone="(033) 337 5931" data-org="ICAG" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>ICTTMO</strong><br>(033) 339 1127
+        <br><button class="btn-outline save-contact-btn" data-name="ICTTMO" data-phone="(033) 339 1127" data-org="ICTTMO" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
     </div>
   </div>
 
   <!-- Hospitals -->
-  <div class="card">
-    <h3>🏥 Hospitals</h3>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px;">
-      <div><strong>WVMC (Provincial)</strong><br>(033) 320 2431</div>
-      <div><strong>WVSUMC (Don Benito)</strong><br>(033) 320 2431</div>
-      <div><strong>St. Paul's Hospital</strong><br>(033) 337 2741 to 49</div>
-      <div><strong>Iloilo Doctor's Hospital</strong><br>(033) 337 7702</div>
-      <div><strong>Metro Iloilo Hospital & Medical Center</strong><br>(033) 327 1527</div>
-      <div><strong>Healthway Qualimed Hospital</strong><br>(033) 500 4000</div>
-      <div><strong>The Medical City</strong><br>(033) 500 4000</div>
-      <div><strong>Iloilo Mission Hospital</strong><br>(033) 339 7340 / 500 1000</div>
-      <div><strong>Asia Pacific Medical Center</strong><br>(033) 320 0315 to 19</div>
-      <div><strong>Medicus Medical Center</strong><br>(033) 339 9991 / (033) 328 7777</div>
+  <div class="card" style="font-size: 0.85rem;">
+    <h3 style="font-size:1rem;">Hospitals</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px;">
+      <div>
+        <strong>WVMC (Provincial)</strong><br>(033) 320 2431
+        <br><button class="btn-outline save-contact-btn" data-name="WVMC (Provincial)" data-phone="(033) 320 2431" data-org="Hospital" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>WVSUMC (Don Benito)</strong><br>(033) 320 2431
+        <br><button class="btn-outline save-contact-btn" data-name="WVSUMC (Don Benito)" data-phone="(033) 320 2431" data-org="Hospital" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>St. Paul's Hospital</strong><br>(033) 337 2741 to 49
+        <br><button class="btn-outline save-contact-btn" data-name="St. Paul's Hospital" data-phone="(033) 337 2741" data-org="Hospital" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Iloilo Doctor's Hospital</strong><br>(033) 337 7702
+        <br><button class="btn-outline save-contact-btn" data-name="Iloilo Doctor's Hospital" data-phone="(033) 337 7702" data-org="Hospital" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Metro Iloilo Hospital & Medical Center</strong><br>(033) 327 1527
+        <br><button class="btn-outline save-contact-btn" data-name="Metro Iloilo Hospital & Medical Center" data-phone="(033) 327 1527" data-org="Hospital" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Healthway Qualimed Hospital</strong><br>(033) 500 4000
+        <br><button class="btn-outline save-contact-btn" data-name="Healthway Qualimed Hospital" data-phone="(033) 500 4000" data-org="Hospital" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>The Medical City</strong><br>(033) 500 4000
+        <br><button class="btn-outline save-contact-btn" data-name="The Medical City Iloilo" data-phone="(033) 500 4000" data-org="Hospital" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Iloilo Mission Hospital</strong><br>(033) 339 7340 / 500 1000
+        <br><button class="btn-outline save-contact-btn" data-name="Iloilo Mission Hospital" data-phone="(033) 339 7340" data-org="Hospital" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Asia Pacific Medical Center</strong><br>(033) 320 0315 to 19
+        <br><button class="btn-outline save-contact-btn" data-name="Asia Pacific Medical Center" data-phone="(033) 320 0315" data-org="Hospital" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Medicus Medical Center</strong><br>(033) 339 9991 / (033) 328 7777
+        <br><button class="btn-outline save-contact-btn" data-name="Medicus Medical Center" data-phone="(033) 339 9991" data-org="Hospital" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
     </div>
   </div>
 
   <!-- Police Stations -->
-  <div class="card">
-    <h3>👮 Police Stations (ICPO)</h3>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;">
-      <div><strong>PS2 La Paz</strong><br>0998 598 6244</div>
-      <div><strong>PS3 Ungka</strong><br>0998 598 6246</div>
-      <div><strong>PS4 Molo</strong><br>0998 598 6248</div>
-      <div><strong>PSS Mandurriao</strong><br>0998 598 6250</div>
-      <div><strong>PS6 Arevalo</strong><br>0998 598 6252</div>
-      <div><strong>PS7 Tanza</strong><br>0947 996 6568</div>
-      <div><strong>PS8 Bo. Obrero</strong><br>0908 689 6098</div>
-      <div><strong>PS9 MH Del Pilar</strong><br>0908 322 8457</div>
-      <div><strong>PS10 Icare Gaisano</strong><br>0968 893 2529</div>
+  <div class="card" style="font-size: 0.85rem;">
+    <h3 style="font-size:1rem;">Police Stations (ICPO)</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px;">
+      <div>
+        <strong>PS2 La Paz</strong><br>0998 598 6244
+        <br><button class="btn-outline save-contact-btn" data-name="PS2 La Paz" data-phone="0998 598 6244" data-org="ICPO" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>PS3 Ungka</strong><br>0998 598 6246
+        <br><button class="btn-outline save-contact-btn" data-name="PS3 Ungka" data-phone="0998 598 6246" data-org="ICPO" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>PS4 Molo</strong><br>0998 598 6248
+        <br><button class="btn-outline save-contact-btn" data-name="PS4 Molo" data-phone="0998 598 6248" data-org="ICPO" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>PSS Mandurriao</strong><br>0998 598 6250
+        <br><button class="btn-outline save-contact-btn" data-name="PSS Mandurriao" data-phone="0998 598 6250" data-org="ICPO" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>PS6 Arevalo</strong><br>0998 598 6252
+        <br><button class="btn-outline save-contact-btn" data-name="PS6 Arevalo" data-phone="0998 598 6252" data-org="ICPO" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>PS7 Tanza</strong><br>0947 996 6568
+        <br><button class="btn-outline save-contact-btn" data-name="PS7 Tanza" data-phone="0947 996 6568" data-org="ICPO" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>PS8 Bo. Obrero</strong><br>0908 689 6098
+        <br><button class="btn-outline save-contact-btn" data-name="PS8 Bo. Obrero" data-phone="0908 689 6098" data-org="ICPO" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>PS9 MH Del Pilar</strong><br>0908 322 8457
+        <br><button class="btn-outline save-contact-btn" data-name="PS9 MH Del Pilar" data-phone="0908 322 8457" data-org="ICPO" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>PS10 Icare Gaisano</strong><br>0968 893 2529
+        <br><button class="btn-outline save-contact-btn" data-name="PS10 Icare Gaisano" data-phone="0968 893 2529" data-org="ICPO" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
     </div>
   </div>
 
   <!-- Fire Stations -->
-  <div class="card">
-    <h3>🔥 Fire Stations (BFP Iloilo)</h3>
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
-      <div><strong>Arevalo</strong><br>(033) 3211096</div>
-      <div><strong>Sto. Niño Sur</strong><br>(033) 314 7631</div>
-      <div><strong>City Proper</strong><br>(033) 337 3011 / (033) 320 3980</div>
-      <div><strong>Jaro</strong><br>(033) 500 0217</div>
-      <div><strong>La Paz</strong><br>(033) 320 6963</div>
-      <div><strong>Mandurriao</strong><br>(033) 321 0779</div>
-      <div><strong>Calumpang</strong><br>(033) 320 9658</div>
-      <div><strong>Bo. Obrero</strong><br>(033) 335 1965</div>
-      <div><strong>San Isidro</strong><br>(033) 330 1507</div>
-      <div><strong>Alta Tierra</strong><br>(033) 323 5139</div>
-      <div><strong>Molo</strong><br>(033) 336 0639</div>
-      <div><strong>Tagbak</strong><br>(033) 323 6564</div>
+  <div class="card" style="font-size: 0.85rem;">
+    <h3 style="font-size:1rem;">Fire Stations (BFP Iloilo)</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 8px;">
+      <div>
+        <strong>Arevalo</strong><br>(033) 3211096
+        <br><button class="btn-outline save-contact-btn" data-name="Arevalo Fire Station" data-phone="(033) 3211096" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Sto. Niño Sur</strong><br>(033) 314 7631
+        <br><button class="btn-outline save-contact-btn" data-name="Sto. Niño Sur Fire Station" data-phone="(033) 314 7631" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>City Proper</strong><br>(033) 337 3011 / (033) 320 3980
+        <br><button class="btn-outline save-contact-btn" data-name="City Proper Fire Station" data-phone="(033) 337 3011" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Jaro</strong><br>(033) 500 0217
+        <br><button class="btn-outline save-contact-btn" data-name="Jaro Fire Station" data-phone="(033) 500 0217" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>La Paz</strong><br>(033) 320 6963
+        <br><button class="btn-outline save-contact-btn" data-name="La Paz Fire Station" data-phone="(033) 320 6963" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Mandurriao</strong><br>(033) 321 0779
+        <br><button class="btn-outline save-contact-btn" data-name="Mandurriao Fire Station" data-phone="(033) 321 0779" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Calumpang</strong><br>(033) 320 9658
+        <br><button class="btn-outline save-contact-btn" data-name="Calumpang Fire Station" data-phone="(033) 320 9658" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Bo. Obrero</strong><br>(033) 335 1965
+        <br><button class="btn-outline save-contact-btn" data-name="Bo. Obrero Fire Station" data-phone="(033) 335 1965" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>San Isidro</strong><br>(033) 330 1507
+        <br><button class="btn-outline save-contact-btn" data-name="San Isidro Fire Station" data-phone="(033) 330 1507" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Alta Tierra</strong><br>(033) 323 5139
+        <br><button class="btn-outline save-contact-btn" data-name="Alta Tierra Fire Station" data-phone="(033) 323 5139" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Molo</strong><br>(033) 336 0639
+        <br><button class="btn-outline save-contact-btn" data-name="Molo Fire Station" data-phone="(033) 336 0639" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
+      <div>
+        <strong>Tagbak</strong><br>(033) 323 6564
+        <br><button class="btn-outline save-contact-btn" data-name="Tagbak Fire Station" data-phone="(033) 323 6564" data-org="BFP Iloilo" style="padding: 2px 6px; width: auto; margin-top: 2px; font-size: 0.7rem;">Save</button>
+      </div>
     </div>
-    <small style="display: block; margin-top: 12px; font-size: 0.7rem; opacity: 0.7;">07-2025 V.4</small>
+    <small style="display: block; margin-top: 10px; font-size: 0.65rem; opacity: 0.7;">07-2025 V.4</small>
   </div>
 
-  <!-- Local RHU / Barangay Health Worker (only once) -->
-  <div class="card">
-    <h3>👩‍⚕️ Local RHU / Barangay Health Worker</h3>
+  <!-- Local RHU / Barangay Health Worker -->
+  <div class="card" style="font-size: 0.85rem;">
+    <h3 style="font-size:1rem;">Local RHU / Barangay Health Worker</h3>
     <p>Idagdag ang inyong barangay health worker para sa mabilis na komunikasyon.</p>
     <form id="customContactForm" style="display: flex; flex-wrap: wrap; gap: 8px; align-items: flex-end;">
       <div style="flex: 2;">
         <label style="font-size: 0.8rem;">Pangalan</label>
-        <input type="text" id="contactName" placeholder="e.g., Nurse Maria" style="padding: 8px; margin: 0;">
+        <input type="text" id="contactName" placeholder="e.g., Nurse Maria" style="padding: 6px; margin: 0; font-size: 0.8rem;">
       </div>
       <div style="flex: 2;">
         <label style="font-size: 0.8rem;">Numero</label>
-        <input type="tel" id="contactPhone" placeholder="0917 123 4567" style="padding: 8px; margin: 0;">
+        <input type="tel" id="contactPhone" placeholder="0917 123 4567" style="padding: 6px; margin: 0; font-size: 0.8rem;">
       </div>
       <div style="flex: 1;">
-        <button type="button" id="saveCustomContactBtn" class="btn-outline" style="margin-top: 0; padding: 8px;">➕ I-save sa Contacts</button>
+        <button type="button" id="saveCustomContactBtn" class="btn-outline" style="margin-top: 0; padding: 6px 8px; font-size: 0.75rem;">I-save sa Contacts</button>
       </div>
     </form>
-    <small class="info-note" style="display: block; margin-top: 12px; font-size: 0.75rem; opacity: 0.8;">
-      ⓘ Pagkatapos i‑download ang file, buksan ito sa iyong telepono – kusang mag‑a‑add ito sa iyong contacts.
+    <small class="info-note" style="display: block; margin-top: 10px; font-size: 0.7rem; opacity: 0.8;">
+      Pagkatapos i-download ang file, buksan ito sa iyong telepono – kusang mag-a-add ito sa iyong contacts.
     </small>
   </div>
 </div>
@@ -1980,9 +2468,55 @@ The app aims to improve access to localize health information, enhance health wo
       </div>
     </div>
 
-    <div class="footer-note">Abot-Kamay · Batay sa Reyes et al. (2026)</div>
+    <div class="footer-note">Abot-Kamay - BSN 2C Group 2 (2026) </div>
   </div>
 </div>
+<!-- BOTTOM NAVIGATION (mobile only) -->
+<nav class="bottom-nav">
+  <div class="bottom-nav-inner">
+    <!-- 1. RHU Services -->
+    <button class="bottom-nav-btn" data-nav="rhu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2h-5v-7H9v7H4a2 2 0 0 1-2-2z"/>
+        <rect x="9" y="21" width="6" height="4" rx="1"/>
+      </svg>
+      <span>RHU Services</span>
+    </button>
+    <!-- 2. Health Education -->
+    <button class="bottom-nav-btn" data-nav="education">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+        <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+      </svg>
+      <span>Health Ed</span>
+    </button>
+    <!-- 3. HOME (center bubble) -->
+    <div class="bottom-nav-center">
+      <button class="bottom-nav-center-btn" data-nav="home">
+        <svg viewBox="0 0 24 24" fill="white" stroke="none">
+          <path d="M12 3L1 9l4 2.18v6L12 22l7-3.82v-6L23 9l-5-3.18V5h-2v1.64L12 3z"/>
+          <rect x="9" y="13" width="6" height="6" rx="1"/>
+        </svg>
+        <span>Home</span>
+      </button>
+    </div>
+    <!-- 4. Emergency -->
+    <button class="bottom-nav-btn" data-nav="emergency">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+      </svg>
+      <span>Emergency</span>
+    </button>
+    <!-- 5. Account -->
+    <button class="bottom-nav-btn" data-nav="account">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+      </svg>
+      <span>Account</span>
+    </button>
+  </div>
+</nav>
   <!-- Terms and Conditions Modal -->
 <div id="termsModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center;">
   <div class="card" style="max-width: 500px; margin: 20px; max-height: 85vh; overflow-y: auto; padding: 20px;">
@@ -2867,27 +3401,61 @@ The app aims to improve access to localize health information, enhance health wo
     document.getElementById('logoutBtn').addEventListener('click', logout);
     document.getElementById('accountLogoutBtn').addEventListener('click', logout);
 
-    // ---------- TABS ----------
-    document.querySelectorAll('.tab-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const tabId = btn.getAttribute('data-tab');
-        if (tabId === 'adminLogs' && !isAdmin()) return;
-        if ((tabId === 'records' || tabId === 'appointments') && !currentUser) return;
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-        btn.classList.add('active');
-        document.getElementById(tabId).classList.add('active');
-        if (tabId === 'adminLogs') renderAdminLogs();
-        // Reset education detail view when leaving the tab
-        if (tabId !== 'education') {
-          const mainView = document.getElementById('eduMainView');
-          const detailView = document.getElementById('eduDetailView');
-          if (mainView) mainView.classList.remove('hidden-view');
-          if (detailView) detailView.style.display = 'none';
-        }
-        resetInactivityTimer();
-      });
-    });
+// ---------- TABS (top bar) ----------
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const tabId = btn.getAttribute('data-tab');
+    if (tabId === 'adminLogs' && !isAdmin()) return;
+    if ((tabId === 'records' || tabId === 'appointments') && !currentUser) return;
+
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+
+    if (tabId === 'adminLogs') renderAdminLogs();
+
+    // Reset education detail view when leaving the tab
+    if (tabId !== 'education') {
+      const mainView = document.getElementById('eduMainView');
+      const detailView = document.getElementById('eduDetailView');
+      if (mainView) mainView.classList.remove('hidden-view');
+      if (detailView) detailView.style.display = 'none';
+    }
+
+    // ---------- Sync bottom navigation active state ----------
+    const navMap = {
+      home: 'home',
+      education: 'education',
+      rhu: 'rhu',
+      emergency: 'emergency',
+      account: 'account'
+    };
+    const navTarget = navMap[tabId];
+    if (navTarget) {
+      document.querySelectorAll('.bottom-nav-btn, .bottom-nav-center-btn').forEach(b => b.classList.remove('active'));
+      const matchingBtn = document.querySelector(
+        `.bottom-nav-btn[data-nav="${navTarget}"], .bottom-nav-center-btn[data-nav="${navTarget}"]`
+      );
+      if (matchingBtn) matchingBtn.classList.add('active');
+    }
+
+    resetInactivityTimer();
+  });
+});
+
+// ---------- BOTTOM NAVIGATION EVENT HANDLERS ----------
+// (This runs immediately, even when the top bar is hidden on mobile)
+document.querySelectorAll('.bottom-nav-btn, .bottom-nav-center-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const targetTab = btn.getAttribute('data-nav');
+    if (!targetTab) return;
+
+    // Simulate a click on the matching (hidden) top‑tab button
+    const topBtn = document.querySelector(`.tab-btn[data-tab="${targetTab}"]`);
+    if (topBtn) topBtn.click();
+  });
+});
 
     // Sub‑tabs inside RHU Services
     document.querySelectorAll('.rhu-subtab').forEach(btn => {
@@ -5156,6 +5724,73 @@ if (topic.isOverview && topic.laws) {
       // Call check on app load
       window.addEventListener('DOMContentLoaded', () => {
         checkTermsAcceptance();
+    
+    // RHU Services new UI interactions
+const rhuSearchInput = document.getElementById('rhuSearchInput');
+const rhuServicesGrid = document.getElementById('rhuServicesGrid');
+const rhuDetailPanel = document.getElementById('rhuDetailPanel');
+const rhuBackBtn = document.getElementById('rhuBackBtn');
+const descToggle = document.getElementById('descToggle');
+const rhuDescriptionCard = document.getElementById('rhuDescriptionCard');
+
+if (descToggle) {
+  descToggle.addEventListener('click', () => {
+    descToggle.classList.toggle('active');
+    if (rhuDescriptionCard) {
+      rhuDescriptionCard.style.display = descToggle.classList.contains('active') ? 'block' : 'none';
+    }
+  });
+}
+
+// Assign background images to service cards (optional URLs)
+const serviceCards = document.querySelectorAll('.rhu-service-card');
+const serviceImages = {
+  maternal: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/maternal.jpg',
+  reproductive: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/reproductive.jpg',
+  lab: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/lab.jpg',
+  disease: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/disease.jpg',
+  environment: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/environment.jpg',
+  dental: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dental.jpg',
+  other: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/other.jpg',
+  medicine: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicine-inventory.jpg'
+};
+serviceCards.forEach(card => {
+  const service = card.getAttribute('data-service');
+  if (serviceImages[service]) {
+    card.style.backgroundImage = `url(${serviceImages[service]})`;
+    card.style.backgroundSize = 'cover';
+  }
+  card.addEventListener('click', () => {
+    // Hide grid and show detail panel
+    if (rhuServicesGrid) rhuServicesGrid.style.display = 'none';
+    if (rhuDetailPanel) rhuDetailPanel.style.display = 'block';
+    // Activate the corresponding subtab
+    const subtab = document.querySelector(`.rhu-subtab[data-rhu-tab="${service}"]`);
+    if (subtab) {
+      subtab.click();
+    }
+  });
+});
+if (rhuBackBtn) {
+  rhuBackBtn.addEventListener('click', () => {
+    if (rhuServicesGrid) rhuServicesGrid.style.display = 'grid';
+    if (rhuDetailPanel) rhuDetailPanel.style.display = 'none';
+  });
+}
+// Search filter for service cards (simple)
+if (rhuSearchInput) {
+  rhuSearchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    serviceCards.forEach(card => {
+      const title = card.querySelector('.rhu-service-title')?.innerText.toLowerCase() || '';
+      if (title.includes(query)) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+}
       });
   })();
 

@@ -569,18 +569,18 @@
     background: linear-gradient(transparent 40%, rgba(0,0,0,0.6) 100%);
     pointer-events: none;
   }
-  #readMoreRow .mini-card .title { position: relative; z-index: 1; font-weight: bold; font-size: 1.1rem; }
-  #readMoreRow .mini-card .desc { position: relative; z-index: 1; font-size: 1.1rem; opacity: 0.8; }
+  #readMoreRow .mini-card .title { position: relative; z-index: 1; font-weight: bold; font-size: 0.85rem; }
+  #readMoreRow .mini-card .desc { position: relative; z-index: 1; font-size: 0.75rem; opacity: 0.8; }
   /* HEALTH ED TAB – WHITE & LARGER TEXT */
-  #education .card h3, #education .card h4, #education .card p, #education .card span,
-  #education .card button, #education .card input, #education .card div { color: #ffffff !important; }
-  #education .card h3 { font-size: 1.6rem !important; }
-  #education .card h4 { font-size: 1.2rem !important; }
-  #education .card p, #education .card button { font-size: 1.05rem !important; }
-  #education .edu-cat-btn { color: #ffffff !important; border-color: rgba(255,255,255,0.5) !important; }
-  #education .edu-cat-btn.active { background: #cf90ff; color: #130420 !important; }
-  #education #healthSearch { color: #ffffff !important; font-size: 1.05rem !important; }
-  #education #healthSearch::placeholder { color: rgba(255,255,255,0.7) !important; }
+#education .card h3, #education .card h4, #education .card p, #education .card span,
+#education .card button, #education .card input, #education .card div { color: #ffffff !important; }
+#education .card h3 { font-size: 1.2rem !important; }
+#education .card h4 { font-size: 1rem !important; }
+#education .card p, #education .card button { font-size: 0.9rem !important; }
+#education .edu-cat-btn { color: #ffffff !important; border-color: rgba(255,255,255,0.5) !important; }
+#education .edu-cat-btn.active { background: #cf90ff; color: #130420 !important; }
+#education #healthSearch { color: #ffffff !important; font-size: 0.9rem !important; }
+#education #healthSearch::placeholder { color: rgba(255,255,255,0.7) !important; }
   /* HEALTH EDUCATION – IMAGE CATEGORY GRID */
   .edu-cat-slider {
     display: flex;
@@ -634,7 +634,7 @@
     z-index: 1;
     color: #fff;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 0.7rem;
     line-height: 1.2;
     text-shadow: 0 1px 4px rgba(0,0,0,0.6);
     text-align: left;
@@ -704,36 +704,38 @@
     background-size: cover;
     background-position: center;
   }
-  .grid-card-body {
+/* Caption container – no background, positioned at top left */
+.grid-card-body {
     position: absolute;
-    bottom: 8px;
-    left: 8px;
-    right: 8px;
-    padding: 10px 12px;
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    border-radius: 14px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;                  /* cover the whole card */
+    padding: 10px;
+    background: transparent;
+    border: none;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 0;
     z-index: 3;
     display: flex;
     flex-direction: column;
-    gap: 6px;
-  }
-  .grid-card::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, transparent 60%, rgba(20,0,50,0.2));
-    border-radius: 18px;
-  }
-  .grid-card-title {
-    font-weight: 700;
-    font-size: 16px;
+    justify-content: space-between;   /* push button to bottom */
+    align-items: flex-start;          /* title stays left */
+}
+
+.grid-card::after {
+    display: none;
+}
+/* Title – plain white text with shadow for readability */
+.grid-card-title {
+    font-size: 1.15rem !important;
     line-height: 1.2;
     color: white;
-    text-shadow: 0 1px 4px rgba(0,0,0,0.8);
-  }
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+    margin: 0;
+    text-align: left;
+}
   .grid-card .pill-btn.mini {
     z-index: 2;
     font-size: 10px;
@@ -746,6 +748,9 @@
   }
   .pill-btn.mini .arrow-circle { width: 18px; height: 18px; font-size: 10px; }
 
+.grid-card-body .pill-btn.mini {
+    align-self: flex-end;   /* move button to the right */
+}
   /* Glass card (reuse) */
   .glass-card {
     background: rgba(255,255,255,0.09);
@@ -781,19 +786,20 @@
     font-size: 12px;
     font-weight: bold;
   }
-  .back-button {
-    background: var(--color-accent);
-    color: white;
+.back-button {
+    background: transparent;
+    color: rgb(255, 255, 255);
     border: none;
-    padding: 8px 20px;
-    border-radius: 40px;
-    font-weight: bold;
+    padding: 0;
+    font-weight: normal;
+    font-size: 0.85rem;
+    text-decoration: underline;
     cursor: pointer;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-  }
+    gap: 6px;
+}
 
   /* ---------- COMMUNICABLE OVERVIEW PAGE ---------- */
   .comm-overview-hero {
@@ -1148,14 +1154,14 @@
         padding: 6px;
     }
     .disease-nav-card {
-        height: 85px !important;
-    }
-    .disease-nav-card-body .d-title {
-        font-size: 9px !important;
-    }
-    .disease-nav-card-body .d-sub {
-        font-size: 7px !important;
-    }
+    height: 160px !important;       /* larger card (was 110px) */
+}
+.disease-nav-card-body .d-title {
+    font-size: 15px !important;    /* larger title (was 11px) */
+}
+.disease-nav-card-body .d-sub {
+    font-size: 10px !important;    /* slightly larger subtitle (was 8px) */
+}
     .pill-btn.mini {
         font-size: 0.5rem !important;
         padding: 2px 5px;
@@ -1531,19 +1537,21 @@
   display: none;
 }
 /* Purple glass effect for all pill buttons in disease detail pages */
+/* Buttons in disease detail pages – no outline, darker shade */
 .pill-btn,
 .pill-btn.mini {
   background: rgba(155, 48, 255, 0.25) !important;
   backdrop-filter: blur(16px) !important;
-  border: 1px solid rgba(155, 48, 255, 0.6) !important;
-  box-shadow: 0 0 8px rgba(155, 48, 255, 0.3) !important;
-  transition: all 0.2s ease;
+  border: none !important;            /* outline removed */
+  box-shadow: none !important;        /* glow removed */
+  transition: background 0.2s ease;
 }
+
 .pill-btn:hover,
 .pill-btn.mini:hover {
   background: rgba(155, 48, 255, 0.4) !important;
-  border-color: rgba(200, 100, 255, 0.8) !important;
-  box-shadow: 0 0 12px rgba(155, 48, 255, 0.5) !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 /* RHU Services redesign */
 .search-bar {
@@ -1681,6 +1689,51 @@
   color: white;
   font-weight: 600;
   cursor: pointer;
+}
+/* Keep the title card, but make it smaller so it doesn't touch the content */
+.sub-detail-view .glass-card {
+    padding: 8px 12px !important;          /* reduce inside spacing */
+    margin-bottom: 16px !important;        /* space before content text */
+    /* Do not change background, border, or backdrop – keep the glass card look */
+}
+
+/* Remove the card styling from the content text only */
+.sub-detail-view .sub-content {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    padding: 0 !important;
+    margin-top: 0 !important;
+}
+/* Sub‑detail view – make the large title smaller */
+.sub-detail-view .glass-card h2 {
+    font-size: 1.2rem !important;
+}
+
+/* Sub‑detail view – make the content text a comfortable reading size */
+.sub-detail-view .sub-content {
+    font-size: 0.9rem !important;
+    line-height: 1.6;
+}
+.sub-detail-view .sub-content img {
+    max-width: 100px !important;
+    width: auto !important;
+    height: auto !important;
+}
+/* Vibrant glass card for the new Senyales sub‑detail content */
+.vibrant-glass-card {
+    background: rgba(155, 48, 255, 0.18) !important;  /* more transparent */
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border: 1px solid rgba(200, 150, 255, 0.35);     /* softer border */
+    border-radius: 16px;
+    padding: 16px;
+    color: #fff;
+    box-shadow: none !important;                      /* glow removed */
+    width: 100%;
+    margin-top: 20px;
 }
 </style>
 </head>
@@ -4107,26 +4160,30 @@ document.querySelectorAll('.bottom-nav-btn, .bottom-nav-center-btn').forEach(btn
         ],
         gridCards: [
           { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales%2Csintomas.png", 
-              detail: `<div style="display: flex; flex-direction: column; gap: 25px;">
-                <div style="display: flex; gap: 25px; align-items: center;">
-                  <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/ubo.png" style="width: 180px; height: 180px; object-fit: cover; border-radius: 12px;">
-                  <div><strong>Ubo</strong><br>nga mas naga lawig sa 3 ka semana</div>
-                </div>
-                <div style="display: flex; gap: 25px; align-items: center;">
-                  <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/nagabuhintimbang.png" style="width: 180px; height: 180px; object-fit: cover; border-radius: 12px;">
-                  <div><strong>Nagabuhin nga timbang</strong><br>nga dawdawdaw</div>
-                </div>
-                <div style="display: flex; gap: 25px; align-items: center;">
-                  <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/mataasngatemp.jpg" style="width: 180px; height: 180px; object-fit: cover; border-radius: 12px;">
-                  <div><strong>Mataas nga temperatura</strong><br>upod sa grabe nga pagbalhas kada gab‑i</div>
-                </div>
-              </div>`
+          detail: `<div style="display: flex; flex-direction: column; gap: 25px;">
+            <div style="display: flex; gap: 25px; align-items: center;">
+              <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/ubo.png" style="width: 180px; height: 180px; object-fit: cover; border-radius: 12px;">
+              <div><strong>Ubo</strong><br>nga mas naga lawig sa 3 ka semana</div>
+            </div>
+            <div style="display: flex; gap: 25px; align-items: center;">
+              <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/nagabuhintimbang.png" style="width: 180px; height: 180px; object-fit: cover; border-radius: 12px;">
+              <div><strong>Nagabuhin nga timbang</strong><br>nga dawdawdaw</div>
+            </div>
+            <div style="display: flex; gap: 25px; align-items: center;">
+              <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/mataasngatemp.jpg" style="width: 180px; height: 180px; object-fit: cover; border-radius: 12px;">
+              <div><strong>Mataas nga temperatura</strong><br>upod sa grabe nga pagbalhas kada gab‑i</div>
+            </div>
+          </div>
+          <div class="vibrant-glass-card" style="width:100%; margin-top:20px;">
+            <strong style="font-size: 1.1rem;">Iban pigid nga mga senyales kag simtomas</strong><br><br>
+            <span style="line-height: 1.6;">May dugo sa ubo<br>Wala gana magkaon<br>Gina kapoy kag wala sing enerhiya</span>
+          </div>`
               },
           { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/epidemiology%20at%20prevalance.png", 
-          detail: `<div style="display: flex; flex-direction: column; gap: 25px;">
+          detail: `<div style="font-size: 0.85rem; line-height: 1.5;">
   <!-- First row: image left, text right -->
-  <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
-    <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/ep%26dem1.png" style="width: 45%; max-width: 300px; border-radius: 12px; flex-shrink: 0;">
+  <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; margin-bottom: 15px;">
+    <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/ep%26dem1.png" style="width: 45%; max-width: 200px; border-radius: 12px; flex-shrink: 0;">
     <div style="flex: 1;">
       <p><strong>10.7 million</strong> ka tawo ang gin estimate nga nagka TB sang 2024 ayon sa World Health Organization (WHO).</p>
       <p>Approximately <strong>1.23 million</strong> people died from TB in 2024, including 150,000 deaths among people living with HIV.</p>
@@ -4134,21 +4191,22 @@ document.querySelectorAll('.bottom-nav-btn, .bottom-nav-center-btn').forEach(btn
     </div>
   </div>
   <!-- Second row: image right, text left -->
-  <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; flex-direction: row-reverse;">
-    <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/ep%26dem2.png" style="width: 45%; max-width: 300px; border-radius: 12px; flex-shrink: 0;">
+  <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; flex-direction: row-reverse; margin-bottom: 15px;">
+    <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/ep%26dem2.png" style="width: 45%; max-width: 200px; border-radius: 12px; flex-shrink: 0;">
     <div style="flex: 1;">
       <p><strong>100,000 cases</strong> sang TB ang gina report kada tuig diri sa Pilipinas ayon sa Department of Health (DOH).</p>
       <p>The Philippines currently ranks <strong>third worldwide</strong> in terms of total TB cases as of 2025. It accounts for <strong>6.8%</strong> of the global TB burden, making it one of the eight countries that together contribute to two‑thirds of all cases globally.</p>
     </div>
   </div>
-  <!-- Third row: larger font summary with bullet points -->
-  <div style="margin-top: 10px; padding: 16px; background: rgba(255,255,255,0.05); border-radius: 16px; font-size: 1.2rem; line-height: 1.5;">
-    <p style="font-weight: bold; margin-bottom: 12px;">From January 1 to March 30, 2025 data reveals mixed trends in TB program indicators compared to the same period last year.</p>
-    <ul style="margin: 0 0 0 20px; padding-left: 0;">
-      <li>Declines were observed in chest x‑ray TB screenings (56%) and initiation of new drug‑susceptible TB (DSTB) treatment (3%).</li>
-      <li>However, positive developments were observed for TB Preventive Treatment (TPT) enrollment, which increased by 45%, and rapid TB diagnostics, almost matching last year's count (up 2%).</li>
-      <li>Incidence of TB cases decreased by 5%, reporting an overall TB incidence rate of 121.38.</li>
-    </ul>
+  <!-- Third row: summary card (vibrant glass) -->
+  <div class="vibrant-glass-card" style="width:100%; margin-top:20px;">
+    <strong style="font-size: 1rem;">Key Statistics (2024‑2025)</strong><br><br>
+    <span style="line-height: 1.6;">
+      Global cases: 10.7 million<br>
+      Philippines: 3rd highest TB burden<br>
+      TB incidence rate (PH): 121.38 per 100,000<br>
+      TB preventive treatment enrollment up 45%
+    </span>
   </div>
 </div>`},
           { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation%20period.png",detail: `<p>After infection, active TB can develop:</p>
@@ -5240,7 +5298,7 @@ if (topic.isOverview && topic.laws) {
         subDetail.innerHTML = `
           <button class="back-button" id="subBackBtn">← Bumalik</button>
           <div class="glass-card" style="text-align: left; padding: 18px 16px; border-radius: 20px;">
-            <h2 style="font-size: 2rem; font-weight: bold; margin: 0; color: #ffffff;">${data.title.replace(/\n/g, '<br>')}</h2>
+            <h2 style="font-size: 2rem; font-weight: bold; margin: 0; color: #ffffff;">${data.title.replace(/\n/g, ' ')}</h2>
           </div>
           <div class="sub-content">${data.detail || `<p>Karagdagang impormasyon...</p>`}</div>
         `;

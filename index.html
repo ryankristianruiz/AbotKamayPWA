@@ -937,7 +937,7 @@
   }
   .hero-bacteria { width: 250px; height: auto; object-fit: contain; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.55)); flex-shrink: 0; margin-left: 0; }
   .hero-text { text-align: left; z-index: 3; }
-  .hero-title { font-size: 60px; font-weight: 900; color: white; letter-spacing: -0.5px; line-height: 1; margin-bottom: 4px; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  .hero-title { font-size: 72px; font-weight: 900; color: white; letter-spacing: -0.5px; line-height: 1; margin-bottom: 4px; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
   .hero-subtitle { font-size: 13px; color: rgba(255,255,255,0.72); font-weight: 400; margin-bottom: 14px; }
   .description-card {
     margin-top: 12px;
@@ -1040,7 +1040,7 @@
     .edu-cat-slider .edu-cat-btn { width: 180px; height: 320px; }
     .detail-hero { flex-direction: column; height: auto; text-align: center; padding: 20px; }
     .hero-bacteria { width: 180px; margin-top: 10px; }
-    .hero-title { font-size: 36px; }
+    .hero-title { font-size: 48px; }
     .rhu-subtab { font-size: 0.75rem; padding: 6px 10px; }
   }
 
@@ -1142,7 +1142,7 @@
         margin-bottom: 8px;
     }
     #eduDetailView h1 {
-        font-size: 1.1rem !important;
+        font-size: 1.65rem !important;
         margin-bottom: 8px;
     }
     #eduDetailView p {
@@ -1207,7 +1207,7 @@
         flex: 1;
     }
     .hero-title {
-        font-size: 1.6rem !important;
+        font-size: 2rem !important;
         font-weight: 900 !important;
         margin-bottom: 6px;
         line-height: 1.2;
@@ -1323,10 +1323,10 @@
         height: 20px !important;
         font-size: 9px !important;
     }
-    .edu-cat-slider .edu-cat-btn {
-        flex: 0 0 115px !important;
-        height: 200px !important;
-    }
+.edu-cat-slider .edu-cat-btn {
+    flex: 0 0 180px !important;   /* wider (was 130px) */
+    height: 300px !important;      /* taller (was 240px) */
+}
     .edu-cat-label {
         font-size: 0.55rem !important;
     }
@@ -1735,6 +1735,23 @@
     width: 100%;
     margin-top: 20px;
 }
+.edu-cat-btn[data-edu="communicable"] {
+    background-position: left center !important;   /* show the left portion */
+}
+.edu-cat-btn[data-edu="communicable"] {
+    background-size: contain !important;       /* show the whole image, no cropping */
+    background-position: center !important;    /* center it */
+    background-repeat: no-repeat;              /* don't tile */
+}
+.edu-cat-btn[data-edu="communicable"] {
+    background-repeat: no-repeat !important;
+    background-size: contain !important;   /* show the whole image once */
+}
+.edu-cat-btn[data-edu="communicable"] {
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+}
 </style>
 </head>
 <body>
@@ -1923,25 +1940,25 @@ The app aims to improve access to localize health information, enhance health wo
         <!-- Category slider (big buttons) — make sure overflow: visible on the card -->
         <div class="card" style="padding:12px; overflow: visible;">
           <div class="edu-cat-slider" id="eduCatSlider">
-            <div class="edu-cat-btn active" data-edu="communicable" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/communicable-final.png');">
+            <div class="edu-cat-btn active" data-edu="communicable" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Gemini_Generated_Image_k8rab3k8rab3k8ra.png');">
               <span class="edu-cat-label">Communicable Diseases</span>
             </div>
-            <div class="edu-cat-btn" data-edu="noncommunicable" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/noncommunicable.jpg');">
+            <div class="edu-cat-btn" data-edu="noncommunicable" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/noncom-final.png');">
               <span class="edu-cat-label">Non‑Communicable Diseases</span>
             </div>
-            <div class="edu-cat-btn" data-edu="dohprograms" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg');">
+            <div class="edu-cat-btn" data-edu="dohprograms" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/DOH.png');">
               <span class="edu-cat-label">DOH Health Programs</span>
             </div>
-            <div class="edu-cat-btn" data-edu="prepartum" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg');">
+            <div class="edu-cat-btn" data-edu="prepartum" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.png');">
               <span class="edu-cat-label">Prepartum Care</span>
             </div>
-            <div class="edu-cat-btn" data-edu="postpartum" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/postpartum.jpg');">
+            <div class="edu-cat-btn" data-edu="postpartum" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/postpartum.png');">
               <span class="edu-cat-label">Postpartum Care</span>
             </div>
-            <div class="edu-cat-btn" data-edu="newborn" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg');">
+            <div class="edu-cat-btn" data-edu="newborn" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.png');">
               <span class="edu-cat-label">Newborn Care</span>
             </div>
-            <div class="edu-cat-btn" data-edu="infant" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/infant.jpg');">
+            <div class="edu-cat-btn" data-edu="infant" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/infant.png');">
               <span class="edu-cat-label">Infant Care</span>
             </div>
           </div>
@@ -4114,7 +4131,6 @@ document.querySelectorAll('.bottom-nav-btn, .bottom-nav-center-btn').forEach(btn
         { key: "tb", title: "Tuberculosis", subtitle: "Bacterial · Nakukuha sa hangin", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/tuberculosis-tb-disease.webp" },
         { key: "dengue", title: "Dengue Fever", subtitle: "Viral · Dala ng lamok", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue.jpg" },
         { key: "influenza", title: "Influenza", subtitle: "Viral · Trangkaso", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenza.jpg" },
-        { key: "covid", title: "COVID-19", subtitle: "Coronavirus · Respiratory", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/covid.jpg" },
         { key: "pneumonia", title: "Pneumonia", subtitle: "Bacterial/Viral · Impeksyon sa baga", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/pneumonia.jpg" },
         { key: "malaria", title: "Malaria", subtitle: "Parasitic · Dala ng lamok (Anopheles)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malaria.jpg" },
         { key: "leptospirosis", title: "Leptospirosis", subtitle: "Bacterial · Mula sa ihi ng hayop (daga)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/leptospirosis.jpg" },
@@ -4370,25 +4386,6 @@ document.querySelectorAll('.bottom-nav-btn, .bottom-nav-center-btn').forEach(btn
           { title: "At-Risk\nMga Grupo", image:  "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenzaatrisk.png" },
           { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Influenzaprevent.jpg" },
           { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenzamanagement.png" }
-        ]
-      },
-      covid: {
-        title: "COVID-19",
-        subtitle: "Communicable Disease · Coronavirus",
-        description: "Ang COVID-19 ay isang nakakahawang sakit na sanhi ng SARS-CoV-2 virus. Karamihan sa mga nahawaan ay makararanas ng mild to moderate respiratory illness.",
-        heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg",
-        faqs: [
-          { question: "Ano ang <strong>causative agent?</strong>", answer: "Ito ay sanhi ng <strong>SARS-CoV-2</strong>, isang novel coronavirus na unang natuklasan sa Wuhan, China noong 2019." },
-          { question: "Paano <strong>kumakalat</strong> ang COVID-19?", answer: "Pangunahing kumakalat ito sa pamamagitan ng respiratory droplets mula sa pag-ubo, pagbahin, o pakikipag-usap ng infected na tao. Maaari ring makuha sa mga kontaminadong surface." },
-          { question: "Anu-ano ang <strong>mga bakuna</strong> para dito?", answer: "Mayroong ilang aprubadong bakuna tulad ng Pfizer, Moderna (mRNA), AstraZeneca, Sinovac, at Johnson & Johnson. Lahat ay nagbibigay ng proteksyon laban sa malalang sakit." }
-        ],
-        gridCards: [
-          { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/cough.jpg" },
-          { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/malnutrition.jpg" },
-          { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/lung-xray.jpg" },
-          { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.jpg" },
-          { title: "Mga Bakuna", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg" },
-          { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg" }
         ]
       },
       pneumonia: {

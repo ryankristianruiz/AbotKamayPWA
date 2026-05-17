@@ -5101,17 +5101,336 @@ detail: `
     description: "Ang Pneumonia ay isang impeksyon sa baga na maaaring sanhi ng bacteria (Streptococcus pneumoniae), virus (influenza, RSV), o fungi. Nagdudulot ito ng pamamaga ng air sacs (alveoli) na maaaring mapuno ng likido o nana, na nagiging sanhi ng ubo na may plema, lagnat, at hirap sa paghinga.",
     heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/pneumoniahero.png",
     faqs: [
-      { question: "Ano ang <strong>causative agent?</strong>", answer: "Ang pinakakaraniwang sanhi ay ang bacterium na <strong>Streptococcus pneumoniae</strong> (pneumococcus). Maaari rin itong maging viral (e.g., respiratory syncytial virus, influenza) o fungal." },
-      { question: "Anu-ano ang <strong>mga sintomas?</strong>", answer: "Ubo na may maberde o madugong plema, lagnat na may panginginig, hirap sa paghinga, mabilis na paghinga, pananakit ng dibdib, pagod, at pagkalito (lalo na sa matatanda)." },
-      { question: "Paano <strong>maiiwasan</strong> ang Pneumonia?", answer: "Magpabakuna (pneumococcal at flu vaccine), maghugas ng kamay, iwasan ang paninigarilyo, panatilihing malinis ang hangin, at palakasin ang immune system sa pamamagitan ng masustansyang pagkain at ehersisyo." }
+      { question: "Ano ang <strong>causative agent?</strong>", 
+      answer: `
+  <div style="color: #ffffff; display: flex; flex-direction: column; gap: 24px;">
+    
+    <!-- Row 1: Bacteria – image left, text right -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/causative-pneumo%20(1).png" 
+           alt="Bacteria" 
+           style="width: 120px; max-width: 100%; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Bacteria</strong><br>
+        • Streptococcus pneumoniae<br>
+        • Haemophilus influenzae<br>
+        • Mycoplasma pneumoniae
+      </div>
+    </div>
+
+    <!-- Row 2: Virus – image right, text left -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Virus</strong><br>
+        • Influenza virus<br>
+        • Respiratory Syncytial Virus (RSV)<br>
+        • SARS-CoV-2 (COVID-19 virus)
+      </div>
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/causative-pneumo%20(2).png" 
+           alt="Virus" 
+           style="width: 120px; max-width: 100%; border-radius: 12px;">
+    </div>
+
+    <!-- Row 3: Fungi – image left, text right -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/causative-pneumo%20(3).png" 
+           alt="Fungi" 
+           style="width: 120px; max-width: 100%; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Fungi</strong><br>
+        • Pneumocystis jirovecii
+      </div>
+    </div>
+
+  </div>
+` },
+      { question: "Mga Sari", 
+      answer: `
+  <div style="color: #ffffff;">
+    <ul style="margin: 0; padding-left: 20px;">
+      <li><strong>Community-Acquired Pneumonia (CAP)</strong> – pneumonia acquired outside of healthcare settings.</li>
+      <li><strong>Hospital-Acquired Pneumonia (HAP)</strong> – pneumonia that develops 48 hours or more after hospital admission.</li>
+      <li><strong>Ventilator-Associated Pneumonia (VAP)</strong> – pneumonia that occurs in patients on mechanical ventilation.</li>
+      <li><strong>Bacterial Pneumonia</strong> – caused by bacteria such as Streptococcus pneumoniae, Haemophilus influenzae, etc.</li>
+      <li><strong>Viral Pneumonia</strong> – caused by viruses such as influenza, RSV, SARS-CoV-2, etc.</li>
+      <li><strong>Mycobacterium tuberculosis complex</strong> – includes M. tuberculosis (TB), M. bovis, and other related species.</li>
+    </ul>
+  </div>
+` },
+      { question: "Paano maglapta ang Pneumonia?", 
+      answer: `
+  <div class="vibrant-glass-card" style="padding: 16px; border-radius: 16px; color: #ffffff;">
+    <ol style="margin: 0; padding-left: 20px;">
+      <li style="margin-bottom: 12px;">Inhalation of droplets from coughing or sneezing</li>
+      <li style="margin-bottom: 12px;">Direct contact with infected respiratory secretions</li>
+      <li style="margin-bottom: 12px;">Aspiration of food, liquids, or vomit into the lungs</li>
+      <li>Spread of infection from the nose or throat to the lungs</li>
+    </ol>
+  </div>
+` }
     ],
     gridCards: [
-      { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2030.png", detail: "Ang mga sintomas ng pneumonia ay maaaring biglaan o dahan-dahang lumitaw. Kabilang dito ang: ubo na may plema, lagnat at panginginig, pagpapawis, hirap sa paghinga, mabilis na tibok ng puso, pagduduwal o pagsusuka, at pananakit ng dibdib na lumalala kapag humihinga ng malalim." },
-      { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/pneumo-ep%2Bdem.png", detail: "Ang pneumonia ay isa sa mga nangungunang sanhi ng kamatayan sa buong mundo, lalo na sa mga batang wala pang 5 taong gulang at matatanda. Sa Pilipinas, libu-libo ang naoospital taun-taon dahil sa pneumonia, partikular sa tag-ulan kung kailan mataas ang kaso ng trangkaso." },
-      { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2028.png", detail: "Ang incubation period ay depende sa causative agent: para sa bacterial pneumonia, 1-3 araw; para sa viral pneumonia, 1-4 na araw (maaaring mas maikli kung ang virus ay influenza, 18-72 oras)." },
-      { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2029.png", detail: "Ang mga may mataas na panganib: batang wala pang 2 taon, matatanda (65+), taong may malalang sakit (hika, diabetes, sakit sa puso), naninigarilyo, may mahinang immune system (HIV, chemotherapy), at mga nakaratay sa ospital." },
-      { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2021.png", detail: "May dalawang bakuna laban sa pneumococcal pneumonia: PCV13 at PPSV23. Inirerekomenda ang mga ito para sa mga bata, matatanda, at taong may malalang karamdaman. Mahalaga rin ang taunang flu vaccine dahil ang trangkaso ay maaaring mauwi sa pneumonia." },
-      { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2027%20(1).png", detail: "Ang bacterial pneumonia ay ginagamot ng antibiotics (amoxicillin, azithromycin). Ang viral pneumonia ay kadalasang ginagamot ng suportang pangangalaga: pahinga, maraming tubig, gamot sa lagnat (paracetamol). Sa malalang kaso, kailangan ng oxygen therapy o hospitalization." }
+      { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2030.png", 
+      detail: `
+  <div style="color: #ffffff; display: flex; flex-direction: column; gap: 24px;">
+    
+    <!-- Early Stage -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales-pneumo%20(1).png" 
+           alt="Early Stage" 
+           style="width: 120px; max-width: 100%; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Early Stage</strong><br>
+        Fever, Chills, Cough, Fatigue, Chest Discomfort
+      </div>
+    </div>
+
+    <!-- Progressive Stage -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales-pneumo%20(2).png" 
+           alt="Progressive Stage" 
+           style="width: 120px; max-width: 100%; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Progressive Stage</strong><br>
+        Shortness of breath, Rapid breathing (tachypnea),<br>
+        Chest pain when breathing or coughing,<br>
+        Thick phlegm or sputum,<br>
+        Wheezing or crackling sounds in lungs
+      </div>
+    </div>
+
+    <!-- Severe Stage -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/senyales-pneumo%20(3).png" 
+           alt="Severe Stage" 
+           style="width: 120px; max-width: 100%; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Severe Stage</strong><br>
+        Bluish lips or fingertips (cyanosis),<br>
+        Confusion or altered mental status,<br>
+        Severe respiratory distress,<br>
+        Low oxygen levels,<br>
+        Respiratory failure
+      </div>
+    </div>
+
+  </div>
+` },
+      { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/pneumo-ep%2Bdem.png", 
+      detail: `
+  <div style="color: #ffffff;">
+    
+    <!-- Top row: image on the right, text on the left (global stats) -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 24px;">
+      <div style="flex: 1; min-width: 200px;">
+        <p><strong>808,000</strong> children under 5 years old were killed by pneumonia worldwide in 2017, accounting for 15% of deaths among children under five.</p>
+        <p>In 2019, pneumonia caused approximately <strong>740,180 deaths</strong> among children under 5 years old globally.</p>
+      </div>
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/pneumo-epidem.png" 
+           alt="Pneumonia epidemiology" 
+           style="width: 140px; max-width: 100%; border-radius: 12px;">
+    </div>
+
+    <!-- Bottom section: Philippines data -->
+    <div>
+      <strong>Pneumonia in the Philippines (DOH Data)</strong>
+      <p>The Philippine Department of Health (DOH) identifies pneumonia as one of the most significant health burdens in the country.</p>
+      <p><strong>Leading Cause of Death:</strong> Pneumonia is the most common cause of death among Filipino children under five years old. Across all ages, it consistently ranks as the third leading cause of death in the country.</p>
+      <p><strong>Mortality Statistics (Field Health Services Information System):</strong></p>
+      <ul style="margin: 8px 0 0 20px; padding-left: 0;">
+        <li>In 2021, pneumonia claimed the lives of <strong>41,761 children</strong> under the age of 15.</li>
+        <li>Of those deaths, <strong>20,104</strong> were children aged 1 to 4 years, and <strong>10,515</strong> were infants aged 29 days to 11 months.</li>
+        <li>Recent Prevalence: In 2022, approximately <strong>31,395 Filipino children under five</strong> died from the disease, with nearly <strong>60,500 children</strong> infected during that year.</li>
+      </ul>
+    </div>
+
+  </div>
+` },
+      { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2028.png", 
+     detail: `
+  <div style="color: #ffffff;">
+    <ol style="margin: 0; padding-left: 20px;">
+      <li style="margin-bottom: 12px;">Usually ranges from <strong>1–4 days</strong> for bacterial pneumonia.</li>
+      <li>Viral pneumonia incubation may range from <strong>1–14 days</strong> depending on the virus involved.</li>
+    </ol>
+  </div>
+`},
+      { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2029.png", 
+    detail: `
+  <div style="color: #ffffff; display: flex; flex-direction: column; gap: 20px;">
+    
+    <!-- 0. Persons with HIV infection -->
+    <div style="display: flex; gap: 16px; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/atrisk-pneumo.png" 
+           alt="HIV" style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover;">
+      <div style="flex: 1;"><strong>Persons with HIV infection.</strong></div>
+    </div>
+
+    <!-- 1. Weakened immune systems -->
+    <div style="display: flex; gap: 16px; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/atrisk-pneumo%20(1).png" 
+           alt="Weakened immune" style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover;">
+      <div style="flex: 1;">People with weakened immune systems (e.g., diabetes, chronic kidney disease, silicosis, cancer, long‑term corticosteroid use).</div>
+    </div>
+
+    <!-- 2. Close contacts of TB patients -->
+    <div style="display: flex; gap: 16px; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/atrisk-pneumo%20(2).png" 
+           alt="TB contacts" style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover;">
+      <div style="flex: 1;">Household and close contacts of people with active pulmonary TB.</div>
+    </div>
+
+    <!-- 3. Healthcare workers -->
+    <div style="display: flex; gap: 16px; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/atrisk-pneumo%20(3).png" 
+           alt="Healthcare workers" style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover;">
+      <div style="flex: 1;">Health‑care workers exposed to TB patients.</div>
+    </div>
+
+    <!-- 4. Malnourished / overcrowded -->
+    <div style="display: flex; gap: 16px; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/atrisk-pneumo%20(4).png" 
+           alt="Malnourished" style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover;">
+      <div style="flex: 1;">Malnourished individuals or those living in overcrowded, poorly ventilated conditions.</div>
+    </div>
+
+    <!-- 5. Smokers / alcohol/drug users -->
+    <div style="display: flex; gap: 16px; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/atrisk-pneumo%20(5).png" 
+           alt="Smokers" style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover;">
+      <div style="flex: 1;">Smokers and people who use alcohol or drugs heavily.</div>
+    </div>
+
+    <!-- 6. Children under 5 -->
+    <div style="display: flex; gap: 16px; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/atrisk-pneumo%20(6).png" 
+           alt="Children under 5" style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover;">
+      <div style="flex: 1;">Children under 5 years (higher risk of severe and disseminated forms).</div>
+    </div>
+
+    <!-- 7. Adults over 65 -->
+    <div style="display: flex; gap: 16px; align-items: center;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/atrisk-pneumo%20(7).png" 
+           alt="Adults over 65" style="width: 70px; height: 70px; border-radius: 12px; object-fit: cover;">
+      <div style="flex: 1;">Adults over 65 years old.</div>
+    </div>
+
+  </div>
+` },
+      { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2021.png", 
+      detail: `
+  <div style="color: #ffffff; display: flex; flex-direction: column; gap: 24px;">
+    
+    <!-- Vaccine row 1 (top) – image (3) on left, text right -->
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prevention-pneumo%20(3).png" 
+           alt="Vaccine 3" style="width: 100px; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong>PCV (Pneumococcal Conjugate Vaccine)</strong><br>
+        Given during infancy under the National Immunization Program.<br>
+        • 1st dose: 6 weeks<br>
+        • 2nd dose: 10 weeks<br>
+        • 3rd dose: 14 weeks
+      </div>
+    </div>
+
+    <!-- Vaccine row 2 (middle) – image (2) on left, text right -->
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prevention-pneumo%20(2).png" 
+           alt="Vaccine 2" style="width: 100px; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong>Influenza Vaccine</strong><br>
+        Recommended yearly for:<br>
+        • Elderly adults<br>
+        • Healthcare workers<br>
+        • Children<br>
+        • People with chronic diseases
+      </div>
+    </div>
+
+    <!-- Vaccine row 3 (bottom) – image (1) on left, text right -->
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prevention-pneumo%20(1).png" 
+           alt="Vaccine 1" style="width: 100px; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong>COVID-19 Vaccine (Pfizer, etc.)</strong><br>
+        Helps reduce risk of severe viral pneumonia caused by SARS-CoV-2.
+      </div>
+    </div>
+
+    <!-- Additional content (Incubation + When to seek help) -->
+    <div>
+      <strong>Incubation Period</strong>
+      <ul style="margin: 8px 0 0 20px;">
+        <li>Usually ranges from <strong>1–4 days</strong> for bacterial pneumonia.</li>
+        <li>Viral pneumonia incubation may range from <strong>1–14 days</strong> depending on the virus involved.</li>
+      </ul>
+    </div>
+
+    <div>
+      <strong>When to Seek Medical Help</strong>
+      <ul style="margin: 8px 0 0 20px;">
+        <li>Difficulty breathing develops</li>
+        <li>Lips or fingertips become bluish</li>
+        <li>Fever is very high or persistent</li>
+        <li>Chest pain worsens</li>
+        <li>Severe cough with blood or thick sputum occurs</li>
+        <li>Confusion or drowsiness appears</li>
+        <li>Symptoms worsen despite home care</li>
+        <li>A child has fast breathing, chest indrawing, or inability to drink/feed</li>
+      </ul>
+    </div>
+
+  </div>
+` },
+      { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2027%20(1).png", 
+      detail: `
+  <div style="color: #ffffff;">
+    
+    <!-- Hygiene Practices -->
+    <div style="margin-bottom: 24px;">
+      <strong style="font-size: 1.1rem;">Hygiene Practices</strong>
+      <ul style="margin: 8px 0 0 20px; padding-left: 0;">
+        <li>Frequent handwashing with soap and water</li>
+        <li>Proper cough and sneeze etiquette</li>
+        <li>Wearing masks when sick</li>
+        <li>Avoiding close contact with infected individuals</li>
+        <li>Maintaining oral hygiene</li>
+        <li>Proper nutrition and hydration</li>
+        <li>Avoid smoking and secondhand smoke exposure</li>
+      </ul>
+    </div>
+
+    <!-- Environmental Practices -->
+    <div style="margin-bottom: 24px;">
+      <strong style="font-size: 1.1rem;">Environmental Practices</strong>
+      <ul style="margin: 8px 0 0 20px; padding-left: 0;">
+        <li>Ensure proper ventilation indoors</li>
+        <li>Reduce indoor air pollution</li>
+        <li>Avoid overcrowded living conditions</li>
+        <li>Minimize exposure to smoke and pollutants</li>
+        <li>Maintain clean surroundings</li>
+        <li>Promote smoke‑free homes and communities</li>
+      </ul>
+    </div>
+
+    <!-- Basic Treatment -->
+    <div>
+      <strong style="font-size: 1.1rem;">Basic Treatment</strong>
+      <ul style="margin: 8px 0 0 20px; padding-left: 0;">
+        <li>Antibiotics for bacterial pneumonia</li>
+        <li>Antiviral medications if viral cause is identified</li>
+        <li>Antifungal medications for fungal pneumonia</li>
+        <li>Fever reducers and pain relievers</li>
+        <li>Adequate hydration</li>
+        <li>Oxygen therapy if oxygen levels are low</li>
+        <li>Rest and nutritional support</li>
+        <li>Hospitalization for severe cases</li>
+      </ul>
+    </div>
+
+  </div>
+` }
     ]
   },
   malaria: {

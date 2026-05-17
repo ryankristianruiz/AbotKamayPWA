@@ -1,4 +1,4 @@
-const CACHE_NAME = 'abotkamay-v24';   // change to v2, v3 etc. when you push a new release
+const CACHE_NAME = 'abotkamay-v25';   // change to v2, v3 etc. when you push a new release
 const urlsToCache = [
   './',
   './index.html',

@@ -965,7 +965,7 @@
   }
   .hero-bacteria { width: 250px; height: auto; object-fit: contain; filter: drop-shadow(0 8px 24px rgba(0,0,0,0.55)); flex-shrink: 0; margin-left: 0; }
   .hero-text { text-align: left; z-index: 3; }
-  .hero-title { font-size: 72px; font-weight: 900; color: white; letter-spacing: -0.5px; line-height: 1; margin-bottom: 4px; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
+  .hero-title { font-size: 56px; font-weight: 900; color: white; letter-spacing: -0.5px; line-height: 1; margin-bottom: 4px; text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
   .hero-subtitle { font-size: 13px; color: rgba(255,255,255,0.72); font-weight: 400; margin-bottom: 14px; }
   .description-card {
     margin-top: 12px;
@@ -1235,7 +1235,7 @@
         flex: 1;
     }
     .hero-title {
-        font-size: 2rem !important;
+        font-size: 1.5rem !important;
         font-weight: 900 !important;
         margin-bottom: 6px;
         line-height: 1.2;
@@ -2048,6 +2048,30 @@
 .search-result-btn:hover {
   background: rgba(155, 48, 255, 0.4) !important;
 }
+/* Vibrant glass card for the warning text (lighter purple/pink) */
+.vibrant-glass-card-warning {
+  background: rgba(255, 180, 220, 0.25) !important;   /* soft pinkish-purple */
+  backdrop-filter: blur(14px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(160%) !important;
+  border: 1px solid rgba(255, 200, 230, 0.5) !important;
+  border-radius: 16px;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  padding: 16px;
+  margin-top: 20px;
+}
+.vibrant-glass-card-warning ul {
+  color: #ffffff;
+  margin: 8px 0 0 20px;
+}
+.vibrant-glass-card-warning strong {
+  color: #ffd6e8;
+}
+.sub-detail-view .sub-content .incubation-text,
+.sub-detail-view .sub-content div[style*="font-size"] {
+  font-size: 1.35rem !important;
+}
+
 </style>
 </head>
 <body>
@@ -4455,7 +4479,7 @@ const detailedData = {
     diseases: [
       { key: "tb", title: "Tuberculosis", subtitle: "Bacterial · Nakukuha sa hangin", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/tuberculosis-tb-disease.webp" },
       { key: "dengue", title: "Dengue Fever", subtitle: "Viral · Dala ng lamok", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue.jpg" },
-      { key: "influenza", title: "Influenza", subtitle: "Viral · Trangkaso", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenza.jpg" },
+      { key: "influenza", title: "Influenza", subtitle: "Viral · Trangkaso", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenza-finale2.jpg" },
       { key: "pneumonia", title: "Pneumonia", subtitle: "Bacterial/Viral · Impeksyon sa baga", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/5a0d636b015e2ee1af799fe8ee9b7fd8087d1aa2/bacterial-pneumonia-1.webp" },
       { key: "malaria", title: "Malaria", subtitle: "Parasitic · Dala ng lamok (Anopheles)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/b2292e812fbf6454ab21e785695121a620f3bacb/malariatitlebutton.jpg" },
       { key: "leptospirosis", title: "Leptospirosis", subtitle: "Bacterial · Mula sa ihi ng hayop (daga)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/3c70c745a5179fefa35acdc51a2159859fc8b2ac/Leptospirosis-compressed.jpg" },
@@ -4488,17 +4512,310 @@ const detailedData = {
     description: "Ang Dengue ay isang viral infection na dala ng lamok na Aedes aegypti. Nagdudulot ito ng mataas na lagnat, matinding sakit ng ulo, pananakit ng kalamnan at kasukasuan, at maaaring mauwi sa severe dengue (dengue hemorrhagic fever) kung hindi agad magamot.",
     heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Dengue-Virus-11-M-removebg-preview%201.png",
     faqs: [
-      { question: "Ano ang <strong>causative agent?</strong>", answer: "Ang Dengue ay sanhi ng <strong>Dengue virus</strong> (DENV) na may apat na serotypes (DENV-1 hanggang DENV-4). Ang pagkakaroon ng isang serotype ay hindi nagbibigay ng immunity sa iba." },
-      { question: "Anu-ano ang <strong>mga sintomas?</strong>", answer: "Biglang mataas na lagnat (40°C/104°F), matinding sakit ng ulo, sakit sa likod ng mata, pananakit ng kalamnan at kasukasuan, pagduduwal, pagsusuka, pamamaga ng mga glandula, at pantal." },
-      { question: "Paano <strong>maiwasan</strong> ang Dengue?", answer: "Gamitin ang <strong>4S strategy</strong>: Search & destroy (pukain ang lamok sa loob at labas ng bahay), Self-protection (gumamit ng mosquito repellent at magsuot ng mahabang damit), Seek early consultation (magpakonsulta agad kapag may lagnat ng 2 araw), at Say no to indiscriminate fogging (fogging lamang kapag may outbreak at sumunod sa tamang oras)." }
+      { question: "Ano ang <strong>causative agent?</strong>", 
+      answer: `<div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+  <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue_causative_agent-removebg-preview.png" 
+       alt="Dengue virus" 
+       style="width: 180px; max-width: 100%; border-radius: 12px; flex-shrink: 0;">
+  <div style="flex: 1;">
+    <div style="font-size: 1.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 8px;">Dengue viruses</div>
+    <div style="font-size: 1.1rem; color: #cf90ff;">Ang sanhi sang dengue</div>
+    <div style="margin-top: 12px;">Ang Dengue ay sanhi ng <strong>Dengue virus</strong> (DENV) na may apat na serotypes (DENV-1 hanggang DENV-4). Ang pagkakaroon ng isang serotype ay hindi nagbibigay ng immunity sa iba.</div>
+  </div>
+</div>`},
+      { question: "Mga Sari</strong>", 
+      answer: `
+  <div style="display: flex; flex-direction: column; gap: 24px;">
+    <!-- Item 1: DENV-1 -->
+    <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue-sari1.png" 
+           alt="DENV-1" style="width: 120px; max-width: 100%; border-radius: 12px; flex-shrink: 0;">
+      <div style="flex: 1;">
+        <div style="font-size: 0.9rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">Dengue Virus - 1 (DENV-1)</div>
+        <div style="font-size: 0.65rem; line-height: 1.4;">Pinakakomon sa paglapta sang balatian</div>
+      </div>
+    </div>
+    <!-- Item 2: DENV-2 -->
+    <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue-sari2.png" 
+           alt="DENV-2" style="width: 120px; max-width: 100%; border-radius: 12px; flex-shrink: 0;">
+      <div style="flex: 1;">
+        <div style="font-size: 0.9rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">Dengue Virus - 2 (DENV-2)</div>
+        <div style="font-size: 0.65rem; line-height: 1.4;">Pinakalala nga dengue virus</div>
+      </div>
+    </div>
+    <!-- Item 3: DENV-3 -->
+    <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue-sari3.png" 
+           alt="DENV-3" style="width: 120px; max-width: 100%; border-radius: 12px; flex-shrink: 0;">
+      <div style="flex: 1;">
+        <div style="font-size: 0.9rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">Dengue Virus - 3 (DENV-3)</div>
+        <div style="font-size: 0.65rem; line-height: 1.4;">Naga-angot sa malala nga epidemya</div>
+      </div>
+    </div>
+    <!-- Item 4: DENV-4 -->
+    <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengue-sari4.png" 
+           alt="DENV-4" style="width: 120px; max-width: 100%; border-radius: 12px; flex-shrink: 0;">
+      <div style="flex: 1;">
+        <div style="font-size: 0.9rem; font-weight: 800; color: #ffffff; margin-bottom: 4px;">Dengue Virus - 4 (DENV-4)</div>
+        <div style="font-size: 0.65rem; line-height: 1.4;">Indi malala pero may posible nga delikado</div>
+      </div>
+    </div>
+  </div>
+`},
+      { question: "Paano maglapta ang Dengue?", 
+      answer: `
+  <div class="vibrant-glass-card" style="padding: 16px; border-radius: 16px;">
+    <ol style="margin: 0; padding-left: 20px;">
+      <li style="margin-bottom: 12px;">Kagat sang infected nga babayi nga Aedes aegypti nga lamok</li>
+      <li style="margin-bottom: 12px;">Ang mga lamok nagaangkon sang virus pagkatapos makakagat sang tawo nga may dengue virus sa iya dugo</li>
+      <li>Ang dengue indi usual nga nagalapta direkta halin sa isa ka tawo pakadto sa iban.</li>
+    </ol>
+  </div>
+`}
     ],
     gridCards: [
-      { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2030%20(1).png", detail: "Ang mga karaniwang sintomas ng Dengue ay biglaang mataas na lagnat (umaabot ng 40°C), matinding sakit ng ulo, pananakit sa likod ng mata, pananakit ng kalamnan at kasukasuan, pagduduwal, pagsusuka, at pamamantal. Sa severe dengue, maaaring magkaroon ng pananakit ng tiyan, pagsusuka ng dugo, pagdurugo ng ilong o gilagid, at pagkahina." },
-      { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2027%20(2).png", detail: "Ang Dengue ay endemic sa higit 100 bansa, kabilang ang Pilipinas. Ayon sa DOH, libu-libong kaso ang naitatala taun-taon, lalo na sa tag-ulan (Hunyo hanggang Nobyembre). Ang mga urban at peri-urban na lugar ay may mas mataas na insidente dahil sa maraming pag-aanakan ng lamok." },
-      { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2028%20(1).png", detail: "Ang incubation period ng Dengue virus ay karaniwang 4 hanggang 10 araw pagkatapos makagat ng infected na lamok. Lumilitaw ang mga sintomas sa ika-4 hanggang ika-7 araw. Maaaring magsimula ang lagnat nang biglaan." },
-      { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2029%20(1).png", detail: "Ang sinumang nakatira sa dengue-endemic na lugar ay maaaring tamaan, ngunit mas mataas ang panganib sa mga batang 5-9 taong gulang, matatanda, buntis, at mga taong may mahinang immune system. Ang pangalawang impeksyon ng ibang serotype ay mas delikado (maaaring magdulot ng severe dengue)." },
-      { title: "Prevention\n(4S Strategy)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2021%20(1).png", detail: "Ang pinakaepektibong pag-iwas ay ang pagkontrol sa lamok: takpan ang mga lalagyan ng tubig, maglagay ng awtomatikong pagtatapon ng basura, gumamit ng insect repellent, magsuot ng mahabang damit, at mag-install ng screen sa bintana. Ang Dengvaxia vaccine ay limitado at nangangailangan ng pre-screening." },
-      { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2027%20(3).png", detail: "Walang specific na antiviral treatment para sa dengue. Ang pamamahala ay nakatuon sa pagtugon sa mga sintomas: pahinga, pag-inom ng maraming tubig o oral rehydration solution, paracetamol para sa lagnat (huwag gumamit ng aspirin o ibuprofen dahil maaaring magdulot ng pagdurugo). Kailangan ang agarang pag-ospital kung may senyales ng severe dengue." }
+      { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2030%20(1).png", 
+      detail: `
+  <!-- Three stages – fully transparent, no background -->
+  <div style="margin-bottom: 20px;">
+    <h4 style="color: #ffffff; margin-bottom: 8px;">Yugto sang Hilanat (Adlaw 1–3)</h4>
+    <ul style="margin: 0 0 20px 20px; padding-left: 0; list-style: disc;">
+      <li>Gulpi nga mataas nga hilanat</li>
+      <li>Grabe nga sakit sang ulo</li>
+      <li>Sakit sa likod sang mga mata</li>
+      <li>Sakit sa muscles kag buto</li>
+      <li>Kapoy kag kaluya</li>
+      <li>Pagsuka</li>
+      <li>Rashes sa panit</li>
+    </ul>
+
+    <h4 style="color: #ffffff; margin-bottom: 8px;">Kritikal nga Yugto (Adlaw 4–6)</h4>
+    <ul style="margin: 0 0 20px 20px; padding-left: 0; list-style: disc;">
+      <li>Grabe nga sakit sang tiyan</li>
+      <li>Padayon nga pagsuka</li>
+      <li>Pagdugo sang gums ukon ilong</li>
+      <li>Dugo sa tae ukon suka</li>
+      <li>Budlay nga pagginhawa</li>
+      <li>Grabe nga pagkabalaka ukon sobra nga kaluya</li>
+      <li>Madasig nga pagnubo sang platelet count</li>
+    </ul>
+
+    <h4 style="color: #ffffff; margin-bottom: 8px;">Yugto sang Pag-ayo</h4>
+    <ul style="margin: 0 0 20px 20px; padding-left: 0; list-style: disc;">
+      <li>Hinay-hinay nga pag-ayo sang mga sintomas</li>
+      <li>Pagbalik sang gana magkaon</li>
+      <li>Mas maayo nga pag-ihi</li>
+      <li>Ang kapoy mahimo magpadayon sa pila ka semana</li>
+    </ul>
+  </div>
+
+  <!-- Lighter purple/pink vibrant glass card for warning -->
+  <div class="vibrant-glass-card-warning" style="margin-top: 20px; padding: 16px; border-radius: 16px;">
+    <strong style="display: block; margin-bottom: 8px;">Ang malala nga dengue mahimo magresulta sa:</strong>
+    <ul style="margin: 0 0 0 20px; padding-left: 0;">
+      <li>Shock</li>
+      <li>Pag-untat sang normal nga pagtrabaho sang organs</li>
+      <li>Grabe nga pagdugo</li>
+      <li>Kamatayon kung indi maayo</li>
+    </ul>
+  </div>
+`},
+      { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2027%20(2).png", 
+      detail: `
+<!-- Centered image using vw units (not touching edges) -->
+<div style="position: relative; left: 50%; margin-left: -47vw; width: 94vw; margin-bottom: 24px; overflow: hidden;">
+  <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dengueepidem.png" 
+       alt="Dengue epidemiology" 
+       style="width: 100%; min-width: 100%; display: block; object-fit: cover; transform: scale(1.05);">
+</div>
+  <!-- Two-column stat blocks -->
+  <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 32px;">
+    <div style="flex: 1; min-width: 180px; background: rgba(0,0,0,0.2); border-radius: 20px; padding: 14px; text-align: center;">
+      <div style="font-size: 1.6rem; font-weight: 800; color: #ffffff; line-height: 1.2;">14.4 million</div>
+      <div style="font-size: 0.75rem; color: #ffffff;">cases of dengue were reported in 2024 – the highest dengue burden ever recorded globally according to WHO.</div>
+    </div>
+    <div style="flex: 1; min-width: 180px; background: rgba(0,0,0,0.2); border-radius: 20px; padding: 14px; text-align: center;">
+      <div style="font-size: 1.6rem; font-weight: 800; color: #ffffff; line-height: 1.2;">11,201 deaths</div>
+      <div style="font-size: 0.75rem; color: #ffffff;">Southeast Asia & Western Pacific contributed over 1 million cases, with significant outbreaks in Indonesia, India, and Vietnam.</div>
+    </div>
+  </div>
+
+  <!-- Worldwide update (March 2026) -->
+  <div style="margin-bottom: 28px;">
+    <div style="font-size: 0.8rem; line-height: 1.4; color: #ffffff;">
+      Over <strong style="font-weight: 800;">500,000 cases</strong> and <strong style="font-weight: 800;">100+ deaths</strong> were reported worldwide as of March 23, 2026.
+    </div>
+  </div>
+
+  <!-- Philippines section -->
+  <div style="margin-bottom: 28px;">
+    <div style="font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: #ffffff;">In the Philippines...</div>
+    <div style="font-size: 1.4rem; font-weight: 800; color: #ffffff; line-height: 1.2;">7,471 cases</div>
+    <div style="font-size: 0.7rem; margin-top: 4px; color: #ffffff;">were recorded in the Philippines as of 2026 from January 4–24.</div>
+    <div style="font-size: 0.7rem; margin-top: 6px; color: #ffffff;">This represents a <strong>71% decrease</strong> in cases compared to the same period in 2025 (which had 25,652 cases).</div>
+  </div>
+
+  <!-- Hotspot Regions (2025) -->
+  <div style="margin-bottom: 28px;">
+    <div style="font-size: 0.9rem; font-weight: 700; margin-bottom: 8px; color: #ffffff;">Hotspot Regions (2025):</div>
+    <ol style="margin: 0; padding-left: 20px; color: #ffffff; font-size: 0.7rem;">
+      <li><strong>CALABARZON</strong> – 12,735 cases</li>
+      <li><strong>National Capital Region (NCR)</strong> – 11,291 cases</li>
+      <li><strong>Central Luzon</strong> – 10,185 cases</li>
+    </ol>
+  </div>
+
+  <!-- Vibrant glass card at the bottom -->
+  <div class="vibrant-glass-card" style="padding: 12px; border-radius: 14px; font-size: 0.75rem; color: #ffffff;">
+    While cases occur year-round, they typically peak during the rainy season from July to September.
+  </div>
+` },
+      { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2028%20(1).png", 
+detail: `
+  <div style="font-size: 1.6rem !important; line-height: 1.5;">
+    <p>Usually <strong>4–10 days</strong> after the bite of an infected mosquito.</p>
+    <p>It can be as short as <strong>3 days</strong> or as long as <strong>14 days</strong>.</p>
+    <p>During the last day of this period and the first few days of illness, the person has a high "viral load" in their blood (viremia) and can pass the virus back to a biting mosquito.</p>
+    <p>Once a mosquito drinks infected blood, the virus needs <strong>8 to 12 days</strong> to migrate to the mosquito's salivary glands. Only after this period can the mosquito infect another human.</p>
+  </div>
+`},
+      { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2029%20(1).png", 
+      detail: `
+  <div style="display: flex; flex-direction: column; gap: 20px;">
+    <!-- Children -->
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/children.png" 
+           alt="Children" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+      <div style="flex: 1;"><strong>Children</strong></div>
+    </div>
+    <!-- Elderly individuals -->
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/elderly.png" 
+           alt="Elderly" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+      <div style="flex: 1;"><strong>Elderly individuals</strong></div>
+    </div>
+    <!-- Pregnant women -->
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/pregnant.png" 
+           alt="Pregnant women" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+      <div style="flex: 1;"><strong>Pregnant women</strong></div>
+    </div>
+    <!-- Individuals previously infected with dengue -->
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/previouslydengue.png" 
+           alt="Previously infected" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+      <div style="flex: 1;"><strong>Individuals previously infected with dengue</strong></div>
+    </div>
+    <!-- People living in tropical and subtropical areas -->
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/tropical.png" 
+           alt="Tropical areas" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+      <div style="flex: 1;"><strong>People living in tropical and subtropical areas</strong></div>
+    </div>
+    <!-- Residents of overcrowded communities -->
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Ellipse%2016.png" 
+           alt="Overcrowded communities" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+      <div style="flex: 1;"><strong>Residents of overcrowded communities</strong></div>
+    </div>
+    <!-- Individuals exposed to mosquito-infested environments -->
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/exposed.png" 
+           alt="Exposed to mosquitoes" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+      <div style="flex: 1;"><strong>Individuals exposed to mosquito-infested environments</strong></div>
+    </div>
+    <!-- Immunocompromised individuals -->
+    <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/immunocomporomised.png" 
+           alt="Immunocompromised" style="width: 60px; height: 60px; border-radius: 50%; object-fit: cover;">
+      <div style="flex: 1;"><strong>Immunocompromised individuals</strong></div>
+    </div>
+  </div>
+` },
+      { title: "Prevention\n(4S Strategy)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2021%20(1).png", 
+detail: `
+  <div style="color: #ffffff;">
+    <!-- Vaccine section (unchanged) -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; margin-bottom: 24px;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/denguevax.png" 
+           alt="Dengvaxia vaccine" 
+           style="width: 140px; max-width: 100%; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Vaccinations</strong><br>
+        <strong>Dengvaxia (CYD-TDV)</strong><br>
+        • Recommended only for individuals with previous dengue infection<br>
+        • May increase risk of severe dengue in people who never had dengue before<br>
+        • Given to eligible individuals usually 9–16 years old, living in dengue-endemic areas, with laboratory-confirmed past dengue infection<br>
+        • Administered in 3 doses at 0, 6, and 12 months<br>
+        • No nationwide routine dengue vaccination program currently exists.
+      </div>
+    </div>
+
+    <!-- Environmental Practices (unchanged) -->
+    <div style="margin-bottom: 24px;">
+      <strong style="font-size: 1.1rem;">Environmental Practices</strong>
+      <ul style="margin: 8px 0 0 20px; padding-left: 0; color: #ffffff;">
+        <li>Eliminate stagnant water</li>
+        <li>Cover water containers</li>
+        <li>Properly dispose of garbage and cans</li>
+        <li>Clean roof gutters and drainage systems</li>
+        <li>Conduct regular community clean-up drives</li>
+        <li>Use insecticide sprays when necessary</li>
+        <li>Improve environmental sanitation</li>
+      </ul>
+    </div>
+
+    <!-- DOH 4S Strategy (unchanged) -->
+    <div style="margin-bottom: 24px;">
+      <strong style="font-size: 1.1rem;">Follow the DOH “4S Strategy”:</strong>
+      <ul style="margin: 8px 0 0 20px; padding-left: 0; color: #ffffff;">
+        <li>Search and destroy mosquito breeding sites</li>
+        <li>Self-protection measures</li>
+        <li>Seek early consultation</li>
+        <li>Support fogging in outbreak areas</li>
+      </ul>
+    </div>
+` },
+      { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Rectangle%2027%20(3).png", 
+      detail: `
+  <div style="color: #ffffff; text-align: center;">
+    <p style="margin-bottom: 20px; font-weight: normal;">There is currently no specific antiviral treatment for dengue.</p>
+  </div>
+  <div style="color: #ffffff;">
+    <strong>Management includes:</strong>
+    <ol style="margin: 8px 0 16px 20px; padding-left: 0;">
+      <li>Adequate hydration</li>
+      <li>Oral rehydration solution (ORS)</li>
+      <li>Paracetamol for fever and pain</li>
+      <li>Rest</li>
+      <li>Monitoring platelet count and hematocrit</li>
+      <li>Intravenous (IV) fluids for severe cases</li>
+      <li>Hospitalization for patients with warning signs or severe dengue</li>
+    </ol>
+
+    <strong>Avoid:</strong>
+    <ul style="margin: 8px 0 16px 20px; padding-left: 0;">
+      <li>Aspirin</li>
+      <li>Ibuprofen</li>
+      <li>NSAIDs due to increased bleeding risk</li>
+    </ul>
+
+    <strong>When to seek medical help:</strong>
+    <ul style="margin: 8px 0 0 20px; padding-left: 0;">
+      <li>Fever persists for more than 2 days</li>
+      <li>Severe abdominal pain develops</li>
+      <li>Persistent vomiting occurs</li>
+      <li>Bleeding from gums or nose appears</li>
+      <li>Blood is seen in stool or vomit</li>
+      <li>Difficulty breathing occurs</li>
+      <li>Patient becomes weak, restless, or confused</li>
+      <li>Signs of dehydration appear</li>
+      <li>A child becomes unusually sleepy or irritable</li>
+    </ul>
+  </div>
+` }
     ]
   },
   influenza: {
@@ -4507,17 +4824,275 @@ const detailedData = {
     description: "Ang Influenza ay isang viral infection na umaatake sa respiratory system — ilong, lalamunan, at baga. Karaniwang tinatawag itong trangkaso.",
     heroImage: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenza.png",
     faqs: [
-      { question: "Ano ang <strong>causative agent?</strong>", answer: "Ito ay sanhi ng <strong>Influenza virus</strong> na may types A, B, at C. Type A at B ang karaniwang nagdudulot ng seasonal flu." },
-      { question: "Anu-ano ang <strong>mga sintomas?</strong>", answer: "Biglaang lagnat, ubo (karaniwang tuyo), sakit ng ulo, pananakit ng kalamnan at kasukasuan, matinding pagod, at minsan sipon at sore throat." },
-      { question: "Mayroon bang <strong>bakuna</strong> para sa Influenza?", answer: "Oo, mayroong <strong>flu vaccine</strong> na inirerekomenda taun-taon lalo na para sa matatanda, bata, buntis, at may mga chronic medical conditions." }
+      { question: "Ano ang <strong>causative agent?</strong>", 
+      answer: `
+  <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+    <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/main/Ellipse%201.png" 
+         alt="Influenza virus" 
+         style="width: 120px; max-width: 100%; border-radius: 12px; flex-shrink: 0;">
+    <div style="flex: 1;">
+      <div style="font-size: 1.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 8px; color: #ffffff;">Influenza viruses</div>
+      <div style="font-size: 1.1rem; color: #cf90ff;">Pinaka-common nga kagaw nga sanhi sang Flu</div>
+      <div style="margin-top: 12px; color: #ffffff;">Ang trangkaso ay sanhi ng influenza virus types A at B. Ito ay kumakalat sa pamamagitan ng respiratory droplets kapag ang isang infected na tao ay umuubo, bumabahing, o nagsasalita.</div>
+    </div>
+  </div>
+` },
+      { question: "Mga Sari", 
+      answer: `
+  <div style="color: #ffffff; display: flex; flex-direction: column; gap: 24px;">
+    
+    <!-- Influenza A -->
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influeA.png" 
+           alt="Influenza A" 
+           style="width: 100px; max-width: 100%; border-radius: 12px; flex-shrink: 0;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Influenza A Virus</strong><br>
+        • Most common type<br>
+        • Responsible for pandemics<br>
+        • Includes subtypes such as H1N1 and H3N2
+      </div>
+    </div>
+
+    <!-- Influenza B -->
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influeB.png" 
+           alt="Influenza B" 
+           style="width: 100px; max-width: 100%; border-radius: 12px; flex-shrink: 0;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Influenza B Virus</strong><br>
+        • Causes seasonal outbreaks<br>
+        • Usually less severe than Influenza A
+      </div>
+    </div>
+
+    <!-- Influenza C -->
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influeC.png" 
+           alt="Influenza C" 
+           style="width: 100px; max-width: 100%; border-radius: 12px; flex-shrink: 0;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Influenza C Virus</strong><br>
+        • Causes mild respiratory illness
+      </div>
+    </div>
+
+    <!-- Influenza D -->
+    <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/InflueD.png" 
+           alt="Influenza D" 
+           style="width: 100px; max-width: 100%; border-radius: 12px; flex-shrink: 0;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Influenza D Virus</strong><br>
+        • Primarily affects animals and rarely infects humans
+      </div>
+    </div>
+
+  </div>
+` },
+      { question: "Paano maglapta ang flu?", 
+      answer: `
+  <div class="vibrant-glass-card" style="padding: 16px; border-radius: 16px; color: #ffffff;">
+    <ol style="margin: 0; padding-left: 20px;">
+      <li style="margin-bottom: 12px;">Respiratory droplets from coughing or sneezing</li>
+      <li style="margin-bottom: 12px;">Talking or close contact with infected individuals</li>
+      <li style="margin-bottom: 12px;">Touching contaminated surfaces then touching the nose, mouth, or eyes</li>
+      <li>Airborne particles in poorly ventilated areas</li>
+    </ol>
+  </div>
+` }
     ],
     gridCards: [
-      { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenzasenyales.png", detail: "" },
-      { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenzaepidem.png", detail: "" },
-      { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation%20period.png", detail: "" },
-      { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenzaatrisk.png", detail: "" },
-      { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Influenzaprevent.jpg", detail: "" },
-      { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenzamanagement.png", detail: "" }
+      { title: "Senyales &\nSintomas", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenzasenyales.png", 
+     detail: `
+  <div style="color: #ffffff; display: flex; flex-direction: column; gap: 24px;">
+    
+    <!-- Early Stage -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influ-early.png" 
+           alt="Early Stage" 
+           style="width: 120px; max-width: 100%; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Early Stage</strong><br>
+        Sudden fever, Chills,<br>
+        Headache,<br>
+        Muscle aches, Fatigue
+      </div>
+    </div>
+
+    <!-- Progressive Stage -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influ-progressive.png" 
+           alt="Progressive Stage" 
+           style="width: 120px; max-width: 100%; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Progressive Stage</strong><br>
+        Dry cough, Sore throat,<br>
+        Runny or stuffy nose,<br>
+        Weakness, Loss of appetite
+      </div>
+    </div>
+
+    <!-- Severe Stage -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influ-severe.png" 
+           alt="Severe Stage" 
+           style="width: 120px; max-width: 100%; border-radius: 12px;">
+      <div style="flex: 1;">
+        <strong style="font-size: 1.1rem;">Severe Stage</strong><br>
+        Difficulty breathing, Chest pain,<br>
+        Pneumonia, Dehydration,<br>
+        Worsening of chronic illnesses<br>
+        such as asthma or heart disease
+      </div>
+    </div>
+
+  </div>
+` },
+      { title: "Epidemiology at\nPrevalence", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenzaepidem.png", 
+      detail: `
+  <div style="color: #ffffff; display: flex; flex-direction: column; gap: 32px;">
+    
+    <!-- Row 1: Image on the right, text on the left -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+      <div style="flex: 1; min-width: 180px;">
+        <strong>Seasonal influenza</strong> causes approximately <strong>1 billion infections</strong> worldwide each year.
+      </div>
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influepidem1.png" 
+           alt="Influenza epidemiology 1" 
+           style="width: 140px; max-width: 100%; border-radius: 12px;">
+    </div>
+
+    <!-- Row 2: Image on the left, text on the right -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: center; justify-content: space-between;">
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influe%20epidem2.png" 
+           alt="Influenza epidemiology 2" 
+           style="width: 140px; max-width: 100%; border-radius: 12px;">
+      <div style="flex: 1; min-width: 180px;">
+        <strong>Influenza</strong> causes approximately <strong>290,000 – 650,000 respiratory deaths</strong> worldwide.
+      </div>
+    </div>
+
+  </div>
+` },
+      { title: "Incubation\nPeriod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/incubation%20period.png", 
+      detail: `
+  <div class="vibrant-glass-card" style="padding: 20px; border-radius: 16px; color: #ffffff;">
+    <p><strong>Incubation period:</strong> Usually <strong>1–4 days</strong> (average 2 days).</p>
+    <p>Infected individuals can spread the virus starting 1 day before symptoms appear and up to 5–7 days after becoming sick.</p>
+    <p>Children and immunocompromised persons may shed the virus for longer periods.</p>
+  </div>
+` },
+      { title: "At-Risk\nMga Grupo", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenzaatrisk.png", 
+      detail: `
+  <div style="color: #ffffff;">
+    <ul style="margin: 0; padding-left: 20px;">
+      <li>Children younger than 5 years old</li>
+      <li>Adults aged 65 years and older</li>
+      <li>Pregnant women</li>
+      <li>Healthcare workers</li>
+      <li>Individuals with asthma or chronic lung disease</li>
+      <li>People with heart disease or diabetes</li>
+      <li>Immunocompromised individuals</li>
+      <li>Residents of crowded facilities such as dormitories or nursing homes</li>
+    </ul>
+  </div>
+` },
+      { title: "Prevention", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Influenzaprevent.jpg", 
+     detail: `
+  <div style="color: #ffffff; display: flex; flex-direction: column; gap: 32px;">
+    
+    <!-- Vaccination section (image right, text left) -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; justify-content: space-between;">
+      <div style="flex: 1; min-width: 200px;">
+        <strong style="font-size: 1.1rem;">Seasonal Influenza Vaccination</strong>
+        <p style="margin: 8px 0;">Annual influenza vaccination is recommended because influenza viruses change frequently. Best given before flu season begins.</p>
+        <strong>Annual flu vaccination is recommended for:</strong>
+        <ul style="margin: 8px 0 0 20px; padding-left: 0;">
+          <li>Healthcare workers</li>
+          <li>Elderly adults</li>
+          <li>Pregnant women</li>
+          <li>Young children</li>
+          <li>Individuals with chronic diseases</li>
+        </ul>
+      </div>
+      <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/fluvax.png" 
+           alt="Flu vaccine" 
+           style="width: 140px; max-width: 100%; border-radius: 12px;">
+    </div>
+
+    <!-- Hygiene section (images left, text right) -->
+    <div style="display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start;">
+      <!-- Images column (stacked vertically) -->
+      <div style="display: flex; flex-direction: column; gap: 12px; width: 100px;">
+        <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hygiene%201%20(1).png" 
+             alt="Hygiene 1" style="width: 100%; border-radius: 12px;">
+        <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hygiene%201%20(2).png" 
+             alt="Hygiene 2" style="width: 100%; border-radius: 12px;">
+        <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hygiene%201%20(3).png" 
+             alt="Hygiene 3" style="width: 100%; border-radius: 12px;">
+      </div>
+      <!-- Text column -->
+      <div style="flex: 1;">
+        <ul style="margin: 0; padding-left: 20px;">
+          <li>Frequent handwashing with soap and water</li>
+          <li>Use of alcohol-based hand sanitizers</li>
+          <li>Covering mouth and nose when coughing or sneezing</li>
+          <li>Wearing masks when sick</li>
+          <li>Avoid touching the face with unwashed hands</li>
+          <li>Staying home when symptomatic</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+` },
+      { title: "Management", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/influenzamanagement.png", 
+      detail: `
+  <div style="color: #ffffff;">
+    <!-- Environmental Practices -->
+    <div style="margin-bottom: 24px;">
+      <strong style="font-size: 1.1rem;">Environmental Practices</strong>
+      <ul style="margin: 8px 0 0 20px; padding-left: 0;">
+        <li>Ensure proper ventilation indoors</li>
+        <li>Regular cleaning and disinfection of surfaces</li>
+        <li>Avoid overcrowded spaces</li>
+        <li>Maintain clean surroundings</li>
+        <li>Improve airflow in classrooms, offices, and homes</li>
+        <li>Encourage workplace and school infection-control practices</li>
+      </ul>
+    </div>
+
+    <!-- Basic Treatment -->
+    <div style="margin-bottom: 24px;">
+      <strong style="font-size: 1.1rem;">Basic Treatment</strong>
+      <ul style="margin: 8px 0 0 20px; padding-left: 0;">
+        <li>Adequate rest</li>
+        <li>Increased fluid intake</li>
+        <li>Antiviral medications (e.g., oseltamivir) when prescribed</li>
+        <li>Fever and pain relievers such as paracetamol</li>
+        <li>Nutritional support</li>
+        <li>Oxygen therapy for severe cases</li>
+        <li>Hospitalization for complications such as pneumonia</li>
+      </ul>
+    </div>
+
+    <!-- When to seek medical help -->
+    <div>
+      <strong style="font-size: 1.1rem;">When to seek medical help</strong>
+      <ul style="margin: 8px 0 0 20px; padding-left: 0;">
+        <li>Difficulty breathing develops</li>
+        <li>Chest pain occurs</li>
+        <li>Fever becomes persistent or very high</li>
+        <li>Lips or face turn bluish</li>
+        <li>Severe dehydration occurs</li>
+        <li>Confusion or seizures develop</li>
+        <li>Symptoms improve then suddenly worsen</li>
+        <li>A child has fast breathing, inability to drink, or persistent vomiting</li>
+      </ul>
+    </div>
+  </div>
+` }
     ]
   },
   pneumonia: {

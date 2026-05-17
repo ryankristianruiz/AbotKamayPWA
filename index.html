@@ -395,105 +395,147 @@
   a:hover { color: #ffc2e8; }
 
   /* Carousel */
-  .carousel-wrapper { width: 100%; margin-top: 18px; margin-bottom: 18px; }
-  .carousel {
-    position: relative;
-    overflow: hidden;
-    border-radius: 16px;
-    background: rgba(31, 0, 58, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.1), inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
-  }
-  .track {
-    display: flex;
-    gap: 0;
-    transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .slide {
-    min-width: 0;
-    width: 70%;
-    flex-shrink: 0;
-    padding: 1.5rem 1.25rem 1.25rem;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-left: 15%;
-    margin-right: 15%;
-  }
-  .slide-image {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    height: auto;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 40px;
-    margin-top: 6px;
-    background: rgba(255,255,255,0.08);
-  }
-  .tag {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    padding: 3px 10px;
-    border-radius: 99px;
-    display: inline-block;
-    width: fit-content;
-  }
-  .slide-title { font-size: 18px; font-weight: 600; color: #ffffff; line-height: 1.3; }
-  .slide-body { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.65; }
-  .slide-cta {
-    margin-top: 4px;
-    font-size: 12px;
-    font-weight: 500;
-    cursor: pointer;
-    border: 1px solid #814daa;
-    border-radius: 8px;
-    padding: 6px 14px;
-    background: transparent;
-    color: #8deeff;
-    width: fit-content;
-    text-decoration: none;
-    transition: background 0.15s;
-  }
-  .slide-cta:hover { background: rgba(141,238,255,0.1); }
-  .nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #1f003a;
-    border: 1px solid #814daa;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 14px;
-    color: #ffffff;
-    z-index: 10;
-    transition: background 0.15s;
-  }
-  .nav:hover { background: #814daa; }
-  .nav-left  { left: 8px; }
-  .nav-right { right: 8px; }
-  .progress { height: 3px; background: #814daa; }
-  .progress-bar { height: 100%; background: #8deeff; width: 0%; transition: width linear; }
-  .dots { display: flex; justify-content: center; gap: 6px; padding: 0.7rem 0 0.3rem; }
-  .dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: #814daa; cursor: pointer; border: none;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .dot.active { background: #8deeff; transform: scale(1.35); }
-  .controls-row { display: flex; align-items: center; justify-content: space-between; padding: 0 0 4px; }
-  .controls-label { font-size: 12px; color: #cf90ff; }
-  .toggle-btn { font-size: 12px; color: #cf90ff; cursor: pointer; background: none; border: none; padding: 0; }
-  .toggle-btn:hover { color: #8deeff; }
+.carousel-wrapper { width: 100%; margin-top: 18px; margin-bottom: 24px; }
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.track {
+  display: flex;
+  gap: 0;
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slide {
+  min-width: 0;
+  width: 70%;
+  flex-shrink: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-left: 15%;
+  margin-right: 15%;
+}
+
+/* ── Image block with overlay ── */
+.slide-image {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  height: auto;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  background: rgba(255,255,255,0.08);
+}
+
+.slide-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Gradient + text overlay at bottom of photo */
+.slide-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 40px 16px 16px;
+  background: linear-gradient(to top, rgba(30,0,50,0.72) 0%, transparent 100%);
+  border-radius: 0 0 20px 20px;
+  text-align: center;
+}
+
+.tag {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  padding: 3px 12px;
+  border-radius: 99px;
+  display: inline-block;
+  background: rgba(210, 175, 110, 0.92);
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.slide-date-big {
+  font-size: 42px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.05;
+  display: block;
+}
+
+.slide-day {
+  font-size: 15px;
+  color: rgba(255,255,255,0.88);
+  display: block;
+}
+
+/* ── Content below the image ── */
+.slide-content {
+  padding: 14px 2px 10px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.slide-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.3;
+}
+
+.slide-body {
+  font-size: 12.5px;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.5;
+}
+
+.slide-cta {
+  margin-top: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  border-radius: 99px;
+  padding: 8px 22px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: background 0.15s;
+  backdrop-filter: blur(4px);
+}
+
+.slide-cta:hover { background: rgba(255,255,255,0.22); }
+
+/* ── Hide nav arrows (design uses swipe only) ── */
+.nav { display: none; }
+
+/* ── Dots ── */
+.dots { display: flex; justify-content: center; gap: 6px; padding: 0.5rem 0 0.2rem; }
+.dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255,255,255,0.35); cursor: pointer; border: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.dot.active { background: #ffffff; transform: scale(1.35); }
+
+/* ── Remove old controls row ── */
+.controls-row { display: none; }
+.progress { display: none; }
 
   /* ---------- BENTO HOME LAYOUT ---------- */
   .home-bento {
@@ -1573,6 +1615,16 @@
   padding: 16px 20px;
   gap: 16px;
 }
+/* RHU Hero Banner – glass card, slightly purpler than homepage cards */
+#rhu .rhu-hero-banner {
+  background: rgba(80, 0, 120, 0.45) !important;         /* deeper purple base */
+  backdrop-filter: blur(16px) saturate(160%) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(160%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 20px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.4), inset 0 0 8px 4px rgba(255, 255, 255, 0.2) !important;
+  background-image: none !important;
+}
 
 .rhu-hero-icon {
   flex-shrink: 0;
@@ -1879,6 +1931,123 @@
 #rhuDetailPanel > .card {
   display: none;
 }
+/* Push the image block lower and keep it centered horizontally */
+.slide {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;   /* keep content aligned to top, but we'll add margin-top to image */
+}
+
+.slide-image {
+  margin-top: 10%;               /* pushes the image down from the top */
+  margin-bottom: 12px;          /* maintains gap with content below */
+}
+
+/* For smaller screens, adjust margin-top */
+@media (max-width: 768px) {
+  .slide-image {
+    margin-top: 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .slide-image {
+    margin-top: 2%;
+  }
+}
+/* Recently viewed – container adjusts to image size, no fixed width */
+#recentlyViewedCard {
+  display: inline-block;
+  width: auto;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+/* Remove card styling */
+#recentlyViewedCard .card {
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Image styling – matches communicable hero dimensions */
+#recentlyViewedCard .card img {
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+/* Lighter, purple, almost transparent overlay for the text bar */
+#recentlyViewedCard .card > div > div:last-child {
+  background: rgba(155, 48, 255, 0.15) !important;   /* very light purple */
+  backdrop-filter: blur(4px) !important;             /* minimal blur */
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Mobile: image height matches communicable hero on mobile (150px) */
+@media (max-width: 480px) {
+  #recentlyViewedCard .card img {
+    height: 220px !important;
+  }
+}
+/* Recently Viewed label styling - consistent appearance */
+.rv-label {
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+  line-height: 1.2;
+}
+
+/* Ensure margin between label and picture is consistent */
+#recentlyViewedCard {
+  margin-bottom: 18px;
+}
+
+/* Optional: if the label already has margin-bottom, keep it */
+
+/* Make the outer wrapper card behind the health module slider transparent */
+#education .card:has(.edu-cat-slider) {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Make the outer container of the sub‑detail page transparent */
+#eduDetailView {
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+.search-results h3 {
+  font-size: 1.2rem;
+  margin-bottom: 12px;
+}
+.search-result-btn {
+  background: rgba(31, 0, 58, 0.55) !important;
+  backdrop-filter: blur(8px);
+  width: 100%;
+  text-align: left;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 16px;
+}
+.search-result-btn:hover {
+  background: rgba(155, 48, 255, 0.4) !important;
+}
 </style>
 </head>
 <body>
@@ -2050,13 +2219,12 @@
         <!-- Recently Viewed Card -->
 <!-- Recently Viewed – Hero Card (full width) -->
 <div id="recentlyViewedCard" style="display: none; margin-bottom: 18px;">
-  <div class="rv-label" style="font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.85); margin-bottom: 8px; letter-spacing: 0.5px;">Kamakailang Tiningnan</div>
+ <div class="rv-label" style="font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.85); margin-bottom: 12px; letter-spacing: 0.5px; line-height: 1.2;">Recently<br>Viewed</div>
   <div class="card" style="padding: 0; overflow: hidden; position: relative;">
     <img id="recentThumbImg" src="" style="width: 100%; height: 200px; object-fit: cover; display: block;">
     <div style="position: absolute; bottom: 0; left: 0; right: 0; background: rgba(31, 0, 58, 0.7); backdrop-filter: blur(10px); padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
       <div style="flex: 1;">
         <div id="recentTitle" style="font-weight: 700; font-size: 1rem; color: white; margin-bottom: 2px;"></div>
-        <div style="font-size: 0.75rem; color: rgba(255,255,255,0.65);">1-sentence description</div>
       </div>
       <button id="recentContinueBtn" class="pill-btn" style="font-size: 0.75rem; white-space: nowrap; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.25); border-radius: 999px; padding: 6px 12px 6px 14px;">Ipagpatuloy <span class="arrow-icon">→</span></button>
     </div>
@@ -2069,16 +2237,16 @@
             <div class="edu-cat-btn active" data-edu="communicable" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/Gemini_Generated_Image_k8rab3k8rab3k8ra.png');">
               <span class="edu-cat-label">Communicable Diseases</span>
             </div>
-            <div class="edu-cat-btn" data-edu="noncommunicable" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/noncom-final.png');">
+            <div class="edu-cat-btn" data-edu="noncommunicable" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/noncomm-finale.png');">
               <span class="edu-cat-label">Non‑Communicable Diseases</span>
             </div>
-            <div class="edu-cat-btn" data-edu="dohprograms" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/DOH.png');">
+            <div class="edu-cat-btn" data-edu="dohprograms" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/DOH-finaleee.png');">
               <span class="edu-cat-label">DOH Health Programs</span>
             </div>
-            <div class="edu-cat-btn" data-edu="prepartum" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.png');">
+            <div class="edu-cat-btn" data-edu="prepartum" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepart-finale.png');">
               <span class="edu-cat-label">Prepartum Care</span>
             </div>
-            <div class="edu-cat-btn" data-edu="postpartum" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/postpartum.png');">
+            <div class="edu-cat-btn" data-edu="postpartum" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/postpart-finale.png');">
               <span class="edu-cat-label">Postpartum Care</span>
             </div>
             <div class="edu-cat-btn" data-edu="newborn" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn-finale.png');">
@@ -2166,13 +2334,13 @@
     </div>
     <div class="rhu-service-card" data-service="disease">
       <div class="rhu-service-card-body">
-        <div class="rhu-service-title">NCD/CD Control</div>
+        <div class="rhu-service-title">Disease Control</div>
         <button class="rhu-see-more-btn">See more. <span class="arrow-icon">→</span></button>
       </div>
     </div>
     <div class="rhu-service-card" data-service="environment">
       <div class="rhu-service-card-body">
-        <div class="rhu-service-title">EHS</div>
+        <div class="rhu-service-title">Environmental &amp; Health</div>
         <button class="rhu-see-more-btn">See more. <span class="arrow-icon">→</span></button>
       </div>
     </div>
@@ -2184,7 +2352,7 @@
     </div>
     <div class="rhu-service-card" data-service="other">
       <div class="rhu-service-card-body">
-        <div class="rhu-service-title">ATBP</div>
+        <div class="rhu-service-title">Other Services</div>
         <button class="rhu-see-more-btn">See more. <span class="arrow-icon">→</span></button>
       </div>
     </div>
@@ -4451,6 +4619,7 @@ const detailedData = {
     isOverview: true,
     title: "Non-Communicable Diseases (NCDs)",
     tagline: "Mga sakit na hindi nakakahawa",
+    image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/4db66cff9f20b3ea8d6336a2cbf0dba0b15e361b/lead-AstraZeneca-FPA-non-communicable-diseases-prevention-early-detection.webp",
     description: "Non-communicable diseases (NCDs) are chronic conditions that are not transmitted from person to person. They are mainly caused by a combination of genetic, physiological, environmental, and behavioral factors. The four main types are cardiovascular diseases, cancers, chronic respiratory diseases, and diabetes (WHO, 2023). NCDs are the leading cause of death globally, accounting for 71% of all deaths (WHO, 2022). Major risk factors include unhealthy diet, physical inactivity, tobacco use, and harmful alcohol consumption (GBD 2019 Risk Factors Collaborators, 2020).",
     spreadModes: [
       { icon: "", label: "Unhealthy diet" },
@@ -4461,13 +4630,13 @@ const detailedData = {
       { icon: "", label: "Stress & depression" }
     ],
     subTopics: [
-      { key: "hypertension", title: "Hypertension", subtitle: "High blood pressure", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hypertension.jpg" },
-      { key: "diabetes", title: "Diabetes Mellitus", subtitle: "High blood sugar", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/diabetes.jpg" },
-      { key: "obesity", title: "Obesity", subtitle: "Excess body fat", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/obesity.jpg" },
-      { key: "ckd", title: "Chronic Kidney Disease", subtitle: "Progressive kidney damage", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/kidney.jpg" },
-      { key: "asthma", title: "Asthma", subtitle: "Chronic airway inflammation", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/asthma.jpg" },
-      { key: "copd", title: "COPD", subtitle: "Chronic obstructive pulmonary disease", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/copd.jpg" },
-      { key: "depression", title: "Depression", subtitle: "Major depressive disorder", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depression.jpg" }
+      { key: "hypertension", title: "Hypertension", subtitle: "High blood pressure", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/hypertensiontitlebutton.jpg" },
+      { key: "diabetes", title: "Diabetes Mellitus", subtitle: "High blood sugar", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/diabetestitlebutton.jpg" },
+      { key: "obesity", title: "Obesity", subtitle: "Excess body fat", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/obesitytitlebutton.jpg" },
+      { key: "ckd", title: "Chronic Kidney Disease", subtitle: "Progressive kidney damage", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/ckd%20title%20card.jpg" },
+      { key: "asthma", title: "Asthma", subtitle: "Chronic airway inflammation", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/asthmatitlecard.jpg" },
+      { key: "copd", title: "COPD", subtitle: "Chronic obstructive pulmonary disease", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/copdtitlebutton.webp" },
+      { key: "depression", title: "Depression", subtitle: "Major depressive disorder", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depressiontitlebutton.jpeg" }
     ]
   },
   hypertension: {
@@ -5195,11 +5364,13 @@ const detailedData = {
     }
 // NEW: for DOH Programs overview (laws list)
 if (topic.isOverview && topic.laws) {
+    // Use the image from the clicked DOH Programs button – no fallback needed
+    const heroImageUrl = imageUrl;
     let lawsHtml = `
         <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
         <div class="card" style="display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; padding: 26px;">
             <div style="flex: 1.15; min-width: 240px; max-width: 400px;">
-                <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg" 
+                <img src="${heroImageUrl}" 
                      alt="${topic.title}" 
                      style="width: 100%; height: 340px; object-fit: cover; border-radius: 16px;">
             </div>
@@ -5244,43 +5415,46 @@ if (topic.isOverview && topic.laws) {
     return;
 }
     // Determine which card array to use (diseases or subTopics)
-    const cardArray = topic.diseases || topic.subTopics;
-    if (!cardArray) return;
+const cardArray = topic.diseases || topic.subTopics;
+if (!cardArray) return;
 
-    const cardsHtml = cardArray.map(card => `
-      <div class="disease-nav-card" 
-          style="background-image: url('${card.image}'); height: 178px;" 
-          data-disease-key="${card.key}">
-        <div class="disease-nav-card-body">
-          <div class="d-title">${card.title}</div>
-          <div class="d-sub">${card.subtitle || ''}</div>
-          <button class="pill-btn mini">Basahin <span class="arrow-icon">→</span></button>
-        </div>
-      </div>
-    `).join('');
+const cardsHtml = cardArray.map(card => `
+  <div class="disease-nav-card" 
+      style="background-image: url('${card.image}'); height: 178px;" 
+      data-disease-key="${card.key}">
+    <div class="disease-nav-card-body">
+      <div class="d-title">${card.title}</div>
+      <div class="d-sub">${card.subtitle || ''}</div>
+      <button class="pill-btn mini">Basahin <span class="arrow-icon">→</span></button>
+    </div>
+  </div>
+`).join('');
 
-    const detailHtml = `
-      <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
-      <div class="card" style="display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; padding: 26px;">
-        <div style="flex: 1.15; min-width: 240px; max-width: 400px;">
-          <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/communicable.jpg" 
-              alt="${topic.title}" 
-              style="width: 100%; height: 340px; object-fit: cover; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.45);">
-        </div>
-        <div style="flex: 1.85; min-width: 300px;">
-          <div class="hero-tag">${topic.tagline || ''}</div>
-          <h1 style="margin: 12px 0 18px 0; font-size: 2.1rem;">${topic.title}</h1>
-          <p style="font-size: 1.08rem; line-height: 1.78;">${topic.description}</p>
-        </div>
-      </div>
-      <p class="section-label-left">${topic.spreadModes ? 'Pangunahing Salik' : 'Paraan ng Pagkalat'}</p>
-      ${spreadHtml}
-      <p class="section-label-left">Mga Sakit</p>
-      <div class="disease-nav-grid">${cardsHtml}</div>
-      <div class="tip-box">💡 <strong>Tandaan:</strong> Kumonsulta sa inyong RHU o Barangay Health Worker para sa libreng serbisyo.</div>
-    `;
+// Use the image URL passed from the clicked category button
+const heroImageUrl = imageUrl;  // imageUrl is the third parameter of showDetailedTopic
 
-    detailView.innerHTML = detailHtml;
+const detailHtml = `
+  <button class="back-button" id="backToMainBtn">← Bumalik sa mga Paksa</button>
+  <div class="card" style="display: flex; gap: 26px; align-items: flex-start; flex-wrap: wrap; padding: 26px;">
+    <div style="flex: 1.15; min-width: 240px; max-width: 400px;">
+      <img src="${heroImageUrl}" 
+           alt="${topic.title}" 
+           style="width: 100%; height: 340px; object-fit: cover; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.45);">
+    </div>
+    <div style="flex: 1.85; min-width: 300px;">
+      <div class="hero-tag">${topic.tagline || ''}</div>
+      <h1 style="margin: 12px 0 18px 0; font-size: 2.1rem;">${topic.title}</h1>
+      <p style="font-size: 1.08rem; line-height: 1.78;">${topic.description}</p>
+    </div>
+  </div>
+  <p class="section-label-left">${topic.spreadModes ? 'Pangunahing Salik' : 'Paraan ng Pagkalat'}</p>
+  ${spreadHtml}
+  <p class="section-label-left">Mga Sakit</p>
+  <div class="disease-nav-grid">${cardsHtml}</div>
+  <div class="tip-box">💡 <strong>Tandaan:</strong> Kumonsulta sa inyong RHU o Barangay Health Worker para sa libreng serbisyo.</div>
+`;
+
+detailView.innerHTML = detailHtml;
     mainView.classList.add('hidden-view');
     detailView.style.display = 'block';
 
@@ -5428,7 +5602,7 @@ if (topic.isOverview && topic.laws) {
     detailView.style.display = 'none';
   });
 }
-
+window.showDetailedTopic = showDetailedTopic;
     function attachCategoryEvents() {
       document.querySelectorAll('#eduCatSlider .edu-cat-btn').forEach(btn => {
         btn.removeEventListener('click', categoryClickHandler);
@@ -5444,6 +5618,136 @@ if (topic.isOverview && topic.laws) {
       const imgUrl = bgStyle ? bgStyle.replace(/^url\(['"]?/, '').replace(/['"]?\)$/, '') : '';
       showDetailedTopic(category, null, imgUrl);
     }
+    // ----- IMPROVED SEARCH FOR HEALTH EDUCATION -----
+function buildSearchIndex() {
+  const index = [];
+  for (const [key, module] of Object.entries(detailedData)) {
+    const item = {
+      key: key,
+      title: module.title || key,
+      tagline: module.tagline || '',
+      description: module.description || '',
+      // Flatten all text content
+      text: [
+        module.title,
+        module.tagline,
+        module.description,
+        module.intro,
+        // FAQ questions and answers
+        ...(module.faqs || []).flatMap(f => [f.question, f.answer]),
+        // Grid card titles and details
+        ...(module.gridCards || []).flatMap(c => [c.title, c.detail]),
+        // Sections headings and content
+        ...(module.sections || []).flatMap(s => [s.heading, s.content]),
+        // Subtopics (for overviews)
+        ...(module.subTopics || []).flatMap(st => [st.title, st.subtitle]),
+        // Spread modes labels
+        ...(module.spreadModes || []).map(m => m.label),
+        // Diseases (for communicable overview)
+        ...(module.diseases || []).flatMap(d => [d.title, d.subtitle])
+      ].filter(Boolean).join(' ').toLowerCase()
+    };
+    index.push(item);
+  }
+  return index;
+}
+
+let searchIndex = buildSearchIndex();
+
+function performDeepSearch(query) {
+  if (!query || query.length < 2) return [];
+  const lowerQuery = query.toLowerCase();
+  return searchIndex
+    .map(item => {
+      let score = 0;
+      if (item.title.toLowerCase().includes(lowerQuery)) score += 10;
+      if (item.tagline.toLowerCase().includes(lowerQuery)) score += 5;
+      if (item.description.toLowerCase().includes(lowerQuery)) score += 3;
+      if (item.text.includes(lowerQuery)) score += 1;
+      return { ...item, score };
+    })
+    .filter(item => item.score > 0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 8); // max 8 results
+}
+
+function showSearchResults(results) {
+  const container = document.getElementById('eduCategoryContent');
+  if (!container) return;
+  if (results.length === 0) {
+    container.innerHTML = '<p>Walang nahanap na module. Subukan ang ibang salita.</p>';
+    return;
+  }
+  let html = '<div class="search-results"><h3>Resulta ng Paghahanap:</h3><ul style="list-style:none; padding:0;">';
+  results.forEach(res => {
+    html += `<li style="margin-bottom:12px;">
+      <button class="btn-outline search-result-btn" data-key="${res.key}" style="width:auto; text-align:left; padding:8px 16px;">
+        <strong>${res.title}</strong><br>
+        <small>${res.tagline || 'I-click para buksan'}</small>
+      </button>
+    </li>`;
+  });
+  html += '</ul></div>';
+  container.innerHTML = html;
+  // Attach click events to result buttons
+  container.querySelectorAll('.search-result-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const key = btn.getAttribute('data-key');
+      // Navigate to that module
+      const moduleData = detailedData[key];
+      if (moduleData) {
+        // Find the category button that matches (if any) to update active state
+        const catBtn = document.querySelector(`.edu-cat-btn[data-edu="${key}"]`);
+        if (catBtn) {
+          document.querySelectorAll('.edu-cat-btn').forEach(b => b.classList.remove('active'));
+          catBtn.classList.add('active');
+        }
+        showDetailedTopic(key);
+        // Clear search input if desired
+        // document.getElementById('healthSearch').value = '';
+      }
+    });
+  });
+}
+
+// Override the original filterCategories and search input
+const originalFilter = window.filterCategories;
+window.filterCategories = function() {
+  const query = document.getElementById('healthSearch').value.trim().toLowerCase();
+  // First, filter the category buttons by label (original behavior)
+  document.querySelectorAll('#eduCatSlider .edu-cat-btn').forEach(btn => {
+    const label = btn.querySelector('.edu-cat-label')?.innerText.toLowerCase() || '';
+    btn.style.display = label.includes(query) ? 'flex' : 'none';
+  });
+  // If query is longer than 2 characters, also perform deep search
+  if (query.length >= 2) {
+    const results = performDeepSearch(query);
+    if (results.length > 0) {
+      showSearchResults(results);
+    } else {
+      const container = document.getElementById('eduCategoryContent');
+      if (container && !container.querySelector('.search-results')) {
+        container.innerHTML = '<p>Walang nahanap na module. Subukan ang ibang salita.</p>';
+      }
+    }
+  } else {
+    // Clear search results and restore default placeholder
+    const container = document.getElementById('eduCategoryContent');
+    if (container && container.querySelector('.search-results')) {
+      container.innerHTML = '<p>Mag‑click sa isang paksa upang mabasa ang buong gabay.</p>';
+    }
+  }
+};
+
+// Replace the existing search input event listener
+const searchInputElem = document.getElementById('healthSearch');
+if (searchInputElem) {
+  // Remove old listener if any (we'll attach a new one)
+  const newSearchHandler = () => window.filterCategories();
+  searchInputElem.removeEventListener('input', window.filterCategories);
+  searchInputElem.addEventListener('input', newSearchHandler);
+  window.filterCategories = window.filterCategories || function() {};
+}
     function filterCategories() {
       const query = searchInput.value.toLowerCase().trim();
       document.querySelectorAll('#eduCatSlider .edu-cat-btn').forEach(btn => {
@@ -5518,104 +5822,134 @@ if (topic.isOverview && topic.laws) {
     const CLONE_COUNT = 2;
     let totalSlides = 0;
     let realSlideCount = 0;
-    const CAROUSEL_DEFAULT = [
-      { tag: "Vaccination", title: "Libreng Bakuna sa Tigdas – Marso 20", body: "8:00 AM – 2:00 PM sa Barangay Hall. Magdala ng baby book.", cta: "I-iskedyul", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/vax.webp", tagBg: "#e8eeff", tagColor: "#3352cc" },
-      { tag: "Mission", title: "Medical Mission – Abril 5", body: "9:00 AM – 4:00 PM. Magdala ng ID at gamot.", cta: "Magbasa pa", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medmission.jpeg", tagBg: "#e6f9ee", tagColor: "#1a7a45" },
-      { tag: "Checkup", title: "Prenatal Checkup – Araw‑araw", body: "Lunes hanggang Biyernes, 8:00 AM – 5:00 PM.", cta: "Matuto pa", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prenatal.webp", tagBg: "#fff7e6", tagColor: "#a05a00" },
-      { tag: "Nutrition", title: "Nutrition Fair – Abril 2", body: "Mga libreng timbang at konsulta para sa mga bata.", cta: "Sumali", ctaLink: "#", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/feeding.jpeg", tagBg: "#fde8f0", tagColor: "#9c2254" }
-    ];
-    function buildCarousel(slidesData) {
-      carouselSlides = slidesData;
-      realSlideCount = slidesData.length;
-      totalSlides = realSlideCount + 2 * CLONE_COUNT;
-      const track = document.getElementById('track');
-      const dotsWrap = document.getElementById('dots');
-      track.innerHTML = '';
-      dotsWrap.innerHTML = '';
-      function createSlide(item) {
-        const div = document.createElement('div');
-        div.className = 'slide';
-        div.innerHTML =
-          `<span class="tag" style="background:${item.tagBg}; color:${item.tagColor};">${item.tag}</span>
-           <div class="slide-title">${item.title}</div>
-           <div class="slide-body">${item.body}</div>
-           <a class="slide-cta" href="${item.ctaLink}">${item.cta}</a>
-           <div class="slide-image">${item.image && (item.image.startsWith('http') || item.image.startsWith('data:image')) ? `<img src="${item.image}" alt="${item.title}" style="width:100%;height:100%;object-fit:cover;" />` : item.image}</div>`;
-        return div;
-      }
-      for (let i = realSlideCount - CLONE_COUNT; i < realSlideCount; i++) {
-        track.appendChild(createSlide(slidesData[i]));
-      }
-      slidesData.forEach(item => track.appendChild(createSlide(item)));
-      for (let i = 0; i < CLONE_COUNT; i++) {
-        track.appendChild(createSlide(slidesData[i]));
-      }
-      carouselCurrent = CLONE_COUNT;
-      document.getElementById('carouselAutoplayBtn').textContent = 'pause';
-      document.getElementById('progress-bar').style.transition = 'none';
-      document.getElementById('progress-bar').style.width = '0%';
-      slidesData.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-        dot.onclick = () => goTo(CLONE_COUNT + i);
-        dotsWrap.appendChild(dot);
-      });
-      function updateSlideOffset() {
-        const firstSlide = track.querySelector('.slide');
-        if (firstSlide) {
-          const style = getComputedStyle(firstSlide);
-          const marginLeft = parseFloat(style.marginLeft) || 0;
-          const marginRight = parseFloat(style.marginRight) || 0;
-          slideOffset = firstSlide.offsetWidth + marginLeft + marginRight;
-          carouselWidth = track.parentElement.clientWidth;
-        }
-      }
-      updateSlideOffset();
-      track.style.transition = 'none';
-      goToImmediate(carouselCurrent);
-      track.offsetHeight;
-      track.style.transition = 'transform 0.38s cubic-bezier(0.4, 0, 0.2, 1)';
-      function handleTransitionEnd() {
-        if (carouselCurrent < CLONE_COUNT) {
-          carouselCurrent = realSlideCount + carouselCurrent;
-          goToImmediate(carouselCurrent);
-        } else if (carouselCurrent >= realSlideCount + CLONE_COUNT) {
-          carouselCurrent = carouselCurrent - realSlideCount;
-          goToImmediate(carouselCurrent);
-        }
-        const realIndex = (carouselCurrent - CLONE_COUNT + realSlideCount) % realSlideCount;
-        document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === realIndex));
-        document.getElementById('slide-counter').textContent = `${realIndex + 1} / ${realSlideCount}`;
-      }
-      track.removeEventListener('transitionend', handleTransitionEnd);
-      track.addEventListener('transitionend', handleTransitionEnd);
-      window.addEventListener('resize', () => {
-        updateSlideOffset();
-        goToImmediate(carouselCurrent);
-      });
-      if (CAROUSEL_DURATION > 0) startAutoplay();
-      const images = track.querySelectorAll('img');
-      let loadedCount = 0;
-      if (images.length > 0) {
-        images.forEach(img => {
-          if (img.complete) loadedCount++;
-          else img.addEventListener('load', () => {
-            loadedCount++;
-            if (loadedCount === images.length) {
-              updateSlideOffset();
-              goToImmediate(carouselCurrent);
-            }
-          }, { once: true });
-        });
-        if (loadedCount === images.length) {
-          updateSlideOffset();
-          goToImmediate(carouselCurrent);
-        }
-      } else {
-        setTimeout(() => { updateSlideOffset(); goToImmediate(carouselCurrent); }, 100);
-      }
+const CAROUSEL_DEFAULT = [
+  {
+    tag: "Vaccination",
+    dateText: "Mar 20",
+    dayText: "Thursday",
+    title: "Libreng Bakuna sa Tigdas",
+    body: "8:00 AM – 2:00 PM sa Barangay Hall. Magdala ng baby book.",
+    cta: "I-iskedyul",
+    image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/vax.webp"
+  },
+  {
+    tag: "Mission",
+    dateText: "Apr 5",
+    dayText: "Saturday",
+    title: "Medical Mission",
+    body: "9:00 AM – 4:00 PM. Magdala ng ID at gamot.",
+    cta: "Magbasa pa",
+    image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medmission.jpeg"
+  },
+  {
+    tag: "Checkup",
+    dateText: "Daily",
+    dayText: "Mon-Fri",
+    title: "Prenatal Checkup",
+    body: "8:00 AM – 5:00 PM. Libreng konsulta.",
+    cta: "Matuto pa",
+    image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prenatal.webp"
+  },
+  {
+    tag: "Nutrition",
+    dateText: "Apr 2",
+    dayText: "Wednesday",
+    title: "Nutrition Fair",
+    body: "Libreng timbang at konsulta para sa mga bata.",
+    cta: "Sumali",
+    image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/feeding.jpeg"
+  }
+];
+function buildCarousel(slidesData) {
+  carouselSlides = slidesData;
+  realSlideCount = slidesData.length;
+  totalSlides = realSlideCount + 2 * CLONE_COUNT;
+  const track = document.getElementById('track');
+  const dotsWrap = document.getElementById('dots');
+  track.innerHTML = '';
+  dotsWrap.innerHTML = '';
+
+  function createSlide(item) {
+    const div = document.createElement('div');
+    div.className = 'slide';
+    div.innerHTML = `
+      <div class="slide-image">
+        <img src="${item.image}" alt="${item.title}" loading="lazy" />
+        <div class="slide-overlay">
+          <span class="tag">${item.tag}</span>
+          <span class="slide-date-big">${item.dateText}</span>
+          <span class="slide-day">${item.dayText}</span>
+        </div>
+      </div>
+      <div class="slide-content">
+        <div class="slide-title">${item.title}</div>
+        <div class="slide-body">${item.body}</div>
+        <a class="slide-cta" href="${item.ctaLink || '#'}">${item.cta} <span class="arrow-icon">→</span></a>
+      </div>
+    `;
+    return div;
+  }
+
+  // Add clones at beginning and end
+  for (let i = realSlideCount - CLONE_COUNT; i < realSlideCount; i++) {
+    track.appendChild(createSlide(slidesData[i]));
+  }
+  slidesData.forEach(item => track.appendChild(createSlide(item)));
+  for (let i = 0; i < CLONE_COUNT; i++) {
+    track.appendChild(createSlide(slidesData[i]));
+  }
+
+  carouselCurrent = CLONE_COUNT;
+  document.getElementById('carouselAutoplayBtn')?.remove(); // remove old button
+  document.getElementById('progress-bar')?.parentElement?.remove(); // remove progress bar
+
+  // Generate dots
+  slidesData.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.className = 'dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+    dot.onclick = () => goTo(CLONE_COUNT + i);
+    dotsWrap.appendChild(dot);
+  });
+
+  function updateSlideOffset() {
+    const firstSlide = track.querySelector('.slide');
+    if (firstSlide) {
+      const style = getComputedStyle(firstSlide);
+      const marginLeft = parseFloat(style.marginLeft) || 0;
+      const marginRight = parseFloat(style.marginRight) || 0;
+      slideOffset = firstSlide.offsetWidth + marginLeft + marginRight;
+      carouselWidth = track.parentElement.clientWidth;
     }
+  }
+
+  updateSlideOffset();
+  track.style.transition = 'none';
+  goToImmediate(carouselCurrent);
+  track.offsetHeight;
+  track.style.transition = 'transform 0.38s cubic-bezier(0.4, 0, 0.2, 1)';
+
+  function handleTransitionEnd() {
+    if (carouselCurrent < CLONE_COUNT) {
+      carouselCurrent = realSlideCount + carouselCurrent;
+      goToImmediate(carouselCurrent);
+    } else if (carouselCurrent >= realSlideCount + CLONE_COUNT) {
+      carouselCurrent = carouselCurrent - realSlideCount;
+      goToImmediate(carouselCurrent);
+    }
+    const realIndex = (carouselCurrent - CLONE_COUNT + realSlideCount) % realSlideCount;
+    document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === realIndex));
+  }
+  track.removeEventListener('transitionend', handleTransitionEnd);
+  track.addEventListener('transitionend', handleTransitionEnd);
+  window.addEventListener('resize', () => {
+    updateSlideOffset();
+    goToImmediate(carouselCurrent);
+  });
+
+  // Start autoplay if duration > 0
+  if (CAROUSEL_DURATION > 0) startAutoplay();
+}
     function goToImmediate(n) {
       const track = document.getElementById('track');
       const firstSlide = track.querySelector('.slide');
@@ -5894,14 +6228,14 @@ if (descToggle) {
 // Assign background images to service cards (optional URLs)
 const serviceCards = document.querySelectorAll('.rhu-service-card');
 const serviceImages = {
-  maternal: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/maternal.jpg',
-  reproductive: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/reproductive.jpg',
-  lab: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/lab.jpg',
-  disease: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/disease.jpg',
-  environment: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/environment.jpg',
-  dental: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/dental.jpg',
-  other: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/other.jpg',
-  medicine: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicine-inventory.jpg'
+  maternal: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rhu-maternal.png',
+  reproductive: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rhu-reproductive.png',
+  lab: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rhu-lab.png',
+  disease: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rhu-disease.png',
+  environment: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rhu-environment.png',
+  dental: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rhu-dental.png',
+  other: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rhu-other.png',
+  medicine: 'https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/rhu-medicine.png'
 };
 serviceCards.forEach(card => {
   const service = card.getAttribute('data-service');

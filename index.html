@@ -38,54 +38,40 @@
   
 
   /* ---------- HEADER (premium glass) ---------- */
-  .app-header {
-    backdrop-filter: blur(72px) saturate(180%);
-    -webkit-backdrop-filter: blur(72px) saturate(180%);
-    background: rgba(31, 0, 58, 0.55);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.5), inset 0 -1px 0 rgba(255, 255, 255, 0.1), inset 0 0 8px 4px rgba(255, 255, 255, 0.4);
-    color: #ffffff;
-    padding: 16px 18px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    overflow: hidden;
-      box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -1px 0 rgba(255, 255, 255, 0.1),
-    inset 0 0 8px 4px rgba(255, 255, 255, 0.4); /* add this line */
-  }
-  .app-header::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.8), transparent);
-  }
-  .app-header::after {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 1px;
-    height: 100%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), transparent, rgba(255, 255, 255, 0.3));
-  }
-  .app-header h1 img { height: 60px; width: auto; transition: height 0.2s; }
-  .app-header h1 { display: flex; align-items: center; gap: 8px; }
-  .offline-badge {
-    background: rgba(141, 238, 255, 0.15);
-    border: 1px solid rgba(141, 238, 255, 0.45);
-    color: #8deeff;
-    font-size: 0.7rem;
-    font-weight: bold;
-    padding: 4px 10px;
-    border-radius: 30px;
-  }
+.app-header {
+  backdrop-filter: blur(1px) saturate(100%);
+  -webkit-backdrop-filter: blur(1px) saturate(100%);
+  background: rgba(31, 0, 58, 0.04);   /* extremely faint purple */
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: none;
+  color: #ffffff;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+
+.app-header::before,
+.app-header::after {
+  display: none;
+}
+
+.app-header h1 img { height: 60px; width: auto; transition: height 0.2s; }
+.app-header h1 { display: flex; align-items: center; gap: 8px; }
+.offline-badge {
+  background: rgba(141, 238, 255, 0.15);
+  border: 1px solid rgba(141, 238, 255, 0.45);
+  color: #8deeff;
+  font-size: 0.7rem;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 30px;
+}
   .logout-btn {
     background: #814daa;
     border: none;
@@ -1752,6 +1738,101 @@
     background-position: center !important;
     background-repeat: no-repeat !important;
 }
+/* Home page cards – faint purple glass with visible outline */
+#home .card {
+  backdrop-filter: blur(1px) saturate(100%);
+  -webkit-backdrop-filter: blur(1px) saturate(100%);
+  background: rgba(31, 0, 58, 0.04);
+  border: none;  /* remove the subtle border */
+  outline: 1px solid rgba(255, 255, 255, 0.3);  /* visible outline */
+  outline-offset: 0px;
+  box-shadow: none;
+  color: #ffffff;
+  padding: 18px 16px;
+  margin-bottom: 18px;
+  border-radius: 20px;
+}
+
+/* Remove the decorative shiny lines */
+#home .card::before,
+#home .card::after {
+  display: none;
+}
+/* Carousel – same faint purple glass with visible outline */
+#home .carousel {
+  backdrop-filter: blur(1px) saturate(100%);
+  -webkit-backdrop-filter: blur(1px) saturate(100%);
+  background: rgba(31, 0, 58, 0.04);
+  border: none;
+  outline: 1px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 0px;
+  box-shadow: none;
+  border-radius: 20px;
+}
+
+/* Remove any extra decorative pseudo-elements from carousel */
+#home .carousel::before,
+#home .carousel::after {
+  display: none;
+}
+
+/* Keep slides fully transparent so background shows through */
+#home .slide {
+  background: transparent;
+  backdrop-filter: none;
+  box-shadow: none;
+  border: none;
+}
+/* Collapsible content styling */
+.collapsible-content {
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.extra-content {
+  margin-top: 12px;
+}
+/* Emergency page cards – faint purple glass with visible outline */
+#emergency .card {
+  backdrop-filter: blur(1px) saturate(100%);
+  -webkit-backdrop-filter: blur(1px) saturate(100%);
+  background: rgba(31, 0, 58, 0.04);
+  border: none;
+  outline: 1px solid rgba(255, 255, 255, 0.3);
+  outline-offset: 0px;
+  box-shadow: none;
+  color: #ffffff;
+  padding: 18px 16px;
+  margin-bottom: 18px;
+  border-radius: 20px;
+}
+
+/* Remove decorative shiny lines from emergency cards */
+#emergency .card::before,
+#emergency .card::after {
+  display: none;
+}
+/* Emergency page – force faint glass effect on all cards (including inline-styled ones) */
+#emergency .card,
+#emergency .card[style] {
+  backdrop-filter: blur(1px) saturate(100%) !important;
+  -webkit-backdrop-filter: blur(1px) saturate(100%) !important;
+  background: rgba(31, 0, 58, 0.04) !important;
+  border: none !important;
+  outline: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: none !important;
+}
+
+/* Remove decorative lines */
+#emergency .card::before,
+#emergency .card::after {
+  display: none !important;
+}
+
+/* Keep the red left accent on the emergency hotline card if desired */
+#emergency .card:first-child {
+  border-left: 4px solid #cf90ff !important;
+}
+
 </style>
 </head>
 <body>
@@ -1774,7 +1855,7 @@
     <div id="appContainer">
       <header class="app-header">
         <h1>
-          <img src="logo.png" alt="Logo" class="header-logo" style="vertical-align: middle; margin-right: 4px;">
+          <img src="https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/2d6020189102ae77ffd2ddb11bd9335236733c6f/logo%20(finalized).png" alt="Logo" class="header-logo" style="vertical-align: middle; margin-right: 4px;">
           Abot-Kamay
         </h1>
         <div style="display: flex; gap: 8px; align-items: center;">
@@ -1822,7 +1903,7 @@
           <div>
             <h2>Mabuhay, <span id="loggedInUserDisplay">Bisita</span>!</h2>
             <p id="userRoleDisplay">Bisita · Barangay Magsaysay</p>
-            <p style="margin-top:12px; font-size:0.9rem; opacity:0.8;">
+            <p style="margin-top:12px; font-size:1.4rem; opacity:0.8;">
               Maligayang pagdating sa Abot-Kamay, ang iyong gabay sa kalusugan.
             </p>
           </div>
@@ -1834,7 +1915,7 @@
         </div>
 
         <div class="card card-user">
-          <div style="font-size:2rem;">👤</div>
+          <div style="font-size:2rem;"></div>
           <div>
             <span id="accountTypeDisplay" style="font-weight:bold;">Bisita</span>
             <div style="font-size:0.8rem; opacity:0.7;">Barangay Magsaysay</div>
@@ -1864,17 +1945,16 @@
         <div class="dots" id="dots"></div>
       </div>
 
-      <div class="card">
-        <h3>What is Abot‑Kamay?</h3>
-        <p>The Abot‑Kamay Health Companion Website is an offline‑first progressive web application (PWA) built specifically for BHWs and community members in rural areas. This is done by enabling systematic data collection, evidence‑based interventions, and continuous community monitoring, ultimately improving patient outcomes in underserved areas.
-
-
-It functions as a health companion that provides essential tools—patient records, immunization tracking,  automated immunization alerts, appointment scheduling, medicine inventory, health education, and emergency contacts, offline‑local data caching, encrypted patient records, RHU service directories, emergency contacts, and cloud backup capabilities. 
-
-Optional online features (appointment requests and full‑system backup) are available when connectivity exists but are never required for core workflows.
-
-The app aims to improve access to localize health information, enhance health worker–community communication, strengthen patient follow‑up, and increase health‑seeking behaviors despite low connectivity. </p>
-      </div>
+<div class="card" id="abotKamayCard">
+  <h3>What is Abot‑Kamay?</h3>
+  <div id="abotKamayExtra" class="extra-content" style="display: none;">
+    <p>The Abot‑Kamay Health Companion Website is an offline‑first progressive web application (PWA) built specifically for BHWs and community members in rural areas. This is done by enabling systematic data collection, evidence‑based interventions, and continuous community monitoring, ultimately improving patient outcomes in underserved areas.</p>
+    <p>It functions as a health companion that provides essential tools—patient records, immunization tracking, automated immunization alerts, appointment scheduling, medicine inventory, health education, emergency contacts, offline‑local data caching, encrypted patient records, RHU service directories, emergency contacts, and cloud backup capabilities.</p>
+    <p>Optional online features (appointment requests and full‑system backup) are available when connectivity exists but are never required for core workflows.</p>
+    <p>The app aims to improve access to localize health information, enhance health worker–community communication, strengthen patient follow‑up, and increase health‑seeking behaviors despite low connectivity.</p>
+  </div>
+  <button id="abotKamayToggleBtn" class="btn-outline" style="margin-top: 12px; width: auto; padding: 6px 16px;">See more</button>
+</div>
 
       <div id="nextAppointmentCard" class="card" style="display: none; border-left: 3px solid #cf90ff;">
         <h3>Susunod na Appointment</h3>
@@ -1955,11 +2035,11 @@ The app aims to improve access to localize health information, enhance health wo
             <div class="edu-cat-btn" data-edu="postpartum" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/postpartum.png');">
               <span class="edu-cat-label">Postpartum Care</span>
             </div>
-            <div class="edu-cat-btn" data-edu="newborn" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.png');">
+            <div class="edu-cat-btn" data-edu="newborn" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn-finale.png');">
               <span class="edu-cat-label">Newborn Care</span>
             </div>
-            <div class="edu-cat-btn" data-edu="infant" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/infant.png');">
-              <span class="edu-cat-label">Infant Care</span>
+            <div class="edu-cat-btn" data-edu="infant" style="background-image:url('https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/infant-finale.png');">
+              <span class="edu-cat-label">re</span>
             </div>
           </div>
         </div>
@@ -2829,7 +2909,7 @@ The app aims to improve access to localize health information, enhance health wo
           ]
         },
         infant: {
-          title: "Infant Care",
+          title: "re",
           intro: "Pangangalaga sa sanggol (1‑12 buwan).",
           sections: [
             { heading: "Eksklusibong Pagpapasuso", content: "I‑breastfeed lamang ang sanggol hanggang 6 na buwan. Ang gatas ng ina ay sapat na nutrisyon at proteksyon." }
@@ -5045,32 +5125,322 @@ prepartum_birth_preparedness: {
     { heading: "Mag‑enroll sa Childbirth Class", content: "Alamin ang breathing techniques, pain management, newborn care, at breastfeeding. Maraming libreng klase sa RHU o online." }
   ]
 },
-      postpartum: {
-        title: "👩 Postpartum Care",
-        hero: "Unang 6 na linggo pagkatapos manganak kritikal para sa kalusugan ng ina.",
-        sections: [
-          { heading: "Postnatal Checkup", content: "Magpatingin sa RHU sa loob ng 48 oras, 1 linggo, at 6 na linggo." },
-          { heading: "Pagpapagaling", content: "Kumain ng masustansya, uminom ng maraming tubig, iwasan ang mabigat na buhatin." }
-        ]
-      },
-      newborn: {
-        title: "👶 Newborn Care (0–28 araw)",
-        hero: "Unang buwan ng buhay – espesyal na pangangailangan.",
-        sections: [
-          { heading: "Essential Newborn Care", content: "Patuyuin, ilagay sa dibdib ng ina, at i-breastfeed sa unang oras." },
-          { heading: "Newborn Screening", content: "Mahalagang magpa-screening sa loob ng 48 oras para makita ang congenital disorders." }
-        ]
-      },
-      infant: {
-        title: "🍼 Infant Care (1–12 buwan)",
-        hero: "Unang taon – panahon ng paglago at pag-unlad.",
-        sections: [
-          { heading: "Eksklusibong Pagpapasuso", content: "I-breastfeed lamang hanggang 6 na buwan." },
-          { heading: "Complementary Foods", content: "Simula 6 na buwan, magdagdag ng lugaw, gulay, prutas, itlog." },
-          { heading: "Vaccination Schedule", content: "Pentavalent, OPV, Measles sa 9 na buwan, MMR sa 12 buwan." }
-        ]
-      }
-    };
+      // ========== POSTPARTUM CARE OVERVIEW ==========
+postpartum: {
+  isOverview: true,
+  title: "Postpartum Care",
+  tagline: "Pangangalaga Pagkatapos Manganak",
+  description: "Ang postpartum period ay ang unang 6 na linggo pagkatapos manganak. Ito ay kritikal na panahon para sa paggaling ng ina, pagpapasuso, at pag-aadjust sa bagong sanggol.",
+  spreadModes: [  // important reminders
+    { icon: "🩸", label: "Bantayan ang\npagdurugo" },
+    { icon: "🤱", label: "Breastfeeding\nwithin 1 hour" },
+    { icon: "🥗", label: "Masustansyang\ndiyeta" },
+    { icon: "🛌", label: "Sapat na\npahinga" },
+    { icon: "❤️", label: "Mental health\ncheck" },
+    { icon: "📅", label: "Family planning\nafter 6 weeks" }
+  ],
+  subTopics: [
+    { key: "postpartum_physical_recovery", title: "Expected Changes in Physical Recovery", subtitle: "Ano ang normal na pagbabago sa katawan pagkatapos manganak", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/postpartum.jpg" },
+    { key: "postpartum_perineal_care_overview", title: "Perineal Care / Wound Care Techniques", subtitle: "Pangangalaga sa tahi (episiotomy / CS)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/postpartum.jpg" },
+    { key: "postpartum_breastfeeding", title: "Breastfeeding Techniques", subtitle: "Tamang posisyon at pagpapatuloy ng pagpapasuso", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg" },
+    { key: "postpartum_maternal_nutrition", title: "Maternal Nutrition", subtitle: "Mga pagkaing kailangan ng nagpapasusong ina", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg" },
+    { key: "postpartum_infant_nutrition", title: "Infant Nutrition", subtitle: "Pagpapakain sa sanggol (breastfeeding o formula)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/infant.jpg" },
+    { key: "postpartum_mental_health", title: "Postpartum Mental Health", subtitle: "Baby blues, depression, at anxiety", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/depression.jpg" },
+    { key: "postpartum_family_planning", title: "Family Planning Techniques", subtitle: "Mga contraceptive option pagkatapos manganak", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/doh-programs.jpg" },
+    { key: "postpartum_danger_signs", title: "Danger Signs", subtitle: "Kailan dapat pumunta agad sa ospital", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png" }
+  ]
+},
+
+// ========== POSTPARTUM DETAIL PAGES (direct) ==========
+postpartum_physical_recovery: {
+  title: "Expected Changes in Physical Recovery",
+  intro: "Ang katawan ng isang ina ay dahan-dahang babalik sa normal pagkatapos manganak.",
+  sections: [
+    { heading: "Lochie (Postpartum Bleeding)", content: "Ang lochia ay normal na pagdurugo na tumatagal ng 4‑6 na linggo. Ito ay pula sa unang 3‑5 araw, pagkatapos ay nagiging pinkish, at sa wakas ay puti/dilaw. Gumamit ng sanitary pad (huwag gumamit ng tampons). Pumunta sa doktor kung may malalaking blood clots o sobrang dami ng dugo." },
+    { heading: "Uterine Involution", content: "Ang matris ay bumabalik sa dating laki sa loob ng 6 na linggo. Maaaring makaramdam ng afterpains (pag-urong ng matris) lalo na habang nagpapasuso. Ito ay normal at nakakatulong upang pigilan ang pagdurugo." },
+    { heading: "Vaginal Discharge and Soreness", content: "Kung may episiotomy o tahi, maaaring may pananakit sa perineal area. Bawasan ang pag-upo nang matagal, uminom ng pain reliever (paracetamol), at gawin ang perineal care." },
+    { heading: "Hormonal Changes", content: "Maaaring makaranas ng pagpapawis sa gabi, pangangati ng balat, at paglagas ng buhok (3‑6 buwan postpartum). Ito ay normal dahil sa pagbaba ng estrogen." }
+  ]
+},
+postpartum_breastfeeding: {
+  title: "Breastfeeding Techniques",
+  intro: "Ang eksklusibong pagpapasuso (walang tubig o formula) sa unang 6 na buwan ay pinakamainam para sa sanggol.",
+  sections: [
+    { heading: "Unang Oras (Golden Hour)", content: "Ilagay ang sanggol sa dibdib sa loob ng unang oras pagkapanganak. Ang skin‑to‑skin contact ay nagpapalakas ng milk let‑down at bonding." },
+    { heading: "Tamang Posisyon", content: "Cradle hold, football hold, side‑lying position. Siguraduhin na ang bibig ng sanggol ay nakabuka nang husto (latching) at ang ibabang labi ay nakalabas." },
+    { heading: "Mga Palatandaan ng Tamang Latch", content: "Maririnig ang paglunok, hindi sumasakit ang utong, at ang sanggol ay unti‑unting tumitigil sa pag-iyak. Ang dibdib ay dapat lumambot pagkatapos ng feeding." },
+    { heading: "Gaano Kadalas Magpakain", content: "On demand – 8‑12 beses sa 24 oras. Huwag maghintay na umiyak ang sanggol bago pakainin." }
+  ]
+},
+postpartum_maternal_nutrition: {
+  title: "Maternal Nutrition (Postpartum & Breastfeeding)",
+  intro: "Ang nagpapasusong ina ay nangangailangan ng dagdag na 300‑500 calories bawat araw.",
+  sections: [
+    { heading: "Mga Dapat Kainin", content: "Protina (itlog, isda, manok, munggo), calcium (gatas, keso, tokwa), iron (malunggay, atay, karne), at maraming gulay at prutas. Uminom ng 8‑10 basong tubig araw‑araw." },
+    { heading: "Mga Dapat Iwasan", content: "Alak, sigarilyo, sobrang caffeine (higit 300 mg/araw), at mga isdang mataas ang mercury (pating, mackerel, swordfish)." },
+    { heading: "Supplements", content: "Patuloy na uminom ng iron + folic acid kahit 1 buwan pagkatapos manganak. Ang calcium at vitamin D ay inirerekomenda rin." }
+  ]
+},
+postpartum_infant_nutrition: {
+  title: "Infant Nutrition (0‑6 months)",
+  intro: "Ang gatas ng ina ang pinakamainam na pagkain para sa sanggol. Kung hindi posible, gumamit ng iron‑fortified formula.",
+  sections: [
+    { heading: "Eksklusibong Pagpapasuso", content: "Walang tubig, juice, o pagkain hanggang 6 na buwan. Ang gatas ng ina ay sapat na nutrisyon at proteksyon laban sa impeksyon." },
+    { heading: "Pagpapalit ng Lampin at Weight Gain", content: "Ang sanggol ay dapat magkaroon ng 6‑8 basang lampin bawat araw at tumataba nang 150‑200 gramo bawat linggo." },
+    { heading: "Vitamin D Supplement", content: "Inirerekomenda ang 400 IU ng Vitamin D araw‑araw para sa mga sanggol na eksklusibong nagpapasuso." }
+  ]
+},
+postpartum_mental_health: {
+  title: "Postpartum Mental Health",
+  intro: "Ang mga pagbabago sa hormone at kakulangan sa tulog ay maaaring magdulot ng emosyonal na pagbabago.",
+  sections: [
+    { heading: "Baby Blues", content: "Nangyayari sa 70‑80% ng ina, karaniwang nagsisimula 1‑5 araw pagkatapos manganak, at tumatagal lamang ng 2 linggo. Sintomas: pag-iyak, iritable, anxiety, at pagod. Hindi nangangailangan ng gamot – suporta mula sa pamilya ay sapat." },
+    { heading: "Postpartum Depression (PPD)", content: "Tumataas ang panganib kung may history ng depression. Sintomas: matinding kalungkutan, kawalan ng interes sa sanggol, pagbabago sa gana, at suicidal thoughts. Kailangan ng propesyonal na tulong (therapy, gamot)." },
+    { heading: "Postpartum Psychosis", content: "Bihira ngunit emergency. Sintomas: hallucinations, delusions, extreme agitation. Kailangan agad ng psychiatric care." },
+    { heading: "Paano Makatutulong", content: "Matulog kapag natutulog ang sanggol, humingi ng tulong sa pamilya, sumali sa support group, at huwag matakot magsabi sa doktor." }
+  ]
+},
+postpartum_family_planning: {
+  title: "Family Planning After Delivery",
+  intro: "Ang pagbubuntis ay maaaring mangyari kahit hindi pa bumabalik ang regla. Ang family planning ay ligtas at mahalaga.",
+  sections: [
+    { heading: "Kailan Pwedeng Mag-umpisa", content: "Kung hindi nagpapasuso, maaaring mag-umpisa ng birth control 3 linggo pagkatapos manganak (kung walang risk ng blood clot). Kung nagpapasuso, maghintay hanggang 6 na linggo." },
+    { heading: "Mga Pamamaraan", content: "⬤ Progestin‑only pills (POP) – ligtas sa nagpapasuso.<br>⬤ Injectable (DMPA) – tuwing 3 buwan.<br>⬤ IUD (copper o hormonal) – maaaring ilagay sa loob ng 48 oras postpartum.<br>⬤ Implant – maaaring ilagay kaagad.<br>⬤ Condoms – walang epekto sa gatas.<br>⬤ Lactational Amenorrhea Method (LAM) – epektibo lamang kung eksklusibong nagpapasuso at wala pang regla at wala pang 6 na buwan." }
+  ]
+},
+postpartum_danger_signs: {
+  title: "Danger Signs After Delivery",
+  intro: "Pumunta agad sa ospital kung makaranas ng alinman sa mga sumusunod.",
+  sections: [
+    { heading: "Emergency Signs", content: "⬤ Pagdurugo na bumababad ng isang sanitary pad bawat oras<br>⬤ Malalaking blood clots (kasing laki ng itlog)<br>⬤ Lagnat na higit 38°C<br>⬤ Sakit ng ulo na may malabong paningin (maaaring senyales ng preeclampsia)<br>⬤ Paninikip ng dibdib o hirap sa paghinga<br>⬤ Matinding pananakit ng tiyan na hindi nawawala<br>⬤ Pamamaga at pananakit ng binti (maaaring deep vein thrombosis)<br>⬤ Pag‑iisip na saktan ang sarili o ang sanggol" }
+  ]
+},
+
+// ========== PERINEAL CARE OVERVIEW (with two sub‑pages) ==========
+postpartum_perineal_care_overview: {
+  isOverview: true,
+  title: "Perineal Care / Wound Care Techniques",
+  tagline: "Pangangalaga sa Tahi Pagkatapos Manganak",
+  description: "Ang tamang pag-aalaga ng tahi (episiotomy o cesarean section) ay pumipigil sa impeksyon at nagpapabilis ng paggaling. Piliin ang uri ng inyong panganganak.",
+  subTopics: [
+    { key: "postpartum_episiotomy", title: "Episiotomy", subtitle: "Pangangalaga ng tahi sa perineum (vaginal delivery)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/postpartum.jpg" },
+    { key: "postpartum_cesarean", title: "Cesarean Section", subtitle: "Pangangalaga ng tahi sa tiyan (C‑section)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/postpartum.jpg" }
+  ]
+},
+
+// ========== PERINEAL CARE DETAIL PAGES ==========
+postpartum_episiotomy: {
+  title: "Episiotomy Care",
+  intro: "Ang episiotomy ay isang surgical cut sa perineum para mapadali ang panganganak. Karaniwang gumagaling ito sa loob ng 2‑4 na linggo.",
+  sections: [
+    { heading: "Paglilinis ng Tahi", content: "Maghugas ng kamay. Gumamit ng peri bottle o tabo na may maligamgam na tubig (huwag maglagay ng sabon sa loob ng ari). Mag‑spray mula sa harap papuntang likod pagkatapos umihi o dumi. Patuyuin ng malinis na tuwalya o tissue sa pamamagitan ng pat‑dry (huwag kuskusin)." },
+    { heading: "Pain Management", content: "Uminom ng paracetamol kung inireseta. Maaaring gumamit ng ice pack (balot sa tela) sa perineum sa unang 24‑48 oras. Pagkatapos ay warm sitz bath (upo sa maligamgam na tubig) 2‑3 beses araw‑araw sa loob ng 10‑15 minuto." },
+    { heading: "Mga Dapat Iwasan", content: "Huwag magbuhat ng mabigat, huwag makipagtalik hanggang 6 na linggo, iwasan ang paninigas ng dumi (kumain ng fiber at uminom ng maraming tubig)." },
+    { heading: "Palatandaan ng Impeksyon", content: "Lagnat, pamumula o pamamaga ng tahi, nana o mabahong discharge, at matinding sakit. Pumunta agad sa RHU kung may mga ito." }
+  ]
+},
+postpartum_cesarean: {
+  title: "Cesarean Section Wound Care",
+  intro: "Ang C‑section ay isang major surgery. Ang tahi sa tiyan ay kailangan ng espesyal na pangangalaga upang maiwasan ang impeksyon at maayos ang paggaling.",
+  sections: [
+    { heading: "Paglilinis at Pagpapatuyo", content: "Huwag basain ang tahi sa unang 48 oras. Pagkatapos, dahan‑dahang sabunin ng mild soap at tubig, banlawan, at patuyuin ng tuwalya. Iwasan ang pagbabad sa bathtub o swimming pool hanggang sa ganap na gumaling (4‑6 na linggo)." },
+    { heading: "Pamamahala ng Sakit", content: "Uminom ng pain reliever ayon sa reseta. Gumamit ng abdominal binder kung inirerekomenda ng doktor para sa suporta. Iwasan ang pagtawa, pag‑ubo, o pag‑atungal nang bigla (pindutin ang unan sa tahi kapag kinakailangan)." },
+    { heading: "Mga Aktibidad", content: "Huwag magbuhat ng mas mabigat sa sanggol (approx 4‑5 kg) sa unang 6 na linggo. Dahan‑dahang maglakad upang maiwasan ang blood clots. Iwasan ang strenuous exercise hanggang sa clearance ng doktor." },
+    { heading: "Palatandaan ng Problema", content: "Lagnat, pamumula na kumakalat, nana, bukas na tahi, o sobrang sakit. Pumunta agad sa ospital." }
+  ]
+},
+      // ========== NEWBORN CARE OVERVIEW ==========
+newborn: {
+  isOverview: true,
+  title: "Newborn Care",
+  tagline: "Pangangalaga sa Bagong Silang (0–28 araw)",
+  description: "Ang unang 28 araw ng buhay ay kritikal para sa bagong panganak. Ang tamang pangangalaga sa pusod, pagpapakain, at pagpapanatili ng init ay nakakatulong upang maiwasan ang impeksyon at komplikasyon.",
+  spreadModes: [
+    { icon: "🍼", label: "Exclusive\nbreastfeeding" },
+    { icon: "🧼", label: "Malinis na\npusod" },
+    { icon: "🌡️", label: "Panatilihing\nmainit" },
+    { icon: "💉", label: "Newborn\nscreening" },
+    { icon: "📅", label: "Immunization\nsa oras" },
+    { icon: "⚠️", label: "Alamin ang\ndanger signs" }
+  ],
+  subTopics: [
+    { key: "newborn_essential", title: "Essential Newborn Care", subtitle: "Unang Yakap at pangunahing pangangalaga", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg" },
+    { key: "newborn_cord_care", title: "Cord Care", subtitle: "Pangangalaga sa pusod", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg" },
+    { key: "newborn_feeding", title: "Feeding", subtitle: "Breastfeeding at formula", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/infant.jpg" },
+    { key: "newborn_thermoregulation", title: "Thermoregulation", subtitle: "Paano panatilihing mainit ang sanggol", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg" },
+    { key: "newborn_screening_immunization", title: "Newborn Screening and Immunization", subtitle: "Mga pagsusuri at bakuna (may schedule)", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg" },
+    { key: "newborn_gestational_age", title: "Normal Term vs Preterm vs Postterm", subtitle: "Pagkakaiba ayon sa edad ng pagbubuntis", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/newborn.jpg" },
+    { key: "newborn_danger_signs", title: "Danger Signs", subtitle: "Kailan dapat pumunta agad sa doktor", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png" }
+  ]
+},
+
+// ========== NEWBORN DETAIL PAGES ==========
+newborn_essential: {
+  title: "Essential Newborn Care",
+  intro: "Ang Essential Newborn Care (ENC) ay isang set ng mga interbensyon na nakakapagligtas ng buhay ng sanggol sa unang oras at unang linggo.",
+  sections: [
+    { heading: "Unang Yakap (Golden Hour)", content: "Sa loob ng unang 1-3 minuto pagkapanganak: patuyuin ang sanggol gamit ang malinis at mainit na tela, ilagay sa dibdib ng ina (skin‑to‑skin), at takpan ng kumot ang likod. Huwag muna paliguan sa unang 6 na oras." },
+    { heading: "Breastfeeding within 1 hour", content: "Hayaang dumede ang sanggol sa loob ng unang oras. Ang colostrum (unang gatas) ay puno ng antibodies." },
+    { heading: "Delayed Cord Clamping", content: "I-clamp ang pusod pagkatapos ng 1-3 minuto habang patuloy ang skin‑to‑skin. Pinapataas nito ang iron storage ng sanggol." },
+    { heading: "Vitamin K at Hepatitis B Vaccine", content: "Bigyan ng Vitamin K injection (para maiwasan ang bleeding) at unang dose ng Hepatitis B vaccine bago lumabas ng ospital." },
+    { heading: "Pagkilala sa Panganib", content: "Siguraduhing humihinga nang maayos ang sanggol, umiiyak, at aktibo. Kung may problema, agad na i-refer sa doktor." }
+  ]
+},
+newborn_cord_care: {
+  title: "Cord Care (Pangangalaga sa Pusod)",
+  intro: "Ang pusod ay natutuyo at nalalagas sa loob ng 5‑15 araw. Ang malinis na pangangalaga ay pumipigil sa impeksyon.",
+  sections: [
+    { heading: "Panatilihing Malinis at Tuyo", content: "Huwag basain ang pusod. Pagkatapos maligo, dahan-dahang patuyuin gamit ang malinis na tela o cotton ball. I-fold ang lampin pababa upang hindi matakpan ang pusod." },
+    { heading: "Huwag Maglagay ng Kahit Ano", content: "Iwasan ang alcohol, pulbos, o traditional na gamot sa pusod. Ang tuyong pusod ay mas mabilis gumaling." },
+    { heading: "Kailan Dapat Mag-alala", content: "Pumunta sa doktor kung may pamumula, pamamaga, nana, mabahong amoy, o pagdurugo. Maaaring ito ay senyales ng omphalitis (impeksyon ng pusod)." },
+    { heading: "Kusang Pagkalagas", content: "Huwag hilahin ang pusod kahit nakalawit na. Hayaan itong matuyo at malagas nang kusa." }
+  ]
+},
+newborn_feeding: {
+  title: "Feeding the Newborn",
+  intro: "Ang eksklusibong pagpapasuso (walang tubig, juice, o formula) sa unang 6 na buwan ay inirerekomenda ng DOH at WHO.",
+  sections: [
+    { heading: "Exclusive Breastfeeding", content: "Pakainin ang sanggol on demand (8‑12 beses sa 24 oras). Ang colostrum ay sapat na nutrisyon sa unang 3 araw. Huwag magbigay ng tubig – ang gatas ng ina ay 88% tubig." },
+    { heading: "Signs of Good Latch", content: "Nakabuka nang husto ang bibig, nakalabas ang ibabang labi, maririnig ang paglunok, at hindi sumasakit ang utong ng ina." },
+    { heading: "Kung Hindi Posible ang Breastfeeding", content: "Gumamit ng iron‑fortified infant formula. Sundin ang tamang paghahalo (huwag magdagdag ng extra water). Pakainin ng 60‑90 mL bawat 3‑4 na oras." },
+    { heading: "Burping at Positioning", content: "I-burp ang sanggol pagkatapos ng bawat feeding. Iposisyon nang patayo o naka-slant upang maiwasan ang choking." }
+  ]
+},
+newborn_thermoregulation: {
+  title: "Thermoregulation (Pagpapanatili ng Init ng Katawan)",
+  intro: "Ang bagong panganak ay madaling lumamig dahil maliit ang katawan at hindi pa ganap ang thermoregulation.",
+  sections: [
+    { heading: "Normal Temperature", content: "Ang normal na temperatura ng newborn ay 36.5°C – 37.5°C (axillary). Kung bumaba sa 36°C, ito ay hypothermia." },
+    { heading: "Paano Panatilihing Mainit", content: "Panatilihin ang room temperature sa 25‑28°C. Damitan ng sapat na damit (dagdag ng isang layer kumpara sa matanda). Gumamit ng cap at medyas. I-skin‑to‑skin contact kung malamig." },
+    { heading: "Iwasan ang Overheating", content: "Huwag balutin nang sobra. Kung pawisan ang batok o dibdib, tanggalin ang isang damit." },
+    { heading: "Palatandaan ng Hypothermia", content: "Malamig ang balat, hindi umiiyak, tamad sumuso, mabagal ang paggalaw. Kung may ganito, painitin agad at kumonsulta sa doktor." }
+  ]
+},
+newborn_screening_immunization: {
+  title: "Newborn Screening and Immunization",
+  intro: "Ang newborn screening at bakuna ay pumoprotekta sa sanggol laban sa malubhang sakit at kapansanan.",
+  sections: [
+    { heading: "Newborn Screening (NBS)", content: "Dapat gawin sa loob ng 48 oras pagkapanganak hanggang 3 araw. Isang patak ng dugo mula sa sakong ay sinusuri ang 6 na sakit: Congenital Hypothyroidism (CH), Congenital Adrenal Hyperplasia (CAH), Galactosemia (GAL), Phenylketonuria (PKU), Glucose‑6‑Phosphate Dehydrogenase Deficiency (G6PD), at Maple Syrup Urine Disease (MSUD)." },
+    { heading: "Immunization Schedule (0‑6 na buwan)", content: "⬤ **Birth:** BCG (TB), HepB (1st dose), OPV (0 – optional)<br>⬤ **6 na linggo:** Pentavalent 1 (DPT‑HepB‑Hib), OPV 1, PCV 1<br>⬤ **10 na linggo:** Pentavalent 2, OPV 2, PCV 2<br>⬤ **14 na linggo:** Pentavalent 3, OPV 3, PCV 3<br>⬤ **9 na buwan:** Measles‑containing vaccine (MCV 1)<br>⬤ **12‑15 na buwan:** MMR" },
+    { heading: "Saan Magpabakuna", content: "Libre ang lahat ng bakuna sa RHU at health center. Dalhin ang baby booklet." }
+  ]
+},
+newborn_gestational_age: {
+  title: "Normal Term vs Preterm vs Postterm",
+  intro: "Ang edad ng pagbubuntis (gestational age) ay nakakaapekto sa kalusugan at pangangailangan ng sanggol.",
+  sections: [
+    { heading: "Normal Term", content: "Ipinanganak sa pagitan ng **37 linggo 0 araw** at **40 linggo 6 araw**. Karaniwang timbang 2.5‑4 kg, malakas ang pagsuso, at kayang i-regulate ang temperatura." },
+    { heading: "Preterm (wala pang 37 linggo)", content: "Mas maliit, manipis ang balat, kaunti ang buhok, at maaaring may problema sa paghinga at pagpapakain. Kailangan ng kangaroo care (skin‑to‑skin) at mas mainit na kapaligiran. May mas mataas na panganib ng jaundice at impeksyon." },
+    { heading: "Postterm (42 linggo pataas)", content: "Bihira. Maaaring tuyo ang balat, mahaba ang kuko, at mas malaki (macrosomia). Kailangan ng malapit na monitoring para sa meconium aspiration at low blood sugar." },
+    { heading: "Paano Alagaan", content: "Ang preterm ay nangangailangan ng extra feeding support at temperature control. Ang postterm ay dapat i‑check ang blood sugar at hydration." }
+  ]
+},
+newborn_danger_signs: {
+  title: "Danger Signs in Newborns",
+  intro: "Kung mayroon ng alinman sa mga sumusunod, dalhin agad ang sanggol sa pinakamalapit na health facility.",
+  sections: [
+    { heading: "Emergency Signs", content: "⬤ Hindi nakakapagpapasuso o sumususo nang mahina<br>⬤ Hindi umiihi sa loob ng 12 oras<br>⬤ Hindi dumudumi sa loob ng 48 oras<br>⬤ Lagnat (>38°C) o sobrang lamig (<36°C)<br>⬤ Mabilis o nahihirapang huminga (chest indrawing)<br>⬤ Paninilaw ng balat na umaabot sa palad o talampakan sa unang 24 oras<br>⬤ Umbilical redness na kumakalat<br>⬤ Convulsions (pangingisay)<br>⬤ Napakatahimik, hindi gumagalaw" }
+  ]
+},
+      // ========== INFANT CARE OVERVIEW (1–12 months) ==========
+infant: {
+  isOverview: true,
+  title: "Infant Care",
+  tagline: "Pangangalaga sa Sanggol (1–12 buwan)",
+  description: "Ang unang taon ng buhay ay panahon ng mabilis na paglaki at pag-unlad. Ang tamang nutrisyon, bakuna, at ligtas na kapaligiran ay pundasyon ng malusog na pagkabata.",
+  spreadModes: [
+    { icon: "📏", label: "Growth &\nMilestones" },
+    { icon: "🥣", label: "Complementary\nfeeding" },
+    { icon: "💉", label: "Immunization\nsa oras" },
+    { icon: "🤒", label: "Common\nillnesses" },
+    { icon: "🧴", label: "Home care &\nhygiene" },
+    { icon: "⚠️", label: "Hazards &\ndanger signs" }
+  ],
+  subTopics: [
+    { key: "infant_growth", title: "Growth and Development Milestones", subtitle: "Ano ang inaasahang kakayahan ng sanggol kada buwan", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/infant.jpg" },
+    { key: "infant_nutrition", title: "Nutrition", subtitle: "Pagpapakain mula 0 hanggang 12 buwan", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/prepartum.jpg" },
+    { key: "infant_immunization", title: "Immunization Schedule", subtitle: "Mga bakuna at kailan dapat ibigay", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/bcg-vaccine.jpg" },
+    { key: "infant_illnesses", title: "Common Illnesses and Management", subtitle: "Lagnat, ubo, pagtatae – paano gagamutin", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/medicines.jpg" },
+    { key: "infant_home_care", title: "Home Care and Hygiene", subtitle: "Pangangalaga sa bahay at kalinisan", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/infant.jpg" },
+    { key: "infant_hazards", title: "Common Hazards and Management", subtitle: "Mga panganib sa paligid at paano maiiwasan", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png" },
+    { key: "infant_danger_signs", title: "Danger Signs", subtitle: "Kailan dapat pumunta agad sa ospital", image: "https://raw.githubusercontent.com/ryankristianruiz/AbotKamayPWA/refs/heads/main/at-risk.png" }
+  ]
+},
+
+// ========== INFANT DETAIL PAGES ==========
+infant_growth: {
+  title: "Growth and Development Milestones (1–12 months)",
+  intro: "Ang bawat sanggol ay may sariling takbo ng pag-unlad, ngunit may mga karaniwang milestone na inaasahan ayon sa buwan.",
+  sections: [
+    { heading: "1‑3 buwan", content: "⬤ Itinataas ang ulo habang nakadapa<br>⬤ Ngumingiti at gumagawa ng tunog (cooing)<br>⬤ Sinusundan ang gumagalaw na bagay gamit ang mata<br>⬤ Ibinubuka ang kamay (hand opening)" },
+    { heading: "4‑6 buwan", content: "⬤ Gumugulong (rolling over)<br>⬤ Nakaupo nang may suporta<br>⬤ Kumukuha ng laruan<br>⬤ Tumatawa at tumitili" },
+    { heading: "7‑9 buwan", content: "⬤ Nakaupo nang walang suporta<br>⬤ Gumagapang (crawling)<br>⬤ Sumasagot sa pangalan<br>⬤ Nag‑peak‑a‑boo at nag‑clap" },
+    { heading: "10‑12 buwan", content: "⬤ Tumutukod (pulling to stand)<br>⬤ Naglalakad nang may hawak (cruising)<br>⬤ May 1‑3 salita (mama, dada)<br>⬤ Gumagamit ng pincer grasp (daliri at hinlalaki)" }
+  ]
+},
+infant_nutrition: {
+  title: "Infant Nutrition (0–12 months)",
+  intro: "Ang nutrisyon sa unang taon ay kritikal para sa utak, katawan, at immune system.",
+  sections: [
+    { heading: "0‑6 na buwan", content: "Eksklusibong pagpapasuso (walang tubig, juice, o formula). Kung hindi posible, gumamit ng iron‑fortified infant formula. Pakainin on demand (8‑12 beses/24 oras)." },
+    { heading: "6‑8 buwan (Simula ng Complementary Foods)", content: "Magdagdag ng lugaw, purong gulay (kalabasa, carrots), prutas (saging, mansanas), at katas ng karne o isda. Simulan sa 1‑2 kutsara, dahan‑dahang damihan. Iwasan ang asukal, asin, at pulot (panganib ng botulism)." },
+    { heading: "9‑11 buwan", content: "Magbigay ng lumpy at soft foods (minced meat, scrambled egg, mashed beans). Tatlong beses sa isang araw kasama ang breastmilk o formula. Hikayatin ang self‑feeding gamit ang kamay." },
+    { heading: "12 buwan", content: "Maaari nang kumain ng halos kaparehong pagkain ng pamilya (gupitin sa maliliit na piraso). Magdagdag ng whole milk (hindi skim). Iwasan ang choke‑hazard foods (whole grapes, nuts, hotdog)." }
+  ]
+},
+infant_immunization: {
+  title: "Immunization Schedule (1–12 months)",
+  intro: "Ang bakuna ay pumoprotekta sa sanggol laban sa mga nakamamatay na sakit. Sundin ang schedule mula sa RHU.",
+  sections: [
+    { heading: "Kapanganakan", content: "BCG (TB), HepB #1, OPV (0 – optional)" },
+    { heading: "6 na linggo", content: "Pentavalent #1 (DPT‑HepB‑Hib), OPV #1, PCV #1, Rotavirus #1" },
+    { heading: "10 na linggo", content: "Pentavalent #2, OPV #2, PCV #2, Rotavirus #2" },
+    { heading: "14 na linggo", content: "Pentavalent #3, OPV #3, PCV #3, Rotavirus #3 (kung available)" },
+    { heading: "9 na buwan", content: "Measles Containing Vaccine (MCV #1)" },
+    { heading: "12‑15 buwan", content: "MMR (Measles, Mumps, Rubella)" },
+    { heading: "Tandaan", content: "Ang mga bakuna ay libre sa RHU. Dalhin ang baby booklet sa bawat pagbisita." }
+  ]
+},
+infant_illnesses: {
+  title: "Common Illnesses in Infants and Home Management",
+  intro: "Karamihan sa mga karaniwang sakit ay kayang pamahalaan sa bahay, ngunit kailangan malaman kung kailan dapat pumunta sa doktor.",
+  sections: [
+    { heading: "Lagnat (≥38°C)", content: "Damitan nang magaan, painumin ng paracetamol (tamang dosage ayon sa timbang). Huwag gumamit ng aspirin. Pumunta sa doktor kung: sanggol <3 buwan, tumatagal ng >3 araw, o may kasamang pagka‑iritable." },
+    { heading: "Ubo at Sipon", content: "Gumamit ng saline drops para sa baradong ilong, humidifier sa kwarto, at panatilihing hydrated. Iwasan ang over‑the‑counter cough medicines (delikado sa sanggol)." },
+    { heading: "Pagtatae (Diarrhea)", content: "Patuloy na magpasuso o magbigay ng formula. Iwasan ang sugary drinks. Magbigay ng oral rehydration solution (Oresol) kung maraming beses dumumi. Pumunta sa doktor kung may dugo sa dumi, sobrang pagsusuka, o walang luha kapag umiiyak." },
+    { heading: "Pagsusuka", content: "Subukang magpakain ng paunti‑unti. Kung hindi tumigil sa loob ng 12 oras o may bile (kulay berde), pumunta agad sa doktor." },
+    { heading: "Diaper Rash", content: "Palitan agad ang lampin, linisin ng tubig, patuyuin, at lagyan ng barrier cream (zinc oxide). Iwanang walang lampin nang ilang oras." }
+  ]
+},
+infant_home_care: {
+  title: "Home Care and Hygiene for Infants",
+  intro: "Ang malinis at ligtas na tahanan ay pumipigil sa impeksyon at aksidente.",
+  sections: [
+    { heading: "Pagliligo at Paliligo", content: "Paliguan ang sanggol 2‑3 beses kada linggo gamit ang mild baby soap. Linisin ang mga tupi ng balat, leeg, at singit. Huwag gumamit ng matatapang na sabon o shampoo." },
+    { heading: "Pangangalaga sa Balat", content: "Gumamit ng baby lotion kung tuyo ang balat. Iwasan ang direct sunlight. Gumamit ng insect repellent na ligtas para sa sanggol (DEET ≤10% sa edad >2 buwan)." },
+    { heading: "Paglilinis ng Kamay at Laruan", content: "Maghugas ng kamay bago humawak ng sanggol. Linisin ang mga laruan linggo‑linggo gamit ang mild soap at tubig." },
+    { heading: "Pagtulog nang Ligtas", content: "Patulugin ang sanggol sa kanyang sariling kuna, nakadapa (back sleeping). Walang unan, kumot, o stuffed toys sa kuna upang maiwasan ang SIDS (Sudden Infant Death Syndrome)." }
+  ]
+},
+infant_hazards: {
+  title: "Common Hazards and Management",
+  intro: "Ang mga sanggol ay mausisa at hindi pa nakakaintindi ng panganib. Ang pag‑iwas ay pinakamahalaga.",
+  sections: [
+    { heading: "Pagkakasakal (Choking)", content: "Iwasan ang maliliit na bagay (barya, butones, maliliit na laruan). Gupitin ang pagkain sa maliliit na piraso (mas maliit sa ½ pulgada). Alamin ang first aid: back blows at chest thrusts (kung conscious)." },
+    { heading: "Pagkakahulog", content: "Huwag iwanan ang sanggol sa pagpapalit ng lampin na walang harang. Lagyan ng baby gate sa hagdanan. Ilagay ang kuna sa ligtas na lugar." },
+    { heading: "Pagkasunog / Scalding", content: "Ilagay ang mainit na inumin at pagkain sa malayo. Itakda ang water heater sa 49°C. Sa paso, patuluin agad ng malamig na tubig sa loob ng 10‑15 minuto (huwag lagyan ng yelo)." },
+    { heading: "Pagkalason", content: "Itago ang mga gamot, cleaning products, at baterya sa naka‑lock na cabinet. Kunin ang poison control number ng inyong lugar." },
+    { heading: "Drowning", content: "Huwag iwanan ang sanggol sa bathtub o palanggana kahit sandali. Isarado ang banyo." }
+  ]
+},
+infant_danger_signs: {
+  title: "Danger Signs in Infants (1‑12 months)",
+  intro: "Kung mayroon ng alinman sa mga sumusunod, dalhin agad ang sanggol sa RHU o ospital – huwag maghintay.",
+  sections: [
+    { heading: "Emergency Signs", content: "⬤ Hindi kumakain o sumususo sa loob ng 6 na oras<br>⬤ Hindi umiihi sa loob ng 8 oras<br>⬤ Lagnat >39°C (o <36°C kung sobrang lamig)<br>⬤ Mahirap huminga (mabilis, may indrawing)<br>⬤ Paninilaw na lumalala (kumakalat ang dilaw)<br>⬤ Pagsusuka ng dugo o berdeng likido (bile)<br>⬤ Matinding pagtatae na may dugo<br>⬤ Convulsions (pangingisay o naninigas)<br>⬤ Hindi ma‑alert (sobrang antok o walang reaksyon)<br>⬤ Bulging fontanelle (malambot na bahagi ng bungo ay umbok)" }
+  ]
+}
+  };
 
     const mainView = document.getElementById('eduMainView');
     const detailView = document.getElementById('eduDetailView');
@@ -5846,9 +6216,18 @@ if (rhuSearchInput) {
     });
   });
 }
-      });
+// Make "What is Abot‑Kamay?" card retractable
+const abotBtn = document.getElementById('abotKamayToggleBtn');
+const abotExtra = document.getElementById('abotKamayExtra');
+if (abotBtn && abotExtra) {
+  abotBtn.addEventListener('click', function() {
+    const isHidden = abotExtra.style.display !== 'block';
+    abotExtra.style.display = isHidden ? 'block' : 'none';
+    abotBtn.textContent = isHidden ? 'See less' : 'See more';
+  });
+}
   })();
-
+  })();  // <-- only one closing for the outer IIFE
 </script>
 </body>
 </html>

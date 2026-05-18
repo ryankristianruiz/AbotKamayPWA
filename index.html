@@ -394,8 +394,12 @@
   a { color: #cf90ff; text-decoration: none; }
   a:hover { color: #ffc2e8; }
 
-  /* Carousel */
-.carousel-wrapper { width: 100%; margin-top: 18px; margin-bottom: 24px; }
+ /* ---------- CAROUSEL (clean, working) ---------- */
+.carousel-wrapper {
+  width: 100%;
+  margin-top: 18px;
+  margin-bottom: 24px;
+}
 
 .carousel {
   position: relative;
@@ -416,22 +420,23 @@
   width: 70%;
   flex-shrink: 0;
   padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0;
   margin-left: 15%;
   margin-right: 15%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;                 /* reduced gap between image and text */
 }
 
-/* ── Image block with overlay ── */
+/* Image block */
 .slide-image {
   width: 100%;
   aspect-ratio: 1 / 1;
-  height: auto;
   border-radius: 20px;
   overflow: hidden;
   position: relative;
   background: rgba(255,255,255,0.08);
+  margin-top: 0;            /* no extra top margin */
+  margin-bottom: 0;
 }
 
 .slide-image img {
@@ -441,14 +446,17 @@
   display: block;
 }
 
-/* Gradient + text overlay at bottom of photo */
+/* Overlay (tag, date, day) – stays at bottom of image */
 .slide-overlay {
   position: absolute;
-  bottom: 0; left: 0; right: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   padding: 40px 16px 16px;
   background: linear-gradient(to top, rgba(30,0,50,0.72) 0%, transparent 100%);
   border-radius: 0 0 20px 20px;
   text-align: center;
+  pointer-events: none;
 }
 
 .tag {
@@ -478,9 +486,9 @@
   display: block;
 }
 
-/* ── Content below the image ── */
+/* Content below the image */
 .slide-content {
-  padding: 14px 2px 10px;
+  padding: 0 2px 10px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -502,7 +510,7 @@
 }
 
 .slide-cta {
-  margin-top: 10px;
+  margin-top: 6px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -515,15 +523,147 @@
   align-items: center;
   gap: 8px;
   text-decoration: none;
-  transition: background 0.15s;
   backdrop-filter: blur(4px);
 }
 
-.slide-cta:hover { background: rgba(255,255,255,0.22); }
+.slide-cta:hover {
+  background: rgba(255,255,255,0.22);
+}
 
-/* ── Hide nav arrows (design uses swipe only) ── */
-.nav { display: none; }
+/* Navigation arrows */
+.nav {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 1.2rem;
+  backdrop-filter: blur(4px);
+}
+.nav-left {
+  left: 8px;
+}
+.nav-right {
+  right: 8px;
+}
+.nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
 
+/* Dots */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding: 0.5rem 0 0.2rem;
+}
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.35);
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.dot.active {
+  background: #ffffff;
+  transform: scale(1.35);
+}
+
+/* Hide old controls row and progress bar (they are not used) */
+.controls-row,
+.progress {
+  display: none;
+}
+
+/* ========== RESPONSIVE: TABLET (max-width: 768px) ========== */
+@media (max-width: 768px) {
+  .slide {
+    width: 85%;
+    margin-left: 7.5%;
+    margin-right: 7.5%;
+    gap: 6px;
+  }
+  .slide-title {
+    font-size: 15px;
+  }
+  .slide-body {
+    font-size: 11px;
+  }
+  .slide-cta {
+    font-size: 11px;
+    padding: 6px 18px;
+  }
+}
+
+/* ========== RESPONSIVE: MOBILE (max-width: 600px) ========== */
+@media (max-width: 600px) {
+  .slide {
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    gap: 6px;
+  }
+  .slide-image {
+    aspect-ratio: 1 / 1;
+    margin-top: 0;
+  }
+  .slide-overlay {
+    padding: 30px 12px 12px;
+  }
+  .tag {
+    font-size: 8px;
+    padding: 2px 8px;
+  }
+  .slide-date-big {
+    font-size: 28px;
+  }
+  .slide-day {
+    font-size: 11px;
+  }
+  .slide-title {
+    font-size: 14px;
+  }
+  .slide-body {
+    font-size: 10px;
+  }
+  .slide-cta {
+    font-size: 10px;
+    padding: 5px 14px;
+    margin-top: 4px;
+  }
+  .nav {
+    width: 28px;
+    height: 28px;
+    font-size: 1rem;
+  }
+}
+
+/* Extra small devices (max-width: 480px) – keep consistent */
+@media (max-width: 480px) {
+  .slide {
+    width: 92%;
+    margin-left: 4%;
+    margin-right: 4%;
+  }
+  .slide-date-big {
+    font-size: 24px;
+  }
+  .slide-cta {
+    font-size: 9px;
+    padding: 4px 12px;
+  }
+}
 /* ── Dots ── */
 .dots { display: flex; justify-content: center; gap: 6px; padding: 0.5rem 0 0.2rem; }
 .dot {
@@ -2071,7 +2211,102 @@
 .sub-detail-view .sub-content div[style*="font-size"] {
   font-size: 1.35rem !important;
 }
+/* Ensure slide image has top margin on all screens */
+.slide-image {
+  margin-top: 10%;
+  margin-bottom: 12px;
+}
 
+/* For mobile (max-width: 480px), adjust margin-top to a smaller but visible value */
+@media (max-width: 480px) {
+  .slide-image {
+    margin-top: 5%;
+  }
+  /* Also ensure the slide content is not too close to the top */
+  .slide {
+    padding-top: 0.5rem;
+  }
+}
+@media (max-width: 600px) {
+  .slide {
+    position: relative;
+    width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 0;
+  }
+
+  .slide-image {
+    margin: 0;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+  }
+
+  /* Hide the separate content block below the image */
+  .slide-content {
+    display: none;
+  }
+
+  /* Inject the title, body, and CTA into the existing overlay */
+  .slide-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    padding: 20px 16px 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  /* Move title, body, and CTA from .slide-content into .slide-overlay using pseudo-content? 
+     We cannot move HTML with CSS. Instead, we duplicate them using `attr()`? Not possible.
+     Therefore, we need to keep .slide-content visible but reposition it absolutely over the image.
+  */
+  /* Alternative: reposition .slide-content over the image */
+  .slide-content {
+    display: flex;  /* override the above hide */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    padding: 20px 16px 16px;
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    z-index: 2;
+  }
+
+  /* Hide the original overlay (tag, date, day) because it would overlap */
+  .slide-overlay {
+    display: none;
+  }
+
+  .slide-title {
+    font-size: 14px;
+    font-weight: bold;
+    margin: 0;
+  }
+
+  .slide-body {
+    font-size: 11px;
+    line-height: 1.3;
+    margin: 0;
+  }
+
+  .slide-cta {
+    margin-top: 6px;
+    padding: 5px 12px;
+    font-size: 10px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+  }
+}
 </style>
 </head>
 <body>
@@ -6794,8 +7029,6 @@ function buildCarousel(slidesData) {
   }
 
   carouselCurrent = CLONE_COUNT;
-  document.getElementById('carouselAutoplayBtn')?.remove(); // remove old button
-  document.getElementById('progress-bar')?.parentElement?.remove(); // remove progress bar
 
   // Generate dots
   slidesData.forEach((_, i) => {
@@ -6843,6 +7076,31 @@ function buildCarousel(slidesData) {
 
   // Start autoplay if duration > 0
   if (CAROUSEL_DURATION > 0) startAutoplay();
+
+  // Inside buildCarousel, after the carousel is fully built and before startAutoplay() is called
+
+const trackElem = document.getElementById('track');
+let touchStartX = 0;
+
+// When finger touches the screen
+trackElem.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].clientX;
+  if (carouselPlaying) stopAutoplay(); // pause autoplay while swiping
+}, { passive: true });
+
+// When finger lifts off the screen
+trackElem.addEventListener('touchend', (e) => {
+  const touchEndX = e.changedTouches[0].clientX;
+  const diff = touchEndX - touchStartX;
+  if (Math.abs(diff) > 50) { // minimum swipe distance (pixels)
+    if (diff > 0) {
+      goTo(carouselCurrent - 1); // swipe right → previous slide
+    } else {
+      goTo(carouselCurrent + 1); // swipe left → next slide
+    }
+  }
+  if (carouselPlaying) startAutoplay(); // resume autoplay after swipe
+});
 }
     function goToImmediate(n) {
       const track = document.getElementById('track');
@@ -6875,30 +7133,49 @@ function buildCarousel(slidesData) {
       document.getElementById('slide-counter').textContent = `${realIndex + 1} / ${realSlideCount}`;
       if (carouselPlaying) restartProgress();
     }
-    function restartProgress() {
-      clearTimeout(carouselTimer);
-      const bar = document.getElementById('progress-bar');
-      bar.style.transition = 'none';
-      bar.style.width = '0%';
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        bar.style.transition = `width ${CAROUSEL_DURATION}ms linear`;
-        bar.style.width = '100%';
-      }));
-      carouselTimer = setTimeout(() => goTo(carouselCurrent + 1), CAROUSEL_DURATION);
-    }
-    function stopAutoplay() {
-      clearTimeout(carouselTimer);
-      const bar = document.getElementById('progress-bar');
-      bar.style.transition = 'none';
-      bar.style.width = '0%';
-      carouselPlaying = false;
-      document.getElementById('carouselAutoplayBtn').textContent = 'resume';
-    }
-    function startAutoplay() {
-      carouselPlaying = true;
-      document.getElementById('carouselAutoplayBtn').textContent = 'pause';
-      restartProgress();
-    }
+function restartProgress() {
+  clearTimeout(carouselTimer);
+  
+  // Safety: do nothing if CAROUSEL_DURATION is invalid
+  if (!CAROUSEL_DURATION || CAROUSEL_DURATION <= 0) {
+    console.warn('Autoplay disabled: invalid CAROUSEL_DURATION', CAROUSEL_DURATION);
+    return;
+  }
+  
+  // Animate progress bar if it exists
+  const bar = document.getElementById('progress-bar');
+  if (bar) {
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      bar.style.transition = `width ${CAROUSEL_DURATION}ms linear`;
+      bar.style.width = '100%';
+    }));
+  }
+  
+  // Set timer to move to next slide
+  carouselTimer = setTimeout(() => goTo(carouselCurrent + 1), CAROUSEL_DURATION);
+}
+
+function stopAutoplay() {
+  clearTimeout(carouselTimer);
+  const bar = document.getElementById('progress-bar');
+  if (bar) {
+    bar.style.transition = 'none';
+    bar.style.width = '0%';
+  }
+  carouselPlaying = false;
+  const btn = document.getElementById('carouselAutoplayBtn');
+  if (btn) btn.textContent = 'resume';
+}
+
+function startAutoplay() {
+  if (CAROUSEL_DURATION <= 0) return;
+  carouselPlaying = true;
+  const btn = document.getElementById('carouselAutoplayBtn');
+  if (btn) btn.textContent = 'pause';
+  restartProgress();
+}
     document.getElementById('prev').addEventListener('click', () => { goTo(carouselCurrent - 1); if (!carouselPlaying) stopAutoplay(); });
     document.getElementById('next').addEventListener('click', () => { goTo(carouselCurrent + 1); if (!carouselPlaying) stopAutoplay(); });
     document.getElementById('carouselAutoplayBtn').addEventListener('click', () => { carouselPlaying ? stopAutoplay() : startAutoplay(); });
@@ -6912,14 +7189,24 @@ function buildCarousel(slidesData) {
     let rhuData = null;
     let lastVisitedModule = null;
 
-    fetch(CAROUSEL_JSON_URL)
-      .then(res => res.json())
-      .then(data => {
-        if (Array.isArray(data) && data.length) buildCarousel(data);
-        else buildCarousel(CAROUSEL_DEFAULT);
-      })
-      .catch(() => buildCarousel(CAROUSEL_DEFAULT));
-
+fetch(CAROUSEL_JSON_URL)
+  .then(res => res.json())
+  .then(data => {
+    // Validate that data is an array and every item has required fields
+    const isValid = Array.isArray(data) && data.length > 0 && data.every(item =>
+      item.tag && item.dateText && item.dayText && item.title && item.body && item.cta && item.image
+    );
+    if (isValid) {
+      buildCarousel(data);
+    } else {
+      console.warn('Invalid carousel data from server, using default.');
+      buildCarousel(CAROUSEL_DEFAULT);
+    }
+  })
+  .catch(() => {
+    console.warn('Failed to fetch carousel data, using default.');
+    buildCarousel(CAROUSEL_DEFAULT);
+  });
     window.addEventListener('online', () => {
       async function refreshMedicine() {
         try {
